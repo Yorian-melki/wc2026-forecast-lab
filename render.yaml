@@ -1,0 +1,28 @@
+# Render blueprint for the live WC2026 Streamlit app.
+# Deploy: Render → New → Blueprint → connect this repo. Add the API keys (sync:false)
+# in the Render dashboard — never commit values. The forecast also runs with NO keys
+# (offline snapshot); keys only enable live xG/odds refresh.
+services:
+  - type: web
+    name: wc2026-forecast-lab
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true"
+    envVars:
+      - key: PYTHONPATH
+        value: src
+      - key: API_FOOTBALL_KEY
+        sync: false
+      - key: API_FOOTBALL_HOST
+        value: v3.football.api-sports.io
+      - key: THESTATSAPI_KEY
+        sync: false
+      - key: HIGHLIGHTLY_API_KEY
+        sync: false
+      - key: HIGHLIGHTLY_BASE_URL
+        sync: false
+      - key: FOOTBALL_DATA_ORG_KEY
+        sync: false
+      - key: PRIMARY_LIVE_PROVIDER
+        value: api_football

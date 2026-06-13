@@ -24,3 +24,6 @@ outputs/audit/*.csv
 outputs/audit/thestatsapi_*
 data/live/thestatsapi_*.json
 data/live/*odds*.json
+
+# Internal launch/ops notes — not for public repo
+outputs/launch/
