@@ -332,7 +332,7 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["🏆 Champion Tracker", "⚽ Live Standings", "🎯 Match Predictor",
+        ["🚀 Release Status", "🏆 Champion Tracker", "⚽ Live Standings", "🎯 Match Predictor",
          "🧬 Nation DNA", "⚔️ Head-to-Head", "📜 Historical Records",
          "🔮 Bracket Paths", "🧮 Model Lab", "📡 Data Quality"],
         label_visibility="collapsed",
@@ -342,22 +342,87 @@ with st.sidebar:
     st.markdown(f"""
     <div style='font-size:11px;color:{MUTED};line-height:1.9'>
     <b style='color:{WHITE}'>Model</b><br>
-    Elo-fitted Poisson · β_raw=0.988 × T=0.55<br>
-    Dixon-Coles ρ≈−0.021<br>
+    Elo→Dixon-Coles Poisson · β_raw=0.988 × T=0.55<br>
+    + ML 1X2 ensemble @ weight 0.20<br>
     100,000 Monte Carlo simulations<br>
     Live-conditioned on WC2026 results<br><br>
-    <b style='color:{WHITE}'>Maturity audit</b><br>
-    <span style='color:{GOLD}'>5.50 / 10</span> (pessimistic, honest)<br>
-    WC2022 backtest: ARG #1 pick ✓<br>
-    Weakest: Validation 5.5 · Calibration 4.5
+    <b style='color:{WHITE}'>Public release · v6</b><br>
+    <span style='color:{GOLD}'>6.93 / 10</span> maturity (self, honest)<br>
+    <span style='color:{TEAL}'>571 tests</span> · 4 WCs validated<br>
+    Weakest: structural uncertainty
     </div>
     """, unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# PAGE 0 — RELEASE STATUS (v6 public release)
+# ══════════════════════════════════════════════════════════════════════════════
+if page == "🚀 Release Status":
+    st.markdown("# WC2026 Forecast Lab — Public Release (v6)")
+    st.markdown(
+        f"<div style='color:{MUTED};font-size:13px'>The current, audited state of the project. "
+        "Every claim below is reflected in the repo, tests, and audit trail.</div>",
+        unsafe_allow_html=True,
+    )
+    st.markdown("")
+    c = st.columns(4)
+    c[0].metric("Tests", "571 passing")
+    c[1].metric("Maturity (self)", "6.93 / 10")
+    c[2].metric("ML ensemble weight", "0.20 (fixed)")
+    c[3].metric("Tournaments validated", "4 World Cups")
+
+    st.markdown("### Live links")
+    st.markdown(
+        f"- 🧪 **Open source:** [github.com/Yorian-melki/wc2026-forecast-lab](https://github.com/Yorian-melki/wc2026-forecast-lab)\n"
+        f"- 🌐 **Portfolio (live):** [www.yorian-melki.com](https://www.yorian-melki.com)\n"
+        f"- 📡 **Live app:** `wc2026.yorian-melki.com` — <span style='color:{GOLD}'>pending Render + DNS</span>",
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("### Data & providers")
+    st.markdown(
+        f"<span style='color:{TEAL}'>●</span> **TheStatsAPI** — active · per-shot shotmap xG, odds, player-stats, lineups, timeline, referee  \n"
+        f"<span style='color:{TEAL}'>●</span> **Highlightly** — active · team xG / advanced stats  \n"
+        f"<span style='color:{TEAL}'>●</span> **API-Football** — active · live score / events / lineups / stats  \n"
+        f"<span style='color:{TEAL}'>●</span> **football-data.org** — active · standings / scorers / fixtures  \n"
+        f"<span style='color:{MUTED};font-size:12px'>Multi-provider score-disagreement check across 4 providers. "
+        "xG caveat: Highlightly and TheStatsAPI likely share an upstream on team xG — not independent.</span>",
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("### Validation & model")
+    st.markdown(
+        "- Calibrated **Elo → Dixon-Coles** Poisson core; bounded xG live adjustment.\n"
+        "- **ML 1X2** accepted (leak-free, Brier 0.508 vs 0.529) and **wired into the tournament sim**.\n"
+        "- ML weight **0.20**; the 0.50 weight was rejected — it over-concentrated favorites and hurt the 2018 upset.\n"
+        "- Walk-forward validation: **WC2010 / 2014 / 2018 / 2022** (ML retrained per cutoff).\n"
+        "- Market odds are a **benchmark / control layer**, not blended into the model by default.\n"
+        "- A **dynamic upset-robust ML** mode exists but is not the default."
+    )
+
+    st.markdown("### Uncertainty & audit")
+    st.markdown(
+        "- Champion probabilities are reported as **P5/P50/P95 intervals**, not point estimates.\n"
+        "- Intervals are a **floor** — they propagate beta sampling uncertainty only, not total uncertainty.\n"
+        "- Artifacts: model card · data lineage map · 20-point reviewer attack audit · reproducibility pack · final release report (`outputs/audit/`, `outputs/release/`)."
+    )
+
+    st.markdown("### Deployment")
+    st.markdown(
+        f"- ✅ **yorian-melki.com** — live on Vercel.\n"
+        f"- ✅ **GitHub repo** — public.\n"
+        f"- ✅ **`render.yaml`** blueprint present for the live Streamlit app.\n"
+        f"- ⏳ **`wc2026.yorian-melki.com`** — pending: connect Render to the repo, then add a Spaceship DNS record:\n"
+        f"  `CNAME · host wc2026 · value <render-target> · TTL 1min`. **Do not touch the @ / www records.**\n"
+        f"- Local launch: `PYTHONPATH=src .venv/bin/python -m streamlit run app.py`"
+    )
+    st.markdown("---")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # PAGE 1 — CHAMPION TRACKER
 # ══════════════════════════════════════════════════════════════════════════════
-if page == "🏆 Champion Tracker":
+elif page == "🏆 Champion Tracker":
     st.markdown("# World Cup 2026 — Champion Probabilities")
     st.markdown(
         f"<div style='color:{MUTED};font-size:13px;margin-bottom:16px'>"
@@ -1825,7 +1890,7 @@ elif page == "📡 Data Quality":
                 "- Validated leak-free at match level (Brier 0.508 vs 0.529 Elo) and tournament "
                 "level (walk-forward WC2010/14/18/22).\n"
                 "- Reported with P5/P50/P95 champion intervals.\n"
-                "- Fully reproducible offline; 558 tests."
+                "- Fully reproducible offline; 571 tests."
             )
         with cwb:
             st.markdown(
@@ -1914,7 +1979,7 @@ elif page == "📡 Data Quality":
 | <span style='color:{GOLD}'>**C**</span> | Score + result only | Goals, half-time score, scorers |
 | <span style='color:{RED}'>**D**</span> | Stale / manual / unavailable | Manual notes only |
 
-**Current status: Quality A** — Highlightly BASIC plan provides xG (Expected Goals) via `/statistics/{matchId}`. All 4 completed matches have confirmed xG. API-Football FREE (date-bypass) provides events/lineups/stats. Football-data.org provides standings + scorers. TheStatsAPI key revoked (documented — no active sub). Zero score disagreements across 3 providers.
+**Current status: Quality A** — Highlightly BASIC provides team xG / advanced stats. TheStatsAPI is active and provides shotmap xG, odds, lineups, timeline, player-stats and referee data. API-Football FREE via date-bypass provides live scores/events/lineups/stats. football-data.org provides standings/scorers/fixtures. Current score disagreement check: zero disagreements across 4 providers.
 """, unsafe_allow_html=True)
 
     st.markdown("---")
