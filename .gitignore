@@ -28,3 +28,5 @@ data/live/*odds*.json
 # Internal launch/ops notes — not for public repo
 outputs/launch/
 app.py.bak_before_dashboard_hotfix
+!outputs/audit/final_maturity_score_v6.json
+!outputs/audit/final_maturity_score_v5.json

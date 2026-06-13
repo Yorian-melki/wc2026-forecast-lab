@@ -1,0 +1,28 @@
+{
+  "before": 5.21,
+  "after": 6.43,
+  "delta": 1.22,
+  "scores_after": {
+    "data_quality": 7.5,
+    "feature_engineering": 4.5,
+    "model_specification": 6.0,
+    "parameter_estimation": 4.5,
+    "model_selection_rigor": 7.5,
+    "calibration_quality": 5.0,
+    "validation_methodology": 6.5,
+    "uncertainty_quantification": 6.0,
+    "code_quality": 7.0,
+    "test_quality": 6.0,
+    "reproducibility": 8.0,
+    "documentation": 7.0,
+    "claims_honesty": 9.0,
+    "publication_readiness": 5.5
+  },
+  "hard_cap": "~7: champion intervals capture only beta SAMPLING uncertainty (small); the DOMINANT uncertainties \u2014 temperature_mul calibration choice, model-structure error, small-tournament variance \u2014 are still NOT quantified. Validation = 4 WCs (32-team only; no EUROs/Copa). Market not integrated. Dynamic ML not adopted (marginal).",
+  "next_unlocks": [
+    "Quantify STRUCTURAL uncertainty: ensemble over model forms / posterior over temperature_mul -> wider, honest predictive intervals",
+    "Expand validation to EUROs/Copa via a flexible-bracket harness (more upset samples)",
+    "Re-test dynamic ML on the larger sample; adopt if tail-regret gain holds",
+    "Market integration once an odds history accumulates"
+  ]
+}

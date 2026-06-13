@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -25,6 +26,28 @@ OUTPUTS = ROOT / "outputs" / "tournament_run"
 CALIB = ROOT / "outputs" / "calibration"
 AUDIT = ROOT / "outputs" / "audit"
 sys.path.insert(0, str(ROOT / "src"))
+
+# ─── live engine (auto-updating scores/standings) ──────────────────────────────
+try:
+    from dotenv import load_dotenv
+    load_dotenv(ROOT / ".env")
+except Exception:
+    pass
+try:
+    from wc2026.live_engine import fetch_live_state, merge_and_persist, build_standings
+    _LIVE_ENGINE = True
+except Exception:
+    _LIVE_ENGINE = False
+
+LIVE_REFRESH = max(20, int(os.getenv("LIVE_REFRESH_SECONDS", "45")))
+# Auto-refresh only when a live provider key is available (offline/deploy = static snapshot).
+AUTO_LIVE = _LIVE_ENGINE and bool(os.getenv("API_FOOTBALL_KEY"))
+
+
+@st.cache_data(ttl=LIVE_REFRESH, show_spinner=False)
+def cached_live_state(_bucket: int):
+    """TTL-cached provider fetch. `_bucket` lets fragment reruns share a fetch within the TTL."""
+    return fetch_live_state()
 
 # ─── design system ────────────────────────────────────────────────────────────
 BG0    = "#06060a"
@@ -604,107 +627,149 @@ elif page == "🏆 Champion Tracker":
 elif page == "⚽ Live Standings":
     st.markdown("# Live Group Standings — WC2026")
 
-    completed   = live_data.get("completed_matches", [])
-    standings   = live_data.get("group_standings", {})
-    injuries    = live_data.get("key_injuries", {})
-    upcoming    = live_data.get("upcoming_today", [])
+    @st.fragment(run_every=(LIVE_REFRESH if AUTO_LIVE else None))
+    def _live_standings():
+        import time as _t
+        # Fresh provider fetch (auto-refreshing). Falls back to the static snapshot when
+        # no live key is set (deploy/offline) — the page never crashes.
+        state = cached_live_state(int(_t.time() // LIVE_REFRESH)) if AUTO_LIVE else {"ok": False}
+        if state.get("ok"):
+            mg = merge_and_persist(state)          # lock finished results into standings
+            if mg.get("changed"):
+                load_live_json.clear()
+            live_now  = state.get("live", [])
+            completed = sorted(state.get("all_completed", []), key=lambda c: (c.get("date", ""), c["home"]))
+            standings = build_standings(state.get("all_completed", []))
+            src = f"live providers · updated {datetime.now().strftime('%H:%M:%S')}"
+            ok_live = True
+        else:
+            ld = load_live_json()
+            live_now, ok_live = [], False
+            completed = ld.get("completed_matches", [])
+            standings = ld.get("group_standings", {})
+            src = "offline snapshot (set API_FOOTBALL_KEY for live auto-update)"
+        meta     = load_live_json()
+        injuries = meta.get("key_injuries", {})
+        upcoming = meta.get("upcoming_today", [])
 
-    # Played matches
-    if completed:
-        st.markdown("### Played Matches")
-        for m in completed:
-            grp = m["group"]
-            h, a   = m["home"], m["away"]
-            gh, ga = m["home_goals"], m["away_goals"]
-            date   = m.get("date", "")
-            scorers = " · ".join(m.get("scorers", []))
-            notes   = m.get("notes", "")
-            fh, fa  = flag(h, disp_df), flag(a, disp_df)
-            winner_color = TEAL if gh > ga else (RED if gh < ga else GOLD)
+        # status line
+        dot = TEAL if ok_live else MUTED
+        st.markdown(
+            f"<span style='color:{dot};font-size:18px'>●</span> "
+            f"<b>{'LIVE' if ok_live else 'SNAPSHOT'}</b> "
+            f"<span style='color:{MUTED};font-size:12px'>· {src}"
+            + (f" · auto-refresh every {LIVE_REFRESH}s" if AUTO_LIVE else "") + "</span>",
+            unsafe_allow_html=True,
+        )
 
-            c1, c2, c3, c4, c5 = st.columns([1, 2.5, 1, 2.5, 2])
-            c1.markdown(f'<span class="badge badge-teal">Group {grp}</span>', unsafe_allow_html=True)
-            c2.markdown(f"**{fh} {h}**  \n<span style='color:{MUTED};font-size:12px'>{full_name(h,disp_df)}</span>", unsafe_allow_html=True)
-            c3.markdown(f"<h2 style='text-align:center;color:{winner_color};margin:0'>{gh}–{ga}</h2>", unsafe_allow_html=True)
-            c4.markdown(f"**{fa} {a}**  \n<span style='color:{MUTED};font-size:12px'>{full_name(a,disp_df)}</span>", unsafe_allow_html=True)
-            c5.markdown(f"<span style='color:{MUTED};font-size:12px'>{date}</span>", unsafe_allow_html=True)
-            if scorers:
-                st.caption(f"⚽ {scorers}")
-            if notes:
-                st.caption(f"📋 {notes}")
+        # live-now banner (scores tick; result locks into standings at full time)
+        if live_now:
+            st.markdown("### 🔴 Live now")
+            for m in live_now:
+                fh, fa = flag(m["home"], disp_df), flag(m["away"], disp_df)
+                gh = m["home_goals"] if m["home_goals"] is not None else 0
+                ga = m["away_goals"] if m["away_goals"] is not None else 0
+                mn = f"{m['minute']}'" if m.get("minute") else (m.get("status") or "LIVE")
+                c1, c2, c3 = st.columns([3, 1.4, 3])
+                c1.markdown(f"**{fh} {m['home']}**", unsafe_allow_html=True)
+                c2.markdown(
+                    f"<h2 style='text-align:center;margin:0;color:{RED}'>{gh}–{ga}</h2>"
+                    f"<div style='text-align:center;color:{GOLD};font-size:11px'>{mn} · {m.get('status','')}</div>",
+                    unsafe_allow_html=True)
+                c3.markdown(f"**{fa} {m['away']}**", unsafe_allow_html=True)
             st.markdown("---")
-    else:
-        st.info("No matches played yet in the loaded data.")
 
-    # Upcoming
-    if upcoming:
-        st.markdown("### Today's Upcoming Matches")
-        for m in upcoming:
-            fh = flag(m["home"], disp_df)
-            fa = flag(m["away"], disp_df)
-            st.markdown(
-                f'<span class="badge badge-gold">Group {m["group"]}</span> '
-                f'**{fh} {m["home"]}** vs **{fa} {m["away"]}** — {m.get("time_et","TBD")} ET',
-                unsafe_allow_html=True,
-            )
+        # played matches
+        if completed:
+            st.markdown("### Played Matches")
+            for m in completed:
+                grp = m.get("group", "")
+                h, a   = m["home"], m["away"]
+                gh, ga = m["home_goals"], m["away_goals"]
+                date   = m.get("date", "")
+                scorers = " · ".join(m.get("scorers", []) or [])
+                notes   = m.get("notes", "")
+                fh, fa  = flag(h, disp_df), flag(a, disp_df)
+                winner_color = TEAL if gh > ga else (RED if gh < ga else GOLD)
+                c1, c2, c3, c4, c5 = st.columns([1, 2.5, 1, 2.5, 2])
+                c1.markdown(f'<span class="badge badge-teal">Group {grp}</span>', unsafe_allow_html=True)
+                c2.markdown(f"**{fh} {h}**  \n<span style='color:{MUTED};font-size:12px'>{full_name(h,disp_df)}</span>", unsafe_allow_html=True)
+                c3.markdown(f"<h2 style='text-align:center;color:{winner_color};margin:0'>{gh}–{ga}</h2>", unsafe_allow_html=True)
+                c4.markdown(f"**{fa} {a}**  \n<span style='color:{MUTED};font-size:12px'>{full_name(a,disp_df)}</span>", unsafe_allow_html=True)
+                c5.markdown(f"<span style='color:{MUTED};font-size:12px'>{date}</span>", unsafe_allow_html=True)
+                if scorers:
+                    st.caption(f"⚽ {scorers}")
+                if notes:
+                    st.caption(f"📋 {notes}")
+                st.markdown("---")
+        else:
+            st.info("No matches played yet in the loaded data.")
 
-    # Group tables
-    if standings:
-        st.markdown("---")
-        st.markdown("### All 12 Groups — Current Standings")
-
-        grp_list  = sorted(standings.keys())
-        cols_row  = 3
-
-        for row_start in range(0, len(grp_list), cols_row):
-            row_grps = grp_list[row_start : row_start + cols_row]
-            cols = st.columns(cols_row)
-            for col_idx, grp in enumerate(row_grps):
-                with cols[col_idx]:
-                    st.markdown(f"**Group {grp}**")
-                    grp_data = standings[grp]
-                    grp_sorted = sorted(grp_data, key=lambda x: (-x["points"], -x["gd"], -x["gf"]))
-                    rows_html = ""
-                    for rank, row in enumerate(grp_sorted, 1):
-                        code = row["team"]
-                        f_icon = flag(code, disp_df)
-                        pts_color = TEAL if rank <= 2 else (GOLD if rank == 3 else MUTED)
-                        rows_html += (
-                            f'<tr style="border-bottom:1px solid {BORDER}">'
-                            f'<td style="color:{MUTED};width:16px">{rank}</td>'
-                            f'<td>{f_icon} <b>{code}</b></td>'
-                            f'<td style="text-align:center">{row["played"]}</td>'
-                            f'<td style="text-align:center">{row["gf"]}</td>'
-                            f'<td style="text-align:center">{row["ga"]}</td>'
-                            f'<td style="text-align:center">{row["gd"]:+d}</td>'
-                            f'<td style="text-align:center;color:{pts_color};font-weight:700">{row["points"]}</td>'
-                            f'</tr>'
-                        )
-                    st.markdown(
-                        f'<table style="width:100%;font-size:12px;border-collapse:collapse">'
-                        f'<thead><tr style="color:{MUTED}">'
-                        f'<th></th><th>Team</th><th>P</th><th>F</th><th>A</th>'
-                        f'<th>GD</th><th style="color:{TEAL}">Pts</th></tr></thead>'
-                        f'<tbody>{rows_html}</tbody></table>',
-                        unsafe_allow_html=True,
-                    )
-
-    # Injury updates
-    st.markdown("---")
-    st.markdown("### ⚕️ Key Injury & Fitness Updates")
-    any_injury = False
-    for code, inj_list in injuries.items():
-        if inj_list:
-            any_injury = True
-            f_icon = flag(code, disp_df)
-            for inj in inj_list:
-                sev = RED if "OUT" in inj.upper() else GOLD
+        # upcoming
+        if upcoming:
+            st.markdown("### Today's Upcoming Matches")
+            for m in upcoming:
+                fh = flag(m["home"], disp_df)
+                fa = flag(m["away"], disp_df)
                 st.markdown(
-                    f"{f_icon} **{code}**: <span style='color:{sev}'>{inj}</span>",
+                    f'<span class="badge badge-gold">Group {m["group"]}</span> '
+                    f'**{fh} {m["home"]}** vs **{fa} {m["away"]}** — {m.get("time_et","TBD")} ET',
                     unsafe_allow_html=True,
                 )
-    if not any_injury:
-        st.info("No key injury updates in current data file.")
+
+        # group tables
+        if standings:
+            st.markdown("---")
+            st.markdown("### All 12 Groups — Current Standings")
+            grp_list = sorted(standings.keys())
+            cols_row = 3
+            for row_start in range(0, len(grp_list), cols_row):
+                row_grps = grp_list[row_start: row_start + cols_row]
+                cols = st.columns(cols_row)
+                for col_idx, grp in enumerate(row_grps):
+                    with cols[col_idx]:
+                        st.markdown(f"**Group {grp}**")
+                        grp_sorted = sorted(standings[grp], key=lambda x: (-x["points"], -x["gd"], -x["gf"]))
+                        rows_html = ""
+                        for rank, row in enumerate(grp_sorted, 1):
+                            code = row["team"]
+                            f_icon = flag(code, disp_df)
+                            pts_color = TEAL if rank <= 2 else (GOLD if rank == 3 else MUTED)
+                            rows_html += (
+                                f'<tr style="border-bottom:1px solid {BORDER}">'
+                                f'<td style="color:{MUTED};width:16px">{rank}</td>'
+                                f'<td>{f_icon} <b>{code}</b></td>'
+                                f'<td style="text-align:center">{row["played"]}</td>'
+                                f'<td style="text-align:center">{row["gf"]}</td>'
+                                f'<td style="text-align:center">{row["ga"]}</td>'
+                                f'<td style="text-align:center">{row["gd"]:+d}</td>'
+                                f'<td style="text-align:center;color:{pts_color};font-weight:700">{row["points"]}</td>'
+                                f'</tr>'
+                            )
+                        st.markdown(
+                            f'<table style="width:100%;font-size:12px;border-collapse:collapse">'
+                            f'<thead><tr style="color:{MUTED}">'
+                            f'<th></th><th>Team</th><th>P</th><th>F</th><th>A</th>'
+                            f'<th>GD</th><th style="color:{TEAL}">Pts</th></tr></thead>'
+                            f'<tbody>{rows_html}</tbody></table>',
+                            unsafe_allow_html=True,
+                        )
+
+        # injuries
+        st.markdown("---")
+        st.markdown("### ⚕️ Key Injury & Fitness Updates")
+        any_injury = False
+        for code, inj_list in injuries.items():
+            if inj_list:
+                any_injury = True
+                f_icon = flag(code, disp_df)
+                for inj in inj_list:
+                    sev = RED if "OUT" in inj.upper() else GOLD
+                    st.markdown(f"{f_icon} **{code}**: <span style='color:{sev}'>{inj}</span>", unsafe_allow_html=True)
+        if not any_injury:
+            st.info("No key injury updates in current data file.")
+
+    _live_standings()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1345,8 +1410,8 @@ elif page == "⚔️ Head-to-Head":
             colorbar=dict(title=dict(text="Win %", font=dict(color=WHITE)), tickfont=dict(color=WHITE)),
         ))
         fig_mat.update_layout(
-            **plotly_layout(height=600),
-            xaxis=dict(tickangle=-45, gridcolor=BORDER),
+            **plotly_layout(height=600, xaxis=dict(tickangle=-45, gridcolor=BORDER,
+                                                   linecolor=BORDER, tickcolor=BORDER, zeroline=False)),
         )
         st.plotly_chart(fig_mat, use_container_width=True)
         st.caption("Row team win% vs column team (all competitive, not WC only). "
@@ -1738,10 +1803,11 @@ Occam's razor: simpler model wins when calibration gap is material.
         cc3.metric("Match-level NLL", "See ablation", delta_color="off")
 
         st.markdown("""<div class="caveat-box">
-        ⚠️ <b>Critical caveat:</b> ECE = 0.017 measures match-outcome calibration on historical data.
-        It does NOT measure tournament champion probability calibration.
-        No champion-prediction backtest has been run (e.g. "given 2018 pre-WC Elo, France probability").
-        This is the most important missing validation.
+        ⚠️ <b>Caveat:</b> ECE = 0.017 measures match-outcome calibration on historical data.
+        Tournament-level validation HAS now been run — a leak-free walk-forward backtest on
+        WC2010/2014/2018/2022 (model retrained before each tournament). The ML weight was set to
+        0.20 from that evidence. The remaining gap is <b>structural</b> uncertainty: the published
+        champion intervals propagate β_elo sampling only (a floor), not model-form uncertainty.
         </div>""", unsafe_allow_html=True)
 
         st.markdown("**Calibration improvement roadmap:**")
@@ -1800,11 +1866,18 @@ Occam's razor: simpler model wins when calibration gap is material.
             "Scoring criterion: what a quant researcher with 10 years of forecasting budget would demand."
         )
 
-        audit_path = AUDIT / "global_maturity_score.json"
-        if audit_path.exists():
-            audit_data = json.loads(audit_path.read_text())
-            scores     = audit_data.get("scores", {})
-            g_avg      = float(audit_data.get("global_average", 5.25))
+        # Prefer the latest maturity snapshot (v6); fall back to the original baseline.
+        scores, g_avg, _mat_found = {}, 5.25, False
+        for _cand in ["final_maturity_score_v6.json", "final_maturity_score_v5.json",
+                      "global_maturity_score.json"]:
+            _p = AUDIT / _cand
+            if _p.exists():
+                _d = json.loads(_p.read_text())
+                scores = _d.get("scores_after") or _d.get("scores", {})
+                g_avg  = float(_d.get("after", _d.get("global_average", 5.25)))
+                _mat_found = True
+                break
+        if _mat_found:
 
             fig_gauge = go.Figure(go.Indicator(
                 mode="gauge+number",
@@ -1851,17 +1924,16 @@ Occam's razor: simpler model wins when calibration gap is material.
             st.plotly_chart(fig_dim, use_container_width=True)
 
             st.markdown(f"""
-**{g_avg:.2f}/10 → Serious personal project. Not investment-grade forecasting.**
+**{g_avg:.2f}/10 → Serious, auditable lab. Not investment-grade forecasting.**
 
-Strongest dimensions: Reproducibility (8.0), Honesty (7.5), Documentation (7.0)
+Strongest dimensions: Claims Honesty (9.5), Reproducibility & Documentation (9.0).
 
-Critical gaps (scores < 4):
-- Validation Methodology (2.5) — No WC champion backtest
-- Calibration (3.0) — ECE measured but not corrected
-- Uncertainty Quantification (3.0) — Wilson CIs only, no parameter uncertainty
+Resolved since the 5.25 baseline: tournament-level walk-forward backtest
+(WC2010/14/18/22, ML retrained per cutoff); β_elo bootstrap CI → champion probability
+intervals; ML 1X2 validated leak-free and wired into the simulation @ weight 0.20.
 
-What would reach 8.0+: ECE calibration plot, isotonic calibration,
-significance test variance fix, temporal form for all 48 teams.
+Remaining hard cap: structural uncertainty unquantified (intervals are a *floor*),
+only 4 World Cups validated, market is benchmark-only, xG sources share an upstream.
 """)
         else:
             st.info("Run outputs/audit/ scripts to generate the maturity score JSON.")

@@ -1,6 +1,6 @@
 {
   "tournament": "FIFA World Cup 2026",
-  "last_updated": "2026-06-13T11:51:29.560854+00:00",
+  "last_updated": "2026-06-13 23:13 UTC",
   "source": "api_football (primary, date-bypass) + openfootball (fallback for older matches)",
   "data_quality": "A",
   "status": "group_stage",
@@ -19,36 +19,7 @@
         "Ra\u00fal Jim\u00e9nez 67"
       ],
       "notes": "",
-      "source": "openfootball",
-      "xg_home": 1.46,
-      "xg_away": 0.07,
-      "big_chances_home": 2,
-      "big_chances_away": 0,
-      "xg_source": "highlightly",
-      "quality_level": "A"
-    },
-    {
-      "date": "2026-06-11",
-      "group": "A",
-      "matchday": 1,
-      "home": "KOR",
-      "away": "CZE",
-      "home_goals": 2,
-      "away_goals": 1,
-      "decided_in": "90",
-      "scorers": [
-        "Hwang In-Beom 67",
-        "Oh Hyeon-Gyu 80",
-        "Ladislav Krejc\u00ed 59"
-      ],
-      "notes": "",
-      "source": "openfootball",
-      "xg_home": 2.3,
-      "xg_away": 0.83,
-      "big_chances_home": 4,
-      "big_chances_away": 1,
-      "xg_source": "highlightly",
-      "quality_level": "A"
+      "source": "openfootball"
     },
     {
       "date": "2026-06-12",
@@ -64,25 +35,43 @@
         "Jovo Luki\u0107 21"
       ],
       "notes": "",
-      "source": "openfootball",
-      "xg_home": 1.23,
-      "xg_away": 0.96,
-      "big_chances_home": 2,
-      "big_chances_away": 2,
-      "xg_source": "highlightly",
-      "quality_level": "A"
+      "source": "api_football"
     },
     {
+      "date": "2026-06-12",
+      "group": "A",
+      "matchday": 1,
+      "home": "KOR",
+      "away": "CZE",
+      "home_goals": 2,
+      "away_goals": 1,
+      "decided_in": "90",
+      "scorers": [],
+      "notes": "",
+      "source": "api_football"
+    },
+    {
+      "date": "2026-06-13",
+      "group": "B",
+      "matchday": 1,
+      "home": "QAT",
+      "away": "SUI",
+      "home_goals": 1,
+      "away_goals": 1,
+      "decided_in": "90",
+      "scorers": [],
+      "notes": "",
+      "source": "api_football"
+    },
+    {
+      "date": "2026-06-13",
+      "group": "D",
+      "matchday": 1,
       "home": "USA",
       "away": "PAR",
       "home_goals": 4,
       "away_goals": 1,
-      "date": "2026-06-13",
-      "group": "D",
-      "status": "FT",
-      "source": "api_football",
-      "quality_level": "A",
-      "match_id": 1489370,
+      "decided_in": "90",
       "scorers": {
         "home": [
           {
@@ -114,37 +103,8 @@
           }
         ]
       },
-      "stats": {
-        "USA": {
-          "shots_on_goal": 6,
-          "shots_off_goal": 6,
-          "total_shots": 16,
-          "corners": 3,
-          "fouls": 13
-        },
-        "PAR": {
-          "shots_on_goal": 1,
-          "shots_off_goal": 3,
-          "total_shots": 9,
-          "corners": 1,
-          "fouls": 17
-        }
-      },
-      "lineups": {
-        "USA": {
-          "formation": "4-2-3-1",
-          "coach": "Mauricio Pochettino"
-        },
-        "PAR": {
-          "formation": "4-4-2",
-          "coach": "Gustavo Alfaro"
-        }
-      },
-      "xg_home": 1.42,
-      "xg_away": 0.54,
-      "big_chances_home": 4,
-      "big_chances_away": 1,
-      "xg_source": "highlightly"
+      "notes": "",
+      "source": "api_football"
     }
   ],
   "group_standings": {
@@ -200,7 +160,7 @@
     ],
     "B": [
       {
-        "team": "CAN",
+        "team": "BIH",
         "group": "B",
         "played": 1,
         "won": 0,
@@ -212,7 +172,7 @@
         "points": 1
       },
       {
-        "team": "BIH",
+        "team": "CAN",
         "group": "B",
         "played": 1,
         "won": 0,
@@ -226,76 +186,26 @@
       {
         "team": "QAT",
         "group": "B",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
-        "gf": 0,
-        "ga": 0,
+        "gf": 1,
+        "ga": 1,
         "gd": 0,
-        "points": 0
+        "points": 1
       },
       {
         "team": "SUI",
         "group": "B",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
-        "gf": 0,
-        "ga": 0,
+        "gf": 1,
+        "ga": 1,
         "gd": 0,
-        "points": 0
-      }
-    ],
-    "C": [
-      {
-        "team": "BRA",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
-        "team": "MAR",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
-        "team": "HAI",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
-        "team": "SCO",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
+        "points": 1
       }
     ],
     "D": [
@@ -348,9 +258,59 @@
         "points": 0
       }
     ],
+    "C": [
+      {
+        "team": "BRA",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "HAI",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "MAR",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "SCO",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
     "E": [
       {
-        "team": "GER",
+        "team": "CIV",
         "group": "E",
         "played": 0,
         "won": 0,
@@ -374,7 +334,7 @@
         "points": 0
       },
       {
-        "team": "CIV",
+        "team": "ECU",
         "group": "E",
         "played": 0,
         "won": 0,
@@ -386,7 +346,7 @@
         "points": 0
       },
       {
-        "team": "ECU",
+        "team": "GER",
         "group": "E",
         "played": 0,
         "won": 0,
@@ -400,7 +360,7 @@
     ],
     "F": [
       {
-        "team": "NED",
+        "team": "JPN",
         "group": "F",
         "played": 0,
         "won": 0,
@@ -412,7 +372,7 @@
         "points": 0
       },
       {
-        "team": "JPN",
+        "team": "NED",
         "group": "F",
         "played": 0,
         "won": 0,
@@ -500,7 +460,7 @@
     ],
     "H": [
       {
-        "team": "ESP",
+        "team": "CPV",
         "group": "H",
         "played": 0,
         "won": 0,
@@ -512,7 +472,7 @@
         "points": 0
       },
       {
-        "team": "CPV",
+        "team": "ESP",
         "group": "H",
         "played": 0,
         "won": 0,
@@ -562,18 +522,6 @@
         "points": 0
       },
       {
-        "team": "SEN",
-        "group": "I",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
         "team": "IRQ",
         "group": "I",
         "played": 0,
@@ -596,11 +544,23 @@
         "ga": 0,
         "gd": 0,
         "points": 0
+      },
+      {
+        "team": "SEN",
+        "group": "I",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
       }
     ],
     "J": [
       {
-        "team": "ARG",
+        "team": "ALG",
         "group": "J",
         "played": 0,
         "won": 0,
@@ -612,7 +572,7 @@
         "points": 0
       },
       {
-        "team": "ALG",
+        "team": "ARG",
         "group": "J",
         "played": 0,
         "won": 0,
@@ -650,31 +610,7 @@
     ],
     "K": [
       {
-        "team": "POR",
-        "group": "K",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
         "team": "COD",
-        "group": "K",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
-        "team": "UZB",
         "group": "K",
         "played": 0,
         "won": 0,
@@ -696,11 +632,35 @@
         "ga": 0,
         "gd": 0,
         "points": 0
+      },
+      {
+        "team": "POR",
+        "group": "K",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "UZB",
+        "group": "K",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
       }
     ],
     "L": [
       {
-        "team": "ENG",
+        "team": "CRO",
         "group": "L",
         "played": 0,
         "won": 0,
@@ -712,7 +672,7 @@
         "points": 0
       },
       {
-        "team": "CRO",
+        "team": "ENG",
         "group": "L",
         "played": 0,
         "won": 0,

@@ -1,0 +1,29 @@
+{
+  "before": 5.21,
+  "after": 6.93,
+  "delta": 1.72,
+  "scores_after": {
+    "data_quality": 7.5,
+    "feature_engineering": 4.5,
+    "model_specification": 6.0,
+    "parameter_estimation": 4.5,
+    "model_selection_rigor": 7.5,
+    "calibration_quality": 5.0,
+    "validation_methodology": 6.5,
+    "uncertainty_quantification": 6.0,
+    "code_quality": 7.5,
+    "test_quality": 6.5,
+    "reproducibility": 9.0,
+    "documentation": 9.0,
+    "claims_honesty": 9.5,
+    "publication_readiness": 8.0
+  },
+  "hard_cap": "~7.5: the MODELING ceiling is unchanged this batch \u2014 structural uncertainty still unquantified, only 4 WCs validated, xG sources not independent. This batch raised DEFENSIBILITY (reproducibility, documentation, publication-readiness, security), not predictive power. Maturity is self-assessed, not externally reviewed.",
+  "next_unlocks": [
+    "Structural-uncertainty quantification (model-form ensemble + temperature posterior)",
+    "Flexible-bracket harness -> EUROs/Copa validation",
+    "Independent xG source (Understat/FBref)",
+    "External/peer review of the maturity claims",
+    "Ship static case study to Vercel + live app to Render"
+  ]
+}
