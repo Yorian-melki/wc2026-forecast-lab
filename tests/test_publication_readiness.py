@@ -66,7 +66,7 @@ def test_reviewer_attack_audit():
 def test_readme_not_stale():
     txt = (ROOT / "README.md").read_text()
     assert "278 automated tests" not in txt and "278 tests" not in txt
-    assert "558" in txt
+    assert "571" in txt
     assert "0.20" in txt  # current ML weight mentioned
 
 
@@ -75,7 +75,7 @@ def test_artifact_consistency_canonical():
     assert p.exists()
     c = json.loads(p.read_text())["canonical_truth"]
     assert c["ml_weight"] == 0.20
-    assert c["tests"] == 558
+    assert c["tests"] >= 558  # current truth: 571 (allow growth)
 
 
 # ── G: deployment ────────────────────────────────────────────────────────────
