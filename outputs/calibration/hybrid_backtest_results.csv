@@ -1,0 +1,5 @@
+split,n_train,n_test,train_date_min,train_date_max,test_date_min,test_date_max,random_nll,empirical_nll,elo_simple_nll,elo_calib_nll,hybrid_nll,random_brier,elo_simple_brier,elo_calib_brier,hybrid_brier,hybrid_accuracy,hybrid_ece,beta_elo,rho,base_xg,converged,hybrid_beats_elo_simple,hybrid_beats_elo_calib,hybrid_beats_random
+train_pre2015_test_2015_2018,21296,3812,1990-01-12,2014-12-31,2015-01-04,2018-12-31,1.09861,1.05391,0.93575,0.92391,0.92777,0.66667,0.55177,0.54441,0.54303,0.5766,0.02947,0.6301,-0.0501,1.4111,False,True,False,True
+train_pre2019_test_2019_2022,25108,3580,1990-01-12,2018-12-31,2019-01-02,2022-12-30,1.09861,1.04572,0.90141,0.886,0.87316,0.66667,0.52788,0.51837,0.51112,0.605,0.01196,0.7385,-0.0304,1.3964,False,True,True,True
+wc2022_holdout,31911,64,1990-01-12,2025-12-31,2022-11-20,2022-12-18,1.09861,1.07361,1.03798,1.02753,1.03251,0.66667,0.61093,0.60905,0.60625,0.5312,0.01856,0.6508,-0.0415,1.3885,False,True,False,True
+train_pre2023_test_2023_2025,28688,3287,1990-01-12,2022-12-30,2023-01-02,2025-12-31,1.09861,1.05479,0.89994,0.88717,0.88131,0.66667,0.52918,0.5208,0.51702,0.5954,0.02566,0.6513,-0.0458,1.4048,False,True,True,True

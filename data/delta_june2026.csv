@@ -1,0 +1,29 @@
+code,dimension,old_value,delta,new_value,source,confidence
+ESP,health,95,-5,90,Fermin Lopez metatarsal surgery confirmed OUT — beIN Sports / WorldSoccerTalk May 2026,HIGH
+ESP,form,90,-5,85,Spain 1-1 Iraq friendly June 4 2026 — ESPN/FOXSports gameId 401871471,HIGH
+ESP,midfield,92,-2,90,Fermin was creative CM; Merino fit is partial positive offset — net -2,MEDIUM
+FRA,health,91,-5,86,Ekitike Achilles tear April 2026 OUT 8 months; Camavinga limited injury-disrupted season — ESPN/Goal.com squad,HIGH
+FRA,depth,94,-5,89,Griezmann+Camavinga+Ekitike+Kolo Muani all absent from squad — Deschamps announcement,HIGH
+FRA,form,91,-2,89,Squad disruption signal; key creative players missing from preparation,MEDIUM
+ARG,health,88,-9,79,Messi hamstring strain May 25 Inter Miami; sat out Argentina vs Honduras June 7; day-by-day — Al Jazeera June 7,HIGH
+ARG,form,87,-5,82,Messi sat out pre-WC friendly; Scaloni optimistic but uncertainty high — multiple sources,HIGH
+BRA,attack,91,-3,88,Rodrygo ACL torn March vs Getafe OUT confirmed; Neymar (34) replacing Estevao but calf grade 2; Vini Jr+Raphinha intact — ESPN/Goal.com,HIGH
+BRA,health,88,-11,77,Rodrygo ACL OUT confirmed; Neymar calf grade 2 (miss match 1 likely); Wesley withdrew replaced Ederson Silva June 7 — ESPN/WorldSoccerTalk,HIGH
+BRA,depth,88,-4,84,Losing young stars Rodrygo+Estevao; Neymar 34 not match-fit reduces quality depth — combined assessment,MEDIUM
+BRA,form,86,+4,90,Brazil 6-2 Panama + 2-1 Egypt WITHOUT Neymar — excellent form from available squad — friendlies June 2026,HIGH
+ENG,depth,89,-6,83,Palmer+Foden+TAA+Maguire all missing; significant quality loss — Sky Sports / ESPN Tuchel squad May 2026,HIGH
+ENG,health,87,-3,84,Palmer partly injury-related (groin Aug-Nov 2025 disrupted season) — ESPN / Sports Mole,MEDIUM
+ENG,form,84,-2,82,Squad disruption; England 1-0 NZ modest result; key creative players absent — ESPN,MEDIUM
+NED,attack,83,-4,79,Xavi Simons ACL ruptured April 2026 Tottenham OUT; key creative attacker — FIFA.com official,HIGH
+NED,midfield,84,-5,79,Simons was CM/AM engine; Frenkie+Reijnders cover but gap significant — Sports Mole / SportsMole WC tracker,HIGH
+NED,defense,84,-5,79,Matthijs de Ligt extra back surgery OUT; Stefan de Vrij OUT; CB depth devastated — ESPN injuries tracker,HIGH
+NED,health,86,-12,74,3 confirmed starters OUT: Simons+De Ligt+De Vrij; most severe injury blow of any team — multiple sources,HIGH
+NED,depth,81,-8,73,Quality depth severely reduced; Koeman missing 3 starters across all lines — combined assessment,HIGH
+NED,form,83,-4,79,Squad severely disrupted; morale concern from key losses — MEDIUM assessment,MEDIUM
+JPN,attack,79,-5,74,Kaoru Mitoma hamstring Brighton vs Wolves OUT; best creative attacker; Moriyasu confirmed — Al Jazeera May 15,HIGH
+JPN,health,89,-9,80,Mitoma confirmed OUT; only major absence but he was irreplaceable — Al Jazeera / JFA statement,HIGH
+JPN,form,88,-6,82,Losing best attacking player; squad concern; Group F opens vs Netherlands June 14 — assessment,MEDIUM
+GER,health,87,-2,85,Lennart Karl thigh torn muscle OUT; replaced by Assan Ouedraogo (20yo RB Leipzig) — ESPN / DFB,HIGH
+SCO,form,77,+6,83,Scotland 4-0 Bolivia warm-up (excellent pre-WC form); Porteous-led defensive unit clicking — Football365 / FIFA.com results,HIGH
+BEL,form,82,+3,85,Belgium 5-0 Tunisia + beat Croatia (Lukaku scoring); strong warm-up form — search results June 2026,MEDIUM
+POR,form,84,+2,86,Portugal 2-1 Chile warm-up win; Leao red card late but clean victory — TNT Sports / Football365,HIGH

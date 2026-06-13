@@ -1,0 +1,27 @@
+{
+  "verdict": "PASS_WITH_TEMPERATURE",
+  "original_beta_elo": 0.988351,
+  "original_top1": 0.30355,
+  "original_top3": 0.66363,
+  "top3_upper_bound": 0.45999999999999996,
+  "top1_upper_bound": 0.2,
+  "historical_top3_reference": 0.36,
+  "recommended_beta_mul": 0.55,
+  "recommended_beta_elo": 0.5436,
+  "recommended_top3": 0.41707,
+  "recommended_top1": 0.17153,
+  "criteria_met": [
+    "ESP vs FRA win prob plausible (50.6%)",
+    "draw rate \u2265 floor (25.7%)",
+    "temperature fix available: beta\u00d70.40 gives top3\u226446%",
+    "P2.5: Elo-backbone ECE=0.0170 (better than hybrid 0.0199)"
+  ],
+  "criteria_failed": [
+    "top3 OVER-CONCENTRATED (66.4% > 46%)",
+    "top1 OVER-CONCENTRATED (30.4% > 20%)",
+    "ESP vs rank-20 win prob IMPLAUSIBLE (83.1% > 72%)"
+  ],
+  "n_criteria_met": 4,
+  "n_criteria_failed": 3,
+  "note": "verdict=PASS_WITH_TEMPERATURE. PASS_ELO_CALIBRATED \u2192 publish as-is. PASS_WITH_TEMPERATURE \u2192 re-run simulation with recommended beta, then publish. FAIL_NEED_BLEND \u2192 blend with expert model before publication."
+}

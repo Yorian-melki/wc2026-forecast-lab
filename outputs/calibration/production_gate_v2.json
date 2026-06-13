@@ -1,0 +1,42 @@
+{
+  "verdict": "BORDERLINE_EXPERIMENTAL",
+  "criteria_met": [
+    "hybrid beats elo_calib average NLL (-0.00208)",
+    "no catastrophic loss on WC2022 holdout",
+    "rho not stuck at \u00b10.20 boundary",
+    "beta_elo stable across splits (CV=0.054)"
+  ],
+  "criteria_failed": [
+    "no clear_win split (only marginal: 1)",
+    "hybrid ECE worse (elo=0.0170, hyb=0.0199)",
+    "per-team residuals show no clear signal beyond Elo-only"
+  ],
+  "n_criteria_met": 4,
+  "n_criteria_failed": 3,
+  "avg_nll": {
+    "elo_calib": 0.93115,
+    "hybrid": 0.92907,
+    "delta": -0.00208
+  },
+  "significance_summary": {
+    "n_clear_win": 0,
+    "n_marginal_win": 1,
+    "n_tie": 3,
+    "n_loss": 0,
+    "n_total": 4,
+    "avg_delta_nll": -0.00208,
+    "avg_z_score": 0.29,
+    "overall": "INCONCLUSIVE"
+  },
+  "beta_elo_cv": 0.0542,
+  "rho_not_boundary": true,
+  "ece": {
+    "elo_calib": 0.017,
+    "hybrid": 0.01994,
+    "ok": false
+  },
+  "wc2022_holdout_delta": 0.00498,
+  "wc2022_ok": true,
+  "residuals_add_signal": false,
+  "note": "BORDERLINE_EXPERIMENTAL \u2192 keep expert model, document hybrid as experimental"
+}

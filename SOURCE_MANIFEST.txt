@@ -1,0 +1,1525 @@
+===== FILE: .gitignore =====
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+outputs/*.csv
+outputs/*.json
+outputs/*.parquet
+outputs/*.npz
+
+
+===== FILE: Makefile =====
+PYTHON ?= python
+
+install:
+	$(PYTHON) -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt && pip install -e .
+
+test:
+	. .venv/bin/activate && pytest -q
+
+validate:
+	. .venv/bin/activate && python -m wc2026.cli validate-data
+
+thirds:
+	. .venv/bin/activate && python -m wc2026.cli export-third-place-map --out outputs/generated_third_place_mapping.csv
+
+pairwise:
+	. .venv/bin/activate && python -m wc2026.cli precompute-pairwise --iterations 1000000 --jobs 8 --batch-size 50000 --out outputs/pairwise_summary.csv
+
+tournament:
+	. .venv/bin/activate && python -m wc2026.cli simulate-tournament --iterations 100000 --seed 20260404 --out-dir outputs/tournament_run
+
+
+===== FILE: README.md =====
+# WC2026 localhost simulator
+
+A complete localhost project to model and simulate the 2026 FIFA World Cup with:
+
+- the real 48-team / 12-group format;
+- exact group match structure from the tournament regulations;
+- qualification of the top two in each group plus the eight best third-placed teams;
+- deterministic round-of-32 assignment for third-placed teams using the official slot families published in the regulations;
+- knockout progression all the way to the final;
+- reproducible Monte Carlo engines for both pairwise match pre-computation and full-tournament simulation;
+- CSV and JSON exports;
+- tests.
+
+## Important honesty note
+
+This project is **complete and executable**, but two truths matter:
+
+1. **A Monte Carlo is still an estimator.** It can be very precise with enough iterations, but it is not mathematically exact.
+2. FIFA published 495 specific third-place mapping combinations in Annex C of the March 2026 regulations. This project implements the **exact official slot families** from the regulations and generates an **exhaustive, deterministic, rule-consistent assignment** for every 8-of-12 third-place combination. That means the tournament logic is complete and exhaustive. However, unless you inject the official Annex C table itself, I cannot honestly certify that every generated row is byte-for-byte identical to FIFA's published row ordering.
+
+The core tournament logic is therefore:
+
+- **exact for group structure, ranking rules, best-third ranking, and knockout skeleton**;
+- **exhaustive for all 495 best-third combinations**;
+- **Monte Carlo for match/tournament outcome estimation**.
+
+## Precision design choices
+
+- floating-point calculations use Python / NumPy `float64`;
+- counters use `int64` or Python integers;
+- no destructive rounding inside the engine;
+- RNG uses `numpy.random.Generator(PCG64DXSM)` with explicit seeds;
+- Monte Carlo is executed in batches to control memory;
+- exports preserve full precision unless you explicitly post-process them.
+
+## Project contents
+
+- `data/teams.csv` – 48 teams with analyst priors for ratings and tie-break support.
+- `data/groups.json` – actual April 2026 final groups.
+- `data/config.json` – simulation parameters.
+- `src/wc2026/` – source code.
+- `tests/` – unit and smoke tests.
+- `scripts/` – installation and launch helpers.
+
+## What the project does
+
+### Pairwise pre-computation
+It can simulate every unique neutral-ground pairing among the 48 qualified teams:
+
+- unique unordered pairings = `48 * 47 / 2 = 1128`
+- if you use `1_000_000` iterations per pairing, the total simulated match count is:
+  `1,128,000,000`
+
+Command:
+
+```bash
+python -m wc2026.cli precompute-pairwise --iterations 1000000 --jobs 8 --batch-size 50000 --out outputs/pairwise_summary.csv
+```
+
+### Full tournament simulation
+It can simulate the whole tournament end-to-end with exact group / qualification / bracket propagation.
+
+Command:
+
+```bash
+python -m wc2026.cli simulate-tournament --iterations 100000 --seed 20260404 --out-dir outputs/tournament_run
+```
+
+The default tournament iteration count is configurable in `data/config.json`. Increase it if your machine can handle it.
+
+## Performance notes
+
+### Pairwise layer
+The pairwise job is the heaviest explicitly requested component. `1_128_000_000` Monte Carlo match draws is large. Real runtime depends on:
+
+- CPU core count;
+- NumPy build;
+- available RAM and cache behavior;
+- chosen batch size;
+- whether your Python is compiled with optimized BLAS / vectorization.
+
+The implementation uses batch vectorization and optional multiprocessing. It is intended for serious localhost execution, not a browser notebook.
+
+### Tournament layer
+Full-tournament simulation is much cheaper per iteration than the full pairwise sweep, but still expensive if you push into the hundreds of thousands or millions of full-bracket runs.
+
+## Group rules implemented
+
+Group ranking uses the tournament regulations ordering:
+
+1. head-to-head points among tied teams;
+2. head-to-head goal difference among tied teams;
+3. head-to-head goals scored among tied teams;
+4. reapplication on the remaining tied subset if partial separation occurs;
+5. overall goal difference;
+6. overall goals scored;
+7. conduct score;
+8. FIFA ranking surrogate in the shipped dataset.
+
+For the best third-placed teams, the ranking follows:
+
+1. points;
+2. goal difference;
+3. goals scored;
+4. conduct score;
+5. FIFA ranking surrogate.
+
+## Conduct / disciplinary tie-break
+The regulations use team conduct score based on yellow/red cards. This project simulates a **disciplinary deduction process** driven by each team's `discipline` parameter and converts it into tie-break penalty points. This is a model-based surrogate for exact card sequences.
+
+## R32 slot families from the regulations
+The code uses the exact slot families published in the March 2026 regulations:
+
+- M74: 1E vs best 3rd of ABCDF
+- M77: 1I vs best 3rd of CDFGH
+- M79: 1A vs best 3rd of CEFHI
+- M80: 1L vs best 3rd of EHIJK
+- M81: 1D vs best 3rd of BEFIJ
+- M82: 1G vs best 3rd of AEHIJ
+- M85: 1B vs best 3rd of EFGIJ
+- M87: 1K vs best 3rd of DEIJL
+
+The code then generates a deterministic matching over the 8 qualifying third-placed groups.
+
+## Production workflow
+
+1. create a venv;
+2. install dependencies;
+3. optionally export the generated 495-combination mapping table;
+4. precompute the full pairwise matrix at 1,000,000 iterations if desired;
+5. run full tournament simulation;
+6. inspect `outputs/`.
+
+## Typical commands
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
+
+python -m wc2026.cli validate-data
+python -m wc2026.cli export-third-place-map --out outputs/generated_third_place_mapping.csv
+python -m wc2026.cli precompute-pairwise --iterations 1000000 --jobs 8 --batch-size 50000 --out outputs/pairwise_summary.csv
+python -m wc2026.cli simulate-tournament --iterations 100000 --seed 20260404 --out-dir outputs/tournament_run
+pytest -q
+```
+
+## Outputs
+
+### Pairwise
+`outputs/pairwise_summary.csv`
+
+Columns include:
+
+- teams;
+- lambdas;
+- win/draw/loss probabilities in 90 minutes;
+- knockout advancement probabilities;
+- mean goals;
+- discipline means.
+
+### Tournament run
+`outputs/tournament_run/summary.csv`
+`outputs/tournament_run/summary.json`
+`outputs/tournament_run/group_position_probs.csv`
+`outputs/tournament_run/stage_probs.csv`
+`outputs/tournament_run/top_paths.json`
+
+## Editing team priors
+The shipped priors are editable. If you want to inject your own ratings, modify `data/teams.csv`.
+
+## Python version
+Tested against Python 3.11+.
+
+
+===== FILE: data/config.json =====
+{
+  "project_name": "wc2026_localhost",
+  "snapshot_date": "2026-04-04",
+  "rng_bit_generator": "PCG64DXSM",
+  "default_pairwise_iterations": 1000000,
+  "default_tournament_iterations": 100000,
+  "default_seed": 20260404,
+  "pairwise_batch_size": 50000,
+  "base_group_xg": 1.25,
+  "knockout_intensity_multiplier": 0.96,
+  "extra_time_multiplier": 0.3333333333333333,
+  "max_goals_cap": 12,
+  "penalty_logit_scale": 0.055,
+  "discipline_base_lambda": 1.35,
+  "travel_penalty_scale": 0.02,
+  "altitude_penalty_scale": 0.03,
+  "climate_penalty_scale": 0.015,
+  "qualitative_adjustment_cap": 0.08,
+  "top_path_count": 20
+}
+
+===== FILE: data/groups.json =====
+{
+  "A": [
+    "MEX",
+    "RSA",
+    "KOR",
+    "CZE"
+  ],
+  "B": [
+    "CAN",
+    "BIH",
+    "QAT",
+    "SUI"
+  ],
+  "C": [
+    "BRA",
+    "MAR",
+    "HAI",
+    "SCO"
+  ],
+  "D": [
+    "USA",
+    "PAR",
+    "AUS",
+    "TUR"
+  ],
+  "E": [
+    "GER",
+    "CUW",
+    "CIV",
+    "ECU"
+  ],
+  "F": [
+    "NED",
+    "JPN",
+    "SWE",
+    "TUN"
+  ],
+  "G": [
+    "BEL",
+    "EGY",
+    "IRN",
+    "NZL"
+  ],
+  "H": [
+    "ESP",
+    "CPV",
+    "KSA",
+    "URU"
+  ],
+  "I": [
+    "FRA",
+    "SEN",
+    "IRQ",
+    "NOR"
+  ],
+  "J": [
+    "ARG",
+    "ALG",
+    "AUT",
+    "JOR"
+  ],
+  "K": [
+    "POR",
+    "COD",
+    "UZB",
+    "COL"
+  ],
+  "L": [
+    "ENG",
+    "CRO",
+    "GHA",
+    "PAN"
+  ]
+}
+
+===== FILE: data/teams.csv =====
+code,name,group,fifa_rank,attack,defense,midfield,transition,setpiece,goalkeeper,depth,coach,penalties,discipline,health,form,climate_resilience,altitude_resilience,travel_resilience
+ESP,Spain,H,2,91,90,92,83,84,82,89,88,83,78,95,90,80,78,74
+FRA,France,I,1,92,88,90,88,85,84,94,87,84,76,91,91,79,77,79
+ARG,Argentina,J,3,89,87,89,84,86,84,86,86,86,80,88,87,77,76,76
+BRA,Brazil,C,6,91,84,86,91,82,81,88,90,82,77,88,86,82,79,77
+ENG,England,L,4,89,85,88,86,84,82,89,84,84,75,87,84,78,76,78
+POR,Portugal,K,5,87,84,87,83,83,81,85,83,83,76,86,84,79,76,76
+GER,Germany,E,7,86,82,85,85,82,80,84,85,81,74,87,86,80,77,78
+NED,Netherlands,F,8,83,84,84,81,81,82,81,82,80,75,86,83,78,76,77
+BEL,Belgium,G,9,84,79,81,83,81,79,80,79,81,73,84,82,77,75,76
+JPN,Japan,F,10,79,81,80,84,77,79,78,82,78,80,89,88,84,79,83
+SEN,Senegal,I,11,80,81,78,84,77,80,77,79,78,74,85,84,84,79,81
+MAR,Morocco,C,12,80,82,79,81,79,81,77,78,79,74,85,80,82,80,79
+COL,Colombia,K,13,81,79,80,79,82,78,78,78,82,75,83,79,80,77,77
+URU,Uruguay,H,14,79,81,79,80,80,80,77,79,79,75,84,80,78,77,76
+NOR,Norway,I,15,82,76,78,85,78,77,75,77,82,74,84,82,79,76,78
+CRO,Croatia,L,16,78,79,84,73,81,80,77,81,80,74,83,78,76,75,75
+SUI,Switzerland,B,17,77,79,78,76,79,79,76,77,78,74,84,79,77,75,76
+AUT,Austria,J,18,78,78,79,80,77,77,75,79,77,74,84,81,78,76,76
+MEX,Mexico,A,19,75,77,76,77,78,77,77,76,79,73,84,79,84,79,82
+USA,United States,D,20,76,75,77,81,75,76,76,77,77,72,83,78,83,78,81
+ECU,Ecuador,E,21,76,79,76,81,75,76,75,77,76,74,84,80,83,84,77
+SWE,Sweden,F,22,77,76,75,78,77,76,75,76,78,75,84,80,78,75,76
+ALG,Algeria,J,23,77,75,75,79,77,74,74,76,77,73,83,80,81,78,79
+PAR,Paraguay,D,24,74,77,74,75,79,77,73,74,78,75,84,78,78,76,77
+TUN,Tunisia,F,25,73,77,72,74,77,76,72,74,76,74,83,77,82,77,78
+IRN,Iran,G,26,74,76,74,76,77,76,72,74,78,76,83,79,82,77,79
+AUS,Australia,D,27,73,75,73,77,75,75,72,74,76,74,84,78,81,77,83
+SCO,Scotland,C,28,74,74,73,76,76,75,72,74,75,74,83,77,77,75,77
+TUR,Turkey,D,29,76,73,75,79,74,74,73,76,76,75,83,81,79,76,78
+KOR,South Korea,A,30,74,73,74,78,74,74,72,75,76,74,83,80,83,78,80
+EGY,Egypt,G,31,73,75,73,75,77,74,72,74,78,74,82,77,81,77,78
+CZE,Czech Republic,A,32,73,73,74,75,76,74,72,74,76,73,82,76,77,74,76
+CIV,Ivory Coast,E,33,74,74,73,78,75,74,73,74,75,74,83,79,82,78,79
+BIH,Bosnia and Herzegovina,B,34,72,72,73,72,75,73,70,72,75,74,82,76,76,74,76
+GHA,Ghana,L,35,73,71,71,78,73,71,71,73,74,74,82,77,81,76,79
+PAN,Panama,L,36,69,73,69,73,73,72,69,71,72,73,82,76,82,76,81
+QAT,Qatar,B,37,70,71,71,72,74,72,70,70,73,73,82,76,84,77,82
+IRQ,Iraq,I,38,69,72,69,72,72,72,69,70,72,74,82,77,84,77,83
+KSA,Saudi Arabia,H,39,69,72,69,71,73,72,69,71,73,74,82,76,84,78,82
+RSA,South Africa,A,40,68,71,68,72,71,71,68,70,71,74,82,76,82,77,79
+UZB,Uzbekistan,K,41,68,71,68,73,71,71,68,71,72,74,82,78,82,78,80
+JOR,Jordan,J,42,66,70,67,71,70,70,66,69,71,74,82,77,82,77,80
+CPV,Cape Verde,H,43,67,71,67,72,70,70,66,69,70,74,82,77,80,77,79
+NZL,New Zealand,G,44,65,69,65,68,71,69,65,68,70,74,82,75,79,76,80
+CUW,Curaçao,E,45,64,68,64,69,70,68,64,67,69,75,82,75,81,76,81
+HAI,Haiti,C,46,66,66,64,72,68,66,63,66,68,75,81,75,82,77,82
+COD,DR Congo,K,47,67,68,66,73,68,67,64,67,69,75,82,77,82,77,80
+CAN,Canada,B,18,76,75,76,80,75,75,76,76,77,73,84,79,83,78,80
+
+
+===== FILE: pyproject.toml =====
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wc2026-localhost"
+version = "0.1.0"
+description = "Localhost Monte Carlo simulator for the 2026 FIFA World Cup"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+===== FILE: requirements.txt =====
+numpy>=1.26
+pandas>=2.2
+pytest>=8.0
+
+
+===== FILE: scripts/install.sh =====
+#!/usr/bin/env bash
+set -euo pipefail
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e .
+echo 'Installation complete.'
+
+
+===== FILE: scripts/run_pairwise.sh =====
+#!/usr/bin/env bash
+set -euo pipefail
+source .venv/bin/activate
+python -m wc2026.cli precompute-pairwise --iterations 1000000 --jobs 8 --batch-size 50000 --seed 20260404 --out outputs/pairwise_summary.csv
+
+
+===== FILE: scripts/run_tests.sh =====
+#!/usr/bin/env bash
+set -euo pipefail
+source .venv/bin/activate
+pytest -q
+
+
+===== FILE: scripts/run_tournament.sh =====
+#!/usr/bin/env bash
+set -euo pipefail
+source .venv/bin/activate
+python -m wc2026.cli simulate-tournament --iterations 100000 --seed 20260404 --out-dir outputs/tournament_run
+
+
+===== FILE: src/wc2026/__init__.py =====
+__all__ = [
+    'constants',
+    'data_loader',
+    'match_model',
+    'group_rules',
+    'best_thirds',
+    'bracket',
+    'tournament',
+]
+
+__version__ = '0.1.0'
+
+
+===== FILE: src/wc2026/best_thirds.py =====
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Dict, List
+
+from .data_loader import Team
+from .group_rules import TeamTable
+
+
+@dataclass
+class ThirdPlacedRecord:
+    group: str
+    code: str
+    points: int
+    gd: int
+    gf: int
+    conduct_penalty: int
+    fifa_rank: int
+
+
+def rank_best_thirds(group_tables: Dict[str, Dict[str, TeamTable]], group_orders: Dict[str, List[str]], teams: Dict[str, Team]) -> List[ThirdPlacedRecord]:
+    records: List[ThirdPlacedRecord] = []
+    for group, order in group_orders.items():
+        third = order[2]
+        rec = group_tables[group][third]
+        records.append(
+            ThirdPlacedRecord(
+                group=group,
+                code=third,
+                points=rec.points,
+                gd=rec.gd,
+                gf=rec.gf,
+                conduct_penalty=rec.conduct_penalty,
+                fifa_rank=teams[third].fifa_rank,
+            )
+        )
+    ranked = sorted(
+        records,
+        key=lambda r: (r.points, r.gd, r.gf, -r.conduct_penalty, -r.fifa_rank, r.code),
+        reverse=True,
+    )
+    return ranked
+
+
+===== FILE: src/wc2026/bracket.py =====
+from __future__ import annotations
+
+import csv
+import itertools
+from collections import OrderedDict
+from functools import lru_cache
+from pathlib import Path
+from typing import Dict, Iterable, List, Tuple
+
+from .constants import BEST_THIRD_SLOT_ORDER, R16_MATCHES, R32_MATCHES, QF_MATCHES, SF_MATCHES, SLOT_FAMILIES
+
+
+def _try_complete(slot_index: int, slots: List[str], remaining_groups: tuple[str, ...], partial: Dict[str, str]) -> bool:
+    if slot_index >= len(slots):
+        return True
+    slot = slots[slot_index]
+    candidates = [g for g in remaining_groups if g in SLOT_FAMILIES[slot]]
+    for group in candidates:
+        next_groups = tuple(x for x in remaining_groups if x != group)
+        partial[slot] = group
+        if _try_complete(slot_index + 1, slots, next_groups, partial):
+            return True
+        partial.pop(slot, None)
+    return False
+
+
+def solve_third_place_mapping(selected_groups: Iterable[str]) -> Dict[str, str]:
+    selected = tuple(sorted(selected_groups))
+    if len(selected) != 8:
+        raise ValueError(f'exactly 8 third-placed groups required, got {selected}')
+    mapping: Dict[str, str] = {}
+    ok = _try_complete(0, BEST_THIRD_SLOT_ORDER, selected, mapping)
+    if not ok:
+        raise ValueError(f'no valid assignment found for groups={selected}')
+    return {slot: mapping[slot] for slot in BEST_THIRD_SLOT_ORDER}
+
+
+@lru_cache(maxsize=512)
+def cached_third_place_mapping(selected_groups: tuple[str, ...]) -> Dict[str, str]:
+    return solve_third_place_mapping(selected_groups)
+
+
+def enumerate_all_third_place_mappings() -> List[dict]:
+    rows = []
+    for idx, combo in enumerate(itertools.combinations('ABCDEFGHIJKL', 8), start=1):
+        mapping = solve_third_place_mapping(combo)
+        row = {'option': idx, 'combination': ''.join(combo)}
+        row.update(mapping)
+        rows.append(row)
+    return rows
+
+
+def export_all_third_place_mappings(path: str | Path) -> None:
+    rows = enumerate_all_third_place_mappings()
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = ['option', 'combination'] + BEST_THIRD_SLOT_ORDER
+    with path.open('w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def build_round_of_32(placements: Dict[str, Dict[str, str]], best_third_groups: List[str]) -> OrderedDict[str, tuple[str, str]]:
+    third_map = cached_third_place_mapping(tuple(sorted(best_third_groups)))
+
+    def resolve(token: str) -> str:
+        if token.startswith('3@'):
+            slot = token[2:]
+            group = third_map[slot]
+            return placements[group]['3']
+        group = token[-1]
+        pos = token[0]
+        return placements[group][pos]
+
+    fixtures: OrderedDict[str, tuple[str, str]] = OrderedDict()
+    for match_no, (left, right) in R32_MATCHES.items():
+        fixtures[match_no] = (resolve(left), resolve(right))
+    return fixtures
+
+
+def build_knockout_round(previous_winners: Dict[str, str], round_mapping: OrderedDict[str, tuple[str, str]]) -> OrderedDict[str, tuple[str, str]]:
+    fixtures: OrderedDict[str, tuple[str, str]] = OrderedDict()
+    for match_no, (left, right) in round_mapping.items():
+        fixtures[match_no] = (previous_winners[left], previous_winners[right])
+    return fixtures
+
+
+def build_round_of_16(r32_winners: Dict[str, str]) -> OrderedDict[str, tuple[str, str]]:
+    return build_knockout_round(r32_winners, R16_MATCHES)
+
+
+def build_quarterfinals(r16_winners: Dict[str, str]) -> OrderedDict[str, tuple[str, str]]:
+    return build_knockout_round(r16_winners, QF_MATCHES)
+
+
+def build_semifinals(qf_winners: Dict[str, str]) -> OrderedDict[str, tuple[str, str]]:
+    return build_knockout_round(qf_winners, SF_MATCHES)
+
+
+def build_final(sf_winners: Dict[str, str]) -> OrderedDict[str, tuple[str, str]]:
+    return OrderedDict([('M104', (sf_winners['M101'], sf_winners['M102']))])
+
+
+===== FILE: src/wc2026/cli.py =====
+from __future__ import annotations
+
+import argparse
+import itertools
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from pathlib import Path
+
+import pandas as pd
+
+from .bracket import export_all_third_place_mappings
+from .data_loader import load_config, load_groups, load_teams, validate_data
+from .match_model import MatchModel
+from .tournament import run_tournament_to_disk
+from .utils import ensure_dir
+
+
+def _pairwise_worker(args: tuple[str, str, int, int, int]):
+    team_a_code, team_b_code, iterations, seed, batch_size = args
+    teams = load_teams()
+    config = load_config()
+    model = MatchModel(config)
+    result = model.simulate_pairwise_monte_carlo(
+        teams[team_a_code],
+        teams[team_b_code],
+        iterations=iterations,
+        seed=seed,
+        batch_size=batch_size,
+    )
+    return result
+
+
+def cmd_validate_data(_: argparse.Namespace) -> None:
+    validate_data()
+    print('data validation passed')
+
+
+def cmd_export_third_place_map(args: argparse.Namespace) -> None:
+    export_all_third_place_mappings(args.out)
+    print(f'exported 495 generated mappings to {args.out}')
+
+
+def cmd_precompute_pairwise(args: argparse.Namespace) -> None:
+    validate_data()
+    teams = sorted(load_teams().keys())
+    combos = list(itertools.combinations(teams, 2))
+    jobs = max(1, int(args.jobs))
+    batch_size = int(args.batch_size)
+    iterations = int(args.iterations)
+    seed = int(args.seed)
+    rows = []
+    if jobs == 1:
+        for idx, (a, b) in enumerate(combos):
+            rows.append(_pairwise_worker((a, b, iterations, seed + idx, batch_size)))
+    else:
+        with ProcessPoolExecutor(max_workers=jobs) as ex:
+            futures = {
+                ex.submit(_pairwise_worker, (a, b, iterations, seed + idx, batch_size)): (a, b)
+                for idx, (a, b) in enumerate(combos)
+            }
+            for fut in as_completed(futures):
+                rows.append(fut.result())
+    df = pd.DataFrame(rows).sort_values(['team_a', 'team_b']).reset_index(drop=True)
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(out, index=False)
+    print(f'wrote {len(df)} pairwise rows to {out}')
+
+
+def cmd_simulate_tournament(args: argparse.Namespace) -> None:
+    validate_data()
+    artifacts = run_tournament_to_disk(iterations=int(args.iterations), seed=int(args.seed), out_dir=args.out_dir)
+    print(artifacts.summary.head(10).to_string(index=False))
+    print(f'outputs written to {args.out_dir}')
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog='wc2026', description='Localhost Monte Carlo World Cup 2026 simulator')
+    sub = parser.add_subparsers(dest='command', required=True)
+
+    p_validate = sub.add_parser('validate-data', help='Validate shipped data files')
+    p_validate.set_defaults(func=cmd_validate_data)
+
+    p_thirds = sub.add_parser('export-third-place-map', help='Export generated 495 third-place mappings')
+    p_thirds.add_argument('--out', required=True, help='Output CSV path')
+    p_thirds.set_defaults(func=cmd_export_third_place_map)
+
+    p_pair = sub.add_parser('precompute-pairwise', help='Run pairwise Monte Carlo for all 1128 unique matchups')
+    p_pair.add_argument('--iterations', type=int, default=1_000_000)
+    p_pair.add_argument('--jobs', type=int, default=1)
+    p_pair.add_argument('--seed', type=int, default=20260404)
+    p_pair.add_argument('--batch-size', type=int, default=50_000)
+    p_pair.add_argument('--out', required=True)
+    p_pair.set_defaults(func=cmd_precompute_pairwise)
+
+    p_tour = sub.add_parser('simulate-tournament', help='Run full tournament Monte Carlo')
+    p_tour.add_argument('--iterations', type=int, default=100_000)
+    p_tour.add_argument('--seed', type=int, default=20260404)
+    p_tour.add_argument('--out-dir', required=True)
+    p_tour.set_defaults(func=cmd_simulate_tournament)
+
+    return parser
+
+
+def main() -> None:
+    parser = build_parser()
+    args = parser.parse_args()
+    args.func(args)
+
+
+if __name__ == '__main__':
+    main()
+
+
+===== FILE: src/wc2026/constants.py =====
+from collections import OrderedDict
+
+GROUP_ORDER = list('ABCDEFGHIJKL')
+BEST_THIRD_SLOT_ORDER = ['1A', '1B', '1D', '1E', '1G', '1I', '1K', '1L']
+GROUP_MATCH_TEMPLATE = [
+    ('1', '2'),
+    ('3', '4'),
+    ('1', '3'),
+    ('4', '2'),
+    ('4', '1'),
+    ('2', '3'),
+]
+
+SLOT_FAMILIES = OrderedDict([
+    ('1A', set('CEFHI')),
+    ('1B', set('EFGIJ')),
+    ('1D', set('BEFIJ')),
+    ('1E', set('ABCDF')),
+    ('1G', set('AEHIJ')),
+    ('1I', set('CDFGH')),
+    ('1K', set('DEIJL')),
+    ('1L', set('EHIJK')),
+])
+
+R32_MATCHES = OrderedDict([
+    ('M73', ('2A', '2B')),
+    ('M74', ('1E', '3@1E')),
+    ('M75', ('1F', '2C')),
+    ('M76', ('1C', '2F')),
+    ('M77', ('1I', '3@1I')),
+    ('M78', ('2E', '2I')),
+    ('M79', ('1A', '3@1A')),
+    ('M80', ('1L', '3@1L')),
+    ('M81', ('1D', '3@1D')),
+    ('M82', ('1G', '3@1G')),
+    ('M83', ('2K', '2L')),
+    ('M84', ('1H', '2J')),
+    ('M85', ('1B', '3@1B')),
+    ('M86', ('1J', '2H')),
+    ('M87', ('1K', '3@1K')),
+    ('M88', ('2D', '2G')),
+])
+
+R16_MATCHES = OrderedDict([
+    ('M89', ('M74', 'M77')),
+    ('M90', ('M73', 'M75')),
+    ('M91', ('M76', 'M78')),
+    ('M92', ('M79', 'M80')),
+    ('M93', ('M83', 'M84')),
+    ('M94', ('M81', 'M82')),
+    ('M95', ('M86', 'M88')),
+    ('M96', ('M85', 'M87')),
+])
+
+QF_MATCHES = OrderedDict([
+    ('M97', ('M89', 'M90')),
+    ('M98', ('M93', 'M94')),
+    ('M99', ('M91', 'M92')),
+    ('M100', ('M95', 'M96')),
+])
+
+SF_MATCHES = OrderedDict([
+    ('M101', ('M97', 'M98')),
+    ('M102', ('M99', 'M100')),
+])
+
+FINAL_MATCH = ('M104', ('M101', 'M102'))
+THIRD_PLACE_MATCH = ('M103', ('M101_loser', 'M102_loser'))
+
+ROUND_ORDER = ['group', 'r32', 'r16', 'qf', 'sf', 'final', 'champion']
+
+
+===== FILE: src/wc2026/data_loader.py =====
+from __future__ import annotations
+
+import csv
+import json
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List
+
+
+@dataclass(frozen=True)
+class Team:
+    code: str
+    name: str
+    group: str
+    fifa_rank: int
+    attack: float
+    defense: float
+    midfield: float
+    transition: float
+    setpiece: float
+    goalkeeper: float
+    depth: float
+    coach: float
+    penalties: float
+    discipline: float
+    health: float
+    form: float
+    climate_resilience: float
+    altitude_resilience: float
+    travel_resilience: float
+
+
+def project_root() -> Path:
+    return Path(__file__).resolve().parents[2]
+
+
+def data_dir() -> Path:
+    return project_root() / 'data'
+
+
+def load_config() -> dict:
+    return json.loads((data_dir() / 'config.json').read_text(encoding='utf-8'))
+
+
+def load_groups() -> Dict[str, List[str]]:
+    return json.loads((data_dir() / 'groups.json').read_text(encoding='utf-8'))
+
+
+def load_teams() -> Dict[str, Team]:
+    path = data_dir() / 'teams.csv'
+    teams: Dict[str, Team] = {}
+    with path.open('r', newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            team = Team(
+                code=row['code'],
+                name=row['name'],
+                group=row['group'],
+                fifa_rank=int(row['fifa_rank']),
+                attack=float(row['attack']),
+                defense=float(row['defense']),
+                midfield=float(row['midfield']),
+                transition=float(row['transition']),
+                setpiece=float(row['setpiece']),
+                goalkeeper=float(row['goalkeeper']),
+                depth=float(row['depth']),
+                coach=float(row['coach']),
+                penalties=float(row['penalties']),
+                discipline=float(row['discipline']),
+                health=float(row['health']),
+                form=float(row['form']),
+                climate_resilience=float(row['climate_resilience']),
+                altitude_resilience=float(row['altitude_resilience']),
+                travel_resilience=float(row['travel_resilience']),
+            )
+            teams[team.code] = team
+    return teams
+
+
+def validate_data() -> None:
+    groups = load_groups()
+    teams = load_teams()
+    expected = {code for values in groups.values() for code in values}
+    actual = set(teams.keys())
+    if expected != actual:
+        missing = expected - actual
+        extra = actual - expected
+        raise ValueError(f'data mismatch; missing={sorted(missing)} extra={sorted(extra)}')
+    for group, members in groups.items():
+        if len(members) != 4:
+            raise ValueError(f'group {group} does not contain 4 teams')
+        for code in members:
+            if teams[code].group != group:
+                raise ValueError(f'team {code} has group={teams[code].group}, expected {group}')
+
+
+===== FILE: src/wc2026/group_rules.py =====
+from __future__ import annotations
+
+from collections import defaultdict
+from dataclasses import dataclass
+from typing import Dict, Iterable, List, Tuple
+
+from .constants import GROUP_MATCH_TEMPLATE
+from .data_loader import Team
+from .match_model import MatchModel, MatchSummary
+
+
+@dataclass
+class TeamTable:
+    code: str
+    points: int = 0
+    gf: int = 0
+    ga: int = 0
+    conduct_penalty: int = 0
+
+    @property
+    def gd(self) -> int:
+        return self.gf - self.ga
+
+
+@dataclass
+class PlayedMatch:
+    team_a: str
+    team_b: str
+    goals_a: int
+    goals_b: int
+    conduct_a: int
+    conduct_b: int
+
+
+def _add_match_to_table(table: Dict[str, TeamTable], match: PlayedMatch) -> None:
+    a = table[match.team_a]
+    b = table[match.team_b]
+    a.gf += match.goals_a
+    a.ga += match.goals_b
+    b.gf += match.goals_b
+    b.ga += match.goals_a
+    a.conduct_penalty += match.conduct_a
+    b.conduct_penalty += match.conduct_b
+    if match.goals_a > match.goals_b:
+        a.points += 3
+    elif match.goals_a < match.goals_b:
+        b.points += 3
+    else:
+        a.points += 1
+        b.points += 1
+
+
+def _mini_table(team_codes: Iterable[str], matches: List[PlayedMatch]) -> Dict[str, TeamTable]:
+    team_codes = list(team_codes)
+    subset = {code: TeamTable(code=code) for code in team_codes}
+    code_set = set(team_codes)
+    for match in matches:
+        if match.team_a in code_set and match.team_b in code_set:
+            _add_match_to_table(subset, match)
+    return subset
+
+
+def _group_by_equal_keys(ordered_codes: List[str], key_map: Dict[str, Tuple[int, ...]]) -> List[List[str]]:
+    groups: List[List[str]] = []
+    current: List[str] = []
+    current_key = None
+    for code in ordered_codes:
+        key = key_map[code]
+        if current_key is None or key == current_key:
+            current.append(code)
+            current_key = key
+        else:
+            groups.append(current)
+            current = [code]
+            current_key = key
+    if current:
+        groups.append(current)
+    return groups
+
+
+def _rank_subset(codes: List[str], all_matches: List[PlayedMatch], overall: Dict[str, TeamTable], teams: Dict[str, Team]) -> List[str]:
+    if len(codes) <= 1:
+        return list(codes)
+
+    mini = _mini_table(codes, all_matches)
+    key1 = {code: (mini[code].points, mini[code].gd, mini[code].gf) for code in codes}
+    ordered1 = sorted(codes, key=lambda c: key1[c], reverse=True)
+    tied_groups = _group_by_equal_keys(ordered1, key1)
+
+    # If step-1 creates separation, recurse on the unresolved sub-groups only.
+    if len(tied_groups) > 1:
+        resolved: List[str] = []
+        for grp in tied_groups:
+            if len(grp) == 1:
+                resolved.extend(grp)
+            else:
+                resolved.extend(_rank_subset(grp, all_matches, overall, teams))
+        return resolved
+
+    # Still unresolved: move to overall criteria.
+    key2 = {
+        code: (
+            overall[code].gd,
+            overall[code].gf,
+            -overall[code].conduct_penalty,
+            -teams[code].fifa_rank,
+            code,
+        )
+        for code in codes
+    }
+    ordered2 = sorted(codes, key=lambda c: key2[c], reverse=True)
+    return ordered2
+
+
+def rank_group(group_codes: List[str], matches: List[PlayedMatch], teams: Dict[str, Team]) -> List[str]:
+    overall = {code: TeamTable(code=code) for code in group_codes}
+    for match in matches:
+        _add_match_to_table(overall, match)
+
+    base_key = {code: (overall[code].points,) for code in group_codes}
+    ordered = sorted(group_codes, key=lambda c: base_key[c], reverse=True)
+    tied_groups = _group_by_equal_keys(ordered, base_key)
+    final_order: List[str] = []
+    for grp in tied_groups:
+        if len(grp) == 1:
+            final_order.extend(grp)
+        else:
+            final_order.extend(_rank_subset(grp, matches, overall, teams))
+    return final_order
+
+
+def simulate_group(group_name: str, group_codes: List[str], teams: Dict[str, Team], model: MatchModel, rng) -> tuple[Dict[str, TeamTable], List[PlayedMatch], List[str]]:
+    matches: List[PlayedMatch] = []
+    for left_pos, right_pos in GROUP_MATCH_TEMPLATE:
+        team_a = group_codes[int(left_pos) - 1]
+        team_b = group_codes[int(right_pos) - 1]
+        result: MatchSummary = model.simulate_group_match(teams[team_a], teams[team_b], rng)
+        matches.append(
+            PlayedMatch(
+                team_a=team_a,
+                team_b=team_b,
+                goals_a=result.goals_a,
+                goals_b=result.goals_b,
+                conduct_a=result.conduct_a,
+                conduct_b=result.conduct_b,
+            )
+        )
+    table = {code: TeamTable(code=code) for code in group_codes}
+    for match in matches:
+        _add_match_to_table(table, match)
+    order = rank_group(group_codes, matches, teams)
+    return table, matches, order
+
+
+def summarize_group(order: List[str], table: Dict[str, TeamTable]) -> List[dict]:
+    rows = []
+    for idx, code in enumerate(order, start=1):
+        rec = table[code]
+        rows.append({
+            'position': idx,
+            'team': code,
+            'points': rec.points,
+            'gd': rec.gd,
+            'gf': rec.gf,
+            'ga': rec.ga,
+            'conduct_penalty': rec.conduct_penalty,
+        })
+    return rows
+
+
+===== FILE: src/wc2026/match_model.py =====
+from __future__ import annotations
+
+import math
+from dataclasses import dataclass
+from typing import Dict
+
+import numpy as np
+
+from .data_loader import Team
+from .utils import logistic
+
+
+@dataclass
+class MatchSummary:
+    goals_a: int
+    goals_b: int
+    conduct_a: int
+    conduct_b: int
+    winner: str | None = None
+    loser: str | None = None
+    decided_in: str | None = None
+
+
+class MatchModel:
+    def __init__(self, config: dict):
+        self.config = config
+        self.base_group_xg = float(config['base_group_xg'])
+        self.knockout_intensity_multiplier = float(config['knockout_intensity_multiplier'])
+        self.extra_time_multiplier = float(config['extra_time_multiplier'])
+        self.max_goals_cap = int(config['max_goals_cap'])
+        self.penalty_logit_scale = float(config['penalty_logit_scale'])
+        self.discipline_base_lambda = float(config['discipline_base_lambda'])
+
+    def _latent_score(self, team: Team, opp: Team) -> float:
+        return (
+            0.060 * (team.attack - opp.defense)
+            + 0.030 * (team.midfield - opp.midfield)
+            + 0.020 * (team.transition - opp.transition)
+            + 0.012 * (team.setpiece - opp.setpiece)
+            + 0.010 * (team.coach - opp.coach)
+            + 0.008 * (team.form - opp.form)
+            + 0.006 * (team.depth - opp.depth)
+            + 0.006 * (team.health - opp.health)
+            + 0.004 * (team.climate_resilience - opp.climate_resilience)
+            + 0.004 * (team.altitude_resilience - opp.altitude_resilience)
+            + 0.004 * (team.travel_resilience - opp.travel_resilience)
+        ) / 10.0
+
+    def expected_goals(self, team_a: Team, team_b: Team, knockout: bool = False) -> tuple[float, float]:
+        base = self.base_group_xg * (self.knockout_intensity_multiplier if knockout else 1.0)
+        mu_a = base * math.exp(self._latent_score(team_a, team_b))
+        mu_b = base * math.exp(self._latent_score(team_b, team_a))
+        # guardrails against unrealistic tails
+        mu_a = min(max(mu_a, 0.15), 3.60)
+        mu_b = min(max(mu_b, 0.15), 3.60)
+        return mu_a, mu_b
+
+    def conduct_lambda(self, team: Team, opp: Team) -> float:
+        raw = self.discipline_base_lambda + max((100.0 - team.discipline) / 25.0, 0.0)
+        style_drag = max((opp.transition - team.defense) / 90.0, 0.0)
+        return max(0.15, raw + style_drag)
+
+    def simulate_group_match(self, team_a: Team, team_b: Team, rng: np.random.Generator) -> MatchSummary:
+        mu_a, mu_b = self.expected_goals(team_a, team_b, knockout=False)
+        goals_a = int(rng.poisson(mu_a))
+        goals_b = int(rng.poisson(mu_b))
+        conduct_a = int(rng.poisson(self.conduct_lambda(team_a, team_b)))
+        conduct_b = int(rng.poisson(self.conduct_lambda(team_b, team_a)))
+        return MatchSummary(
+            goals_a=min(goals_a, self.max_goals_cap),
+            goals_b=min(goals_b, self.max_goals_cap),
+            conduct_a=conduct_a,
+            conduct_b=conduct_b,
+        )
+
+    def _penalty_win_prob(self, team_a: Team, team_b: Team) -> float:
+        delta = (team_a.penalties - team_b.penalties) + 0.6 * (team_a.goalkeeper - team_b.goalkeeper)
+        return logistic(delta * self.penalty_logit_scale)
+
+    def simulate_knockout_match(self, team_a: Team, team_b: Team, rng: np.random.Generator) -> MatchSummary:
+        mu_a, mu_b = self.expected_goals(team_a, team_b, knockout=True)
+        goals_a = int(min(rng.poisson(mu_a), self.max_goals_cap))
+        goals_b = int(min(rng.poisson(mu_b), self.max_goals_cap))
+        conduct_a = int(rng.poisson(self.conduct_lambda(team_a, team_b)))
+        conduct_b = int(rng.poisson(self.conduct_lambda(team_b, team_a)))
+        if goals_a != goals_b:
+            winner = team_a.code if goals_a > goals_b else team_b.code
+            loser = team_b.code if winner == team_a.code else team_a.code
+            return MatchSummary(goals_a, goals_b, conduct_a, conduct_b, winner, loser, '90')
+
+        et_mu_a = mu_a * self.extra_time_multiplier
+        et_mu_b = mu_b * self.extra_time_multiplier
+        et_a = int(min(rng.poisson(et_mu_a), self.max_goals_cap))
+        et_b = int(min(rng.poisson(et_mu_b), self.max_goals_cap))
+        total_a = goals_a + et_a
+        total_b = goals_b + et_b
+        if total_a != total_b:
+            winner = team_a.code if total_a > total_b else team_b.code
+            loser = team_b.code if winner == team_a.code else team_a.code
+            return MatchSummary(total_a, total_b, conduct_a, conduct_b, winner, loser, 'ET')
+
+        p_a = self._penalty_win_prob(team_a, team_b)
+        a_wins = bool(rng.random() < p_a)
+        winner = team_a.code if a_wins else team_b.code
+        loser = team_b.code if a_wins else team_a.code
+        return MatchSummary(total_a, total_b, conduct_a, conduct_b, winner, loser, 'PEN')
+
+    def simulate_pairwise_monte_carlo(
+        self,
+        team_a: Team,
+        team_b: Team,
+        iterations: int,
+        seed: int,
+        batch_size: int,
+    ) -> Dict[str, float]:
+        rng = np.random.default_rng(np.random.PCG64DXSM(seed))
+        remaining = iterations
+        group_win_a = group_draw = group_win_b = 0
+        ko_win90_a = ko_draw90 = ko_win90_b = 0
+        ko_advance_a = ko_advance_b = 0
+        ko_et_a = ko_et_b = 0
+        ko_pen_a = ko_pen_b = 0
+        goals_a_sum = goals_b_sum = 0
+        conduct_a_sum = conduct_b_sum = 0
+        mu_group_a, mu_group_b = self.expected_goals(team_a, team_b, knockout=False)
+        mu_ko_a, mu_ko_b = self.expected_goals(team_a, team_b, knockout=True)
+        p_pen_a = self._penalty_win_prob(team_a, team_b)
+        while remaining > 0:
+            n = min(remaining, batch_size)
+            ga = rng.poisson(mu_group_a, size=n)
+            gb = rng.poisson(mu_group_b, size=n)
+            group_win_a += int(np.sum(ga > gb))
+            group_draw += int(np.sum(ga == gb))
+            group_win_b += int(np.sum(ga < gb))
+            goals_a_sum += int(np.sum(ga))
+            goals_b_sum += int(np.sum(gb))
+            ca = rng.poisson(self.conduct_lambda(team_a, team_b), size=n)
+            cb = rng.poisson(self.conduct_lambda(team_b, team_a), size=n)
+            conduct_a_sum += int(np.sum(ca))
+            conduct_b_sum += int(np.sum(cb))
+
+            kga = rng.poisson(mu_ko_a, size=n)
+            kgb = rng.poisson(mu_ko_b, size=n)
+            ko_win90_a += int(np.sum(kga > kgb))
+            ko_draw90 += int(np.sum(kga == kgb))
+            ko_win90_b += int(np.sum(kga < kgb))
+
+            draw_mask = kga == kgb
+            draw_count = int(np.sum(draw_mask))
+            if draw_count:
+                etga = rng.poisson(mu_ko_a * self.extra_time_multiplier, size=draw_count)
+                etgb = rng.poisson(mu_ko_b * self.extra_time_multiplier, size=draw_count)
+                adv_a_mask = etga > etgb
+                adv_b_mask = etga < etgb
+                et_tie_mask = etga == etgb
+                ko_advance_a += int(np.sum(adv_a_mask))
+                ko_advance_b += int(np.sum(adv_b_mask))
+                ko_et_a += int(np.sum(adv_a_mask))
+                ko_et_b += int(np.sum(adv_b_mask))
+                pen_count = int(np.sum(et_tie_mask))
+                if pen_count:
+                    pen_draws = rng.random(size=pen_count)
+                    pen_a = int(np.sum(pen_draws < p_pen_a))
+                    pen_b = pen_count - pen_a
+                    ko_advance_a += pen_a
+                    ko_advance_b += pen_b
+                    ko_pen_a += pen_a
+                    ko_pen_b += pen_b
+            ko_advance_a += int(np.sum(kga > kgb))
+            ko_advance_b += int(np.sum(kga < kgb))
+            remaining -= n
+
+        return {
+            'team_a': team_a.code,
+            'team_b': team_b.code,
+            'iterations': int(iterations),
+            'group_mu_a': mu_group_a,
+            'group_mu_b': mu_group_b,
+            'ko_mu_a': mu_ko_a,
+            'ko_mu_b': mu_ko_b,
+            'group_win_a': group_win_a / iterations,
+            'group_draw': group_draw / iterations,
+            'group_win_b': group_win_b / iterations,
+            'ko_win90_a': ko_win90_a / iterations,
+            'ko_draw90': ko_draw90 / iterations,
+            'ko_win90_b': ko_win90_b / iterations,
+            'ko_advance_a': ko_advance_a / iterations,
+            'ko_advance_b': ko_advance_b / iterations,
+            'ko_et_a': ko_et_a / iterations,
+            'ko_et_b': ko_et_b / iterations,
+            'ko_pen_a': ko_pen_a / iterations,
+            'ko_pen_b': ko_pen_b / iterations,
+            'avg_goals_a': goals_a_sum / iterations,
+            'avg_goals_b': goals_b_sum / iterations,
+            'avg_conduct_a': conduct_a_sum / iterations,
+            'avg_conduct_b': conduct_b_sum / iterations,
+        }
+
+
+===== FILE: src/wc2026/tournament.py =====
+from __future__ import annotations
+
+import csv
+import json
+from collections import Counter, defaultdict
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, Tuple
+
+import numpy as np
+import pandas as pd
+
+from .best_thirds import rank_best_thirds
+from .bracket import build_final, build_quarterfinals, build_round_of_16, build_round_of_32, build_semifinals
+from .constants import GROUP_ORDER
+from .data_loader import Team, load_config, load_groups, load_teams
+from .group_rules import simulate_group
+from .match_model import MatchModel
+from .utils import ensure_dir, write_json
+
+
+@dataclass
+class TournamentArtifacts:
+    summary: pd.DataFrame
+    group_positions: pd.DataFrame
+    stage_probs: pd.DataFrame
+    top_paths: dict
+
+
+class TournamentSimulator:
+    def __init__(self, teams: Dict[str, Team], groups: Dict[str, List[str]], config: dict | None = None):
+        self.teams = teams
+        self.groups = groups
+        self.config = config or load_config()
+        self.model = MatchModel(self.config)
+
+    def simulate_once(self, rng: np.random.Generator) -> dict:
+        group_tables = {}
+        group_orders = {}
+        placements = {}
+        for group, codes in self.groups.items():
+            table, _, order = simulate_group(group, codes, self.teams, self.model, rng)
+            group_tables[group] = table
+            group_orders[group] = order
+            placements[group] = {'1': order[0], '2': order[1], '3': order[2], '4': order[3]}
+
+        ranked_thirds = rank_best_thirds(group_tables, group_orders, self.teams)
+        best_thirds = ranked_thirds[:8]
+        best_third_groups = [x.group for x in best_thirds]
+
+        r32 = build_round_of_32(placements, best_third_groups)
+        r32_winners = {}
+        r32_losers = {}
+        for match_no, (a, b) in r32.items():
+            result = self.model.simulate_knockout_match(self.teams[a], self.teams[b], rng)
+            r32_winners[match_no] = result.winner
+            r32_losers[match_no] = result.loser
+
+        r16 = build_round_of_16(r32_winners)
+        r16_winners = {}
+        r16_losers = {}
+        for match_no, (a, b) in r16.items():
+            result = self.model.simulate_knockout_match(self.teams[a], self.teams[b], rng)
+            r16_winners[match_no] = result.winner
+            r16_losers[match_no] = result.loser
+
+        qf = build_quarterfinals(r16_winners)
+        qf_winners = {}
+        qf_losers = {}
+        for match_no, (a, b) in qf.items():
+            result = self.model.simulate_knockout_match(self.teams[a], self.teams[b], rng)
+            qf_winners[match_no] = result.winner
+            qf_losers[match_no] = result.loser
+
+        sf = build_semifinals(qf_winners)
+        sf_winners = {}
+        sf_losers = {}
+        for match_no, (a, b) in sf.items():
+            result = self.model.simulate_knockout_match(self.teams[a], self.teams[b], rng)
+            sf_winners[match_no] = result.winner
+            sf_losers[match_no] = result.loser
+
+        final = build_final(sf_winners)
+        final_match = next(iter(final.items()))
+        _, (a, b) = final_match
+        final_result = self.model.simulate_knockout_match(self.teams[a], self.teams[b], rng)
+        champion = final_result.winner
+        runner_up = final_result.loser
+
+        third_place_match = self.model.simulate_knockout_match(self.teams[sf_losers['M101']], self.teams[sf_losers['M102']], rng)
+        third_place = third_place_match.winner
+        fourth_place = third_place_match.loser
+
+        return {
+            'placements': placements,
+            'best_thirds': best_thirds,
+            'best_third_groups': best_third_groups,
+            'r32': r32,
+            'r32_winners': r32_winners,
+            'r16_winners': r16_winners,
+            'qf_winners': qf_winners,
+            'sf_winners': sf_winners,
+            'champion': champion,
+            'runner_up': runner_up,
+            'third_place': third_place,
+            'fourth_place': fourth_place,
+        }
+
+    def simulate_many(self, iterations: int, seed: int) -> TournamentArtifacts:
+        rng = np.random.default_rng(np.random.PCG64DXSM(seed))
+        teams = list(self.teams.keys())
+
+        stage_counts = {team: Counter() for team in teams}
+        position_counts = {team: Counter() for team in teams}
+        path_counts = Counter()
+
+        for _ in range(iterations):
+            run = self.simulate_once(rng)
+            placements = run['placements']
+            for group, pos_map in placements.items():
+                for pos, team in pos_map.items():
+                    position_counts[team][f'group_{pos}'] += 1
+            for rec in run['best_thirds']:
+                stage_counts[rec.code]['best_third_selected'] += 1
+            for team in teams:
+                stage_counts[team]['group_survived'] += int(
+                    any(placements[g]['1'] == team or placements[g]['2'] == team or placements[g]['3'] == team and g in run['best_third_groups'] for g in self.groups)
+                )
+            for winner in run['r32_winners'].values():
+                stage_counts[winner]['r16'] += 1
+            for winner in run['r16_winners'].values():
+                stage_counts[winner]['qf'] += 1
+            for winner in run['qf_winners'].values():
+                stage_counts[winner]['sf'] += 1
+            for winner in run['sf_winners'].values():
+                stage_counts[winner]['final'] += 1
+            stage_counts[run['champion']]['champion'] += 1
+            stage_counts[run['runner_up']]['runner_up'] += 1
+            stage_counts[run['third_place']]['third_place'] += 1
+            stage_counts[run['fourth_place']]['fourth_place'] += 1
+
+            path_key = ' > '.join(run['best_third_groups'])
+            path_counts[path_key] += 1
+
+        summary_rows = []
+        group_position_rows = []
+        stage_rows = []
+        for team in teams:
+            summary_rows.append({
+                'team': team,
+                'group_survival_prob': stage_counts[team]['group_survived'] / iterations,
+                'r16_prob': stage_counts[team]['r16'] / iterations,
+                'qf_prob': stage_counts[team]['qf'] / iterations,
+                'sf_prob': stage_counts[team]['sf'] / iterations,
+                'final_prob': stage_counts[team]['final'] / iterations,
+                'champion_prob': stage_counts[team]['champion'] / iterations,
+                'runner_up_prob': stage_counts[team]['runner_up'] / iterations,
+                'third_place_prob': stage_counts[team]['third_place'] / iterations,
+                'fourth_place_prob': stage_counts[team]['fourth_place'] / iterations,
+            })
+            for pos_key in ['group_1', 'group_2', 'group_3', 'group_4']:
+                group_position_rows.append({
+                    'team': team,
+                    'position': pos_key,
+                    'probability': position_counts[team][pos_key] / iterations,
+                })
+            for stage in ['group_survived', 'r16', 'qf', 'sf', 'final', 'champion']:
+                stage_rows.append({'team': team, 'stage': stage, 'probability': stage_counts[team][stage] / iterations})
+
+        summary = pd.DataFrame(summary_rows).sort_values(['champion_prob', 'final_prob', 'sf_prob'], ascending=False).reset_index(drop=True)
+        group_positions = pd.DataFrame(group_position_rows)
+        stage_probs = pd.DataFrame(stage_rows)
+        top_paths = {
+            'iterations': iterations,
+            'top_best_third_group_sets': [
+                {'best_third_groups': key, 'count': count, 'probability': count / iterations}
+                for key, count in path_counts.most_common(int(self.config.get('top_path_count', 20)))
+            ]
+        }
+        return TournamentArtifacts(summary=summary, group_positions=group_positions, stage_probs=stage_probs, top_paths=top_paths)
+
+
+def run_tournament_to_disk(iterations: int, seed: int, out_dir: str | Path) -> TournamentArtifacts:
+    teams = load_teams()
+    groups = load_groups()
+    config = load_config()
+    simulator = TournamentSimulator(teams=teams, groups=groups, config=config)
+    artifacts = simulator.simulate_many(iterations=iterations, seed=seed)
+    out_dir = ensure_dir(out_dir)
+    artifacts.summary.to_csv(out_dir / 'summary.csv', index=False)
+    artifacts.group_positions.to_csv(out_dir / 'group_position_probs.csv', index=False)
+    artifacts.stage_probs.to_csv(out_dir / 'stage_probs.csv', index=False)
+    write_json(out_dir / 'top_paths.json', artifacts.top_paths)
+    write_json(out_dir / 'summary.json', json.loads(artifacts.summary.to_json(orient='records')))
+    return artifacts
+
+
+===== FILE: src/wc2026/utils.py =====
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+
+def ensure_dir(path: str | Path) -> Path:
+    p = Path(path)
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def write_json(path: str | Path, payload: Any) -> None:
+    Path(path).write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding='utf-8')
+
+
+def logistic(x: float) -> float:
+    import math
+    return 1.0 / (1.0 + math.exp(-x))
+
+
+===== FILE: tests/test_data_and_mapping.py =====
+from wc2026.data_loader import load_groups, load_teams, validate_data
+from wc2026.bracket import enumerate_all_third_place_mappings
+
+
+def test_validate_data():
+    validate_data()
+    assert len(load_teams()) == 48
+    assert len(load_groups()) == 12
+
+
+def test_third_place_mapping_count_and_validity():
+    rows = enumerate_all_third_place_mappings()
+    assert len(rows) == 495
+    for row in rows:
+        used = {row[s] for s in ['1A', '1B', '1D', '1E', '1G', '1I', '1K', '1L']}
+        assert len(used) == 8
+
+
+===== FILE: tests/test_group_rules.py =====
+from wc2026.data_loader import load_teams
+from wc2026.group_rules import PlayedMatch, rank_group
+
+
+def test_group_rank_respects_points_then_tiebreaks():
+    teams = load_teams()
+    group_codes = ['ESP', 'CPV', 'KSA', 'URU']
+    matches = [
+        PlayedMatch('ESP', 'CPV', 1, 0, 1, 2),
+        PlayedMatch('KSA', 'URU', 0, 0, 2, 1),
+        PlayedMatch('ESP', 'KSA', 1, 1, 1, 1),
+        PlayedMatch('URU', 'CPV', 1, 0, 1, 2),
+        PlayedMatch('URU', 'ESP', 0, 1, 1, 2),
+        PlayedMatch('CPV', 'KSA', 0, 2, 2, 1),
+    ]
+    order = rank_group(group_codes, matches, teams)
+    assert order[0] == 'ESP'
+    assert order[-1] == 'CPV'
+
+
+===== FILE: tests/test_pairwise.py =====
+from wc2026.data_loader import load_config, load_teams
+from wc2026.match_model import MatchModel
+
+
+def test_pairwise_probabilities_sum():
+    teams = load_teams()
+    model = MatchModel(load_config())
+    result = model.simulate_pairwise_monte_carlo(teams['ESP'], teams['FRA'], iterations=5000, seed=1, batch_size=1000)
+    assert abs(result['group_win_a'] + result['group_draw'] + result['group_win_b'] - 1.0) < 1e-9
+    assert abs(result['ko_advance_a'] + result['ko_advance_b'] - 1.0) < 1e-9
+
+
+===== FILE: tests/test_tournament_smoke.py =====
+from wc2026.tournament import run_tournament_to_disk
+
+
+def test_tournament_smoke(tmp_path):
+    artifacts = run_tournament_to_disk(iterations=50, seed=42, out_dir=tmp_path)
+    assert not artifacts.summary.empty
+    assert (tmp_path / 'summary.csv').exists()
+    assert (tmp_path / 'summary.json').exists()
+
+

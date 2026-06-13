@@ -1,0 +1,94 @@
+Metadata-Version: 2.4
+Name: wc2026-localhost
+Version: 0.5.0
+Summary: Localhost Monte Carlo simulator and aggregate dashboard for the 2026 FIFA World Cup
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.26
+Requires-Dist: pandas>=2.2
+Requires-Dist: streamlit>=1.44
+Requires-Dist: plotly>=5.24
+
+## V5
+
+This version keeps the quantitative model and charts intact while improving accessibility, removing technical file-path controls from the main sidebar, expanding 48-team display controls where available, and hardening the best-third combinations chart.
+
+# WC2026 localhost quantitative dashboard — V4 publication layer
+
+This project packages a fully local World Cup 2026 simulation workbench.
+
+Core principles:
+- no backend logic change relative to the working simulation project
+- no chart style change relative to the existing dashboard
+- additive publication layer only
+- bilingual interface (English / Français)
+- clearer quantitative wording without removing technical terms
+- explicit model-vs-market comparison page
+- explicit publication / LinkedIn-ready framing page
+
+## What is included
+- tournament simulation CLI
+- pairwise Monte Carlo CLI
+- best-third qualification mapping export
+- Streamlit dashboard
+- EN / FR interface dictionaries
+- glossary docs
+- publication docs
+- sample market odds CSV for model-vs-market comparison
+
+## What is not included
+- no betting automation
+- no wagering instruction module
+- no guarantee logic
+- no change to the underlying simulation engine
+
+## Local setup
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e .
+```
+
+## Validate and generate outputs
+
+```bash
+python -m wc2026.cli validate-data
+python -m wc2026.cli export-third-place-map --out outputs/generated_third_place_mapping.csv
+pytest -q
+python -m wc2026.cli simulate-tournament --iterations 100000 --seed 20260404 --out-dir outputs/tournament_run
+python -m wc2026.cli precompute-pairwise --iterations 1000000 --jobs 8 --batch-size 50000 --seed 20260404 --out outputs/pairwise_summary.csv
+```
+
+## Launch dashboard
+
+```bash
+streamlit run app.py
+```
+
+## Dashboard pages
+- Overview
+- Groups
+- Tournament states
+- Pairwise
+- Team
+- Model vs market
+- Publication layer
+- Audit
+
+## Optional market data
+The dashboard reads `data/market_odds_sample.csv` by default.
+
+Expected columns:
+- `team`
+- `title_american`
+- optional metadata columns such as `source`, `date_utc`
+
+## Publication positioning
+See:
+- `docs/dashboard_glossary_en.md`
+- `docs/dashboard_glossary_fr.md`
+- `docs/linkedin_readme_en.md`
+- `docs/linkedin_readme_fr.md`

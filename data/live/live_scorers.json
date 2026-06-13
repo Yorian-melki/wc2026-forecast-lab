@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-06-13T11:49:34.380314+00:00",
+  "source": "football_data_org",
+  "quality": "B",
+  "scorers": [
+    {
+      "player_name": "Folarin Balogun",
+      "player_id": 131040,
+      "nationality": "USA",
+      "team": "USA",
+      "team_tla": "USA",
+      "goals": 2,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Julián Quiñones",
+      "player_id": 39237,
+      "nationality": "Colombia",
+      "team": "Mexico",
+      "team_tla": "MEX",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Raúl Jiménez",
+      "player_id": 3305,
+      "nationality": "Mexico",
+      "team": "Mexico",
+      "team_tla": "MEX",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Ladislav Krejčí",
+      "player_id": 1878,
+      "nationality": "Czech Republic",
+      "team": "Czechia",
+      "team_tla": "CZE",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "In-beom Hwang",
+      "player_id": 170561,
+      "nationality": "South Korea",
+      "team": "Korea Republic",
+      "team_tla": "KOR",
+      "goals": 1,
+      "assists": 1,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Hyun-Gyu Oh",
+      "player_id": 191295,
+      "nationality": "South Korea",
+      "team": "Korea Republic",
+      "team_tla": "KOR",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Jovo Lukić",
+      "player_id": 17767,
+      "nationality": "Bosnia-Herzegovina",
+      "team": "Bosnia-H.",
+      "team_tla": "BIH",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Cyle Larin",
+      "player_id": 15958,
+      "nationality": "Canada",
+      "team": "Canada",
+      "team_tla": "CAN",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Mauricio",
+      "player_id": 119594,
+      "nationality": "Paraguay",
+      "team": "Paraguay",
+      "team_tla": "PAR",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Gio Reyna",
+      "player_id": 136733,
+      "nationality": "USA",
+      "team": "USA",
+      "team_tla": "USA",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    }
+  ]
+}

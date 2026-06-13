@@ -1,0 +1,246 @@
+{
+  "generated_at": "2026-06-13T11:47:36.614173+00:00",
+  "source": "highlightly",
+  "quality": "A",
+  "total": 14,
+  "goals": [
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "9",
+      "type": "Goal",
+      "assist": "E. Lira",
+      "player": "J. Quinones",
+      "playerId": 5720806,
+      "substituted": null,
+      "assistingPlayerId": 42881699
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "67",
+      "type": "Goal",
+      "assist": "R. Alvarado",
+      "player": "R. Jimenez",
+      "playerId": 464961,
+      "substituted": null,
+      "assistingPlayerId": 463673
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "21",
+      "type": "Goal",
+      "assist": "S. Kolasinac",
+      "player": "J. Lukic",
+      "playerId": 12403111,
+      "substituted": null,
+      "assistingPlayerId": 232316
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "78",
+      "type": "Goal",
+      "assist": "P. David",
+      "player": "C. Larin",
+      "playerId": 322315,
+      "substituted": null,
+      "assistingPlayerId": 50449987
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 656054,
+        "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+        "name": "Czech Republic"
+      },
+      "time": "59",
+      "type": "Goal",
+      "assist": "V. Coufal",
+      "player": "L. Krejci",
+      "playerId": 10691681,
+      "substituted": null,
+      "assistingPlayerId": 198345
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "67",
+      "type": "Goal",
+      "assist": "Lee Kang-In",
+      "player": "Hwang In-Beom",
+      "playerId": 467215,
+      "substituted": null,
+      "assistingPlayerId": 149401
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 656054,
+        "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+        "name": "Czech Republic"
+      },
+      "time": "77",
+      "type": "VAR Goal Cancelled - Offside",
+      "assist": null,
+      "player": "T. Soucek",
+      "playerId": 200277,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "80",
+      "type": "Goal",
+      "assist": "Hwang In-Beom",
+      "player": "Oh Hyeon-Gyu",
+      "playerId": 5588464,
+      "substituted": null,
+      "assistingPlayerId": 467215
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "7",
+      "type": "Own Goal",
+      "assist": null,
+      "player": "D. Bobadilla",
+      "playerId": 31412381,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "28",
+      "type": "VAR Goal Cancelled - Offside",
+      "assist": null,
+      "player": "F. Balogun",
+      "playerId": 22352589,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "31",
+      "type": "Goal",
+      "assist": "C. Pulisic",
+      "player": "F. Balogun",
+      "playerId": 22352589,
+      "substituted": null,
+      "assistingPlayerId": 2891
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "45+5",
+      "type": "Goal",
+      "assist": "M. Tillman",
+      "player": "F. Balogun",
+      "playerId": 22352589,
+      "substituted": null,
+      "assistingPlayerId": 26088111
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "73",
+      "type": "Goal",
+      "assist": "J. Enciso",
+      "player": "Mauricio",
+      "playerId": 17144239,
+      "substituted": null,
+      "assistingPlayerId": 11390421
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "90+8",
+      "type": "Goal",
+      "assist": "A. Freeman",
+      "player": "G. Reyna",
+      "playerId": 26069435,
+      "substituted": null,
+      "assistingPlayerId": 57315188
+    }
+  ]
+}

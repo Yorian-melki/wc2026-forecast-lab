@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wc2026-localhost"
+version = "0.5.0"
+description = "Localhost Monte Carlo simulator and aggregate dashboard for the 2026 FIFA World Cup"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "streamlit>=1.44",
+  "plotly>=5.24",
+]
+
+[project.scripts]
+wc2026 = "wc2026.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

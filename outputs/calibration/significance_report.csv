@@ -1,0 +1,5 @@
+split,n_test,model_a,model_b,nll_a,nll_b,delta_nll,approx_se,z_score,verdict,note
+train_pre2015_test_2015_2018,3812,elo_calib,hybrid_full,0.92391,0.92756,0.00365,0.01024,-0.356,tie,"z=-0.36 (within ±0.5σ noise floor, treat as tie)"
+train_pre2019_test_2019_2022,3580,elo_calib,hybrid_full,0.886,0.87449,-0.01151,0.01057,1.089,marginal_win,"z=1.09 (0.5–2σ, plausible signal but not conclusive)"
+wc2022_holdout,64,elo_calib,hybrid_full,1.02753,1.03251,0.00498,0.07906,-0.063,tie,"z=-0.06 (within ±0.5σ noise floor, treat as tie)"
+train_pre2023_test_2023_2025,3287,elo_calib,hybrid_full,0.88717,0.88174,-0.00543,0.01103,0.492,tie,"z=0.49 (within ±0.5σ noise floor, treat as tie)"

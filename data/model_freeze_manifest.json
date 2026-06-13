@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-06-10T00:00:00",
+  "freeze_phase": "P4",
+  "selected_model": "elo_calibrated_temperature_corrected",
+  "beta_elo": 0.543593,
+  "original_beta_elo": 0.988351,
+  "temperature_mul": 0.55,
+  "log_base": 0.226934,
+  "base_xg": 1.2547,
+  "rho": -0.021007,
+  "simulation_seed": 20260609,
+  "iterations": 100000,
+  "n_train_matches": 10555,
+  "fit_dataset": "martj42 competitive 2010-2025",
+  "source_files_hashes": {
+    "results_csv": "208834ed9039fbe6",
+    "elo_params_json": "08c21051c87085bc",
+    "elo_summary_csv": "cbb503f81ba0d468"
+  },
+  "output_files": [
+    "outputs/tournament_run/elo_calibrated_summary.csv",
+    "outputs/tournament_run/expert_summary.csv",
+    "outputs/public/wc2026_final_forecast_chart.png",
+    "outputs/public/model_selection_report.md",
+    "outputs/public/technical_summary.md",
+    "outputs/calibration/ablation_results.csv",
+    "outputs/calibration/elo_calibration_gate.json"
+  ],
+  "tests_count": 278,
+  "tests_ignored": [
+    "tests/test_data_and_mapping.py"
+  ],
+  "conservation_laws": {
+    "champion_sum": 1.0,
+    "final_sum": 2.0,
+    "sf_sum": 4.0
+  },
+  "concentration_metrics": {
+    "top1": 0.1697,
+    "top3": 0.41764,
+    "top5": 0.54164,
+    "top10": 0.73204
+  },
+  "top10_probs": {
+    "ESP": 0.1697,
+    "ARG": 0.14761,
+    "FRA": 0.10033,
+    "ENG": 0.06708,
+    "BRA": 0.05692,
+    "COL": 0.04821,
+    "POR": 0.04811,
+    "NED": 0.03297,
+    "ECU": 0.03089,
+    "GER": 0.03022
+  },
+  "rejected_models": [
+    "pure_mle_dixon_coles",
+    "full_hybrid_elo_dc_residuals",
+    "elo_calibrated_uncorrected_beta"
+  ],
+  "forbidden_claims_checked": true,
+  "note": "MODEL FROZEN. Do not change beta_elo, seed, or iterations before publication."
+}

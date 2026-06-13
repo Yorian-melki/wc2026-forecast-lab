@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-06-13T16:48:46.362453+00:00",
+  "flags": [
+    {
+      "match": "MEX-RSA",
+      "class": "model_more_confident",
+      "sub_flags": [
+        "model_more_confident"
+      ],
+      "max_abs_disagreement": 0.06,
+      "market": [
+        0.671,
+        0.219,
+        0.11
+      ],
+      "model": [
+        0.731,
+        0.174,
+        0.096
+      ],
+      "detail": {}
+    },
+    {
+      "match": "KOR-CZE",
+      "class": "agree",
+      "sub_flags": [],
+      "max_abs_disagreement": 0.033,
+      "market": [
+        0.368,
+        0.31,
+        0.319
+      ],
+      "model": [
+        0.388,
+        0.278,
+        0.334
+      ],
+      "detail": {}
+    },
+    {
+      "match": "CAN-BIH",
+      "class": "model_more_confident",
+      "sub_flags": [
+        "model_more_confident"
+      ],
+      "max_abs_disagreement": 0.067,
+      "market": [
+        0.521,
+        0.275,
+        0.204
+      ],
+      "model": [
+        0.588,
+        0.233,
+        0.18
+      ],
+      "detail": {}
+    },
+    {
+      "match": "USA-PAR",
+      "class": "model_underprices_team",
+      "sub_flags": [
+        "model_underprices_USA"
+      ],
+      "max_abs_disagreement": 0.206,
+      "market": [
+        0.466,
+        0.3,
+        0.237
+      ],
+      "model": [
+        0.292,
+        0.265,
+        0.443
+      ],
+      "detail": {
+        "underprice_USA": 0.174
+      }
+    }
+  ],
+  "class_counts": {
+    "agree": 1,
+    "model_more_confident": 2,
+    "model_underprices_team": 1,
+    "market_unavailable": 0
+  }
+}

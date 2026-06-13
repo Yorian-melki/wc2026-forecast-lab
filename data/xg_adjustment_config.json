@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "weight_per_xg_margin": 6.0,
+  "max_abs_delta": 8.0,
+  "missing_xg_behavior": "score_only",
+  "apply_to_completed_matches_only": true,
+  "do_not_modify_beta_elo": true,
+  "guardrail_max_champion_pp_move": 1.0,
+  "rationale": "Bounded live-conditioning only. Corrects the score-based Elo delta by the gap between xG margin and score margin, capped at +/-8 Elo per match. Does NOT train on xG, does NOT replace goals, does NOT touch beta_elo. With only 4 xG matches available, the cap prevents any single fluky finishing/save streak from moving champion probabilities by more than ~1pp. Coefficient 6.0 chosen so a full 1.0-xG overperformance maps to a 6 Elo correction (< the 8 cap), and a 1.33+ xG gap saturates the cap.",
+  "source_note": "xG source: Highlightly BASIC /statistics/{matchId}. TheStatsAPI per-shot shotmap would supersede as source when its plan is attached (currently PLAN_NOT_ATTACHED)."
+}

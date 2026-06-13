@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-06-13T11:50:17.713730+00:00",
+  "source": "cross_provider_check",
+  "providers_checked": [
+    "api_football",
+    "highlightly",
+    "football_data_org"
+  ],
+  "total_matches_checked": 4,
+  "agreements": 4,
+  "disagreements": 0,
+  "verdict": "ZERO score disagreements \u2014 all 3 providers fully consistent",
+  "agreement_details": [
+    {
+      "match": "CAN vs BIH",
+      "score": [
+        1,
+        1
+      ],
+      "confirmed_by": [
+        "api_football",
+        "highlightly",
+        "football_data_org"
+      ]
+    },
+    {
+      "match": "KOR vs CZE",
+      "score": [
+        2,
+        1
+      ],
+      "confirmed_by": [
+        "api_football",
+        "highlightly",
+        "football_data_org"
+      ]
+    },
+    {
+      "match": "MEX vs RSA",
+      "score": [
+        2,
+        0
+      ],
+      "confirmed_by": [
+        "api_football",
+        "highlightly",
+        "football_data_org"
+      ]
+    },
+    {
+      "match": "USA vs PAR",
+      "score": [
+        4,
+        1
+      ],
+      "confirmed_by": [
+        "api_football",
+        "highlightly",
+        "football_data_org"
+      ]
+    }
+  ],
+  "disagreement_details": [],
+  "thestatsapi_scores": {
+    "USA-PAR": "4-1",
+    "CAN-BIH": "1-1",
+    "KOR-CZE": "2-1",
+    "MEX-RSA": "2-0"
+  },
+  "thestatsapi_confirms_all": true,
+  "providers_compared": [
+    "api_football",
+    "highlightly",
+    "football_data_org",
+    "thestatsapi"
+  ],
+  "updated_at": "2026-06-13T13:22:48.659378+00:00"
+}

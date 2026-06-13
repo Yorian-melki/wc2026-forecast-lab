@@ -1,0 +1,73 @@
+============================================================
+WC2026 Forecast — Reproducibility Log
+Timestamp: 2026-06-10T02:07:19.204096
+Python: 3.13.11
+============================================================
+
+[PARAMS]
+  beta_elo: 0.543593
+  original_beta_elo: 0.988351
+  temperature_mul: 0.55
+  log_base: 0.226934
+  base_xg: 1.2547
+  rho: -0.021007
+  n_train_matches: 10555
+  fit_dataset: martj42 competitive 2010-2025
+[OK] pytest (full suite, ignoring test_data_and_mapping) (15.8s)
+  350 passed in 14.86s
+
+[SIMULATION]
+  rows: 48
+  champion_prob sum: 1.000000
+  final_prob sum: 2.000000
+  sf_prob sum: 4.000000
+  top1: 16.97%
+  top3: 41.76%
+  top5: 54.16%
+  top10: 73.20%
+
+  Top-10 champion probabilities:
+    ESP: 16.97%
+    ARG: 14.76%
+    FRA: 10.03%
+    ENG: 6.71%
+    BRA: 5.69%
+    COL: 4.82%
+    POR: 4.81%
+    NED: 3.30%
+    ECU: 3.09%
+    GER: 3.02%
+
+  Conservation laws:
+    OK champion_prob: 1.0000 (expected 1.0)
+    OK final_prob: 2.0000 (expected 2.0)
+    OK sf_prob: 4.0000 (expected 4.0)
+    OK qf_prob: 8.0000 (expected 8.0)
+    OK group_survival_prob: 32.0000 (expected 32.0)
+[OK] generate_public_final_chart.py (0.7s)
+
+[OUTPUT FILES]
+  OK MODEL_CARD.md
+  OK MODEL_FREEZE.md
+  OK README.md
+  OK data/model_freeze_manifest.json
+  OK outputs/public/wc2026_final_forecast_chart.png
+  OK outputs/public/model_selection_report.md
+  OK outputs/public/technical_summary.md
+  OK outputs/public/claims_checklist.md
+  OK outputs/public/linkedin_post.md
+  OK outputs/public/claims_audit.md
+
+[FORBIDDEN CLAIMS CHECK]
+  OK all forbidden phrases absent from public document bodies
+
+============================================================
+SUMMARY
+  Tests: PASS
+  Chart: PASS
+  Output files present: PASS
+  Forbidden claims: PASS
+  beta_elo: 0.543593
+  Seed: 20260609 · Iterations: 100,000
+  Overall: READY TO PUBLISH
+============================================================

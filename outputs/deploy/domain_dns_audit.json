@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-06-13T17:21:42.829543+00:00",
+  "domain": "yorian-melki.com",
+  "registrar": "Spaceship, Inc.",
+  "created": "2026-03-23",
+  "expires": "2027-03-23",
+  "nameservers": [
+    "launch1.spaceship.net",
+    "launch2.spaceship.net"
+  ],
+  "records": {
+    "root_A": "216.198.79.1 (Vercel anycast)",
+    "www_CNAME": "ae4e6dba669ff61a.vercel-dns-017.com (Vercel)"
+  },
+  "interpretation": [
+    "DNS is managed at Spaceship (nameservers launch1/2.spaceship.net).",
+    "Root (@) A record points to a Vercel anycast IP -> root is Vercel-ready.",
+    "www is CNAME'd to Vercel DNS -> www is delegated to Vercel.",
+    "Conclusion: the apex + www are already wired to Vercel. A portfolio on Vercel needs minimal config.",
+    "A new subdomain (wc2026.yorian-melki.com) requires ADDING a DNS record AT SPACESHIP pointing to the chosen app host. This is a USER action; Claude must not change DNS."
+  ],
+  "no_action_taken": "No DNS changes made or proposed for execution. Read-only interpretation only."
+}

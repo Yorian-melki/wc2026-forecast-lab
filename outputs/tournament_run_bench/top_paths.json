@@ -1,0 +1,105 @@
+{
+  "iterations": 1000,
+  "top_best_third_group_sets": [
+    {
+      "best_third_groups": "C > K > J > A > L > D > F > I",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "G > J > C > B > I > F > D > K",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "A > J > D > E > H > K > G > B",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "A > D > C > L > I > F > H > K",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "J > G > D > E > F > L > B > C",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "G > F > K > A > L > C > B > E",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "D > C > H > E > K > F > G > L",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "C > E > G > F > I > H > K > L",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "C > F > K > G > J > E > I > B",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "I > K > L > H > C > D > G > E",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "K > C > I > J > L > E > A > B",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "I > J > H > D > E > F > B > A",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "G > B > F > C > D > L > J > I",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "L > C > K > A > D > J > H > I",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "L > J > I > C > H > D > K > G",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "G > I > K > J > B > A > C > D",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "G > J > K > L > F > H > E > B",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "D > H > K > I > G > A > L > C",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "I > E > G > A > L > H > C > J",
+      "count": 1,
+      "probability": 0.001
+    },
+    {
+      "best_third_groups": "C > H > A > E > D > F > G > L",
+      "count": 1,
+      "probability": 0.001
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+model,train_nll,holdout_nll,holdout_brier,holdout_acc,holdout_ece
+random,1.09861,1.09861,0.66667,0.4531,0.0
+elo_only,1.0478,1.08382,0.60701,0.5625,0.12209
+indep_poisson,0.78517,1.23314,0.71315,0.4219,0.12109
+dc_mle_experimental,0.80231,1.11754,0.66514,0.5,0.07285

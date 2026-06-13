@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-06-13T16:08:32.752922+00:00",
+  "source": "thestatsapi_odds_devigged",
+  "matches": {
+    "USA-PAR": {
+      "home": 0.4657,
+      "draw": 0.2998,
+      "away": 0.2368
+    },
+    "CAN-BIH": {
+      "home": 0.5208,
+      "draw": 0.2752,
+      "away": 0.2039
+    },
+    "KOR-CZE": {
+      "home": 0.3678,
+      "draw": 0.3104,
+      "away": 0.3186
+    },
+    "MEX-RSA": {
+      "home": 0.6707,
+      "draw": 0.2188,
+      "away": 0.1104
+    }
+  }
+}

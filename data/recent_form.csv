@@ -1,0 +1,721 @@
+code,date,opponent,gf,ga,result,tournament,neutral
+MEX,2024-03-21,PAN,3,0,W,CONCACAF Nations League,True
+MEX,2024-03-24,USA,0,2,L,CONCACAF Nations League,False
+MEX,2024-06-22,JAM,1,0,W,Copa América,True
+MEX,2024-06-26,VEN,0,1,L,Copa América,True
+MEX,2024-06-30,ECU,0,0,D,Copa América,True
+MEX,2024-11-15,HON,0,2,L,CONCACAF Nations League,False
+MEX,2024-11-19,HON,4,0,W,CONCACAF Nations League,False
+MEX,2025-03-20,CAN,2,0,W,CONCACAF Nations League,True
+MEX,2025-03-23,PAN,2,1,W,CONCACAF Nations League,True
+MEX,2025-06-14,DOM,3,2,W,Gold Cup,True
+MEX,2025-06-18,SUR,2,0,W,Gold Cup,True
+MEX,2025-06-22,COS,0,0,D,Gold Cup,True
+MEX,2025-06-28,KSA,2,0,W,Gold Cup,True
+MEX,2025-07-02,HON,1,0,W,Gold Cup,True
+MEX,2025-07-06,USA,2,1,W,Gold Cup,False
+RSA,2024-09-10,SOU,3,2,W,African Cup of Nations qualification,False
+RSA,2024-10-11,CON,5,0,W,African Cup of Nations qualification,False
+RSA,2024-10-15,CON,1,1,D,African Cup of Nations qualification,False
+RSA,2024-11-15,UGA,2,0,W,African Cup of Nations qualification,False
+RSA,2024-11-19,SOU,3,0,W,African Cup of Nations qualification,False
+RSA,2025-03-21,LES,0,3,L,FIFA World Cup qualification,False
+RSA,2025-03-25,BEN,2,0,W,FIFA World Cup qualification,True
+RSA,2025-09-05,LES,3,0,W,FIFA World Cup qualification,False
+RSA,2025-09-09,NIG,1,1,D,FIFA World Cup qualification,False
+RSA,2025-10-10,ZIM,0,0,D,FIFA World Cup qualification,False
+RSA,2025-10-14,RWA,3,0,W,FIFA World Cup qualification,False
+RSA,2025-12-22,ANG,2,1,W,African Cup of Nations,True
+RSA,2025-12-26,EGY,0,1,L,African Cup of Nations,True
+RSA,2025-12-29,ZIM,3,2,W,African Cup of Nations,True
+RSA,2026-01-04,CAM,1,2,L,African Cup of Nations,True
+KOR,2024-02-06,JOR,0,2,L,AFC Asian Cup,True
+KOR,2024-03-21,THA,1,1,D,FIFA World Cup qualification,False
+KOR,2024-03-26,THA,3,0,W,FIFA World Cup qualification,False
+KOR,2024-06-06,SIN,7,0,W,FIFA World Cup qualification,False
+KOR,2024-06-11,CHI,1,0,W,FIFA World Cup qualification,False
+KOR,2024-09-05,PAL,0,0,D,FIFA World Cup qualification,False
+KOR,2024-09-10,OMA,3,1,W,FIFA World Cup qualification,False
+KOR,2024-10-10,JOR,2,0,W,FIFA World Cup qualification,False
+KOR,2024-10-15,IRQ,3,2,W,FIFA World Cup qualification,False
+KOR,2024-11-14,KUW,3,1,W,FIFA World Cup qualification,False
+KOR,2024-11-19,PAL,1,1,D,FIFA World Cup qualification,True
+KOR,2025-03-20,OMA,1,1,D,FIFA World Cup qualification,False
+KOR,2025-03-25,JOR,1,1,D,FIFA World Cup qualification,False
+KOR,2025-06-05,IRQ,2,0,W,FIFA World Cup qualification,False
+KOR,2025-06-10,KUW,4,0,W,FIFA World Cup qualification,False
+CZE,2024-09-10,UKR,3,2,W,UEFA Nations League,False
+CZE,2024-10-11,ALB,2,0,W,UEFA Nations League,False
+CZE,2024-10-14,UKR,1,1,D,UEFA Nations League,True
+CZE,2024-11-16,ALB,0,0,D,UEFA Nations League,False
+CZE,2024-11-19,GEO,2,1,W,UEFA Nations League,False
+CZE,2025-03-22,FAR,2,1,W,FIFA World Cup qualification,False
+CZE,2025-03-25,GIB,4,0,W,FIFA World Cup qualification,True
+CZE,2025-06-06,MON,2,0,W,FIFA World Cup qualification,False
+CZE,2025-06-09,CRO,1,5,L,FIFA World Cup qualification,False
+CZE,2025-09-05,MON,2,0,W,FIFA World Cup qualification,False
+CZE,2025-10-09,CRO,0,0,D,FIFA World Cup qualification,False
+CZE,2025-10-12,FAR,1,2,L,FIFA World Cup qualification,False
+CZE,2025-11-17,GIB,6,0,W,FIFA World Cup qualification,False
+CZE,2026-03-26,REP,2,2,D,FIFA World Cup qualification,False
+CZE,2026-03-31,DEN,2,2,D,FIFA World Cup qualification,False
+CAN,2024-06-25,PER,1,0,W,Copa América,True
+CAN,2024-06-29,CHI,0,0,D,Copa América,True
+CAN,2024-07-05,VEN,1,1,D,Copa América,True
+CAN,2024-07-09,ARG,0,2,L,Copa América,True
+CAN,2024-07-13,URU,2,2,D,Copa América,True
+CAN,2024-11-15,SUR,1,0,W,CONCACAF Nations League,False
+CAN,2024-11-19,SUR,3,0,W,CONCACAF Nations League,False
+CAN,2025-03-20,MEX,0,2,L,CONCACAF Nations League,True
+CAN,2025-03-23,USA,2,1,W,CONCACAF Nations League,False
+CAN,2025-06-07,UKR,4,2,W,Canadian Shield,False
+CAN,2025-06-10,CIV,0,0,D,Canadian Shield,False
+CAN,2025-06-17,HON,6,0,W,Gold Cup,False
+CAN,2025-06-21,CUW,1,1,D,Gold Cup,True
+CAN,2025-06-24,EL ,2,0,W,Gold Cup,True
+CAN,2025-06-29,GUA,1,1,D,Gold Cup,True
+BIH,2024-09-10,HUN,0,0,D,UEFA Nations League,False
+BIH,2024-10-11,GER,1,2,L,UEFA Nations League,False
+BIH,2024-10-14,HUN,0,2,L,UEFA Nations League,False
+BIH,2024-11-16,GER,0,7,L,UEFA Nations League,False
+BIH,2024-11-19,NED,1,1,D,UEFA Nations League,False
+BIH,2025-03-21,ROM,1,0,W,FIFA World Cup qualification,False
+BIH,2025-03-24,CYP,2,1,W,FIFA World Cup qualification,False
+BIH,2025-06-07,SAN,1,0,W,FIFA World Cup qualification,False
+BIH,2025-09-06,SAN,6,0,W,FIFA World Cup qualification,False
+BIH,2025-09-09,AUT,1,2,L,FIFA World Cup qualification,False
+BIH,2025-10-09,CYP,2,2,D,FIFA World Cup qualification,False
+BIH,2025-11-15,ROM,3,1,W,FIFA World Cup qualification,False
+BIH,2025-11-18,AUT,1,1,D,FIFA World Cup qualification,False
+BIH,2026-03-26,WAL,1,1,D,FIFA World Cup qualification,False
+BIH,2026-03-31,ITA,1,1,D,FIFA World Cup qualification,False
+QAT,2024-10-15,IRN,1,4,L,FIFA World Cup qualification,True
+QAT,2024-11-14,UZB,3,2,W,FIFA World Cup qualification,False
+QAT,2024-11-19,UNI,0,5,L,FIFA World Cup qualification,False
+QAT,2024-12-21,UNI,1,1,D,Gulf Cup,True
+QAT,2024-12-24,OMA,1,2,L,Gulf Cup,True
+QAT,2024-12-27,KUW,1,1,D,Gulf Cup,False
+QAT,2025-03-20,NOR,5,1,W,FIFA World Cup qualification,False
+QAT,2025-03-25,KYR,1,3,L,FIFA World Cup qualification,False
+QAT,2025-06-05,IRN,1,0,W,FIFA World Cup qualification,False
+QAT,2025-06-10,UZB,0,3,L,FIFA World Cup qualification,False
+QAT,2025-10-08,OMA,0,0,D,FIFA World Cup qualification,False
+QAT,2025-10-14,UNI,2,1,W,FIFA World Cup qualification,False
+QAT,2025-12-01,PAL,0,1,L,Arab Cup,False
+QAT,2025-12-04,SYR,1,1,D,Arab Cup,False
+QAT,2025-12-07,TUN,0,3,L,Arab Cup,False
+SUI,2024-06-23,GER,1,1,D,UEFA Euro,False
+SUI,2024-06-29,ITA,2,0,W,UEFA Euro,True
+SUI,2024-07-06,ENG,1,1,D,UEFA Euro,True
+SUI,2024-09-05,DEN,0,2,L,UEFA Nations League,False
+SUI,2024-09-08,ESP,1,4,L,UEFA Nations League,False
+SUI,2024-10-12,SER,0,2,L,UEFA Nations League,False
+SUI,2024-10-15,DEN,2,2,D,UEFA Nations League,False
+SUI,2024-11-15,SER,1,1,D,UEFA Nations League,False
+SUI,2024-11-18,ESP,2,3,L,UEFA Nations League,False
+SUI,2025-09-05,KOS,4,0,W,FIFA World Cup qualification,False
+SUI,2025-09-08,SLO,3,0,W,FIFA World Cup qualification,False
+SUI,2025-10-10,SWE,2,0,W,FIFA World Cup qualification,False
+SUI,2025-10-13,SLO,0,0,D,FIFA World Cup qualification,False
+SUI,2025-11-15,SWE,4,1,W,FIFA World Cup qualification,False
+SUI,2025-11-18,KOS,1,1,D,FIFA World Cup qualification,False
+BRA,2024-07-02,COL,1,1,D,Copa América,True
+BRA,2024-07-06,URU,0,0,D,Copa América,True
+BRA,2024-09-06,ECU,1,0,W,FIFA World Cup qualification,False
+BRA,2024-09-10,PAR,0,1,L,FIFA World Cup qualification,False
+BRA,2024-10-10,CHI,2,1,W,FIFA World Cup qualification,False
+BRA,2024-10-15,PER,4,0,W,FIFA World Cup qualification,False
+BRA,2024-11-14,VEN,1,1,D,FIFA World Cup qualification,False
+BRA,2024-11-19,URU,1,1,D,FIFA World Cup qualification,False
+BRA,2025-03-20,COL,2,1,W,FIFA World Cup qualification,False
+BRA,2025-03-25,ARG,1,4,L,FIFA World Cup qualification,False
+BRA,2025-06-05,ECU,0,0,D,FIFA World Cup qualification,False
+BRA,2025-06-10,PAR,1,0,W,FIFA World Cup qualification,False
+BRA,2025-09-04,CHI,3,0,W,FIFA World Cup qualification,False
+BRA,2025-09-09,BOL,0,1,L,FIFA World Cup qualification,False
+BRA,2025-10-14,JPN,2,3,L,Kirin Cup,False
+MAR,2025-09-08,ZAM,2,0,W,FIFA World Cup qualification,False
+MAR,2025-10-14,CON,1,0,W,FIFA World Cup qualification,False
+MAR,2025-12-02,COM,3,1,W,Arab Cup,True
+MAR,2025-12-05,OMA,0,0,D,Arab Cup,True
+MAR,2025-12-08,KSA,1,0,W,Arab Cup,True
+MAR,2025-12-11,SYR,1,0,W,Arab Cup,True
+MAR,2025-12-15,UNI,3,0,W,Arab Cup,True
+MAR,2025-12-18,JOR,3,2,W,Arab Cup,True
+MAR,2025-12-21,COM,2,0,W,African Cup of Nations,False
+MAR,2025-12-26,MAL,1,1,D,African Cup of Nations,False
+MAR,2025-12-29,ZAM,3,0,W,African Cup of Nations,False
+MAR,2026-01-04,TAN,1,0,W,African Cup of Nations,False
+MAR,2026-01-09,CAM,2,0,W,African Cup of Nations,False
+MAR,2026-01-14,NIG,0,0,D,African Cup of Nations,False
+MAR,2026-01-18,SEN,3,0,W,African Cup of Nations,False
+HAI,2024-10-11,ARU,3,1,W,CONCACAF Nations League,False
+HAI,2024-10-14,ARU,5,3,W,CONCACAF Nations League,False
+HAI,2024-11-15,SIN,8,0,W,CONCACAF Nations League,True
+HAI,2024-11-18,PUE,3,0,W,CONCACAF Nations League,False
+HAI,2025-06-07,ARU,5,0,W,FIFA World Cup qualification,False
+HAI,2025-06-10,CUW,1,5,L,FIFA World Cup qualification,True
+HAI,2025-06-15,KSA,0,1,L,Gold Cup,True
+HAI,2025-06-19,TRI,1,1,D,Gold Cup,True
+HAI,2025-06-22,USA,1,2,L,Gold Cup,False
+HAI,2025-09-05,HON,0,0,D,FIFA World Cup qualification,True
+HAI,2025-09-09,COS,3,3,D,FIFA World Cup qualification,False
+HAI,2025-10-09,NIC,3,0,W,FIFA World Cup qualification,False
+HAI,2025-10-13,HON,0,3,L,FIFA World Cup qualification,False
+HAI,2025-11-13,COS,1,0,W,FIFA World Cup qualification,True
+HAI,2025-11-18,NIC,2,0,W,FIFA World Cup qualification,True
+SCO,2024-06-23,HUN,0,1,L,UEFA Euro,True
+SCO,2024-09-05,POL,2,3,L,UEFA Nations League,False
+SCO,2024-09-08,POR,1,2,L,UEFA Nations League,False
+SCO,2024-10-12,CRO,1,2,L,UEFA Nations League,False
+SCO,2024-10-15,POR,0,0,D,UEFA Nations League,False
+SCO,2024-11-15,CRO,1,0,W,UEFA Nations League,False
+SCO,2024-11-18,POL,2,1,W,UEFA Nations League,False
+SCO,2025-03-20,GRE,1,0,W,UEFA Nations League,False
+SCO,2025-03-23,GRE,0,3,L,UEFA Nations League,False
+SCO,2025-09-05,DEN,0,0,D,FIFA World Cup qualification,False
+SCO,2025-09-08,BEL,2,0,W,FIFA World Cup qualification,True
+SCO,2025-10-09,GRE,3,1,W,FIFA World Cup qualification,False
+SCO,2025-10-12,BEL,2,1,W,FIFA World Cup qualification,False
+SCO,2025-11-15,GRE,2,3,L,FIFA World Cup qualification,False
+SCO,2025-11-18,DEN,4,2,W,FIFA World Cup qualification,False
+USA,2024-03-21,JAM,3,1,W,CONCACAF Nations League,False
+USA,2024-03-24,MEX,2,0,W,CONCACAF Nations League,False
+USA,2024-06-23,BOL,2,0,W,Copa América,False
+USA,2024-06-27,PAN,1,2,L,Copa América,False
+USA,2024-07-01,URU,0,1,L,Copa América,False
+USA,2024-11-14,JAM,1,0,W,CONCACAF Nations League,False
+USA,2024-11-18,JAM,4,2,W,CONCACAF Nations League,False
+USA,2025-03-20,PAN,0,1,L,CONCACAF Nations League,False
+USA,2025-03-23,CAN,1,2,L,CONCACAF Nations League,False
+USA,2025-06-15,TRI,5,0,W,Gold Cup,False
+USA,2025-06-19,KSA,1,0,W,Gold Cup,False
+USA,2025-06-22,HAI,2,1,W,Gold Cup,False
+USA,2025-06-29,COS,2,2,D,Gold Cup,False
+USA,2025-07-02,GUA,2,1,W,Gold Cup,False
+USA,2025-07-06,MEX,1,2,L,Gold Cup,False
+PAR,2024-06-28,BRA,1,4,L,Copa América,True
+PAR,2024-07-02,COS,1,2,L,Copa América,True
+PAR,2024-09-06,URU,0,0,D,FIFA World Cup qualification,False
+PAR,2024-09-10,BRA,1,0,W,FIFA World Cup qualification,False
+PAR,2024-10-10,ECU,0,0,D,FIFA World Cup qualification,False
+PAR,2024-10-15,VEN,2,1,W,FIFA World Cup qualification,False
+PAR,2024-11-14,ARG,2,1,W,FIFA World Cup qualification,False
+PAR,2024-11-19,BOL,2,2,D,FIFA World Cup qualification,False
+PAR,2025-03-20,CHI,1,0,W,FIFA World Cup qualification,False
+PAR,2025-03-25,COL,2,2,D,FIFA World Cup qualification,False
+PAR,2025-06-05,URU,2,0,W,FIFA World Cup qualification,False
+PAR,2025-06-10,BRA,0,1,L,FIFA World Cup qualification,False
+PAR,2025-09-04,ECU,0,0,D,FIFA World Cup qualification,False
+PAR,2025-09-09,PER,1,0,W,FIFA World Cup qualification,False
+PAR,2025-10-10,JPN,2,2,D,Kirin Cup,False
+AUS,2024-06-11,PAL,5,0,W,FIFA World Cup qualification,False
+AUS,2024-09-05,BAH,0,1,L,FIFA World Cup qualification,False
+AUS,2024-09-10,IND,0,0,D,FIFA World Cup qualification,False
+AUS,2024-10-10,CHI,3,1,W,FIFA World Cup qualification,False
+AUS,2024-10-15,JPN,1,1,D,FIFA World Cup qualification,False
+AUS,2024-11-14,KSA,0,0,D,FIFA World Cup qualification,False
+AUS,2024-11-19,BAH,2,2,D,FIFA World Cup qualification,False
+AUS,2025-03-20,IND,5,1,W,FIFA World Cup qualification,False
+AUS,2025-03-25,CHI,2,0,W,FIFA World Cup qualification,False
+AUS,2025-06-05,JPN,1,0,W,FIFA World Cup qualification,False
+AUS,2025-06-10,KSA,2,1,W,FIFA World Cup qualification,False
+AUS,2025-09-05,NZL,1,0,W,Soccer Ashes,False
+AUS,2025-09-09,NZL,3,1,W,Soccer Ashes,False
+AUS,2026-03-27,CAM,1,0,W,FIFA Series,False
+AUS,2026-03-31,CUW,5,1,W,FIFA Series,False
+TUR,2024-09-09,ICE,3,1,W,UEFA Nations League,False
+TUR,2024-10-11,MON,1,0,W,UEFA Nations League,False
+TUR,2024-10-14,ICE,4,2,W,UEFA Nations League,False
+TUR,2024-11-16,WAL,0,0,D,UEFA Nations League,False
+TUR,2024-11-19,MON,1,3,L,UEFA Nations League,False
+TUR,2025-03-20,HUN,3,1,W,UEFA Nations League,False
+TUR,2025-03-23,HUN,3,0,W,UEFA Nations League,False
+TUR,2025-09-04,GEO,3,2,W,FIFA World Cup qualification,False
+TUR,2025-09-07,ESP,0,6,L,FIFA World Cup qualification,False
+TUR,2025-10-11,BUL,6,1,W,FIFA World Cup qualification,False
+TUR,2025-10-14,GEO,4,1,W,FIFA World Cup qualification,False
+TUR,2025-11-15,BUL,2,0,W,FIFA World Cup qualification,False
+TUR,2025-11-18,ESP,2,2,D,FIFA World Cup qualification,False
+TUR,2026-03-26,ROM,1,0,W,FIFA World Cup qualification,False
+TUR,2026-03-31,KOS,1,0,W,FIFA World Cup qualification,False
+GER,2024-09-10,NED,2,2,D,UEFA Nations League,False
+GER,2024-10-11,BIH,2,1,W,UEFA Nations League,False
+GER,2024-10-14,NED,1,0,W,UEFA Nations League,False
+GER,2024-11-16,BIH,7,0,W,UEFA Nations League,False
+GER,2024-11-19,HUN,1,1,D,UEFA Nations League,False
+GER,2025-03-20,ITA,2,1,W,UEFA Nations League,False
+GER,2025-03-23,ITA,3,3,D,UEFA Nations League,False
+GER,2025-06-04,POR,1,2,L,UEFA Nations League,False
+GER,2025-06-08,FRA,0,2,L,UEFA Nations League,False
+GER,2025-09-04,SLO,0,2,L,FIFA World Cup qualification,False
+GER,2025-09-07,NOR,3,1,W,FIFA World Cup qualification,False
+GER,2025-10-10,LUX,4,0,W,FIFA World Cup qualification,False
+GER,2025-10-13,NOR,1,0,W,FIFA World Cup qualification,False
+GER,2025-11-14,LUX,2,0,W,FIFA World Cup qualification,False
+GER,2025-11-17,SLO,6,0,W,FIFA World Cup qualification,False
+CUW,2024-11-15,SAI,5,0,W,CONCACAF Nations League,False
+CUW,2024-11-18,SAI,4,1,W,CONCACAF Nations League,False
+CUW,2025-06-06,SAI,4,0,W,FIFA World Cup qualification,False
+CUW,2025-06-10,HAI,5,1,W,FIFA World Cup qualification,True
+CUW,2025-06-17,EL ,0,0,D,Gold Cup,True
+CUW,2025-06-21,CAN,1,1,D,Gold Cup,True
+CUW,2025-06-24,HON,1,2,L,Gold Cup,True
+CUW,2025-09-05,TRI,0,0,D,FIFA World Cup qualification,False
+CUW,2025-09-09,BER,3,2,W,FIFA World Cup qualification,False
+CUW,2025-10-10,JAM,2,0,W,FIFA World Cup qualification,False
+CUW,2025-10-14,TRI,1,1,D,FIFA World Cup qualification,False
+CUW,2025-11-13,BER,7,0,W,FIFA World Cup qualification,False
+CUW,2025-11-18,JAM,0,0,D,FIFA World Cup qualification,False
+CUW,2026-03-27,CHI,0,2,L,FIFA Series,True
+CUW,2026-03-31,AUS,1,5,L,FIFA Series,False
+CIV,2024-11-15,ZAM,0,1,L,African Cup of Nations qualification,False
+CIV,2024-11-19,CHA,4,0,W,African Cup of Nations qualification,False
+CIV,2025-03-21,BUR,1,0,W,FIFA World Cup qualification,True
+CIV,2025-03-24,GAM,1,0,W,FIFA World Cup qualification,False
+CIV,2025-06-07,NZL,0,1,L,Canadian Shield,True
+CIV,2025-06-10,CAN,0,0,D,Canadian Shield,False
+CIV,2025-09-05,BUR,1,0,W,FIFA World Cup qualification,False
+CIV,2025-09-09,GAB,0,0,D,FIFA World Cup qualification,False
+CIV,2025-10-10,SEY,7,0,W,FIFA World Cup qualification,True
+CIV,2025-10-14,KEN,3,0,W,FIFA World Cup qualification,False
+CIV,2025-12-24,MOZ,1,0,W,African Cup of Nations,True
+CIV,2025-12-28,CAM,1,1,D,African Cup of Nations,True
+CIV,2025-12-31,GAB,3,2,W,African Cup of Nations,True
+CIV,2026-01-06,BUR,3,0,W,African Cup of Nations,True
+CIV,2026-01-10,EGY,2,3,L,African Cup of Nations,True
+ECU,2024-06-26,JAM,3,1,W,Copa América,True
+ECU,2024-06-30,MEX,0,0,D,Copa América,True
+ECU,2024-07-04,ARG,1,1,D,Copa América,True
+ECU,2024-09-06,BRA,0,1,L,FIFA World Cup qualification,False
+ECU,2024-09-10,PER,1,0,W,FIFA World Cup qualification,False
+ECU,2024-10-10,PAR,0,0,D,FIFA World Cup qualification,False
+ECU,2024-10-15,URU,0,0,D,FIFA World Cup qualification,False
+ECU,2024-11-14,BOL,4,0,W,FIFA World Cup qualification,False
+ECU,2024-11-19,COL,1,0,W,FIFA World Cup qualification,False
+ECU,2025-03-21,VEN,2,1,W,FIFA World Cup qualification,False
+ECU,2025-03-25,CHI,0,0,D,FIFA World Cup qualification,False
+ECU,2025-06-05,BRA,0,0,D,FIFA World Cup qualification,False
+ECU,2025-06-10,PER,0,0,D,FIFA World Cup qualification,False
+ECU,2025-09-04,PAR,0,0,D,FIFA World Cup qualification,False
+ECU,2025-09-09,ARG,1,0,W,FIFA World Cup qualification,False
+NED,2024-09-10,GER,2,2,D,UEFA Nations League,False
+NED,2024-10-11,HUN,1,1,D,UEFA Nations League,False
+NED,2024-10-14,GER,0,1,L,UEFA Nations League,False
+NED,2024-11-16,HUN,4,0,W,UEFA Nations League,False
+NED,2024-11-19,BIH,1,1,D,UEFA Nations League,False
+NED,2025-03-20,ESP,2,2,D,UEFA Nations League,False
+NED,2025-03-23,ESP,3,3,D,UEFA Nations League,False
+NED,2025-06-07,FIN,2,0,W,FIFA World Cup qualification,False
+NED,2025-06-10,MAL,8,0,W,FIFA World Cup qualification,False
+NED,2025-09-04,POL,1,1,D,FIFA World Cup qualification,False
+NED,2025-09-07,LIT,3,2,W,FIFA World Cup qualification,False
+NED,2025-10-09,MAL,4,0,W,FIFA World Cup qualification,False
+NED,2025-10-12,FIN,4,0,W,FIFA World Cup qualification,False
+NED,2025-11-14,POL,1,1,D,FIFA World Cup qualification,False
+NED,2025-11-17,LIT,4,0,W,FIFA World Cup qualification,False
+JPN,2024-06-11,SYR,5,0,W,FIFA World Cup qualification,False
+JPN,2024-09-05,CHI,7,0,W,FIFA World Cup qualification,False
+JPN,2024-09-10,BAH,5,0,W,FIFA World Cup qualification,False
+JPN,2024-10-10,KSA,2,0,W,FIFA World Cup qualification,False
+JPN,2024-10-15,AUS,1,1,D,FIFA World Cup qualification,False
+JPN,2024-11-15,IND,4,0,W,FIFA World Cup qualification,False
+JPN,2024-11-19,CHI,3,1,W,FIFA World Cup qualification,False
+JPN,2025-03-20,BAH,2,0,W,FIFA World Cup qualification,False
+JPN,2025-03-25,KSA,0,0,D,FIFA World Cup qualification,False
+JPN,2025-06-05,AUS,0,1,L,FIFA World Cup qualification,False
+JPN,2025-06-10,IND,6,0,W,FIFA World Cup qualification,False
+JPN,2025-10-10,PAR,2,2,D,Kirin Cup,False
+JPN,2025-10-14,BRA,3,2,W,Kirin Cup,False
+JPN,2025-11-14,GHA,2,0,W,Kirin Cup,False
+JPN,2025-11-18,BOL,3,0,W,Kirin Cup,False
+SWE,2023-11-19,EST,2,0,W,UEFA Euro qualification,False
+SWE,2024-09-05,AZE,3,1,W,UEFA Nations League,False
+SWE,2024-09-08,EST,3,0,W,UEFA Nations League,False
+SWE,2024-10-11,SLO,2,2,D,UEFA Nations League,False
+SWE,2024-10-14,EST,3,0,W,UEFA Nations League,False
+SWE,2024-11-16,SLO,2,1,W,UEFA Nations League,False
+SWE,2024-11-19,AZE,6,0,W,UEFA Nations League,False
+SWE,2025-09-05,SLO,2,2,D,FIFA World Cup qualification,False
+SWE,2025-09-08,KOS,0,2,L,FIFA World Cup qualification,False
+SWE,2025-10-10,SUI,0,2,L,FIFA World Cup qualification,False
+SWE,2025-10-13,KOS,0,1,L,FIFA World Cup qualification,False
+SWE,2025-11-15,SUI,1,4,L,FIFA World Cup qualification,False
+SWE,2025-11-18,SLO,1,1,D,FIFA World Cup qualification,False
+SWE,2026-03-26,UKR,3,1,W,FIFA World Cup qualification,True
+SWE,2026-03-31,POL,3,2,W,FIFA World Cup qualification,False
+TUN,2024-11-14,MAD,3,2,W,African Cup of Nations qualification,True
+TUN,2024-11-18,GAM,0,1,L,African Cup of Nations qualification,False
+TUN,2025-03-19,LIB,1,0,W,FIFA World Cup qualification,False
+TUN,2025-03-24,MAL,2,0,W,FIFA World Cup qualification,False
+TUN,2025-09-04,LIB,3,0,W,FIFA World Cup qualification,False
+TUN,2025-09-08,EQU,1,0,W,FIFA World Cup qualification,False
+TUN,2025-10-10,SÃO,6,0,W,FIFA World Cup qualification,False
+TUN,2025-10-13,NAM,3,0,W,FIFA World Cup qualification,False
+TUN,2025-12-01,SYR,0,1,L,Arab Cup,True
+TUN,2025-12-04,PAL,2,2,D,Arab Cup,True
+TUN,2025-12-07,QAT,3,0,W,Arab Cup,False
+TUN,2025-12-23,UGA,3,1,W,African Cup of Nations,True
+TUN,2025-12-27,NIG,2,3,L,African Cup of Nations,True
+TUN,2025-12-30,TAN,1,1,D,African Cup of Nations,True
+TUN,2026-01-03,MAL,1,1,D,African Cup of Nations,True
+BEL,2024-09-09,FRA,0,2,L,UEFA Nations League,False
+BEL,2024-10-10,ITA,2,2,D,UEFA Nations League,False
+BEL,2024-10-14,FRA,1,2,L,UEFA Nations League,False
+BEL,2024-11-14,ITA,0,1,L,UEFA Nations League,False
+BEL,2024-11-17,ISR,0,1,L,UEFA Nations League,True
+BEL,2025-03-20,UKR,1,3,L,UEFA Nations League,True
+BEL,2025-03-23,UKR,3,0,W,UEFA Nations League,False
+BEL,2025-06-06,NOR,1,1,D,FIFA World Cup qualification,False
+BEL,2025-06-09,WAL,4,3,W,FIFA World Cup qualification,False
+BEL,2025-09-04,LIE,6,0,W,FIFA World Cup qualification,False
+BEL,2025-09-07,KAZ,6,0,W,FIFA World Cup qualification,False
+BEL,2025-10-10,NOR,0,0,D,FIFA World Cup qualification,False
+BEL,2025-10-13,WAL,4,2,W,FIFA World Cup qualification,False
+BEL,2025-11-15,KAZ,1,1,D,FIFA World Cup qualification,False
+BEL,2025-11-18,LIE,7,0,W,FIFA World Cup qualification,False
+EGY,2025-09-09,BUR,0,0,D,FIFA World Cup qualification,False
+EGY,2025-10-08,DJI,3,0,W,FIFA World Cup qualification,True
+EGY,2025-10-12,GUI,1,0,W,FIFA World Cup qualification,False
+EGY,2025-11-14,UZB,0,2,L,Al Ain International Cup,True
+EGY,2025-11-17,CPV,1,1,D,Al Ain International Cup,True
+EGY,2025-12-02,KUW,1,1,D,Arab Cup,True
+EGY,2025-12-06,UNI,1,1,D,Arab Cup,True
+EGY,2025-12-09,JOR,0,3,L,Arab Cup,True
+EGY,2025-12-22,ZIM,2,1,W,African Cup of Nations,True
+EGY,2025-12-26,RSA,1,0,W,African Cup of Nations,True
+EGY,2025-12-29,ANG,0,0,D,African Cup of Nations,True
+EGY,2026-01-05,BEN,3,1,W,African Cup of Nations,True
+EGY,2026-01-10,CIV,3,2,W,African Cup of Nations,True
+EGY,2026-01-14,SEN,0,1,L,African Cup of Nations,True
+EGY,2026-01-17,NIG,0,0,D,African Cup of Nations,True
+IRN,2024-03-26,TUR,1,0,W,FIFA World Cup qualification,False
+IRN,2024-06-06,HON,4,2,W,FIFA World Cup qualification,False
+IRN,2024-06-11,UZB,0,0,D,FIFA World Cup qualification,False
+IRN,2024-09-05,KYR,1,0,W,FIFA World Cup qualification,False
+IRN,2024-09-10,UNI,1,0,W,FIFA World Cup qualification,False
+IRN,2024-10-10,UZB,0,0,D,FIFA World Cup qualification,False
+IRN,2024-10-15,QAT,4,1,W,FIFA World Cup qualification,True
+IRN,2024-11-14,NOR,3,2,W,FIFA World Cup qualification,True
+IRN,2024-11-19,KYR,3,2,W,FIFA World Cup qualification,False
+IRN,2025-03-20,UNI,2,0,W,FIFA World Cup qualification,False
+IRN,2025-03-25,UZB,2,2,D,FIFA World Cup qualification,False
+IRN,2025-06-05,QAT,0,1,L,FIFA World Cup qualification,False
+IRN,2025-06-10,NOR,3,0,W,FIFA World Cup qualification,False
+IRN,2025-11-13,CPV,0,0,D,Al Ain International Cup,True
+IRN,2025-11-18,UZB,0,0,D,Al Ain International Cup,True
+NZL,2024-06-18,SOL,3,0,W,Oceania Nations Cup,True
+NZL,2024-06-21,VAN,4,0,W,Oceania Nations Cup,False
+NZL,2024-06-27,TAH,5,0,W,Oceania Nations Cup,True
+NZL,2024-06-30,VAN,3,0,W,Oceania Nations Cup,False
+NZL,2024-10-11,TAH,3,0,W,FIFA World Cup qualification,True
+NZL,2024-11-15,VAN,8,1,W,FIFA World Cup qualification,False
+NZL,2024-11-18,SAM,8,0,W,FIFA World Cup qualification,False
+NZL,2025-03-21,FIJ,7,0,W,FIFA World Cup qualification,False
+NZL,2025-03-24,NEW,3,0,W,FIFA World Cup qualification,False
+NZL,2025-06-07,CIV,1,0,W,Canadian Shield,True
+NZL,2025-06-10,UKR,1,2,L,Canadian Shield,True
+NZL,2025-09-05,AUS,0,1,L,Soccer Ashes,False
+NZL,2025-09-09,AUS,1,3,L,Soccer Ashes,False
+NZL,2026-03-27,FIN,0,2,L,FIFA Series,False
+NZL,2026-03-30,CHI,4,1,W,FIFA Series,False
+ESP,2024-09-08,SUI,4,1,W,UEFA Nations League,False
+ESP,2024-10-12,DEN,1,0,W,UEFA Nations League,False
+ESP,2024-10-15,SER,3,0,W,UEFA Nations League,False
+ESP,2024-11-15,DEN,2,1,W,UEFA Nations League,False
+ESP,2024-11-18,SUI,3,2,W,UEFA Nations League,False
+ESP,2025-03-20,NED,2,2,D,UEFA Nations League,False
+ESP,2025-03-23,NED,3,3,D,UEFA Nations League,False
+ESP,2025-06-05,FRA,5,4,W,UEFA Nations League,True
+ESP,2025-06-08,POR,2,2,D,UEFA Nations League,True
+ESP,2025-09-04,BUL,3,0,W,FIFA World Cup qualification,False
+ESP,2025-09-07,TUR,6,0,W,FIFA World Cup qualification,False
+ESP,2025-10-11,GEO,2,0,W,FIFA World Cup qualification,False
+ESP,2025-10-14,BUL,4,0,W,FIFA World Cup qualification,False
+ESP,2025-11-15,GEO,4,0,W,FIFA World Cup qualification,False
+ESP,2025-11-18,TUR,2,2,D,FIFA World Cup qualification,False
+CPV,2024-09-10,MAU,2,0,W,African Cup of Nations qualification,False
+CPV,2024-10-10,BOT,0,1,L,African Cup of Nations qualification,False
+CPV,2024-10-15,BOT,0,1,L,African Cup of Nations qualification,False
+CPV,2024-11-15,EGY,1,1,D,African Cup of Nations qualification,False
+CPV,2024-11-19,MAU,0,1,L,African Cup of Nations qualification,False
+CPV,2025-03-20,MAU,1,0,W,FIFA World Cup qualification,False
+CPV,2025-03-25,ANG,2,1,W,FIFA World Cup qualification,False
+CPV,2025-09-04,MAU,2,0,W,FIFA World Cup qualification,False
+CPV,2025-09-09,CAM,1,0,W,FIFA World Cup qualification,False
+CPV,2025-10-08,LIB,3,3,D,FIFA World Cup qualification,False
+CPV,2025-10-13,ESW,3,0,W,FIFA World Cup qualification,False
+CPV,2025-11-13,IRN,0,0,D,Al Ain International Cup,True
+CPV,2025-11-17,EGY,1,1,D,Al Ain International Cup,True
+CPV,2026-03-27,CHI,2,4,L,FIFA Series,True
+CPV,2026-03-30,FIN,1,1,D,FIFA Series,True
+KSA,2025-03-20,CHI,1,0,W,FIFA World Cup qualification,False
+KSA,2025-03-25,JPN,0,0,D,FIFA World Cup qualification,False
+KSA,2025-06-05,BAH,2,0,W,FIFA World Cup qualification,False
+KSA,2025-06-10,AUS,1,2,L,FIFA World Cup qualification,False
+KSA,2025-06-15,HAI,1,0,W,Gold Cup,True
+KSA,2025-06-19,USA,0,1,L,Gold Cup,False
+KSA,2025-06-22,TRI,1,1,D,Gold Cup,True
+KSA,2025-06-28,MEX,0,2,L,Gold Cup,True
+KSA,2025-10-08,IND,3,2,W,FIFA World Cup qualification,False
+KSA,2025-10-14,IRQ,0,0,D,FIFA World Cup qualification,False
+KSA,2025-12-02,OMA,2,1,W,Arab Cup,True
+KSA,2025-12-05,COM,3,1,W,Arab Cup,True
+KSA,2025-12-08,MAR,0,1,L,Arab Cup,True
+KSA,2025-12-11,PAL,2,1,W,Arab Cup,True
+KSA,2025-12-15,JOR,0,1,L,Arab Cup,True
+URU,2024-07-06,BRA,0,0,D,Copa América,True
+URU,2024-07-10,COL,0,1,L,Copa América,True
+URU,2024-07-13,CAN,2,2,D,Copa América,True
+URU,2024-09-06,PAR,0,0,D,FIFA World Cup qualification,False
+URU,2024-09-10,VEN,0,0,D,FIFA World Cup qualification,False
+URU,2024-10-11,PER,0,1,L,FIFA World Cup qualification,False
+URU,2024-10-15,ECU,0,0,D,FIFA World Cup qualification,False
+URU,2024-11-15,COL,3,2,W,FIFA World Cup qualification,False
+URU,2024-11-19,BRA,1,1,D,FIFA World Cup qualification,False
+URU,2025-03-21,ARG,0,1,L,FIFA World Cup qualification,False
+URU,2025-03-25,BOL,0,0,D,FIFA World Cup qualification,False
+URU,2025-06-05,PAR,0,2,L,FIFA World Cup qualification,False
+URU,2025-06-10,VEN,2,0,W,FIFA World Cup qualification,False
+URU,2025-09-04,PER,3,0,W,FIFA World Cup qualification,False
+URU,2025-09-09,CHI,0,0,D,FIFA World Cup qualification,False
+FRA,2024-09-09,BEL,2,0,W,UEFA Nations League,False
+FRA,2024-10-10,ISR,4,1,W,UEFA Nations League,True
+FRA,2024-10-14,BEL,2,1,W,UEFA Nations League,False
+FRA,2024-11-14,ISR,0,0,D,UEFA Nations League,False
+FRA,2024-11-17,ITA,3,1,W,UEFA Nations League,False
+FRA,2025-03-20,CRO,0,2,L,UEFA Nations League,False
+FRA,2025-03-23,CRO,2,0,W,UEFA Nations League,False
+FRA,2025-06-05,ESP,4,5,L,UEFA Nations League,True
+FRA,2025-06-08,GER,2,0,W,UEFA Nations League,False
+FRA,2025-09-05,UKR,2,0,W,FIFA World Cup qualification,True
+FRA,2025-09-09,ICE,2,1,W,FIFA World Cup qualification,False
+FRA,2025-10-10,AZE,3,0,W,FIFA World Cup qualification,False
+FRA,2025-10-13,ICE,2,2,D,FIFA World Cup qualification,False
+FRA,2025-11-13,UKR,4,0,W,FIFA World Cup qualification,False
+FRA,2025-11-16,AZE,3,1,W,FIFA World Cup qualification,False
+SEN,2024-11-14,BUR,1,0,W,African Cup of Nations qualification,True
+SEN,2024-11-19,BUR,2,0,W,African Cup of Nations qualification,False
+SEN,2025-03-22,SUD,0,0,D,FIFA World Cup qualification,True
+SEN,2025-03-25,TOG,2,0,W,FIFA World Cup qualification,False
+SEN,2025-09-05,SUD,2,0,W,FIFA World Cup qualification,False
+SEN,2025-09-09,COD,3,2,W,FIFA World Cup qualification,False
+SEN,2025-10-10,SOU,5,0,W,FIFA World Cup qualification,False
+SEN,2025-10-14,MAU,4,0,W,FIFA World Cup qualification,False
+SEN,2025-12-23,BOT,3,0,W,African Cup of Nations,True
+SEN,2025-12-27,COD,1,1,D,African Cup of Nations,True
+SEN,2025-12-30,BEN,3,0,W,African Cup of Nations,True
+SEN,2026-01-03,SUD,3,1,W,African Cup of Nations,True
+SEN,2026-01-09,MAL,1,0,W,African Cup of Nations,True
+SEN,2026-01-14,EGY,1,0,W,African Cup of Nations,True
+SEN,2026-01-18,MAR,0,3,L,African Cup of Nations,False
+IRQ,2025-03-20,KUW,2,2,D,FIFA World Cup qualification,False
+IRQ,2025-03-25,PAL,1,2,L,FIFA World Cup qualification,True
+IRQ,2025-06-05,KOR,0,2,L,FIFA World Cup qualification,False
+IRQ,2025-06-10,JOR,1,0,W,FIFA World Cup qualification,False
+IRQ,2025-09-04,HON,2,1,W,King's Cup,True
+IRQ,2025-09-07,THA,1,0,W,King's Cup,False
+IRQ,2025-10-11,IND,1,0,W,FIFA World Cup qualification,True
+IRQ,2025-10-14,KSA,0,0,D,FIFA World Cup qualification,False
+IRQ,2025-11-13,UNI,1,1,D,FIFA World Cup qualification,False
+IRQ,2025-11-18,UNI,2,1,W,FIFA World Cup qualification,False
+IRQ,2025-12-03,BAH,2,1,W,Arab Cup,True
+IRQ,2025-12-06,SUD,2,0,W,Arab Cup,True
+IRQ,2025-12-09,ALG,0,2,L,Arab Cup,True
+IRQ,2025-12-12,JOR,0,1,L,Arab Cup,True
+IRQ,2026-03-31,BOL,2,1,W,FIFA World Cup qualification,True
+NOR,2023-11-19,SCO,3,3,D,UEFA Euro qualification,False
+NOR,2024-09-06,KAZ,0,0,D,UEFA Nations League,False
+NOR,2024-09-09,AUT,2,1,W,UEFA Nations League,False
+NOR,2024-10-10,SLO,3,0,W,UEFA Nations League,False
+NOR,2024-10-13,AUT,1,5,L,UEFA Nations League,False
+NOR,2024-11-14,SLO,4,1,W,UEFA Nations League,False
+NOR,2024-11-17,KAZ,5,0,W,UEFA Nations League,False
+NOR,2025-03-22,MOL,5,0,W,FIFA World Cup qualification,False
+NOR,2025-03-25,ISR,4,2,W,FIFA World Cup qualification,True
+NOR,2025-06-06,ITA,3,0,W,FIFA World Cup qualification,False
+NOR,2025-06-09,EST,1,0,W,FIFA World Cup qualification,False
+NOR,2025-09-09,MOL,11,1,W,FIFA World Cup qualification,False
+NOR,2025-10-11,ISR,5,0,W,FIFA World Cup qualification,False
+NOR,2025-11-13,EST,4,1,W,FIFA World Cup qualification,False
+NOR,2025-11-16,ITA,4,1,W,FIFA World Cup qualification,False
+ARG,2024-07-04,ECU,1,1,D,Copa América,True
+ARG,2024-07-09,CAN,2,0,W,Copa América,True
+ARG,2024-07-14,COL,1,0,W,Copa América,True
+ARG,2024-09-05,CHI,3,0,W,FIFA World Cup qualification,False
+ARG,2024-09-10,COL,1,2,L,FIFA World Cup qualification,False
+ARG,2024-10-10,VEN,1,1,D,FIFA World Cup qualification,False
+ARG,2024-10-15,BOL,6,0,W,FIFA World Cup qualification,False
+ARG,2024-11-14,PAR,1,2,L,FIFA World Cup qualification,False
+ARG,2024-11-19,PER,1,0,W,FIFA World Cup qualification,False
+ARG,2025-03-21,URU,1,0,W,FIFA World Cup qualification,False
+ARG,2025-03-25,BRA,4,1,W,FIFA World Cup qualification,False
+ARG,2025-06-05,CHI,1,0,W,FIFA World Cup qualification,False
+ARG,2025-06-10,COL,1,1,D,FIFA World Cup qualification,False
+ARG,2025-09-04,VEN,3,0,W,FIFA World Cup qualification,False
+ARG,2025-09-09,ECU,0,1,L,FIFA World Cup qualification,False
+ALG,2025-03-21,BOT,3,1,W,FIFA World Cup qualification,False
+ALG,2025-03-25,MOZ,5,1,W,FIFA World Cup qualification,False
+ALG,2025-09-04,BOT,3,1,W,FIFA World Cup qualification,False
+ALG,2025-09-08,GUI,0,0,D,FIFA World Cup qualification,True
+ALG,2025-10-09,SOM,3,0,W,FIFA World Cup qualification,False
+ALG,2025-10-14,UGA,2,1,W,FIFA World Cup qualification,False
+ALG,2025-12-03,SUD,0,0,D,Arab Cup,True
+ALG,2025-12-06,BAH,5,1,W,Arab Cup,True
+ALG,2025-12-09,IRQ,2,0,W,Arab Cup,True
+ALG,2025-12-12,UNI,1,1,D,Arab Cup,True
+ALG,2025-12-24,SUD,3,0,W,African Cup of Nations,True
+ALG,2025-12-28,BUR,1,0,W,African Cup of Nations,True
+ALG,2025-12-31,EQU,3,1,W,African Cup of Nations,True
+ALG,2026-01-06,COD,1,0,W,African Cup of Nations,True
+ALG,2026-01-10,NIG,0,2,L,African Cup of Nations,True
+AUT,2024-09-09,NOR,1,2,L,UEFA Nations League,False
+AUT,2024-10-10,KAZ,4,0,W,UEFA Nations League,False
+AUT,2024-10-13,NOR,5,1,W,UEFA Nations League,False
+AUT,2024-11-14,KAZ,2,0,W,UEFA Nations League,False
+AUT,2024-11-17,SLO,1,1,D,UEFA Nations League,False
+AUT,2025-03-20,SER,1,1,D,UEFA Nations League,False
+AUT,2025-03-23,SER,0,2,L,UEFA Nations League,False
+AUT,2025-06-07,ROM,2,1,W,FIFA World Cup qualification,False
+AUT,2025-06-10,SAN,4,0,W,FIFA World Cup qualification,False
+AUT,2025-09-06,CYP,1,0,W,FIFA World Cup qualification,False
+AUT,2025-09-09,BIH,2,1,W,FIFA World Cup qualification,False
+AUT,2025-10-09,SAN,10,0,W,FIFA World Cup qualification,False
+AUT,2025-10-12,ROM,0,1,L,FIFA World Cup qualification,False
+AUT,2025-11-15,CYP,2,0,W,FIFA World Cup qualification,False
+AUT,2025-11-18,BIH,1,1,D,FIFA World Cup qualification,False
+JOR,2024-09-10,PAL,3,1,W,FIFA World Cup qualification,True
+JOR,2024-10-10,KOR,0,2,L,FIFA World Cup qualification,False
+JOR,2024-10-15,OMA,4,0,W,FIFA World Cup qualification,False
+JOR,2024-11-14,IRQ,0,0,D,FIFA World Cup qualification,False
+JOR,2024-11-19,KUW,1,1,D,FIFA World Cup qualification,False
+JOR,2025-03-20,PAL,3,1,W,FIFA World Cup qualification,False
+JOR,2025-03-25,KOR,1,1,D,FIFA World Cup qualification,False
+JOR,2025-06-05,OMA,3,0,W,FIFA World Cup qualification,False
+JOR,2025-06-10,IRQ,0,1,L,FIFA World Cup qualification,False
+JOR,2025-12-03,UNI,2,1,W,Arab Cup,True
+JOR,2025-12-06,KUW,3,1,W,Arab Cup,True
+JOR,2025-12-09,EGY,3,0,W,Arab Cup,True
+JOR,2025-12-12,IRQ,1,0,W,Arab Cup,True
+JOR,2025-12-15,KSA,1,0,W,Arab Cup,True
+JOR,2025-12-18,MAR,2,3,L,Arab Cup,True
+POR,2024-09-08,SCO,2,1,W,UEFA Nations League,False
+POR,2024-10-12,POL,3,1,W,UEFA Nations League,False
+POR,2024-10-15,SCO,0,0,D,UEFA Nations League,False
+POR,2024-11-15,POL,5,1,W,UEFA Nations League,False
+POR,2024-11-18,CRO,1,1,D,UEFA Nations League,False
+POR,2025-03-20,DEN,0,1,L,UEFA Nations League,False
+POR,2025-03-23,DEN,5,2,W,UEFA Nations League,False
+POR,2025-06-04,GER,2,1,W,UEFA Nations League,False
+POR,2025-06-08,ESP,2,2,D,UEFA Nations League,True
+POR,2025-09-06,ARM,5,0,W,FIFA World Cup qualification,False
+POR,2025-09-09,HUN,3,2,W,FIFA World Cup qualification,False
+POR,2025-10-11,REP,1,0,W,FIFA World Cup qualification,False
+POR,2025-10-14,HUN,2,2,D,FIFA World Cup qualification,False
+POR,2025-11-13,REP,0,2,L,FIFA World Cup qualification,False
+POR,2025-11-16,ARM,9,1,W,FIFA World Cup qualification,False
+COD,2024-11-16,GUI,0,1,L,African Cup of Nations qualification,True
+COD,2024-11-19,ETH,1,2,L,African Cup of Nations qualification,False
+COD,2025-03-21,SOU,1,0,W,FIFA World Cup qualification,False
+COD,2025-03-25,MAU,2,0,W,FIFA World Cup qualification,False
+COD,2025-09-05,SOU,4,1,W,FIFA World Cup qualification,False
+COD,2025-09-09,SEN,2,3,L,FIFA World Cup qualification,False
+COD,2025-10-10,TOG,1,0,W,FIFA World Cup qualification,False
+COD,2025-10-14,SUD,1,0,W,FIFA World Cup qualification,False
+COD,2025-11-13,CAM,1,0,W,FIFA World Cup qualification,True
+COD,2025-11-16,NIG,1,1,D,FIFA World Cup qualification,True
+COD,2025-12-23,BEN,1,0,W,African Cup of Nations,True
+COD,2025-12-27,SEN,1,1,D,African Cup of Nations,True
+COD,2025-12-30,BOT,3,0,W,African Cup of Nations,True
+COD,2026-01-06,ALG,0,1,L,African Cup of Nations,True
+COD,2026-03-31,JAM,1,0,W,FIFA World Cup qualification,True
+UZB,2024-06-11,IRN,0,0,D,FIFA World Cup qualification,False
+UZB,2024-09-05,NOR,1,0,W,FIFA World Cup qualification,False
+UZB,2024-09-10,KYR,3,2,W,FIFA World Cup qualification,False
+UZB,2024-10-10,IRN,0,0,D,FIFA World Cup qualification,False
+UZB,2024-10-15,UNI,1,0,W,FIFA World Cup qualification,False
+UZB,2024-11-14,QAT,2,3,L,FIFA World Cup qualification,False
+UZB,2024-11-19,NOR,1,0,W,FIFA World Cup qualification,True
+UZB,2025-03-20,KYR,1,0,W,FIFA World Cup qualification,False
+UZB,2025-03-25,IRN,2,2,D,FIFA World Cup qualification,False
+UZB,2025-06-05,UNI,0,0,D,FIFA World Cup qualification,False
+UZB,2025-06-10,QAT,3,0,W,FIFA World Cup qualification,False
+UZB,2025-11-14,EGY,2,0,W,Al Ain International Cup,True
+UZB,2025-11-18,IRN,0,0,D,Al Ain International Cup,True
+UZB,2026-03-27,GAB,3,1,W,FIFA Series,False
+UZB,2026-03-30,VEN,0,0,D,FIFA Series,False
+COL,2024-07-06,PAN,5,0,W,Copa América,True
+COL,2024-07-10,URU,1,0,W,Copa América,True
+COL,2024-07-14,ARG,0,1,L,Copa América,True
+COL,2024-09-06,PER,1,1,D,FIFA World Cup qualification,False
+COL,2024-09-10,ARG,2,1,W,FIFA World Cup qualification,False
+COL,2024-10-10,BOL,0,1,L,FIFA World Cup qualification,False
+COL,2024-10-15,CHI,4,0,W,FIFA World Cup qualification,False
+COL,2024-11-15,URU,2,3,L,FIFA World Cup qualification,False
+COL,2024-11-19,ECU,0,1,L,FIFA World Cup qualification,False
+COL,2025-03-20,BRA,1,2,L,FIFA World Cup qualification,False
+COL,2025-03-25,PAR,2,2,D,FIFA World Cup qualification,False
+COL,2025-06-06,PER,0,0,D,FIFA World Cup qualification,False
+COL,2025-06-10,ARG,1,1,D,FIFA World Cup qualification,False
+COL,2025-09-04,BOL,3,0,W,FIFA World Cup qualification,False
+COL,2025-09-09,VEN,6,3,W,FIFA World Cup qualification,False
+ENG,2024-07-14,ESP,1,2,L,UEFA Euro,True
+ENG,2024-09-07,REP,2,0,W,UEFA Nations League,False
+ENG,2024-09-10,FIN,2,0,W,UEFA Nations League,False
+ENG,2024-10-10,GRE,1,2,L,UEFA Nations League,False
+ENG,2024-10-13,FIN,3,1,W,UEFA Nations League,False
+ENG,2024-11-14,GRE,3,0,W,UEFA Nations League,False
+ENG,2024-11-17,REP,5,0,W,UEFA Nations League,False
+ENG,2025-03-21,ALB,2,0,W,FIFA World Cup qualification,False
+ENG,2025-03-24,LAT,3,0,W,FIFA World Cup qualification,False
+ENG,2025-06-07,AND,1,0,W,FIFA World Cup qualification,True
+ENG,2025-09-06,AND,2,0,W,FIFA World Cup qualification,False
+ENG,2025-09-09,SER,5,0,W,FIFA World Cup qualification,False
+ENG,2025-10-14,LAT,5,0,W,FIFA World Cup qualification,False
+ENG,2025-11-13,SER,2,0,W,FIFA World Cup qualification,False
+ENG,2025-11-16,ALB,2,0,W,FIFA World Cup qualification,False
+CRO,2024-09-08,POL,1,0,W,UEFA Nations League,False
+CRO,2024-10-12,SCO,2,1,W,UEFA Nations League,False
+CRO,2024-10-15,POL,3,3,D,UEFA Nations League,False
+CRO,2024-11-15,SCO,0,1,L,UEFA Nations League,False
+CRO,2024-11-18,POR,1,1,D,UEFA Nations League,False
+CRO,2025-03-20,FRA,2,0,W,UEFA Nations League,False
+CRO,2025-03-23,FRA,0,2,L,UEFA Nations League,False
+CRO,2025-06-06,GIB,7,0,W,FIFA World Cup qualification,True
+CRO,2025-06-09,CZE,5,1,W,FIFA World Cup qualification,False
+CRO,2025-09-05,FAR,1,0,W,FIFA World Cup qualification,False
+CRO,2025-09-08,MON,4,0,W,FIFA World Cup qualification,False
+CRO,2025-10-09,CZE,0,0,D,FIFA World Cup qualification,False
+CRO,2025-10-12,GIB,3,0,W,FIFA World Cup qualification,False
+CRO,2025-11-14,FAR,3,1,W,FIFA World Cup qualification,False
+CRO,2025-11-17,MON,3,2,W,FIFA World Cup qualification,False
+GHA,2024-09-05,ANG,0,1,L,African Cup of Nations qualification,False
+GHA,2024-09-09,NIG,1,1,D,African Cup of Nations qualification,True
+GHA,2024-10-10,SUD,0,0,D,African Cup of Nations qualification,False
+GHA,2024-10-15,SUD,0,2,L,African Cup of Nations qualification,True
+GHA,2024-11-15,ANG,1,1,D,African Cup of Nations qualification,False
+GHA,2024-11-18,NIG,1,2,L,African Cup of Nations qualification,False
+GHA,2025-03-21,CHA,5,0,W,FIFA World Cup qualification,False
+GHA,2025-03-24,MAD,3,0,W,FIFA World Cup qualification,True
+GHA,2025-05-28,NIG,1,2,L,Unity Cup,True
+GHA,2025-05-31,TRI,4,0,W,Unity Cup,True
+GHA,2025-09-04,CHA,1,1,D,FIFA World Cup qualification,False
+GHA,2025-09-08,MAL,1,0,W,FIFA World Cup qualification,False
+GHA,2025-10-08,CEN,5,0,W,FIFA World Cup qualification,True
+GHA,2025-10-12,COM,1,0,W,FIFA World Cup qualification,False
+GHA,2025-11-14,JPN,0,2,L,Kirin Cup,False
+PAN,2024-11-18,COS,2,2,D,CONCACAF Nations League,False
+PAN,2025-03-20,USA,1,0,W,CONCACAF Nations League,False
+PAN,2025-03-23,MEX,1,2,L,CONCACAF Nations League,True
+PAN,2025-06-07,BEL,2,0,W,FIFA World Cup qualification,False
+PAN,2025-06-10,NIC,3,0,W,FIFA World Cup qualification,False
+PAN,2025-06-16,GUA,5,2,W,Gold Cup,True
+PAN,2025-06-20,GUA,1,0,W,Gold Cup,True
+PAN,2025-06-24,JAM,4,1,W,Gold Cup,True
+PAN,2025-06-28,HON,1,1,D,Gold Cup,True
+PAN,2025-09-04,SUR,0,0,D,FIFA World Cup qualification,False
+PAN,2025-09-08,GUA,1,1,D,FIFA World Cup qualification,False
+PAN,2025-10-10,EL ,1,0,W,FIFA World Cup qualification,False
+PAN,2025-10-14,SUR,1,1,D,FIFA World Cup qualification,False
+PAN,2025-11-13,GUA,3,2,W,FIFA World Cup qualification,False
+PAN,2025-11-18,EL ,3,0,W,FIFA World Cup qualification,False

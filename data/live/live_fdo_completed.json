@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-06-13T11:48:58.210044+00:00",
+  "source": "football_data_org",
+  "quality": "B",
+  "note": "Scores + goals + bookings + subs, NO xG",
+  "total": 4,
+  "matches": [
+    {
+      "provider": "football_data_org",
+      "match_id": "537327",
+      "home": "MEX",
+      "away": "RSA",
+      "home_goals": 2,
+      "away_goals": 0,
+      "date": "2026-06-11",
+      "status": "FT",
+      "group": "GROUP_A",
+      "stage": "GROUP_STAGE"
+    },
+    {
+      "provider": "football_data_org",
+      "match_id": "537328",
+      "home": "KOR",
+      "away": "CZE",
+      "home_goals": 2,
+      "away_goals": 1,
+      "date": "2026-06-12",
+      "status": "FT",
+      "group": "GROUP_A",
+      "stage": "GROUP_STAGE"
+    },
+    {
+      "provider": "football_data_org",
+      "match_id": "537333",
+      "home": "CAN",
+      "away": "BIH",
+      "home_goals": 1,
+      "away_goals": 1,
+      "date": "2026-06-12",
+      "status": "FT",
+      "group": "GROUP_B",
+      "stage": "GROUP_STAGE"
+    },
+    {
+      "provider": "football_data_org",
+      "match_id": "537345",
+      "home": "USA",
+      "away": "PAR",
+      "home_goals": 4,
+      "away_goals": 1,
+      "date": "2026-06-13",
+      "status": "FT",
+      "group": "GROUP_D",
+      "stage": "GROUP_STAGE"
+    }
+  ]
+}

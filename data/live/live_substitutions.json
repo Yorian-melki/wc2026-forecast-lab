@@ -1,0 +1,637 @@
+{
+  "generated_at": "2026-06-13T11:47:36.614173+00:00",
+  "source": "highlightly",
+  "quality": "A",
+  "total": 37,
+  "substitutions": [
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "56",
+      "type": "Substitution",
+      "assist": null,
+      "player": "L. Foster",
+      "playerId": 15928850,
+      "substituted": "T. Mbatha",
+      "assistingPlayerId": 31303384
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "61",
+      "type": "Substitution",
+      "assist": null,
+      "player": "J. Adams",
+      "playerId": 43262464,
+      "substituted": "T. Zwane",
+      "assistingPlayerId": 529683
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "66",
+      "type": "Substitution",
+      "assist": null,
+      "player": "B. Gutierrez",
+      "playerId": 34169667,
+      "substituted": "L. Chavez",
+      "assistingPlayerId": 5746244
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "66",
+      "type": "Substitution",
+      "assist": null,
+      "player": "A. Fidalgo",
+      "playerId": 120904,
+      "substituted": "G. Mora",
+      "assistingPlayerId": 77699559
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "76",
+      "type": "Substitution",
+      "assist": null,
+      "player": "E. Lira",
+      "playerId": 42881699,
+      "substituted": "E. Alvarez",
+      "assistingPlayerId": 462063
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "76",
+      "type": "Substitution",
+      "assist": null,
+      "player": "R. Jimenez",
+      "playerId": 464961,
+      "substituted": "A. Gonzalez",
+      "assistingPlayerId": 46965947
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "77",
+      "type": "Substitution",
+      "assist": null,
+      "player": "I. Rayners",
+      "playerId": 20516223,
+      "substituted": "E. Makgopa",
+      "assistingPlayerId": 32418148
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "77",
+      "type": "Substitution",
+      "assist": null,
+      "player": "A. Modiba",
+      "playerId": 7459928,
+      "substituted": "O. Appollis",
+      "assistingPlayerId": 28962927
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "79",
+      "type": "Substitution",
+      "assist": null,
+      "player": "J. Quinones",
+      "playerId": 5720806,
+      "substituted": "A. Vega",
+      "assistingPlayerId": 465283
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "61",
+      "type": "Substitution",
+      "assist": null,
+      "player": "L. Millar",
+      "playerId": 7212632,
+      "substituted": "J. Shaffelburg",
+      "assistingPlayerId": 8183140
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "61",
+      "type": "Substitution",
+      "assist": null,
+      "player": "J. David",
+      "playerId": 1366883,
+      "substituted": "P. David",
+      "assistingPlayerId": 50449987
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "61",
+      "type": "Substitution",
+      "assist": null,
+      "player": "T. Buchanan",
+      "playerId": 8213730,
+      "substituted": "A. Ahmed",
+      "assistingPlayerId": 58305499
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "62",
+      "type": "Substitution",
+      "assist": null,
+      "player": "J. Lukic",
+      "playerId": 12403111,
+      "substituted": "S. Bazdar",
+      "assistingPlayerId": 50614851
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "62",
+      "type": "Substitution",
+      "assist": null,
+      "player": "I. Basic",
+      "playerId": 26117896,
+      "substituted": "A. Gigovic",
+      "assistingPlayerId": 11352908
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "74",
+      "type": "Substitution",
+      "assist": null,
+      "player": "E. Bajraktarevic",
+      "playerId": 53035003,
+      "substituted": "I. Sunjic",
+      "assistingPlayerId": 213318
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "74",
+      "type": "Substitution",
+      "assist": null,
+      "player": "A. Memic",
+      "playerId": 51858415,
+      "substituted": "K. Alajbegovic",
+      "assistingPlayerId": 63685153
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "76",
+      "type": "Substitution",
+      "assist": null,
+      "player": "T. Oluwaseyi",
+      "playerId": 56605661,
+      "substituted": "C. Larin",
+      "assistingPlayerId": 322315
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "84",
+      "type": "Substitution",
+      "assist": null,
+      "player": "S. Kolasinac",
+      "playerId": 232316,
+      "substituted": "D. Burnic",
+      "assistingPlayerId": 4045923
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "90+1",
+      "type": "Substitution",
+      "assist": null,
+      "player": "S. Eustaquio",
+      "playerId": 5726924,
+      "substituted": "J. Osorio",
+      "assistingPlayerId": 8181691
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "62",
+      "type": "Substitution",
+      "assist": null,
+      "player": "Lee Jae-Sung",
+      "playerId": 468020,
+      "substituted": "Hwang Hee-Chan",
+      "assistingPlayerId": 4007122
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 656054,
+        "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+        "name": "Czech Republic"
+      },
+      "time": "64",
+      "type": "Substitution",
+      "assist": null,
+      "player": "P. Sulc",
+      "playerId": 10688461,
+      "substituted": "A. Hlozek",
+      "assistingPlayerId": 10629213
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 656054,
+        "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+        "name": "Czech Republic"
+      },
+      "time": "64",
+      "type": "Substitution",
+      "assist": null,
+      "player": "P. Schick",
+      "playerId": 127988,
+      "substituted": "T. Chory",
+      "assistingPlayerId": 131852
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 656054,
+        "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+        "name": "Czech Republic"
+      },
+      "time": "64",
+      "type": "Substitution",
+      "assist": null,
+      "player": "L. Provod",
+      "playerId": 10682987,
+      "substituted": "M. Sadilek",
+      "assistingPlayerId": 38955
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "69",
+      "type": "Substitution",
+      "assist": null,
+      "player": "Lee Tae-Seok",
+      "playerId": 38192574,
+      "substituted": "Eom Ji-Sung",
+      "assistingPlayerId": 38165204
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "69",
+      "type": "Substitution",
+      "assist": null,
+      "player": "Son Heung-Min",
+      "playerId": 30100,
+      "substituted": "Oh Hyeon-Gyu",
+      "assistingPlayerId": 5588464
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "84",
+      "type": "Substitution",
+      "assist": null,
+      "player": "Hwang In-Beom",
+      "playerId": 467215,
+      "substituted": "Kim Jin-Gyu",
+      "assistingPlayerId": 5501202
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "84",
+      "type": "Substitution",
+      "assist": null,
+      "player": "Paik Seung-Ho",
+      "playerId": 468503,
+      "substituted": "Park Jin-Seob",
+      "assistingPlayerId": 15973125
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 656054,
+        "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+        "name": "Czech Republic"
+      },
+      "time": "84",
+      "type": "Substitution",
+      "assist": null,
+      "player": "A. Sojka",
+      "playerId": 62280911,
+      "substituted": "M. Chytil",
+      "assistingPlayerId": 10670429
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "46",
+      "type": "Substitution",
+      "assist": null,
+      "player": "D. Bobadilla",
+      "playerId": 31412381,
+      "substituted": "Mauricio",
+      "assistingPlayerId": 17144239
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "46",
+      "type": "Substitution",
+      "assist": null,
+      "player": "C. Pulisic",
+      "playerId": 2891,
+      "substituted": "S. Berhalter",
+      "assistingPlayerId": 32475947
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "62",
+      "type": "Substitution",
+      "assist": null,
+      "player": "A. Sanabria",
+      "playerId": 406196,
+      "substituted": "A. Arce",
+      "assistingPlayerId": 15369214
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "72",
+      "type": "Substitution",
+      "assist": null,
+      "player": "S. Dest",
+      "playerId": 6236489,
+      "substituted": "T. Weah",
+      "assistingPlayerId": 183372
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "72",
+      "type": "Substitution",
+      "assist": null,
+      "player": "F. Balogun",
+      "playerId": 22352589,
+      "substituted": "R. Pepi",
+      "assistingPlayerId": 11892902
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "79",
+      "type": "Substitution",
+      "assist": null,
+      "player": "M. Almiron",
+      "playerId": 403781,
+      "substituted": "R. Sosa",
+      "assistingPlayerId": 31604132
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "79",
+      "type": "Substitution",
+      "assist": null,
+      "player": "J. Caceres",
+      "playerId": 31554866,
+      "substituted": "G. Velazquez",
+      "assistingPlayerId": 5765242
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "80",
+      "type": "Substitution",
+      "assist": null,
+      "player": "D. Gomez",
+      "playerId": 44817724,
+      "substituted": "Kaku",
+      "assistingPlayerId": 404908
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "82",
+      "type": "Substitution",
+      "assist": null,
+      "player": "M. Tillman",
+      "playerId": 26088111,
+      "substituted": "G. Reyna",
+      "assistingPlayerId": 26069435
+    }
+  ]
+}

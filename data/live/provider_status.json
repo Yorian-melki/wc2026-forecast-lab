@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-06-13T13:11:57.866237+00:00",
+  "overall_quality": "A",
+  "note": "Highlightly BASIC plan confirmed xG. API-Football FREE date-bypass primary. TSA KEY_REVOKED.",
+  "providers": {
+    "highlightly": {
+      "available": true,
+      "plan": "basic",
+      "wc2026_accessible": true,
+      "quality_level": "A",
+      "role": "Primary xG source. Statistics endpoint returns Expected Goals, Big Chances, Expected Assists, Key Passes, Passes Final Third, Tackles, Clearances, Aerial Duels.",
+      "bypass_method": "Direct soccer.highlightly.net server (x-rapidapi-key + x-rapidapi-host headers). RapidAPI endpoint returns 403.",
+      "xg_confirmed": true,
+      "matches_with_xg": 4,
+      "fields": [
+        "xG (Expected Goals)",
+        "Big Chances Created",
+        "Expected Assists",
+        "Key Passes",
+        "Passes Into Final Third",
+        "Tackles",
+        "Clearances",
+        "Aerial Duels",
+        "Successful Dribbles",
+        "Successful Crosses",
+        "Attacks",
+        "Events (goals/cards/subs)",
+        "Lineups",
+        "Venue",
+        "Referee",
+        "Weather forecast",
+        "Box score"
+      ],
+      "missing": [
+        "Highlights clips (endpoint returns [])",
+        "Odds (endpoint returns [])"
+      ],
+      "lag_note": "Realtime. Finished matches show immediately."
+    },
+    "api_football": {
+      "available": true,
+      "plan": "free",
+      "wc2026_accessible": true,
+      "quality_level": "B",
+      "role": "Primary provider for scores, events, lineups. Confirmed 4/4 completed matches.",
+      "bypass_method": "fixtures?date=YYYY-MM-DD (no season/league params). WC matches returned on Free plan.",
+      "fields": [
+        "Live score",
+        "Goals + scorers",
+        "Half-time score",
+        "Shots / SOT",
+        "Corners",
+        "Cards",
+        "Lineups",
+        "Events"
+      ],
+      "missing": [
+        "xG",
+        "Standings (blocked on Free plan)",
+        "Season-level fixture list"
+      ],
+      "lag_note": "~2 min delay on live scores."
+    },
+    "football_data_org": {
+      "available": true,
+      "plan": "tier_one_free",
+      "wc2026_accessible": true,
+      "quality_level": "B",
+      "role": "Standings (12 groups, 48 teams), Top scorers, Full WC fixture list (104 matches).",
+      "fields": [
+        "Standings (all 12 groups)",
+        "Top scorers (goals + assists)",
+        "All fixtures",
+        "Team info"
+      ],
+      "missing": [
+        "xG",
+        "Live score",
+        "Events",
+        "Lineups",
+        "Odds"
+      ],
+      "lag_note": "Updated after each match day."
+    },
+    "thestatsapi": {
+      "available": true,
+      "plan": "stats_growth_trial",
+      "wc2026_accessible": true,
+      "quality_level": "A",
+      "final_status": "ACTIVE_CONFIRMED_AFTER_STATS_API_SUBSCRIPTION",
+      "key_masked": "fapi_r..CamaCy (len 37)",
+      "role": "PRIMARY shot-level xG (per-shot shotmap w/ x,y coords) + PRIMARY odds source (market baseline). Team-xG shares upstream with Highlightly (not independent).",
+      "fields": [
+        "Per-shot shotmap xG (x/y coords)",
+        "Team xG (=Highlightly upstream)",
+        "Bookmaker odds (4 books)",
+        "Player-stats",
+        "Timeline",
+        "Lineups",
+        "Referee",
+        "Full match stats"
+      ],
+      "missing": [
+        "live-stats only for in-progress matches"
+      ],
+      "lag_note": "Finished matches available immediately.",
+      "note": "Same fapi_r key as prior KEY_REVOKED \u2014 unblocked by Stats API trial activation."
+    },
+    "openfootball": {
+      "available": true,
+      "plan": "open_source",
+      "wc2026_accessible": true,
+      "quality_level": "C",
+      "role": "Fallback only. Historical WC data. Used for older matches when API-Football fails.",
+      "fields": [
+        "Score",
+        "Result",
+        "Date",
+        "Group"
+      ],
+      "missing": [
+        "xG",
+        "Live score",
+        "Events",
+        "Lineups",
+        "Stats"
+      ],
+      "lag_note": "Days to weeks behind \u2014 GitHub pushes only."
+    }
+  },
+  "score_disagreements": {
+    "checked": 4,
+    "disagreements": 0,
+    "verdict": "ZERO \u2014 all 3 live providers (API-Football + Highlightly + FDO) confirm all 4 scores."
+  }
+}

@@ -1,0 +1,1053 @@
+{
+  "generated_at": "2026-06-13T11:47:36.614173+00:00",
+  "source": "highlightly",
+  "quality": "A",
+  "matches": {
+    "1267453803": {
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "venue": {
+        "city": "Mexico City",
+        "name": "Mexico City Stadium",
+        "country": "Mexico",
+        "capacity": "87000"
+      },
+      "referee": {
+        "name": "Pereira Sampaio, Wilton",
+        "nationality": "Brazil"
+      },
+      "forecast": {
+        "status": "partly cloudy day",
+        "temperature": "22.74°C"
+      },
+      "events": [
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "9",
+          "type": "Goal",
+          "assist": "E. Lira",
+          "player": "J. Quinones",
+          "playerId": 5720806,
+          "substituted": null,
+          "assistingPlayerId": 42881699
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "17",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "T. Mokoena",
+          "playerId": 529361,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "23",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "B. Gutierrez",
+          "playerId": 34169667,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "49",
+          "type": "Red Card",
+          "assist": null,
+          "player": "Y. Sithole",
+          "playerId": 25507867,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "56",
+          "type": "Substitution",
+          "assist": null,
+          "player": "L. Foster",
+          "playerId": 15928850,
+          "substituted": "T. Mbatha",
+          "assistingPlayerId": 31303384
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "61",
+          "type": "Substitution",
+          "assist": null,
+          "player": "J. Adams",
+          "playerId": 43262464,
+          "substituted": "T. Zwane",
+          "assistingPlayerId": 529683
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "66",
+          "type": "Substitution",
+          "assist": null,
+          "player": "B. Gutierrez",
+          "playerId": 34169667,
+          "substituted": "L. Chavez",
+          "assistingPlayerId": 5746244
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "66",
+          "type": "Substitution",
+          "assist": null,
+          "player": "A. Fidalgo",
+          "playerId": 120904,
+          "substituted": "G. Mora",
+          "assistingPlayerId": 77699559
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "67",
+          "type": "Goal",
+          "assist": "R. Alvarado",
+          "player": "R. Jimenez",
+          "playerId": 464961,
+          "substituted": null,
+          "assistingPlayerId": 463673
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "74",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "N. Sibisi",
+          "playerId": 7479892,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "76",
+          "type": "Substitution",
+          "assist": null,
+          "player": "E. Lira",
+          "playerId": 42881699,
+          "substituted": "E. Alvarez",
+          "assistingPlayerId": 462063
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "76",
+          "type": "Substitution",
+          "assist": null,
+          "player": "R. Jimenez",
+          "playerId": 464961,
+          "substituted": "A. Gonzalez",
+          "assistingPlayerId": 46965947
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "77",
+          "type": "Substitution",
+          "assist": null,
+          "player": "I. Rayners",
+          "playerId": 20516223,
+          "substituted": "E. Makgopa",
+          "assistingPlayerId": 32418148
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "77",
+          "type": "Substitution",
+          "assist": null,
+          "player": "A. Modiba",
+          "playerId": 7459928,
+          "substituted": "O. Appollis",
+          "assistingPlayerId": 28962927
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "79",
+          "type": "Substitution",
+          "assist": null,
+          "player": "J. Quinones",
+          "playerId": 5720806,
+          "substituted": "A. Vega",
+          "assistingPlayerId": 465283
+        },
+        {
+          "team": {
+            "id": 1303665,
+            "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+            "name": "South Africa"
+          },
+          "time": "84",
+          "type": "Red Card",
+          "assist": null,
+          "player": "T. Zwane",
+          "playerId": 529683,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 14400,
+            "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+            "name": "Mexico"
+          },
+          "time": "90+2",
+          "type": "Red Card",
+          "assist": null,
+          "player": "C. Montes",
+          "playerId": 462707,
+          "substituted": null,
+          "assistingPlayerId": null
+        }
+      ]
+    },
+    "1309689784": {
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "venue": {
+        "city": "Toronto, ON",
+        "name": "Toronto Stadium",
+        "country": "Canada",
+        "capacity": "43036"
+      },
+      "referee": {
+        "name": "Tello Figueroa, Facundo",
+        "nationality": "Argentina"
+      },
+      "forecast": {
+        "status": "partly cloudy day",
+        "temperature": "25.66°C"
+      },
+      "events": [
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "11",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "A. Johnston",
+          "playerId": 12646221,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "21",
+          "type": "Goal",
+          "assist": "S. Kolasinac",
+          "player": "J. Lukic",
+          "playerId": 12403111,
+          "substituted": null,
+          "assistingPlayerId": 232316
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "45",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "E. Demirovic",
+          "playerId": 7555884,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "45+1",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "J. Lukic",
+          "playerId": 12403111,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "53",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "L. De Fougerolles",
+          "playerId": 52765972,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "61",
+          "type": "Substitution",
+          "assist": null,
+          "player": "L. Millar",
+          "playerId": 7212632,
+          "substituted": "J. Shaffelburg",
+          "assistingPlayerId": 8183140
+        },
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "61",
+          "type": "Substitution",
+          "assist": null,
+          "player": "J. David",
+          "playerId": 1366883,
+          "substituted": "P. David",
+          "assistingPlayerId": 50449987
+        },
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "61",
+          "type": "Substitution",
+          "assist": null,
+          "player": "T. Buchanan",
+          "playerId": 8213730,
+          "substituted": "A. Ahmed",
+          "assistingPlayerId": 58305499
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "62",
+          "type": "Substitution",
+          "assist": null,
+          "player": "J. Lukic",
+          "playerId": 12403111,
+          "substituted": "S. Bazdar",
+          "assistingPlayerId": 50614851
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "62",
+          "type": "Substitution",
+          "assist": null,
+          "player": "I. Basic",
+          "playerId": 26117896,
+          "substituted": "A. Gigovic",
+          "assistingPlayerId": 11352908
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "74",
+          "type": "Substitution",
+          "assist": null,
+          "player": "E. Bajraktarevic",
+          "playerId": 53035003,
+          "substituted": "I. Sunjic",
+          "assistingPlayerId": 213318
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "74",
+          "type": "Substitution",
+          "assist": null,
+          "player": "A. Memic",
+          "playerId": 51858415,
+          "substituted": "K. Alajbegovic",
+          "assistingPlayerId": 63685153
+        },
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "76",
+          "type": "Substitution",
+          "assist": null,
+          "player": "T. Oluwaseyi",
+          "playerId": 56605661,
+          "substituted": "C. Larin",
+          "assistingPlayerId": 322315
+        },
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "78",
+          "type": "Goal",
+          "assist": "P. David",
+          "player": "C. Larin",
+          "playerId": 322315,
+          "substituted": null,
+          "assistingPlayerId": 50449987
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "84",
+          "type": "Substitution",
+          "assist": null,
+          "player": "S. Kolasinac",
+          "playerId": 232316,
+          "substituted": "D. Burnic",
+          "assistingPlayerId": 4045923
+        },
+        {
+          "team": {
+            "id": 4705963,
+            "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+            "name": "Canada"
+          },
+          "time": "90+1",
+          "type": "Substitution",
+          "assist": null,
+          "player": "S. Eustaquio",
+          "playerId": 5726924,
+          "substituted": "J. Osorio",
+          "assistingPlayerId": 8181691
+        },
+        {
+          "team": {
+            "id": 947947,
+            "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+            "name": "Bosnia & Herzegovina"
+          },
+          "time": "90+3",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "N. Katic",
+          "playerId": 280455,
+          "substituted": null,
+          "assistingPlayerId": null
+        }
+      ]
+    },
+    "1309688933": {
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "venue": {
+        "city": "Zapopan",
+        "name": "Estadio Guadalajara",
+        "country": "Mexico",
+        "capacity": "45664"
+      },
+      "referee": {
+        "name": "Omar, Amin Mohamed",
+        "nationality": "Egypt"
+      },
+      "forecast": {
+        "status": "clear night",
+        "temperature": "22.84°C"
+      },
+      "events": [
+        {
+          "team": {
+            "id": 656054,
+            "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+            "name": "Czech Republic"
+          },
+          "time": "59",
+          "type": "Goal",
+          "assist": "V. Coufal",
+          "player": "L. Krejci",
+          "playerId": 10691681,
+          "substituted": null,
+          "assistingPlayerId": 198345
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "62",
+          "type": "Substitution",
+          "assist": null,
+          "player": "Lee Jae-Sung",
+          "playerId": 468020,
+          "substituted": "Hwang Hee-Chan",
+          "assistingPlayerId": 4007122
+        },
+        {
+          "team": {
+            "id": 656054,
+            "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+            "name": "Czech Republic"
+          },
+          "time": "64",
+          "type": "Substitution",
+          "assist": null,
+          "player": "P. Sulc",
+          "playerId": 10688461,
+          "substituted": "A. Hlozek",
+          "assistingPlayerId": 10629213
+        },
+        {
+          "team": {
+            "id": 656054,
+            "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+            "name": "Czech Republic"
+          },
+          "time": "64",
+          "type": "Substitution",
+          "assist": null,
+          "player": "P. Schick",
+          "playerId": 127988,
+          "substituted": "T. Chory",
+          "assistingPlayerId": 131852
+        },
+        {
+          "team": {
+            "id": 656054,
+            "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+            "name": "Czech Republic"
+          },
+          "time": "64",
+          "type": "Substitution",
+          "assist": null,
+          "player": "L. Provod",
+          "playerId": 10682987,
+          "substituted": "M. Sadilek",
+          "assistingPlayerId": 38955
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "67",
+          "type": "Goal",
+          "assist": "Lee Kang-In",
+          "player": "Hwang In-Beom",
+          "playerId": 467215,
+          "substituted": null,
+          "assistingPlayerId": 149401
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "69",
+          "type": "Substitution",
+          "assist": null,
+          "player": "Lee Tae-Seok",
+          "playerId": 38192574,
+          "substituted": "Eom Ji-Sung",
+          "assistingPlayerId": 38165204
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "69",
+          "type": "Substitution",
+          "assist": null,
+          "player": "Son Heung-Min",
+          "playerId": 30100,
+          "substituted": "Oh Hyeon-Gyu",
+          "assistingPlayerId": 5588464
+        },
+        {
+          "team": {
+            "id": 656054,
+            "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+            "name": "Czech Republic"
+          },
+          "time": "77",
+          "type": "VAR Goal Cancelled - Offside",
+          "assist": null,
+          "player": "T. Soucek",
+          "playerId": 200277,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "80",
+          "type": "Goal",
+          "assist": "Hwang In-Beom",
+          "player": "Oh Hyeon-Gyu",
+          "playerId": 5588464,
+          "substituted": null,
+          "assistingPlayerId": 467215
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "84",
+          "type": "Substitution",
+          "assist": null,
+          "player": "Hwang In-Beom",
+          "playerId": 467215,
+          "substituted": "Kim Jin-Gyu",
+          "assistingPlayerId": 5501202
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "84",
+          "type": "Substitution",
+          "assist": null,
+          "player": "Paik Seung-Ho",
+          "playerId": 468503,
+          "substituted": "Park Jin-Seob",
+          "assistingPlayerId": 15973125
+        },
+        {
+          "team": {
+            "id": 656054,
+            "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+            "name": "Czech Republic"
+          },
+          "time": "84",
+          "type": "Substitution",
+          "assist": null,
+          "player": "A. Sojka",
+          "playerId": 62280911,
+          "substituted": "M. Chytil",
+          "assistingPlayerId": 10670429
+        },
+        {
+          "team": {
+            "id": 15251,
+            "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+            "name": "South Korea"
+          },
+          "time": "90+6",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "Lee Gi-Hyuk",
+          "playerId": 49097265,
+          "substituted": null,
+          "assistingPlayerId": null
+        }
+      ]
+    },
+    "1267454654": {
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "venue": {
+        "city": "Inglewood, CA",
+        "name": "Los Angeles Stadium",
+        "country": "USA",
+        "capacity": "70240"
+      },
+      "referee": {
+        "name": "Makkelie, Danny",
+        "nationality": "Netherlands"
+      },
+      "forecast": {
+        "status": "partly cloudy day",
+        "temperature": "22.28°C"
+      },
+      "events": [
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "7",
+          "type": "Own Goal",
+          "assist": null,
+          "player": "D. Bobadilla",
+          "playerId": 31412381,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "10",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "J. Caceres",
+          "playerId": 31554866,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "28",
+          "type": "VAR Goal Cancelled - Offside",
+          "assist": null,
+          "player": "F. Balogun",
+          "playerId": 22352589,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "31",
+          "type": "Goal",
+          "assist": "C. Pulisic",
+          "player": "F. Balogun",
+          "playerId": 22352589,
+          "substituted": null,
+          "assistingPlayerId": 2891
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "45+5",
+          "type": "Goal",
+          "assist": "M. Tillman",
+          "player": "F. Balogun",
+          "playerId": 22352589,
+          "substituted": null,
+          "assistingPlayerId": 26088111
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "46",
+          "type": "Substitution",
+          "assist": null,
+          "player": "D. Bobadilla",
+          "playerId": 31412381,
+          "substituted": "Mauricio",
+          "assistingPlayerId": 17144239
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "46",
+          "type": "Substitution",
+          "assist": null,
+          "player": "C. Pulisic",
+          "playerId": 2891,
+          "substituted": "S. Berhalter",
+          "assistingPlayerId": 32475947
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "53",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "M. Almiron",
+          "playerId": 403781,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "59",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "T. Adams",
+          "playerId": 185304,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "62",
+          "type": "Substitution",
+          "assist": null,
+          "player": "A. Sanabria",
+          "playerId": 406196,
+          "substituted": "A. Arce",
+          "assistingPlayerId": 15369214
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "72",
+          "type": "Substitution",
+          "assist": null,
+          "player": "S. Dest",
+          "playerId": 6236489,
+          "substituted": "T. Weah",
+          "assistingPlayerId": 183372
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "72",
+          "type": "Substitution",
+          "assist": null,
+          "player": "F. Balogun",
+          "playerId": 22352589,
+          "substituted": "R. Pepi",
+          "assistingPlayerId": 11892902
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "73",
+          "type": "Goal",
+          "assist": "J. Enciso",
+          "player": "Mauricio",
+          "playerId": 17144239,
+          "substituted": null,
+          "assistingPlayerId": 11390421
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "79",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "D. Gomez",
+          "playerId": 44817724,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "79",
+          "type": "Substitution",
+          "assist": null,
+          "player": "M. Almiron",
+          "playerId": 403781,
+          "substituted": "R. Sosa",
+          "assistingPlayerId": 31604132
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "79",
+          "type": "Substitution",
+          "assist": null,
+          "player": "J. Caceres",
+          "playerId": 31554866,
+          "substituted": "G. Velazquez",
+          "assistingPlayerId": 5765242
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "80",
+          "type": "Substitution",
+          "assist": null,
+          "player": "D. Gomez",
+          "playerId": 44817724,
+          "substituted": "Kaku",
+          "assistingPlayerId": 404908
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "82",
+          "type": "Substitution",
+          "assist": null,
+          "player": "M. Tillman",
+          "playerId": 26088111,
+          "substituted": "G. Reyna",
+          "assistingPlayerId": 26069435
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "88",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "A. Arce",
+          "playerId": 15369214,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2026164,
+            "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+            "name": "Paraguay"
+          },
+          "time": "90+3",
+          "type": "Yellow Card",
+          "assist": null,
+          "player": "J. Alonso",
+          "playerId": 402493,
+          "substituted": null,
+          "assistingPlayerId": null
+        },
+        {
+          "team": {
+            "id": 2029568,
+            "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+            "name": "USA"
+          },
+          "time": "90+8",
+          "type": "Goal",
+          "assist": "A. Freeman",
+          "player": "G. Reyna",
+          "playerId": 26069435,
+          "substituted": null,
+          "assistingPlayerId": 57315188
+        }
+      ]
+    }
+  }
+}

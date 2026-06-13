@@ -1,0 +1,190 @@
+{
+  "schema_version": "p1_mle_v1",
+  "WARNING": "EXPERIMENTAL \u2014 do not overwrite production model without holdout proof",
+  "params": {
+    "log_base_xg": 0.099978,
+    "base_xg": 1.10515,
+    "rho": 0.2,
+    "team_attack": {
+      "ARG": 0.461611,
+      "AUS": 0.223393,
+      "BEL": 0.615263,
+      "BRA": 0.083515,
+      "CAN": -2.4e-05,
+      "CMR": -1.7e-05,
+      "COL": 0.267317,
+      "CRC": -0.46008,
+      "CRO": 0.734473,
+      "DEN": -0.112615,
+      "ECU": -5.5e-05,
+      "EGY": -0.533881,
+      "ENG": 0.390021,
+      "ESP": 0.415637,
+      "FRA": 0.886623,
+      "GER": -0.575639,
+      "GHA": -5.1e-05,
+      "IRN": -0.541814,
+      "ISL": -0.438164,
+      "JPN": 0.520186,
+      "KOR": -0.34492,
+      "KSA": -0.457063,
+      "MAR": -0.393489,
+      "MEX": -0.419872,
+      "NED": 5.9e-05,
+      "NGA": -0.144342,
+      "PAN": -0.449508,
+      "PER": 0.003956,
+      "POL": -0.368431,
+      "POR": 0.499126,
+      "QAT": -9.4e-05,
+      "RUS": 0.464613,
+      "SEN": 0.219238,
+      "SRB": -0.589619,
+      "SUI": 0.05126,
+      "SWE": -0.202752,
+      "TUN": 0.260787,
+      "URU": -0.064698,
+      "USA": -6e-06,
+      "WAL": 5.1e-05
+    },
+    "team_defense": {
+      "ARG": -0.288858,
+      "AUS": -0.041889,
+      "BEL": 0.557864,
+      "BRA": 0.494681,
+      "CAN": -2.1e-05,
+      "CMR": -1.3e-05,
+      "COL": 0.519933,
+      "CRC": -0.479346,
+      "CRO": 0.146114,
+      "DEN": 1.134039,
+      "ECU": 7e-06,
+      "EGY": -0.506289,
+      "ENG": 0.292815,
+      "ESP": -0.198111,
+      "FRA": 0.505542,
+      "GER": -0.459064,
+      "GHA": 5e-06,
+      "IRN": 0.604427,
+      "ISL": 0.002521,
+      "JPN": -0.206116,
+      "KOR": -0.253296,
+      "KSA": -0.670605,
+      "MAR": 0.030837,
+      "MEX": -0.530424,
+      "NED": 4.8e-05,
+      "NGA": 0.160291,
+      "PAN": -0.739154,
+      "PER": 0.78132,
+      "POL": -0.114821,
+      "POR": -0.385261,
+      "QAT": 0.0,
+      "RUS": -0.090361,
+      "SEN": 0.015218,
+      "SRB": -0.278206,
+      "SUI": -0.35283,
+      "SWE": 0.12633,
+      "TUN": -0.57285,
+      "URU": 0.795863,
+      "USA": 2.7e-05,
+      "WAL": -2.5e-05
+    }
+  },
+  "training": {
+    "dataset": "WC2018 (StatsBomb competition_id=43 season_id=3)",
+    "n_matches": 64,
+    "n_teams": 32,
+    "regularization_lambda": 0.2
+  },
+  "holdout": {
+    "dataset": "WC2022 (StatsBomb competition_id=43 season_id=106)",
+    "n_matches": 64
+  },
+  "train_metrics": {
+    "nll": 0.80231,
+    "brier": 0.4567,
+    "accuracy": 0.6875,
+    "ece": 0.08119,
+    "n_matches": 64
+  },
+  "holdout_metrics": {
+    "nll": 1.11754,
+    "brier": 0.66514,
+    "accuracy": 0.5,
+    "ece": 0.07285,
+    "n_matches": 64
+  },
+  "baselines": {
+    "random": {
+      "nll": 1.09861,
+      "brier": 0.66667,
+      "accuracy": 0.4531,
+      "ece": 0.0,
+      "n_matches": 64
+    },
+    "elo_only": {
+      "nll": 1.08382,
+      "brier": 0.60701,
+      "accuracy": 0.5625,
+      "ece": 0.12209,
+      "n_matches": 64
+    },
+    "indep_poisson": {
+      "nll": 1.23314,
+      "brier": 0.71315,
+      "accuracy": 0.4219,
+      "ece": 0.12109,
+      "n_matches": 64
+    }
+  },
+  "grid_search": {
+    "0.01": {
+      "train_nll": 0.78354,
+      "holdout_nll": 1.32521,
+      "train_brier": 0.44494,
+      "holdout_brier": 0.74043,
+      "converged": false,
+      "rho": 0.2,
+      "base_xg": 1.0927
+    },
+    "0.05": {
+      "train_nll": 0.78925,
+      "holdout_nll": 1.21387,
+      "train_brier": 0.44863,
+      "holdout_brier": 0.70808,
+      "converged": false,
+      "rho": 0.2,
+      "base_xg": 1.0712
+    },
+    "0.1": {
+      "train_nll": 0.79469,
+      "holdout_nll": 1.15755,
+      "train_brier": 0.45208,
+      "holdout_brier": 0.6843,
+      "converged": false,
+      "rho": 0.2,
+      "base_xg": 1.0846
+    },
+    "0.2": {
+      "train_nll": 0.80231,
+      "holdout_nll": 1.11754,
+      "train_brier": 0.4567,
+      "holdout_brier": 0.66514,
+      "converged": true,
+      "rho": 0.2,
+      "base_xg": 1.1051
+    }
+  },
+  "convergence_status": "converged",
+  "n_iterations": 120,
+  "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+  "warnings": [
+    "DC MLE does NOT beat Elo-only baseline \u2014 DO NOT deploy"
+  ],
+  "verdict": {
+    "beats_random": false,
+    "beats_elo_only": false,
+    "converged": true,
+    "production_candidate": false
+  }
+}

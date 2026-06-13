@@ -1,0 +1,1432 @@
+{
+  "generated_at": "2026-06-13T11:47:36.614173+00:00",
+  "source": "highlightly",
+  "quality": "A",
+  "available": true,
+  "matches": {
+    "1267453803": {
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "data": {
+        "homeTeam": {
+          "formation": "4-1-4-1",
+          "substitutes": [
+            {
+              "name": "Carlos Acevedo",
+              "number": 12,
+              "position": "Goalkeeper",
+              "id": 5758963
+            },
+            {
+              "name": "Guillermo Ochoa",
+              "number": 13,
+              "position": "Goalkeeper",
+              "id": 337932
+            },
+            {
+              "name": "Jorge Sánchez",
+              "number": 2,
+              "position": "Defender",
+              "id": 463512
+            },
+            {
+              "name": "Luis Romo",
+              "number": 7,
+              "position": "Midfielder",
+              "id": 5791324
+            },
+            {
+              "name": "Mateo Chávez",
+              "number": 20,
+              "position": "Defender",
+              "id": 62790476
+            },
+            {
+              "name": "Alexis Vega",
+              "number": 10,
+              "position": "Forward",
+              "id": 465283
+            },
+            {
+              "name": "César Huerta",
+              "number": 21,
+              "position": "Midfielder",
+              "id": 5814025
+            },
+            {
+              "name": "Edson Álvarez",
+              "number": 4,
+              "position": "Midfielder",
+              "id": 462063
+            },
+            {
+              "name": "Gilberto Mora",
+              "number": 19,
+              "position": "Midfielder",
+              "id": 77699559
+            },
+            {
+              "name": "Luis Chávez",
+              "number": 24,
+              "position": "Midfielder",
+              "id": 5746244
+            },
+            {
+              "name": "Obed Vargas",
+              "number": 18,
+              "position": "Midfielder",
+              "id": 50454817
+            },
+            {
+              "name": "Orbelín Pineda",
+              "number": 17,
+              "position": "Midfielder",
+              "id": 5727890
+            },
+            {
+              "name": "Armando González",
+              "number": 14,
+              "position": "Forward",
+              "id": 46965947
+            },
+            {
+              "name": "Guillermo Martínez",
+              "number": 22,
+              "position": "Forward",
+              "id": 5810322
+            },
+            {
+              "name": "Santiago Giménez",
+              "number": 11,
+              "position": "Forward",
+              "id": 15224636
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Raúl Rangel",
+                "number": 1,
+                "position": "Goalkeeper",
+                "id": 43594768
+              }
+            ],
+            [
+              {
+                "name": "Jesús Gallardo",
+                "number": 23,
+                "position": "Defender",
+                "id": 463995
+              },
+              {
+                "name": "Johan Vásquez",
+                "number": 5,
+                "position": "Defender",
+                "id": 5722738
+              },
+              {
+                "name": "César Montes",
+                "number": 3,
+                "position": "Defender",
+                "id": 462707
+              },
+              {
+                "name": "Israel Reyes",
+                "number": 15,
+                "position": "Defender",
+                "id": 20483701
+              }
+            ],
+            [
+              {
+                "name": "Erik Lira",
+                "number": 6,
+                "position": "Midfielder",
+                "id": 42881699
+              }
+            ],
+            [
+              {
+                "name": "Julián Quiñones",
+                "number": 16,
+                "position": "Midfielder",
+                "id": 5720806
+              },
+              {
+                "name": "Álvaro Fidalgo",
+                "number": 8,
+                "position": "Midfielder",
+                "id": 120904
+              },
+              {
+                "name": "Brian Gutiérrez",
+                "number": 26,
+                "position": "Midfielder",
+                "id": 34169667
+              },
+              {
+                "name": "Roberto Alvarado",
+                "number": 25,
+                "position": "Midfielder",
+                "id": 463673
+              }
+            ],
+            [
+              {
+                "name": "Raúl Jiménez",
+                "number": 9,
+                "position": "Forward",
+                "id": 464961
+              }
+            ]
+          ],
+          "id": 14400,
+          "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+          "name": "Mexico"
+        },
+        "awayTeam": {
+          "formation": "5-3-2",
+          "substitutes": [
+            {
+              "name": "Ricardo Goss",
+              "number": 22,
+              "position": "Goalkeeper",
+              "id": 7445599
+            },
+            {
+              "name": "Sipho Chaine",
+              "number": 16,
+              "position": "Goalkeeper",
+              "id": 7473291
+            },
+            {
+              "name": "Bradley Cross",
+              "number": 26,
+              "position": "Defender",
+              "id": 26249755
+            },
+            {
+              "name": "Khulumani Ndamane",
+              "number": 3,
+              "position": "Defender",
+              "id": 76415584
+            },
+            {
+              "name": "Olwethu Makhanya",
+              "number": 24,
+              "position": "Defender",
+              "id": 63174461
+            },
+            {
+              "name": "Samukelo Kabini",
+              "number": 18,
+              "position": "Defender",
+              "id": 69242712
+            },
+            {
+              "name": "Tholo Thabang Matuludi",
+              "number": 2,
+              "position": "Defender",
+              "id": 53158168
+            },
+            {
+              "name": "Oswin Appollis",
+              "number": 7,
+              "position": "Forward",
+              "id": 28962927
+            },
+            {
+              "name": "Tshepang Moremi",
+              "number": 8,
+              "position": "Forward",
+              "id": 47652451
+            },
+            {
+              "name": "Relebohile Mofokeng",
+              "number": 10,
+              "position": "Forward",
+              "id": 66678143
+            },
+            {
+              "name": "Kamogelo Sebelebele",
+              "number": 25,
+              "position": "Midfielder",
+              "id": 57889475
+            },
+            {
+              "name": "Thalente Mbatha",
+              "number": 5,
+              "position": "Midfielder",
+              "id": 31303384
+            },
+            {
+              "name": "Themba Zwane",
+              "number": 11,
+              "position": "Midfielder",
+              "id": 529683
+            },
+            {
+              "name": "Thapelo Maseko",
+              "number": 12,
+              "position": "Forward",
+              "id": 57127945
+            },
+            {
+              "name": "Evidence Makgopa",
+              "number": 17,
+              "position": "Forward",
+              "id": 32418148
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Ronwen Williams",
+                "number": 1,
+                "position": "Goalkeeper",
+                "id": 527429
+              }
+            ],
+            [
+              {
+                "name": "Aubrey Modiba",
+                "number": 6,
+                "position": "Defender",
+                "id": 7459928
+              },
+              {
+                "name": "Mbekezeli Mbokazi",
+                "number": 14,
+                "position": "Defender",
+                "id": 82238793
+              },
+              {
+                "name": "Nkosinathi Sibisi",
+                "number": 19,
+                "position": "Defender",
+                "id": 7479892
+              },
+              {
+                "name": "Ime Okon",
+                "number": 21,
+                "position": "Defender",
+                "id": 65487226
+              },
+              {
+                "name": "Khuliso Mudau",
+                "number": 20,
+                "position": "Defender",
+                "id": 7502915
+              }
+            ],
+            [
+              {
+                "name": "Jayden Adams",
+                "number": 23,
+                "position": "Midfielder",
+                "id": 43262464
+              },
+              {
+                "name": "Siphephelo Sithole",
+                "number": 13,
+                "position": "Midfielder",
+                "id": 25507867
+              },
+              {
+                "name": "Teboho Mokoena",
+                "number": 4,
+                "position": "Midfielder",
+                "id": 529361
+              }
+            ],
+            [
+              {
+                "name": "Iqraam Rayners",
+                "number": 15,
+                "position": "Forward",
+                "id": 20516223
+              },
+              {
+                "name": "Lyle Foster",
+                "number": 9,
+                "position": "Forward",
+                "id": 15928850
+              }
+            ]
+          ],
+          "id": 1303665,
+          "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+          "name": "South Africa"
+        }
+      }
+    },
+    "1309689784": {
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "data": {
+        "homeTeam": {
+          "formation": "4-4-2",
+          "substitutes": [
+            {
+              "name": "Dayne St. Clair",
+              "number": 1,
+              "position": "Goalkeeper",
+              "id": 8234982
+            },
+            {
+              "name": "Owen Goodman",
+              "number": 18,
+              "position": "Goalkeeper",
+              "id": 45813348
+            },
+            {
+              "name": "Niko Sigur",
+              "number": 23,
+              "position": "Midfielder",
+              "id": 67121215
+            },
+            {
+              "name": "Alfie Jones",
+              "number": 3,
+              "position": "Defender",
+              "id": 3049172
+            },
+            {
+              "name": "Joel Waterman",
+              "number": 5,
+              "position": "Defender",
+              "id": 12637688
+            },
+            {
+              "name": "Moise Bombito",
+              "number": 15,
+              "position": "Defender",
+              "id": 65529891
+            },
+            {
+              "name": "Alphonso Davies",
+              "number": 19,
+              "position": "Defender",
+              "id": 82103
+            },
+            {
+              "name": "Ali Ahmed",
+              "number": 20,
+              "position": "Midfielder",
+              "id": 58305499
+            },
+            {
+              "name": "Nathan-Dylan Saliba",
+              "number": 25,
+              "position": "Midfielder",
+              "id": 47466818
+            },
+            {
+              "name": "Mathieu Choinière",
+              "number": 6,
+              "position": "Midfielder",
+              "id": 8177022
+            },
+            {
+              "name": "Jonathan Osorio",
+              "number": 21,
+              "position": "Midfielder",
+              "id": 8181691
+            },
+            {
+              "name": "Jacob Shaffelburg",
+              "number": 14,
+              "position": "Forward",
+              "id": 8183140
+            },
+            {
+              "name": "Promise David",
+              "number": 24,
+              "position": "Forward",
+              "id": 50449987
+            },
+            {
+              "name": "Jayden Nelson",
+              "number": 26,
+              "position": "Forward",
+              "id": 31118073
+            },
+            {
+              "name": "Cyle Larin",
+              "number": 9,
+              "position": "Forward",
+              "id": 322315
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Maxime Crépeau",
+                "number": 16,
+                "position": "Goalkeeper",
+                "id": 8255268
+              }
+            ],
+            [
+              {
+                "name": "Richie Laryea",
+                "number": 22,
+                "position": "Defender",
+                "id": 8181530
+              },
+              {
+                "name": "Derek Cornelius",
+                "number": 13,
+                "position": "Defender",
+                "id": 8258649
+              },
+              {
+                "name": "Luc De Fougerolles",
+                "number": 4,
+                "position": "Defender",
+                "id": 52765972
+              },
+              {
+                "name": "Alistair Johnston",
+                "number": 2,
+                "position": "Defender",
+                "id": 12646221
+              }
+            ],
+            [
+              {
+                "name": "Liam Millar",
+                "number": 11,
+                "position": "Midfielder",
+                "id": 7212632
+              },
+              {
+                "name": "Stephen Eustaquio",
+                "number": 7,
+                "position": "Midfielder",
+                "id": 5726924
+              },
+              {
+                "name": "Ismael Koné",
+                "number": 8,
+                "position": "Midfielder",
+                "id": 52815560
+              },
+              {
+                "name": "Tajon Buchanan",
+                "number": 17,
+                "position": "Midfielder",
+                "id": 8213730
+              }
+            ],
+            [
+              {
+                "name": "Tani Oluwaseyi",
+                "number": 12,
+                "position": "Forward",
+                "id": 56605661
+              },
+              {
+                "name": "Jonathan David",
+                "number": 10,
+                "position": "Forward",
+                "id": 1366883
+              }
+            ]
+          ],
+          "id": 4705963,
+          "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+          "name": "Canada"
+        },
+        "awayTeam": {
+          "formation": "4-4-2",
+          "substitutes": [
+            {
+              "name": "Mladen Jurkas",
+              "number": 12,
+              "position": "Goalkeeper",
+              "id": 71827084
+            },
+            {
+              "name": "Martin Zlomislić",
+              "number": 22,
+              "position": "Goalkeeper",
+              "id": 17447724
+            },
+            {
+              "name": "Arjan Malić",
+              "number": 24,
+              "position": "Defender",
+              "id": 65957024
+            },
+            {
+              "name": "Stjepan Radeljić",
+              "number": 21,
+              "position": "Defender",
+              "id": 2302615
+            },
+            {
+              "name": "Dennis Hadžikadunić",
+              "number": 3,
+              "position": "Defender",
+              "id": 8616391
+            },
+            {
+              "name": "Nihad Mujakić",
+              "number": 2,
+              "position": "Defender",
+              "id": 12375741
+            },
+            {
+              "name": "Amir Hadžiahmetović",
+              "number": 16,
+              "position": "Midfielder",
+              "id": 8051120
+            },
+            {
+              "name": "Ivan Šunjić",
+              "number": 14,
+              "position": "Midfielder",
+              "id": 213318
+            },
+            {
+              "name": "Armin Gigović",
+              "number": 8,
+              "position": "Midfielder",
+              "id": 11352908
+            },
+            {
+              "name": "Dženis Burnić",
+              "number": 17,
+              "position": "Midfielder",
+              "id": 4045923
+            },
+            {
+              "name": "Kerim Alajbegović",
+              "number": 19,
+              "position": "Forward",
+              "id": 63685153
+            },
+            {
+              "name": "Ermin Mahmic",
+              "number": 26,
+              "position": "Midfielder",
+              "id": 54768007
+            },
+            {
+              "name": "Samed Baždar",
+              "number": 9,
+              "position": "Forward",
+              "id": 50614851
+            },
+            {
+              "name": "Edin Džeko",
+              "number": 11,
+              "position": "Forward",
+              "id": 127344
+            },
+            {
+              "name": "Haris Tabaković",
+              "number": 23,
+              "position": "Forward",
+              "id": 4569656
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Nikola Vasilj",
+                "number": 1,
+                "position": "Goalkeeper",
+                "id": 1453340
+              }
+            ],
+            [
+              {
+                "name": "Sead Kolašinac",
+                "number": 5,
+                "position": "Defender",
+                "id": 232316
+              },
+              {
+                "name": "Tarik Muharemović",
+                "number": 4,
+                "position": "Defender",
+                "id": 43687504
+              },
+              {
+                "name": "Nikola Katić",
+                "number": 18,
+                "position": "Defender",
+                "id": 280455
+              },
+              {
+                "name": "Amar Dedić",
+                "number": 7,
+                "position": "Defender",
+                "id": 1178352
+              }
+            ],
+            [
+              {
+                "name": "Amar Memić",
+                "number": 15,
+                "position": "Midfielder",
+                "id": 51858415
+              },
+              {
+                "name": "Benjamin Tahirović",
+                "number": 6,
+                "position": "Midfielder",
+                "id": 42519288
+              },
+              {
+                "name": "Ivan Bašić",
+                "number": 13,
+                "position": "Midfielder",
+                "id": 26117896
+              },
+              {
+                "name": "Esmir Bajraktarević",
+                "number": 20,
+                "position": "Midfielder",
+                "id": 53035003
+              }
+            ],
+            [
+              {
+                "name": "Jovo Lukić",
+                "number": 25,
+                "position": "Forward",
+                "id": 12403111
+              },
+              {
+                "name": "Ermedin Demirović",
+                "number": 10,
+                "position": "Forward",
+                "id": 7555884
+              }
+            ]
+          ],
+          "id": 947947,
+          "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+          "name": "Bosnia & Herzegovina"
+        }
+      }
+    },
+    "1309688933": {
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "data": {
+        "homeTeam": {
+          "formation": "3-4-2-1",
+          "substitutes": [
+            {
+              "name": "Jo Hyeonwoo",
+              "number": 21,
+              "position": "Goalkeeper",
+              "id": 465444
+            },
+            {
+              "name": "Song Bum-keun",
+              "number": 12,
+              "position": "Goalkeeper",
+              "id": 5534368
+            },
+            {
+              "name": "Kim Moon-hwan",
+              "number": 15,
+              "position": "Defender",
+              "id": 468986
+            },
+            {
+              "name": "Wi-je Cho",
+              "number": 14,
+              "position": "Defender",
+              "id": 57510803
+            },
+            {
+              "name": "Kim Tae-hyeon",
+              "number": 5,
+              "position": "Defender",
+              "id": 5541452
+            },
+            {
+              "name": "Dong-gyeong Lee",
+              "number": 26,
+              "position": "Midfielder",
+              "id": 5543545
+            },
+            {
+              "name": "Jens Castrop",
+              "number": 23,
+              "position": "Midfielder",
+              "id": 45137792
+            },
+            {
+              "name": "Ji-sung Eom",
+              "number": 25,
+              "position": "Forward",
+              "id": 38165204
+            },
+            {
+              "name": "Jin-gyu Kim",
+              "number": 24,
+              "position": "Midfielder",
+              "id": 5501202
+            },
+            {
+              "name": "Jin-seob Park",
+              "number": 16,
+              "position": "Midfielder",
+              "id": 15973125
+            },
+            {
+              "name": "Jun-Ho Bae",
+              "number": 17,
+              "position": "Midfielder",
+              "id": 57523200
+            },
+            {
+              "name": "Gue-sung Cho",
+              "number": 9,
+              "position": "Forward",
+              "id": 5508125
+            },
+            {
+              "name": "Hwang Hee-chan",
+              "number": 11,
+              "position": "Forward",
+              "id": 4007122
+            },
+            {
+              "name": "Hyeon-gyu Oh",
+              "number": 18,
+              "position": "Forward",
+              "id": 5588464
+            },
+            {
+              "name": "Yang Hyun-Jun",
+              "number": 20,
+              "position": "Forward",
+              "id": 49098392
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Kim Seung-gyu",
+                "number": 1,
+                "position": "Goalkeeper",
+                "id": 465766
+              }
+            ],
+            [
+              {
+                "name": "Gi-Hyuk Lee",
+                "number": 3,
+                "position": "Defender",
+                "id": 49097265
+              },
+              {
+                "name": "Kim Min-jae",
+                "number": 4,
+                "position": "Defender",
+                "id": 466571
+              },
+              {
+                "name": "Han-Beom Lee",
+                "number": 2,
+                "position": "Defender",
+                "id": 38192252
+              }
+            ],
+            [
+              {
+                "name": "Lee Tae-seok",
+                "number": 13,
+                "position": "Midfielder",
+                "id": 38192574
+              },
+              {
+                "name": "Seung Ho Paik",
+                "number": 8,
+                "position": "Midfielder",
+                "id": 468503
+              },
+              {
+                "name": "Hwang In-beom",
+                "number": 6,
+                "position": "Midfielder",
+                "id": 467215
+              },
+              {
+                "name": "Young-woo Seol",
+                "number": 22,
+                "position": "Midfielder",
+                "id": 31875739
+              }
+            ],
+            [
+              {
+                "name": "Jae-sung Lee",
+                "number": 10,
+                "position": "Forward",
+                "id": 468020
+              },
+              {
+                "name": "Kang-in Lee",
+                "number": 19,
+                "position": "Forward",
+                "id": 149401
+              }
+            ],
+            [
+              {
+                "name": "Son Heung-min",
+                "number": 7,
+                "position": "Forward",
+                "id": 30100
+              }
+            ]
+          ],
+          "id": 15251,
+          "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+          "name": "South Korea"
+        },
+        "awayTeam": {
+          "formation": "3-4-2-1",
+          "substitutes": [
+            {
+              "name": "Jindřich Staněk",
+              "number": 16,
+              "position": "Goalkeeper",
+              "id": 10682021
+            },
+            {
+              "name": "Lukáš Horníček",
+              "number": 23,
+              "position": "Goalkeeper",
+              "id": 43365343
+            },
+            {
+              "name": "David Jurásek",
+              "number": 14,
+              "position": "Defender",
+              "id": 20735827
+            },
+            {
+              "name": "David Zima",
+              "number": 2,
+              "position": "Defender",
+              "id": 20732446
+            },
+            {
+              "name": "Tomáš Holeš",
+              "number": 3,
+              "position": "Defender",
+              "id": 362726
+            },
+            {
+              "name": "Michal Sadílek",
+              "number": 18,
+              "position": "Midfielder",
+              "id": 38955
+            },
+            {
+              "name": "David Douděra",
+              "number": 21,
+              "position": "Midfielder",
+              "id": 10660608
+            },
+            {
+              "name": "Denis Višinský",
+              "number": 26,
+              "position": "Midfielder",
+              "id": 46724286
+            },
+            {
+              "name": "Hugo Sochurek",
+              "number": 25,
+              "position": "Midfielder",
+              "id": 89425511
+            },
+            {
+              "name": "Lukáš Červ",
+              "number": 12,
+              "position": "Midfielder",
+              "id": 26113388
+            },
+            {
+              "name": "Vladimír Darida",
+              "number": 8,
+              "position": "Midfielder",
+              "id": 4081182
+            },
+            {
+              "name": "Adam Hložek",
+              "number": 9,
+              "position": "Forward",
+              "id": 10629213
+            },
+            {
+              "name": "Jan Kuchta",
+              "number": 11,
+              "position": "Forward",
+              "id": 10680894
+            },
+            {
+              "name": "Mojmír Chytil",
+              "number": 13,
+              "position": "Forward",
+              "id": 10670429
+            },
+            {
+              "name": "Tomáš Chorý",
+              "number": 19,
+              "position": "Forward",
+              "id": 131852
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Matěj Kovář",
+                "number": 1,
+                "position": "Goalkeeper",
+                "id": 22347598
+              }
+            ],
+            [
+              {
+                "name": "Ladislav Krejčí",
+                "number": 7,
+                "position": "Defender",
+                "id": 10691681
+              },
+              {
+                "name": "Robin Hranáč",
+                "number": 4,
+                "position": "Defender",
+                "id": 26237358
+              },
+              {
+                "name": "Štěpán Chaloupek",
+                "number": 6,
+                "position": "Defender",
+                "id": 54376294
+              }
+            ],
+            [
+              {
+                "name": "Jaroslav Zelený",
+                "number": 20,
+                "position": "Midfielder",
+                "id": 199311
+              },
+              {
+                "name": "Alexandr Sojka",
+                "number": 24,
+                "position": "Midfielder",
+                "id": 62280911
+              },
+              {
+                "name": "Tomáš Souček",
+                "number": 22,
+                "position": "Midfielder",
+                "id": 200277
+              },
+              {
+                "name": "Vladimír Coufal",
+                "number": 5,
+                "position": "Midfielder",
+                "id": 198345
+              }
+            ],
+            [
+              {
+                "name": "Lukáš Provod",
+                "number": 17,
+                "position": "Forward",
+                "id": 10682987
+              },
+              {
+                "name": "Pavel Šulc",
+                "number": 15,
+                "position": "Forward",
+                "id": 10688461
+              }
+            ],
+            [
+              {
+                "name": "Patrik Schick",
+                "number": 10,
+                "position": "Forward",
+                "id": 127988
+              }
+            ]
+          ],
+          "id": 656054,
+          "logo": "https://highlightly.net/soccer/images/teams/656054.png",
+          "name": "Czech Republic"
+        }
+      }
+    },
+    "1267454654": {
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "data": {
+        "homeTeam": {
+          "formation": "4-2-3-1",
+          "substitutes": [
+            {
+              "name": "Matt Turner",
+              "number": 1,
+              "position": "Goalkeeper",
+              "id": 8210993
+            },
+            {
+              "name": "Chris Brady",
+              "number": 25,
+              "position": "Goalkeeper",
+              "id": 42923720
+            },
+            {
+              "name": "Auston Trusty",
+              "number": 6,
+              "position": "Defender",
+              "id": 8168811
+            },
+            {
+              "name": "Miles Robinson",
+              "number": 12,
+              "position": "Defender",
+              "id": 8191673
+            },
+            {
+              "name": "Mark McKenzie",
+              "number": 22,
+              "position": "Defender",
+              "id": 8168489
+            },
+            {
+              "name": "Joe Scally",
+              "number": 23,
+              "position": "Defender",
+              "id": 8187326
+            },
+            {
+              "name": "Maximilian Arfsten",
+              "number": 18,
+              "position": "Midfielder",
+              "id": 58346554
+            },
+            {
+              "name": "Giovanni Reyna",
+              "number": 7,
+              "position": "Midfielder",
+              "id": 26069435
+            },
+            {
+              "name": "Sebastian Berhalter",
+              "number": 14,
+              "position": "Midfielder",
+              "id": 32475947
+            },
+            {
+              "name": "Cristian Roldán",
+              "number": 15,
+              "position": "Midfielder",
+              "id": 8229508
+            },
+            {
+              "name": "Brenden Aaronson",
+              "number": 11,
+              "position": "Midfielder",
+              "id": 8169133
+            },
+            {
+              "name": "Tim Weah",
+              "number": 21,
+              "position": "Forward",
+              "id": 183372
+            },
+            {
+              "name": "Alex Zendejas",
+              "number": 26,
+              "position": "Forward",
+              "id": 5777639
+            },
+            {
+              "name": "Ricardo Pepi",
+              "number": 9,
+              "position": "Forward",
+              "id": 11892902
+            },
+            {
+              "name": "Haji Wright",
+              "number": 19,
+              "position": "Forward",
+              "id": 68901
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Matthew Freese",
+                "number": 24,
+                "position": "Goalkeeper",
+                "id": 8167362
+              }
+            ],
+            [
+              {
+                "name": "Antonee Robinson",
+                "number": 5,
+                "position": "Defender",
+                "id": 3147543
+              },
+              {
+                "name": "Tim Ream",
+                "number": 13,
+                "position": "Defender",
+                "id": 3062857
+              },
+              {
+                "name": "Chris Richards",
+                "number": 3,
+                "position": "Defender",
+                "id": 20438943
+              },
+              {
+                "name": "Alexander Freeman",
+                "number": 16,
+                "position": "Defender",
+                "id": 57315188
+              }
+            ],
+            [
+              {
+                "name": "Tyler Adams",
+                "number": 4,
+                "position": "Midfielder",
+                "id": 185304
+              },
+              {
+                "name": "Malik Tillman",
+                "number": 17,
+                "position": "Midfielder",
+                "id": 26088111
+              }
+            ],
+            [
+              {
+                "name": "Christian Pulišić",
+                "number": 10,
+                "position": "Midfielder",
+                "id": 2891
+              },
+              {
+                "name": "Weston McKennie",
+                "number": 8,
+                "position": "Midfielder",
+                "id": 66969
+              },
+              {
+                "name": "Sergiño Dest",
+                "number": 2,
+                "position": "Midfielder",
+                "id": 6236489
+              }
+            ],
+            [
+              {
+                "name": "Folarin Balogun",
+                "number": 20,
+                "position": "Forward",
+                "id": 22352589
+              }
+            ]
+          ],
+          "id": 2029568,
+          "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+          "name": "USA"
+        },
+        "awayTeam": {
+          "formation": "4-4-2",
+          "substitutes": [
+            {
+              "name": "Gastón Olveira",
+              "number": 22,
+              "position": "Goalkeeper",
+              "id": 8329167
+            },
+            {
+              "name": "Roberto Fernández",
+              "number": 1,
+              "position": "Goalkeeper",
+              "id": 402171
+            },
+            {
+              "name": "Fabián Balbuena",
+              "number": 5,
+              "position": "Defender",
+              "id": 402654
+            },
+            {
+              "name": "Alexandro Maidana",
+              "number": 26,
+              "position": "Defender",
+              "id": 68428374
+            },
+            {
+              "name": "Gustavo Velázquez",
+              "number": 2,
+              "position": "Defender",
+              "id": 5765242
+            },
+            {
+              "name": "José Canale",
+              "number": 13,
+              "position": "Defender",
+              "id": 11388006
+            },
+            {
+              "name": "Braian Ojeda",
+              "number": 20,
+              "position": "Midfielder",
+              "id": 11393641
+            },
+            {
+              "name": "Alejandro Romero",
+              "number": 17,
+              "position": "Midfielder",
+              "id": 404908
+            },
+            {
+              "name": "Gustavo Caballero",
+              "number": 24,
+              "position": "Forward",
+              "id": 19179762
+            },
+            {
+              "name": "Matías Galarza",
+              "number": 23,
+              "position": "Midfielder",
+              "id": 49239106
+            },
+            {
+              "name": "Mauricio",
+              "number": 11,
+              "position": "Midfielder",
+              "id": 17144239
+            },
+            {
+              "name": "Gabriel Ávalos",
+              "number": 21,
+              "position": "Forward",
+              "id": 1043917
+            },
+            {
+              "name": "Alex Arce",
+              "number": 18,
+              "position": "Forward",
+              "id": 15369214
+            },
+            {
+              "name": "Isidro Pitta",
+              "number": 25,
+              "position": "Forward",
+              "id": 11378024
+            },
+            {
+              "name": "Ramón Sosa",
+              "number": 7,
+              "position": "Forward",
+              "id": 31604132
+            }
+          ],
+          "initialLineup": [
+            [
+              {
+                "name": "Orlando Gill",
+                "number": 12,
+                "position": "Goalkeeper",
+                "id": 11407326
+              }
+            ],
+            [
+              {
+                "name": "Junior Alonso",
+                "number": 6,
+                "position": "Defender",
+                "id": 402493
+              },
+              {
+                "name": "Omar Alderete",
+                "number": 3,
+                "position": "Defender",
+                "id": 993202
+              },
+              {
+                "name": "Gustavo Gómez",
+                "number": 15,
+                "position": "Defender",
+                "id": 402976
+              },
+              {
+                "name": "Juan Cáceres",
+                "number": 4,
+                "position": "Defender",
+                "id": 31554866
+              }
+            ],
+            [
+              {
+                "name": "Miguel Almirón",
+                "number": 10,
+                "position": "Midfielder",
+                "id": 403781
+              },
+              {
+                "name": "Damián Bobadilla",
+                "number": 16,
+                "position": "Midfielder",
+                "id": 31412381
+              },
+              {
+                "name": "Andrés Cubas",
+                "number": 14,
+                "position": "Midfielder",
+                "id": 1004150
+              },
+              {
+                "name": "Diego Gómez",
+                "number": 8,
+                "position": "Midfielder",
+                "id": 44817724
+              }
+            ],
+            [
+              {
+                "name": "Julio Enciso",
+                "number": 19,
+                "position": "Forward",
+                "id": 11390421
+              },
+              {
+                "name": "Antonio Sanabria",
+                "number": 9,
+                "position": "Forward",
+                "id": 406196
+              }
+            ]
+          ],
+          "id": 2026164,
+          "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+          "name": "Paraguay"
+        }
+      }
+    }
+  }
+}

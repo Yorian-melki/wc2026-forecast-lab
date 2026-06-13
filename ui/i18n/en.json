@@ -1,0 +1,317 @@
+{
+  "sidebar": {
+    "title": "Navigation",
+    "output_dir": "Tournament outputs folder",
+    "pairwise_csv": "Pairwise CSV",
+    "teams_csv": "Teams CSV",
+    "groups_json": "Groups JSON",
+    "window": "Window",
+    "glossary_title": "Glossary / reading guide",
+    "readme_title": "What this interface is",
+    "readme_text": "This dashboard does not change the model, the pages, the charts, or the visual system. It adds a bilingual presentation layer and clearer labels while preserving the underlying quantitative terminology.",
+    "market_csv": "Market odds CSV (optional)",
+    "brand_title": "WC2026 Tournament Probability Studio",
+    "brand_subtitle": "A clearer, shareable, and still fully quantitative interface for the 2026 World Cup simulation project.",
+    "data_ready_title": "Project data status",
+    "data_ready_text": "This interface uses the project's default local outputs. It keeps the quantitative content intact while hiding technical file naming from the main navigation.",
+    "optional_sources_title": "Optional analytical sources",
+    "ready": "Ready",
+    "missing": "Missing",
+    "status": {
+      "tournament_summary": "Tournament summary outputs",
+      "group_probabilities": "Group probability table",
+      "stage_probabilities": "Stage probability table",
+      "pairwise_matrix": "Full pairwise matrix",
+      "teams_reference": "Team ratings reference",
+      "groups_reference": "Official group structure",
+      "market_view": "Market comparison layer",
+      "third_place_mapping": "Third-place mapping reference"
+    }
+  },
+  "pages": {
+    "overview": {
+      "label": "Overview",
+      "description": "Aggregated tournament surface. Same model. Same charts. Clearer wording only."
+    },
+    "groups": {
+      "label": "Groups",
+      "description": "Group-stage position distributions and group structure without changing the underlying outputs."
+    },
+    "stages": {
+      "label": "Tournament states",
+      "description": "Stage-by-stage survival structure from group exit to champion probability."
+    },
+    "pairwise": {
+      "label": "Pairwise matrix",
+      "description": "Full 48×48 pairwise surface from the existing pairwise engine."
+    },
+    "team": {
+      "label": "Team view",
+      "description": "Single-team reading panel for final probabilities and structural ratings."
+    },
+    "audit": {
+      "label": "Audit & methodology",
+      "description": "Run audit, aggregated tables, and descriptive statistics."
+    },
+    "market": {
+      "label": "Model vs market",
+      "description": "Compare simulated title probabilities to normalized market-implied probabilities without changing the model."
+    },
+    "publication": {
+      "label": "Publication layer",
+      "description": "Public-facing project framing, methodology language, and LinkedIn-ready narrative without changing charts or calculations."
+    }
+  },
+  "overview": {
+    "cards": {
+      "teams": "Teams",
+      "favorite_champion": "Champion favorite",
+      "favorite_final": "Final favorite",
+      "favorite_sf": "Semifinal favorite"
+    },
+    "visible_teams": "Teams shown in the champion chart",
+    "chart_title_champion_prob": "Title probability",
+    "chart_title_heatmap": "Heatmap of probabilities by stage",
+    "top_third_paths_title": "Top best-third qualification families",
+    "top_third_paths_help": "This chart shows the most frequent combinations of groups supplying the best third-placed teams.",
+    "top_third_paths_chart": "Frequency of best-third group families",
+    "top_third_paths_axis": "Groups supplying the best third-placed teams",
+    "top_paths_missing": "top_paths.json is missing.",
+    "group_strength_title": "Structural group strength",
+    "group_strength_help": "Mean strength, strongest team level, and spread inside each group.",
+    "group_strength_chart": "Mean and peak strength by group"
+  },
+  "groups": {
+    "select_group": "Group",
+    "chart_title_selected": "Position distribution — Group {group}",
+    "axis_probability": "Probability",
+    "all_groups_title": "All teams by group",
+    "all_groups_chart": "Position distribution for all 12 groups",
+    "positions": {
+      "group_1": "1st place",
+      "group_2": "2nd place",
+      "group_3": "3rd place",
+      "group_4": "4th place"
+    },
+    "best_thirds_title": "Best third-placed qualification structures",
+    "best_thirds_help": "This chart shows the simulated frequency of the best-third group combinations that feed the knockout bracket. It is normalized defensively if the saved probability field is missing or null.",
+    "best_thirds_chart": "Most frequent best-third group combinations"
+  },
+  "stages": {
+    "survival_curve_title": "Survival curve by team",
+    "frontier_title": "Favorite frontier",
+    "frontier_slider": "Teams shown in the tournament-state comparison",
+    "frontier_chart": "Probability by stage — top teams",
+    "stage_names": {
+      "group_survived": "Knockout qualification",
+      "r16": "Round of 16",
+      "qf": "Quarterfinal",
+      "sf": "Semifinal",
+      "final": "Final",
+      "champion": "Champion"
+    }
+  },
+  "pairwise": {
+    "metric_select": "Pairwise metric",
+    "matrix_title": "Matrix — {metric}",
+    "team_focus": "Focus team",
+    "team_chart_title": "{team} vs all opponents — {metric}"
+  },
+  "team": {
+    "select_team": "Team",
+    "probability_chart_title": "Final probabilities — {team}",
+    "radar_title": "Structural radar — {team}",
+    "detail_table_title": "Detailed table"
+  },
+  "audit": {
+    "bullets": {
+      "aggregated_view": "Strictly aggregated view.",
+      "no_raw_front": "No raw billion-line simulation output is injected into the frontend.",
+      "graph_source": "Charts are built from run exports and structural team data.",
+      "pairwise_complete": "The full pairwise layer contains 1,128 unique matchups."
+    },
+    "cards": {
+      "unique_pairs": "Unique pairs",
+      "teams": "Teams",
+      "champion_mass": "Champion probability mass"
+    },
+    "summary_table_title": "Full aggregated result table",
+    "descriptive_stats_title": "Descriptive statistics"
+  },
+  "metrics": {
+    "group_survival_prob": {
+      "label": "Group survival probability",
+      "help": "Probability of reaching the knockout phase from the group stage."
+    },
+    "r16_prob": {
+      "label": "Round of 16 probability",
+      "help": "Probability of reaching the Round of 16."
+    },
+    "qf_prob": {
+      "label": "Quarterfinal probability",
+      "help": "Probability of reaching the quarterfinals."
+    },
+    "sf_prob": {
+      "label": "Semifinal probability",
+      "help": "Probability of reaching the semifinals."
+    },
+    "final_prob": {
+      "label": "Final probability",
+      "help": "Probability of reaching the final."
+    },
+    "champion_prob": {
+      "label": "Champion probability",
+      "help": "Probability of winning the tournament."
+    },
+    "runner_up_prob": {
+      "label": "Runner-up probability",
+      "help": "Probability of losing the final."
+    },
+    "third_place_prob": {
+      "label": "Third-place probability",
+      "help": "Probability of winning the third-place match."
+    },
+    "fourth_place_prob": {
+      "label": "Fourth-place probability",
+      "help": "Probability of losing the third-place match."
+    },
+    "fragility": {
+      "label": "Fragility",
+      "help": "How strongly tournament odds deteriorate under adverse scenarios."
+    },
+    "upside": {
+      "label": "Upside",
+      "help": "How strongly tournament odds rise under favorable scenarios."
+    },
+    "path_dependence": {
+      "label": "Path dependence",
+      "help": "How strongly tournament odds change depending on the route through the bracket."
+    },
+    "group_win_a": {
+      "label": "Group win probability — team A",
+      "help": "Probability that team A wins in 90 minutes in the group-stage model."
+    },
+    "group_draw": {
+      "label": "Group draw probability",
+      "help": "Probability of a draw in 90 minutes in the group-stage model."
+    },
+    "group_win_b": {
+      "label": "Group win probability — team B",
+      "help": "Probability that team B wins in 90 minutes in the group-stage model."
+    },
+    "ko_win90_a": {
+      "label": "Knockout win in 90 minutes — team A",
+      "help": "Probability that team A wins in regulation time in the knockout model."
+    },
+    "ko_draw90": {
+      "label": "Knockout draw after 90 minutes",
+      "help": "Probability that the knockout match is level after 90 minutes."
+    },
+    "ko_win90_b": {
+      "label": "Knockout win in 90 minutes — team B",
+      "help": "Probability that team B wins in regulation time in the knockout model."
+    },
+    "ko_advance_a": {
+      "label": "Knockout advance probability — team A",
+      "help": "Probability that team A advances after regulation, extra time, or penalties."
+    },
+    "ko_advance_b": {
+      "label": "Knockout advance probability — team B",
+      "help": "Probability that team B advances after regulation, extra time, or penalties."
+    },
+    "ko_et_a": {
+      "label": "Extra-time survival — team A",
+      "help": "Conditional probability contribution from extra time for team A."
+    },
+    "ko_et_b": {
+      "label": "Extra-time survival — team B",
+      "help": "Conditional probability contribution from extra time for team B."
+    },
+    "ko_pen_a": {
+      "label": "Penalty shootout survival — team A",
+      "help": "Conditional probability contribution from penalties for team A."
+    },
+    "ko_pen_b": {
+      "label": "Penalty shootout survival — team B",
+      "help": "Conditional probability contribution from penalties for team B."
+    },
+    "avg_goals_a": {
+      "label": "Average goals — team A",
+      "help": "Average goals scored by team A in the pairwise Monte Carlo layer."
+    },
+    "avg_goals_b": {
+      "label": "Average goals — team B",
+      "help": "Average goals scored by team B in the pairwise Monte Carlo layer."
+    },
+    "avg_conduct_a": {
+      "label": "Average conduct score — team A",
+      "help": "Average fair-play or conduct proxy generated for team A."
+    },
+    "avg_conduct_b": {
+      "label": "Average conduct score — team B",
+      "help": "Average fair-play or conduct proxy generated for team B."
+    }
+  },
+  "ratings": {
+    "attack": "Attack",
+    "defense": "Defense",
+    "midfield": "Midfield",
+    "transition": "Transition",
+    "setpiece": "Set pieces",
+    "goalkeeper": "Goalkeeper",
+    "depth": "Depth",
+    "coach": "Coach",
+    "penalties": "Penalties",
+    "discipline": "Discipline",
+    "health": "Health",
+    "form": "Form",
+    "climate_resilience": "Climate resilience",
+    "altitude_resilience": "Altitude resilience",
+    "travel_resilience": "Travel resilience"
+  },
+  "market": {
+    "no_file": "No market odds file found. The page stays available but needs a CSV with columns team,title_american.",
+    "caption": "This page compares model title probabilities to normalized market-implied probabilities. It is not a betting module and does not produce wagering instructions.",
+    "topn": "Teams shown in the model-versus-market comparison",
+    "comparison_chart": "Model probability vs market-implied probability",
+    "scatter_chart": "Disagreement surface — model vs market",
+    "table_title": "Full disagreement table",
+    "cards": {
+      "rows": "Market rows",
+      "coverage": "Model coverage",
+      "overround": "Raw market overround"
+    },
+    "legend": {
+      "model": "Model",
+      "market": "Market"
+    },
+    "table": {
+      "market_prob": "Normalized market probability",
+      "disagreement": "Model minus market",
+      "odds": "American odds",
+      "classification": "Classification"
+    },
+    "classification": {
+      "model_higher": "Model above market",
+      "market_higher": "Market above model",
+      "aligned": "Broadly aligned",
+      "no_market_data": "No market data"
+    }
+  },
+  "publication": {
+    "project_summary_title": "Project summary",
+    "project_summary_text": "This local dashboard presents a fully reproducible World Cup 2026 simulation workbench. Current headline result: **{team}** is the model leader at **{prob}** title probability in the active run.",
+    "cards": {
+      "teams": "Teams covered",
+      "unique_pairs": "Unique pairwise matchups",
+      "iterations_hint": "Computation layer",
+      "iterations_value": "Monte Carlo + bracket propagation"
+    },
+    "linkedin_title": "LinkedIn-ready project summary",
+    "linkedin_text": "Built a local World Cup 2026 quantitative simulation dashboard in Python + Streamlit. It combines pairwise Monte Carlo, full tournament propagation, best-third qualification logic, bilingual UI, and a model-vs-market disagreement layer. Current active run leader: {team} at {prob} title probability.",
+    "methodology_title": "Readable methodology / glossary",
+    "limitations_title": "Limits that remain true",
+    "limitations_text": "The dashboard does not change the underlying model. It surfaces aggregated results more clearly, preserves technical terminology, and adds a public-facing framing layer. Monte Carlo outputs remain estimates, not certainties.",
+    "market_gap_chart": "Largest model-vs-market disagreements"
+  }
+}

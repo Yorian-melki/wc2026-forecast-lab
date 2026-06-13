@@ -1,0 +1,317 @@
+{
+  "sidebar": {
+    "title": "Navigation",
+    "output_dir": "Dossier des sorties du tournoi",
+    "pairwise_csv": "CSV pairwise",
+    "teams_csv": "CSV équipes",
+    "groups_json": "JSON groupes",
+    "window": "Fenêtre",
+    "glossary_title": "Glossaire / guide de lecture",
+    "readme_title": "Ce que cette interface est",
+    "readme_text": "Ce dashboard ne modifie ni le modèle, ni les pages, ni les graphes, ni le système visuel. Il ajoute une couche de présentation bilingue et des libellés plus clairs, tout en conservant la terminologie quantitative sous-jacente.",
+    "market_csv": "CSV des cotes de marché (optionnel)",
+    "brand_title": "WC2026 Tournament Probability Studio",
+    "brand_subtitle": "Une interface plus claire, plus partageable, mais toujours entièrement quantitative pour le projet de simulation de la Coupe du Monde 2026.",
+    "data_ready_title": "État des données du projet",
+    "data_ready_text": "Cette interface utilise les sorties locales par défaut du projet. Elle conserve tout le contenu quantitatif tout en retirant les noms de fichiers techniques de la navigation principale.",
+    "optional_sources_title": "Sources analytiques optionnelles",
+    "ready": "Prêt",
+    "missing": "Manquant",
+    "status": {
+      "tournament_summary": "Sorties de synthèse du tournoi",
+      "group_probabilities": "Table des probabilités de groupe",
+      "stage_probabilities": "Table des probabilités par tour",
+      "pairwise_matrix": "Matrice pairwise complète",
+      "teams_reference": "Référentiel des notes équipes",
+      "groups_reference": "Structure officielle des groupes",
+      "market_view": "Couche de comparaison au marché",
+      "third_place_mapping": "Référence de mapping des meilleurs troisièmes"
+    }
+  },
+  "pages": {
+    "overview": {
+      "label": "Vue d’ensemble",
+      "description": "Surface agrégée du tournoi. Même modèle. Même graphes. Formulation seulement plus claire."
+    },
+    "groups": {
+      "label": "Groupes",
+      "description": "Distributions des positions en phase de groupes et structure des groupes sans changer les sorties sous-jacentes."
+    },
+    "stages": {
+      "label": "États du tournoi",
+      "description": "Structure de survie par stade, de la sortie de groupe jusqu’à la probabilité de titre."
+    },
+    "pairwise": {
+      "label": "Matrice pairwise",
+      "description": "Surface pairwise complète 48×48 issue du moteur pairwise existant."
+    },
+    "team": {
+      "label": "Vue équipe",
+      "description": "Panneau de lecture d’une équipe pour les probabilités finales et les ratings structurels."
+    },
+    "audit": {
+      "label": "Audit & méthodologie",
+      "description": "Audit du run, tables agrégées et statistiques descriptives."
+    },
+    "market": {
+      "label": "Modèle vs marché",
+      "description": "Comparer les probabilités de titre simulées aux probabilités implicites normalisées du marché, sans changer le modèle."
+    },
+    "publication": {
+      "label": "Couche publication",
+      "description": "Cadrage public du projet, langage méthodologique et texte prêt pour LinkedIn, sans modifier les graphes ni les calculs."
+    }
+  },
+  "overview": {
+    "cards": {
+      "teams": "Équipes",
+      "favorite_champion": "Favori titre",
+      "favorite_final": "Favori finale",
+      "favorite_sf": "Favori demi-finale"
+    },
+    "visible_teams": "Équipes affichées dans le graphe de titre",
+    "chart_title_champion_prob": "Probabilité de titre",
+    "chart_title_heatmap": "Carte thermique des probabilités par stade",
+    "top_third_paths_title": "Principales familles de meilleurs troisièmes",
+    "top_third_paths_help": "Ce graphe montre les combinaisons de groupes qui fournissent le plus souvent les meilleurs troisièmes qualifiés.",
+    "top_third_paths_chart": "Fréquence des familles de groupes des meilleurs troisièmes",
+    "top_third_paths_axis": "Groupes fournissant les meilleurs troisièmes",
+    "top_paths_missing": "top_paths.json est absent.",
+    "group_strength_title": "Force structurelle des groupes",
+    "group_strength_help": "Force moyenne, niveau de la meilleure équipe et dispersion interne dans chaque groupe.",
+    "group_strength_chart": "Force moyenne et force de pointe par groupe"
+  },
+  "groups": {
+    "select_group": "Groupe",
+    "chart_title_selected": "Distribution des positions — Groupe {group}",
+    "axis_probability": "Probabilité",
+    "all_groups_title": "Toutes les équipes par groupe",
+    "all_groups_chart": "Distribution des positions pour les 12 groupes",
+    "positions": {
+      "group_1": "1re place",
+      "group_2": "2e place",
+      "group_3": "3e place",
+      "group_4": "4e place"
+    },
+    "best_thirds_title": "Structures de qualification des meilleurs troisièmes",
+    "best_thirds_help": "Ce graphique montre la fréquence simulée des combinaisons de groupes des meilleurs troisièmes qui alimentent le tableau à élimination directe. Il est renormalisé de façon défensive si le champ de probabilité sauvegardé est manquant ou nul.",
+    "best_thirds_chart": "Combinaisons des meilleurs troisièmes les plus fréquentes"
+  },
+  "stages": {
+    "survival_curve_title": "Courbe de survie par équipe",
+    "frontier_title": "Frontière des favoris",
+    "frontier_slider": "Équipes affichées dans la comparaison par tour",
+    "frontier_chart": "Probabilité par stade — top équipes",
+    "stage_names": {
+      "group_survived": "Qualification KO",
+      "r16": "Huitièmes",
+      "qf": "Quarts",
+      "sf": "Demies",
+      "final": "Finale",
+      "champion": "Champion"
+    }
+  },
+  "pairwise": {
+    "metric_select": "Métrique pairwise",
+    "matrix_title": "Matrice — {metric}",
+    "team_focus": "Équipe focale",
+    "team_chart_title": "{team} contre tous — {metric}"
+  },
+  "team": {
+    "select_team": "Équipe",
+    "probability_chart_title": "Probabilités finales — {team}",
+    "radar_title": "Radar structurel — {team}",
+    "detail_table_title": "Table détaillée"
+  },
+  "audit": {
+    "bullets": {
+      "aggregated_view": "Vue strictement agrégée.",
+      "no_raw_front": "Aucune ligne brute des milliards de simulations n’est injectée dans le front.",
+      "graph_source": "Les graphes sont construits à partir des exports du run et des données structurelles des équipes.",
+      "pairwise_complete": "La couche pairwise complète contient 1 128 confrontations uniques."
+    },
+    "cards": {
+      "unique_pairs": "Paires uniques",
+      "teams": "Équipes",
+      "champion_mass": "Masse de probabilité champion"
+    },
+    "summary_table_title": "Table complète des résultats agrégés",
+    "descriptive_stats_title": "Statistiques descriptives"
+  },
+  "metrics": {
+    "group_survival_prob": {
+      "label": "Probabilité de survie en groupes",
+      "help": "Probabilité d’atteindre la phase à élimination directe depuis la phase de groupes."
+    },
+    "r16_prob": {
+      "label": "Probabilité d’atteindre les huitièmes",
+      "help": "Probabilité d’atteindre les huitièmes de finale."
+    },
+    "qf_prob": {
+      "label": "Probabilité d’atteindre les quarts",
+      "help": "Probabilité d’atteindre les quarts de finale."
+    },
+    "sf_prob": {
+      "label": "Probabilité d’atteindre les demies",
+      "help": "Probabilité d’atteindre les demi-finales."
+    },
+    "final_prob": {
+      "label": "Probabilité d’atteindre la finale",
+      "help": "Probabilité d’atteindre la finale."
+    },
+    "champion_prob": {
+      "label": "Probabilité de titre",
+      "help": "Probabilité de remporter le tournoi."
+    },
+    "runner_up_prob": {
+      "label": "Probabilité de finir vice-champion",
+      "help": "Probabilité de perdre la finale."
+    },
+    "third_place_prob": {
+      "label": "Probabilité de finir troisième",
+      "help": "Probabilité de gagner le match pour la troisième place."
+    },
+    "fourth_place_prob": {
+      "label": "Probabilité de finir quatrième",
+      "help": "Probabilité de perdre le match pour la troisième place."
+    },
+    "fragility": {
+      "label": "Fragilité",
+      "help": "Mesure de la dégradation des chances de tournoi sous scénarios adverses."
+    },
+    "upside": {
+      "label": "Upside",
+      "help": "Mesure de la hausse des chances de tournoi sous scénarios favorables."
+    },
+    "path_dependence": {
+      "label": "Dépendance au parcours",
+      "help": "Mesure à quel point les chances de titre changent selon la route dans le tableau."
+    },
+    "group_win_a": {
+      "label": "Victoire en groupes — équipe A",
+      "help": "Probabilité que l’équipe A gagne en 90 minutes dans le modèle de phase de groupes."
+    },
+    "group_draw": {
+      "label": "Match nul en groupes",
+      "help": "Probabilité d’un match nul en 90 minutes dans le modèle de phase de groupes."
+    },
+    "group_win_b": {
+      "label": "Victoire en groupes — équipe B",
+      "help": "Probabilité que l’équipe B gagne en 90 minutes dans le modèle de phase de groupes."
+    },
+    "ko_win90_a": {
+      "label": "Victoire en 90 min KO — équipe A",
+      "help": "Probabilité que l’équipe A gagne dans le temps réglementaire en phase à élimination directe."
+    },
+    "ko_draw90": {
+      "label": "Égalité après 90 min en KO",
+      "help": "Probabilité que le match à élimination directe soit à égalité après 90 minutes."
+    },
+    "ko_win90_b": {
+      "label": "Victoire en 90 min KO — équipe B",
+      "help": "Probabilité que l’équipe B gagne dans le temps réglementaire en phase à élimination directe."
+    },
+    "ko_advance_a": {
+      "label": "Qualification KO — équipe A",
+      "help": "Probabilité que l’équipe A se qualifie après temps réglementaire, prolongation ou tirs au but."
+    },
+    "ko_advance_b": {
+      "label": "Qualification KO — équipe B",
+      "help": "Probabilité que l’équipe B se qualifie après temps réglementaire, prolongation ou tirs au but."
+    },
+    "ko_et_a": {
+      "label": "Survie en prolongation — équipe A",
+      "help": "Contribution conditionnelle de la prolongation pour l’équipe A."
+    },
+    "ko_et_b": {
+      "label": "Survie en prolongation — équipe B",
+      "help": "Contribution conditionnelle de la prolongation pour l’équipe B."
+    },
+    "ko_pen_a": {
+      "label": "Survie aux tirs au but — équipe A",
+      "help": "Contribution conditionnelle des tirs au but pour l’équipe A."
+    },
+    "ko_pen_b": {
+      "label": "Survie aux tirs au but — équipe B",
+      "help": "Contribution conditionnelle des tirs au but pour l’équipe B."
+    },
+    "avg_goals_a": {
+      "label": "Buts moyens — équipe A",
+      "help": "Nombre moyen de buts marqués par l’équipe A dans la couche Monte Carlo pairwise."
+    },
+    "avg_goals_b": {
+      "label": "Buts moyens — équipe B",
+      "help": "Nombre moyen de buts marqués par l’équipe B dans la couche Monte Carlo pairwise."
+    },
+    "avg_conduct_a": {
+      "label": "Score moyen de conduite — équipe A",
+      "help": "Proxy moyen de fair-play ou de conduite généré pour l’équipe A."
+    },
+    "avg_conduct_b": {
+      "label": "Score moyen de conduite — équipe B",
+      "help": "Proxy moyen de fair-play ou de conduite généré pour l’équipe B."
+    }
+  },
+  "ratings": {
+    "attack": "Attaque",
+    "defense": "Défense",
+    "midfield": "Milieu",
+    "transition": "Transition",
+    "setpiece": "Coups de pied arrêtés",
+    "goalkeeper": "Gardien",
+    "depth": "Profondeur",
+    "coach": "Coach",
+    "penalties": "Tirs au but",
+    "discipline": "Discipline",
+    "health": "Santé",
+    "form": "Forme",
+    "climate_resilience": "Résilience climatique",
+    "altitude_resilience": "Résilience à l’altitude",
+    "travel_resilience": "Résilience au voyage"
+  },
+  "market": {
+    "no_file": "Aucun fichier de cotes de marché trouvé. La page reste disponible mais nécessite un CSV avec les colonnes team,title_american.",
+    "caption": "Cette page compare les probabilités de titre du modèle aux probabilités implicites normalisées du marché. Ce n’est pas un module de pari et elle ne produit aucune instruction de mise.",
+    "topn": "Équipes affichées dans la comparaison modèle-marché",
+    "comparison_chart": "Probabilité du modèle vs probabilité implicite du marché",
+    "scatter_chart": "Surface d’écart — modèle vs marché",
+    "table_title": "Table complète des écarts",
+    "cards": {
+      "rows": "Lignes de marché",
+      "coverage": "Couverture du modèle",
+      "overround": "Overround brut du marché"
+    },
+    "legend": {
+      "model": "Modèle",
+      "market": "Marché"
+    },
+    "table": {
+      "market_prob": "Probabilité de marché normalisée",
+      "disagreement": "Modèle moins marché",
+      "odds": "Cotes américaines",
+      "classification": "Classification"
+    },
+    "classification": {
+      "model_higher": "Modèle au-dessus du marché",
+      "market_higher": "Marché au-dessus du modèle",
+      "aligned": "Globalement aligné",
+      "no_market_data": "Pas de données marché"
+    }
+  },
+  "publication": {
+    "project_summary_title": "Résumé du projet",
+    "project_summary_text": "Ce dashboard local présente un workbench reproductible de simulation quantitative de la Coupe du Monde 2026. Résultat principal du run actif : **{team}** est leader du modèle avec **{prob}** de probabilité de titre.",
+    "cards": {
+      "teams": "Équipes couvertes",
+      "unique_pairs": "Confrontations pairwise uniques",
+      "iterations_hint": "Couche de calcul",
+      "iterations_value": "Monte Carlo + propagation du tableau"
+    },
+    "linkedin_title": "Résumé prêt pour LinkedIn",
+    "linkedin_text": "J’ai construit un dashboard local quantitatif de simulation de la Coupe du Monde 2026 en Python + Streamlit. Il combine Monte Carlo pairwise, propagation complète du tournoi, logique des meilleurs troisièmes, interface bilingue, et une couche d’écart modèle-vs-marché. Leader du run actif : {team} à {prob} de probabilité de titre.",
+    "methodology_title": "Méthodologie / glossaire lisible",
+    "limitations_title": "Limites qui restent vraies",
+    "limitations_text": "Le dashboard ne modifie pas le modèle sous-jacent. Il rend les résultats agrégés plus lisibles, conserve la terminologie technique, et ajoute une couche de présentation publiable. Les sorties Monte Carlo restent des estimations, pas des certitudes.",
+    "market_gap_chart": "Plus grands écarts modèle-vs-marché"
+  }
+}

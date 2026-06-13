@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+outputs/*.csv
+outputs/*.json
+outputs/*.parquet
+outputs/*.npz
+
+# Secrets — never commit (project holds 5 live API keys)
+.env
+.env.*
+!.env.example
+*.secret
+secrets/
+
+# Raw API responses may contain account-bound identifiers
+data/raw/provider_responses/
+
+# Audit JSON/CSV may contain masked key fragments (first6..last6) — exclude from any
+# public repo. Track curated audit *.md (no key fragments) deliberately if needed.
+outputs/audit/*.json
+outputs/audit/*.csv
+outputs/audit/thestatsapi_*
+data/live/thestatsapi_*.json
+data/live/*odds*.json

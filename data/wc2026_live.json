@@ -1,0 +1,919 @@
+{
+  "tournament": "FIFA World Cup 2026",
+  "last_updated": "2026-06-13T11:51:29.560854+00:00",
+  "source": "api_football (primary, date-bypass) + openfootball (fallback for older matches)",
+  "data_quality": "A",
+  "status": "group_stage",
+  "completed_matches": [
+    {
+      "date": "2026-06-11",
+      "group": "A",
+      "matchday": 1,
+      "home": "MEX",
+      "away": "RSA",
+      "home_goals": 2,
+      "away_goals": 0,
+      "decided_in": "90",
+      "scorers": [
+        "Juli\u00e1n Qui\u00f1ones 9",
+        "Ra\u00fal Jim\u00e9nez 67"
+      ],
+      "notes": "",
+      "source": "openfootball",
+      "xg_home": 1.46,
+      "xg_away": 0.07,
+      "big_chances_home": 2,
+      "big_chances_away": 0,
+      "xg_source": "highlightly",
+      "quality_level": "A"
+    },
+    {
+      "date": "2026-06-11",
+      "group": "A",
+      "matchday": 1,
+      "home": "KOR",
+      "away": "CZE",
+      "home_goals": 2,
+      "away_goals": 1,
+      "decided_in": "90",
+      "scorers": [
+        "Hwang In-Beom 67",
+        "Oh Hyeon-Gyu 80",
+        "Ladislav Krejc\u00ed 59"
+      ],
+      "notes": "",
+      "source": "openfootball",
+      "xg_home": 2.3,
+      "xg_away": 0.83,
+      "big_chances_home": 4,
+      "big_chances_away": 1,
+      "xg_source": "highlightly",
+      "quality_level": "A"
+    },
+    {
+      "date": "2026-06-12",
+      "group": "B",
+      "matchday": 1,
+      "home": "CAN",
+      "away": "BIH",
+      "home_goals": 1,
+      "away_goals": 1,
+      "decided_in": "90",
+      "scorers": [
+        "Cyle Larin 78",
+        "Jovo Luki\u0107 21"
+      ],
+      "notes": "",
+      "source": "openfootball",
+      "xg_home": 1.23,
+      "xg_away": 0.96,
+      "big_chances_home": 2,
+      "big_chances_away": 2,
+      "xg_source": "highlightly",
+      "quality_level": "A"
+    },
+    {
+      "home": "USA",
+      "away": "PAR",
+      "home_goals": 4,
+      "away_goals": 1,
+      "date": "2026-06-13",
+      "group": "D",
+      "status": "FT",
+      "source": "api_football",
+      "quality_level": "A",
+      "match_id": 1489370,
+      "scorers": {
+        "home": [
+          {
+            "player": "D. Bobadilla",
+            "minute": 7,
+            "detail": "Own Goal"
+          },
+          {
+            "player": "F. Balogun",
+            "minute": 31,
+            "detail": "Normal Goal"
+          },
+          {
+            "player": "F. Balogun",
+            "minute": 45,
+            "detail": "Normal Goal"
+          },
+          {
+            "player": "G. Reyna",
+            "minute": 90,
+            "detail": "Normal Goal"
+          }
+        ],
+        "away": [
+          {
+            "player": "Mauricio",
+            "minute": 73,
+            "detail": "Normal Goal"
+          }
+        ]
+      },
+      "stats": {
+        "USA": {
+          "shots_on_goal": 6,
+          "shots_off_goal": 6,
+          "total_shots": 16,
+          "corners": 3,
+          "fouls": 13
+        },
+        "PAR": {
+          "shots_on_goal": 1,
+          "shots_off_goal": 3,
+          "total_shots": 9,
+          "corners": 1,
+          "fouls": 17
+        }
+      },
+      "lineups": {
+        "USA": {
+          "formation": "4-2-3-1",
+          "coach": "Mauricio Pochettino"
+        },
+        "PAR": {
+          "formation": "4-4-2",
+          "coach": "Gustavo Alfaro"
+        }
+      },
+      "xg_home": 1.42,
+      "xg_away": 0.54,
+      "big_chances_home": 4,
+      "big_chances_away": 1,
+      "xg_source": "highlightly"
+    }
+  ],
+  "group_standings": {
+    "A": [
+      {
+        "team": "MEX",
+        "group": "A",
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 2,
+        "ga": 0,
+        "gd": 2,
+        "points": 3
+      },
+      {
+        "team": "KOR",
+        "group": "A",
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 2,
+        "ga": 1,
+        "gd": 1,
+        "points": 3
+      },
+      {
+        "team": "CZE",
+        "group": "A",
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1,
+        "gf": 1,
+        "ga": 2,
+        "gd": -1,
+        "points": 0
+      },
+      {
+        "team": "RSA",
+        "group": "A",
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1,
+        "gf": 0,
+        "ga": 2,
+        "gd": -2,
+        "points": 0
+      }
+    ],
+    "B": [
+      {
+        "team": "CAN",
+        "group": "B",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "gf": 1,
+        "ga": 1,
+        "gd": 0,
+        "points": 1
+      },
+      {
+        "team": "BIH",
+        "group": "B",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "gf": 1,
+        "ga": 1,
+        "gd": 0,
+        "points": 1
+      },
+      {
+        "team": "QAT",
+        "group": "B",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "SUI",
+        "group": "B",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "C": [
+      {
+        "team": "BRA",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "MAR",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "HAI",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "SCO",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "D": [
+      {
+        "team": "USA",
+        "group": "D",
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 4,
+        "ga": 1,
+        "gd": 3,
+        "points": 3
+      },
+      {
+        "team": "AUS",
+        "group": "D",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "TUR",
+        "group": "D",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "PAR",
+        "group": "D",
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1,
+        "gf": 1,
+        "ga": 4,
+        "gd": -3,
+        "points": 0
+      }
+    ],
+    "E": [
+      {
+        "team": "GER",
+        "group": "E",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "CUW",
+        "group": "E",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "CIV",
+        "group": "E",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "ECU",
+        "group": "E",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "F": [
+      {
+        "team": "NED",
+        "group": "F",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "JPN",
+        "group": "F",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "SWE",
+        "group": "F",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "TUN",
+        "group": "F",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "G": [
+      {
+        "team": "BEL",
+        "group": "G",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "EGY",
+        "group": "G",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "IRN",
+        "group": "G",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "NZL",
+        "group": "G",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "H": [
+      {
+        "team": "ESP",
+        "group": "H",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "CPV",
+        "group": "H",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "KSA",
+        "group": "H",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "URU",
+        "group": "H",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "I": [
+      {
+        "team": "FRA",
+        "group": "I",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "SEN",
+        "group": "I",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "IRQ",
+        "group": "I",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "NOR",
+        "group": "I",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "J": [
+      {
+        "team": "ARG",
+        "group": "J",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "ALG",
+        "group": "J",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "AUT",
+        "group": "J",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "JOR",
+        "group": "J",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "K": [
+      {
+        "team": "POR",
+        "group": "K",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "COD",
+        "group": "K",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "UZB",
+        "group": "K",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "COL",
+        "group": "K",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
+    "L": [
+      {
+        "team": "ENG",
+        "group": "L",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "CRO",
+        "group": "L",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "GHA",
+        "group": "L",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "PAN",
+        "group": "L",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ]
+  },
+  "upcoming_today": [
+    {
+      "group": "B",
+      "home": "QAT",
+      "away": "SUI",
+      "time_utc": "12:00 UTC-7",
+      "status": "SCHEDULED"
+    },
+    {
+      "group": "C",
+      "home": "BRA",
+      "away": "MAR",
+      "time_utc": "18:00 UTC-4",
+      "status": "SCHEDULED"
+    },
+    {
+      "group": "C",
+      "home": "HAI",
+      "away": "SCO",
+      "time_utc": "21:00 UTC-4",
+      "status": "SCHEDULED"
+    },
+    {
+      "group": "D",
+      "home": "AUS",
+      "away": "TUR",
+      "time_utc": "21:00 UTC-7",
+      "status": "SCHEDULED"
+    }
+  ],
+  "key_injuries": {
+    "ESP": [
+      "Fermin Lopez (metatarsal, OUT)",
+      "Pedri (partial fitness)"
+    ],
+    "FRA": [
+      "Ekitike (Achilles, OUT)",
+      "Kolo Muani (OUT)",
+      "Griezmann (OUT)"
+    ],
+    "ARG": [
+      "Messi (hamstring strain, fitness doubt)"
+    ],
+    "BRA": [
+      "Rodrygo (ACL, OUT)",
+      "Neymar (calf grade 2, doubtful)"
+    ],
+    "ENG": [],
+    "GER": [],
+    "CAN": [
+      "Alphonso Davies (hamstring, doubtful MD1)"
+    ]
+  },
+  "xg_available": true,
+  "xg_source": "highlightly",
+  "providers_confirmed": [
+    "api_football",
+    "highlightly",
+    "football_data_org"
+  ],
+  "provider_agreement": "ZERO disagreements \u2014 all 3 providers confirm all 4 scores",
+  "top_scorers": [
+    {
+      "player_name": "Folarin Balogun",
+      "player_id": 131040,
+      "nationality": "USA",
+      "team": "USA",
+      "team_tla": "USA",
+      "goals": 2,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Juli\u00e1n Qui\u00f1ones",
+      "player_id": 39237,
+      "nationality": "Colombia",
+      "team": "Mexico",
+      "team_tla": "MEX",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Ra\u00fal Jim\u00e9nez",
+      "player_id": 3305,
+      "nationality": "Mexico",
+      "team": "Mexico",
+      "team_tla": "MEX",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Ladislav Krej\u010d\u00ed",
+      "player_id": 1878,
+      "nationality": "Czech Republic",
+      "team": "Czechia",
+      "team_tla": "CZE",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "In-beom Hwang",
+      "player_id": 170561,
+      "nationality": "South Korea",
+      "team": "Korea Republic",
+      "team_tla": "KOR",
+      "goals": 1,
+      "assists": 1,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Hyun-Gyu Oh",
+      "player_id": 191295,
+      "nationality": "South Korea",
+      "team": "Korea Republic",
+      "team_tla": "KOR",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Jovo Luki\u0107",
+      "player_id": 17767,
+      "nationality": "Bosnia-Herzegovina",
+      "team": "Bosnia-H.",
+      "team_tla": "BIH",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Cyle Larin",
+      "player_id": 15958,
+      "nationality": "Canada",
+      "team": "Canada",
+      "team_tla": "CAN",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Mauricio",
+      "player_id": 119594,
+      "nationality": "Paraguay",
+      "team": "Paraguay",
+      "team_tla": "PAR",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    },
+    {
+      "player_name": "Gio Reyna",
+      "player_id": 136733,
+      "nationality": "USA",
+      "team": "USA",
+      "team_tla": "USA",
+      "goals": 1,
+      "assists": null,
+      "played_matches": 1
+    }
+  ],
+  "thestatsapi_active": true,
+  "xg_shot_level_source": "thestatsapi (per-shot shotmap)",
+  "odds_source": "thestatsapi (4 bookmakers, de-vigged)",
+  "xg_provider_note": "Highlightly and TheStatsAPI team-xG share the same upstream (identical on 3/4 matches) \u2014 not independent."
+}

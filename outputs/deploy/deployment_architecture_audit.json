@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-06-13T17:21:42.829543+00:00",
+  "key_constraint": "The dashboard is a Streamlit app = a persistent Python process with websockets. Vercel (serverless/static) CANNOT host it. Vercel = portfolio/static; a Python host runs the live app.",
+  "hosts": [
+    {
+      "host": "Vercel (portfolio/static + case study)",
+      "feasibility": "HIGH (static/Next.js, NOT Streamlit)",
+      "cost": "free tier",
+      "complexity": "low",
+      "secret_mgmt": "env UI",
+      "custom_domain": "yes",
+      "subdomain": "yes",
+      "reliability": "high",
+      "user_action": "connect repo, confirm project",
+      "claude_action": "scaffold static/Next case-study page"
+    },
+    {
+      "host": "Streamlit Community Cloud (live app)",
+      "feasibility": "HIGH for app",
+      "cost": "free",
+      "complexity": "low",
+      "secret_mgmt": "st.secrets",
+      "custom_domain": "NO on free tier (share.streamlit.io URL)",
+      "subdomain": "no custom subdomain free",
+      "reliability": "good",
+      "user_action": "connect GitHub repo",
+      "claude_action": "prepare repo + secrets template"
+    },
+    {
+      "host": "Render (live app)",
+      "feasibility": "HIGH",
+      "cost": "free(spins down)/$7mo",
+      "complexity": "medium",
+      "secret_mgmt": "env vars",
+      "custom_domain": "yes",
+      "subdomain": "yes (CNAME)",
+      "reliability": "good",
+      "user_action": "create service, add env, map subdomain",
+      "claude_action": "write render.yaml + Dockerfile/start cmd"
+    },
+    {
+      "host": "Railway (live app)",
+      "feasibility": "HIGH",
+      "cost": "~$5/mo usage",
+      "complexity": "low-medium",
+      "secret_mgmt": "env vars",
+      "custom_domain": "yes",
+      "subdomain": "yes",
+      "reliability": "good",
+      "user_action": "create project, add env",
+      "claude_action": "write start config"
+    },
+    {
+      "host": "Fly.io (live app)",
+      "feasibility": "HIGH",
+      "cost": "free allowance",
+      "complexity": "higher (Dockerfile)",
+      "secret_mgmt": "fly secrets",
+      "custom_domain": "yes",
+      "subdomain": "yes",
+      "reliability": "good",
+      "user_action": "flyctl launch + secrets",
+      "claude_action": "write Dockerfile + fly.toml"
+    },
+    {
+      "host": "Static snapshot + separate live app",
+      "feasibility": "RECOMMENDED split",
+      "cost": "free + host",
+      "complexity": "low",
+      "secret_mgmt": "n/a for static",
+      "custom_domain": "yes",
+      "subdomain": "yes",
+      "reliability": "high",
+      "user_action": "host static on Vercel, app on Render",
+      "claude_action": "build static export of forecast"
+    },
+    {
+      "host": "VPS (DIY)",
+      "feasibility": "possible, not advised",
+      "cost": "$5+/mo",
+      "complexity": "high (ops)",
+      "secret_mgmt": "manual",
+      "custom_domain": "yes",
+      "subdomain": "yes",
+      "reliability": "depends on you",
+      "user_action": "provision, secure, deploy",
+      "claude_action": "not recommended"
+    }
+  ],
+  "recommendation": {
+    "portfolio_and_case_study": "Vercel (apex+www already Vercel-wired) -> yorian-melki.com + /projets/wc2026",
+    "live_streamlit_app": "Render (or Railway) at wc2026.yorian-melki.com \u2014 supports custom subdomain + env secrets. Streamlit Community Cloud is easiest but cannot map a custom subdomain on the free tier.",
+    "safest_public_demo": "Deploy the app reading the COMMITTED offline snapshot (no live API keys needed) \u2014 zero secret exposure. Add keys to host env only if live refresh is wanted.",
+    "split": "static case study (Vercel) + live app (Render) is the clean separation."
+  },
+  "secret_handling": "All hosts: API keys go in the host's env/secret store, NEVER in the repo. The offline forecast needs NO keys; only live refresh does."
+}

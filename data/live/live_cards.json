@@ -1,0 +1,314 @@
+{
+  "generated_at": "2026-06-13T11:47:36.614173+00:00",
+  "source": "highlightly",
+  "quality": "A",
+  "total": 18,
+  "cards": [
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "17",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "T. Mokoena",
+      "playerId": 529361,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "23",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "B. Gutierrez",
+      "playerId": 34169667,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "49",
+      "type": "Red Card",
+      "assist": null,
+      "player": "Y. Sithole",
+      "playerId": 25507867,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "74",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "N. Sibisi",
+      "playerId": 7479892,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 1303665,
+        "logo": "https://highlightly.net/soccer/images/teams/1303665.png",
+        "name": "South Africa"
+      },
+      "time": "84",
+      "type": "Red Card",
+      "assist": null,
+      "player": "T. Zwane",
+      "playerId": 529683,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267453803",
+      "match": "MEX vs RSA",
+      "date": "2026-06-11",
+      "team": {
+        "id": 14400,
+        "logo": "https://highlightly.net/soccer/images/teams/14400.png",
+        "name": "Mexico"
+      },
+      "time": "90+2",
+      "type": "Red Card",
+      "assist": null,
+      "player": "C. Montes",
+      "playerId": 462707,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "11",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "A. Johnston",
+      "playerId": 12646221,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "45",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "E. Demirovic",
+      "playerId": 7555884,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "45+1",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "J. Lukic",
+      "playerId": 12403111,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 4705963,
+        "logo": "https://highlightly.net/soccer/images/teams/4705963.png",
+        "name": "Canada"
+      },
+      "time": "53",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "L. De Fougerolles",
+      "playerId": 52765972,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1309689784",
+      "match": "CAN vs BIH",
+      "date": "2026-06-12",
+      "team": {
+        "id": 947947,
+        "logo": "https://highlightly.net/soccer/images/teams/947947.png",
+        "name": "Bosnia & Herzegovina"
+      },
+      "time": "90+3",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "N. Katic",
+      "playerId": 280455,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1309688933",
+      "match": "KOR vs CZE",
+      "date": "2026-06-12",
+      "team": {
+        "id": 15251,
+        "logo": "https://highlightly.net/soccer/images/teams/15251.png",
+        "name": "South Korea"
+      },
+      "time": "90+6",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "Lee Gi-Hyuk",
+      "playerId": 49097265,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "10",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "J. Caceres",
+      "playerId": 31554866,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "53",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "M. Almiron",
+      "playerId": 403781,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2029568,
+        "logo": "https://highlightly.net/soccer/images/teams/2029568.png",
+        "name": "USA"
+      },
+      "time": "59",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "T. Adams",
+      "playerId": 185304,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "79",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "D. Gomez",
+      "playerId": 44817724,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "88",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "A. Arce",
+      "playerId": 15369214,
+      "substituted": null,
+      "assistingPlayerId": null
+    },
+    {
+      "match_id": "1267454654",
+      "match": "USA vs PAR",
+      "date": "2026-06-13",
+      "team": {
+        "id": 2026164,
+        "logo": "https://highlightly.net/soccer/images/teams/2026164.png",
+        "name": "Paraguay"
+      },
+      "time": "90+3",
+      "type": "Yellow Card",
+      "assist": null,
+      "player": "J. Alonso",
+      "playerId": 402493,
+      "substituted": null,
+      "assistingPlayerId": null
+    }
+  ]
+}

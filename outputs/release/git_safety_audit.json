@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-06-13T21:07:16.910575+00:00",
+  "is_git_repo": false,
+  "clean_start_possible": true,
+  "note": "Not a git repo -> no history to scrub; first commit can be clean.",
+  "secret_scan": {
+    "full_keys_found": 0,
+    "result": "CLEAN \u2014 no full API keys in any file type",
+    "masked_fragments": "first6..last6 of 37-char keys appeared only in outputs/audit/thestatsapi_* and *.json (now all gitignored); not recoverable secrets"
+  },
+  "ignored_sensitive": {
+    ".env": "ignored (.env)",
+    ".env.backup.20260613_192400": "ignored (.env.*) \u2014 contains OLD real key, stays private",
+    ".env.example": "TRACKED intentionally (template, no values)",
+    "data/raw/provider_responses/": "ignored",
+    "outputs/audit/*.json + *.csv": "ignored",
+    "outputs/audit/thestatsapi_*": "ignored (masked fragments)",
+    "data/live/thestatsapi_*.json + *odds*.json": "ignored",
+    ".venv/": "ignored (938M)"
+  },
+  "verification_commands": [
+    "git check-ignore .env .env.backup.20260613_192400   # both must print",
+    "grep -rInE 'fapi_[A-Za-z0-9]{25,}|[a-f0-9]{64}' --exclude-dir=.venv .   # must be empty",
+    "git status --porcelain | grep -iE '\\.env($|\\.)' | grep -v example   # must be empty"
+  ],
+  "verdict": "SAFE to initialize and push once .env/.env.backup remain untracked (verified by patterns)."
+}
