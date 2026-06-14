@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-06-14T00:22:47.001399+00:00",
+  "live_locally": "yes with API_FOOTBALL_KEY",
+  "live_publicly": false,
+  "providers_live": [
+    "api_football"
+  ],
+  "persisted_file": "data/wc2026_live.json",
+  "auto_update": true,
+  "interval_seconds": 45,
+  "completed_locking": true,
+  "upcoming_filter": "fixed (filter vs completed+live)",
+  "both_lists_possible": false,
+  "standings_basis": "completed matches only",
+  "no_key_behavior": "static snapshot, no crash",
+  "render_no_env": "static snapshot",
+  "qat_sui_duplicate": {
+    "status": "FIXED",
+    "root_cause": "stale upcoming_today not pruned vs completed",
+    "residual": "prune upcoming_today in merge_and_persist for full fix"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-06-14T00:19:59.553452+00:00",
+  "flows": {
+    "live_refresh": "API-Football/TheStatsAPI/Highlightly/football-data.org \u2192 providers/router.py \u2192 live_engine.fetch_live_state() \u2192 merge_and_persist() \u2192 data/wc2026_live.json \u2192 Live Standings page (st.fragment 45s).",
+    "offline_snapshot": "No API key \u2192 live_engine returns ok=False \u2192 app reads committed data/wc2026_live.json (static). Never crashes.",
+    "tournament_sim": "data/elo_calibrated_params.json + teams.csv + groups.json \u2192 calibrated_elo_model + tournament.py \u2192 outputs/tournament_run/*summary.csv \u2192 Champion Tracker.",
+    "ml_validation": "martj42 results.csv \u2192 ml/features+train_match_model \u2192 outputs/audit/ml_validation_report.* (Brier 0.508).",
+    "tournament_validation": "results.csv \u2192 run_expanded_validation_and_dynamic_ml.py (WC2010/14/18/22) \u2192 outputs/audit/expanded_tournament_validation.*",
+    "uncertainty_intervals": "results.csv \u2192 run_beta_uncertainty_intervals.py (bootstrap) \u2192 data/live/champion_probability_intervals.json \u2192 Champion Tracker/Release Status.",
+    "market_flags": "TheStatsAPI odds \u2192 de-vig \u2192 data/live/market_disagreement_flags.json \u2192 Data Quality.",
+    "maturity": "manual per-dimension \u2192 outputs/audit/final_maturity_score_v6.json \u2192 Model Lab gauge + sidebar."
+  },
+  "artifacts": [
+    {
+      "path": "data/wc2026_live.json",
+      "produced_by": "live_engine.merge_and_persist / update_live_data.py",
+      "consumed_by": "Live Standings, Data Quality",
+      "state": "committed snapshot, runtime-overwritten",
+      "authority": "AUTHORITATIVE/RUNTIME",
+      "safe_manual_edit": "no \u2014 app overwrites"
+    },
+    {
+      "path": "data/groups.json",
+      "produced_by": "manual",
+      "consumed_by": "live_engine, tournament, validation",
+      "state": "committed",
+      "authority": "AUTHORITATIVE",
+      "safe_manual_edit": "yes carefully"
+    },
+    {
+      "path": "data/live/*",
+      "produced_by": "provider extract scripts",
+      "consumed_by": "Data Quality",
+      "state": "committed except thestatsapi_*/odds (ignored)",
+      "authority": "mixed",
+      "safe_manual_edit": "no"
+    },
+    {
+      "path": "outputs/audit/final_maturity_score_v6.json",
+      "produced_by": "manual (this session)",
+      "consumed_by": "Model Lab, Release Status",
+      "state": "committed (gitignore negation)",
+      "authority": "AUTHORITATIVE_GENERATED",
+      "safe_manual_edit": "via script only"
+    },
+    {
+      "path": "outputs/audit/global_maturity_score.json",
+      "produced_by": "old baseline",
+      "consumed_by": "(legacy)",
+      "state": "committed",
+      "authority": "LEGACY",
+      "safe_manual_edit": "NO"
+    },
+    {
+      "path": "render.yaml",
+      "produced_by": "manual",
+      "consumed_by": "Render deploy",
+      "state": "committed",
+      "authority": "DEPLOYMENT",
+      "safe_manual_edit": "yes"
+    },
+    {
+      "path": ".env.example",
+      "produced_by": "manual",
+      "consumed_by": "template",
+      "state": "committed",
+      "authority": "DEPLOYMENT",
+      "safe_manual_edit": "yes"
+    }
+  ]
+}

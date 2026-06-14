@@ -30,3 +30,10 @@ outputs/launch/
 app.py.bak_before_dashboard_hotfix
 !outputs/audit/final_maturity_score_v6.json
 !outputs/audit/final_maturity_score_v5.json
+
+# Backup / junk (never commit)
+*.bak
+*.bak_*
+app.py.bak_*
+data/*.bak
+.DS_Store

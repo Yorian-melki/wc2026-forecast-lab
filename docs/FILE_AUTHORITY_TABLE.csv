@@ -1,0 +1,25 @@
+path,category,why,safe_to_commit,safe_to_delete,safe_to_rely,successor
+app.py,AUTHORITATIVE_SOURCE,Streamlit dashboard entrypoint,yes,no,yes,
+src/wc2026/,AUTHORITATIVE_SOURCE,model + providers + live_engine,yes,no,yes,
+src/wc2026/live_engine.py,AUTHORITATIVE_SOURCE,live fetch+merge+standings (failure-safe),yes,no,yes,
+tests/,AUTHORITATIVE_SOURCE,571 tests gate the claims,yes,no,yes,
+data/wc2026_live.json,LIVE_RUNTIME_SNAPSHOT,auto-updated by live_engine; completed+standings,yes,no,yes — but app overwrites it,
+data/elo_calibrated_params.json,AUTHORITATIVE_SOURCE,"frozen model params (beta_elo, team_elos)",yes,no,yes,
+data/model_stack_config.json,AUTHORITATIVE_SOURCE,"ML weight 0.20, rollback flag",yes,no,yes,
+data/groups.json,AUTHORITATIVE_SOURCE,48-team group map (team->group),yes,no,yes,
+data/teams.csv,AUTHORITATIVE_SOURCE,team Elo + attributes,yes,no,yes,
+outputs/audit/final_maturity_score_v6.json,AUTHORITATIVE_GENERATED,CURRENT maturity 6.93 (committed via gitignore negation),yes,no,yes,supersedes global_maturity_score.json
+outputs/audit/global_maturity_score.json,LEGACY_REFERENCE,ORIGINAL baseline 5.25 — NOT current,yes,no,no — historical only,final_maturity_score_v6.json
+outputs/audit/*.md,AUDIT_DOC,"curated audits (reviewer, lineage, model card)",yes,no,yes,
+outputs/audit/thestatsapi_*,PRIVATE_IGNORED,masked key fragments — gitignored,no,review,no,
+outputs/release/,RELEASE_DOC,"git safety, manifests, deploy decision",yes,no,yes,
+outputs/deploy/,DEPLOYMENT_DOC,render/dns/runbook docs,yes,no,yes,
+outputs/launch/,DEPLOYMENT_DOC,launch ops notes — gitignored (local only),no,no,yes (local),
+render.yaml,DEPLOYMENT_DOC,Render blueprint for live app,yes,no,yes,
+.env.example,DEPLOYMENT_DOC,"env var names only, no values",yes,no,yes,
+.env / .env.backup*,PRIVATE_IGNORED,SECRETS — never commit,NO,no,no,
+app.py.bak_before_dashboard_hotfix,BACKUP_DO_NOT_USE,pre-hotfix backup; superseded,no,yes (after review),NO,app.py @ 8484b07+
+"data/teams.csv.bak, data/*_BACKUP_PRE_P0.csv",BACKUP_DO_NOT_USE,old data backups,no,review,no,data/teams.csv
+session_handoff/,LEGACY_REFERENCE,old chat handoff notes — may be stale,review,review,no — verify first,
+"MODEL_CARD.md, MODEL_FREEZE.md",LEGACY_REFERENCE,P4-era; superseded by model_card_public.md,yes,no,no — use outputs/audit/model_card_public.md,outputs/audit/model_card_public.md
+README.md,AUTHORITATIVE_SOURCE,"public-facing, current (571 tests, ML@0.20)",yes,no,yes,

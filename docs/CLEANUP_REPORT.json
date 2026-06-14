@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-06-14T00:19:59.553452+00:00",
+  "gitignored_this_pass": [
+    "app.py.bak_before_dashboard_hotfix",
+    "data/teams.csv.bak",
+    "*.bak / *.bak_*",
+    "data/*.bak",
+    ".DS_Store"
+  ],
+  "preserved_local": [
+    "session_handoff/ (kept, marked legacy)",
+    "outputs/launch/ (kept, gitignored)",
+    "data/*_BACKUP_PRE_P0.csv (kept, marked backup)"
+  ],
+  "not_touched": [
+    "all source, tests, data inputs, audit md, release/deploy docs"
+  ],
+  "review_later": [
+    "session_handoff/ \u2014 confirm stale and archive",
+    "MODEL_CARD.md/MODEL_FREEZE.md \u2014 superseded, keep for history",
+    "ui/ \u2014 confirm purpose",
+    "data/elo_live_params.json vs elo_calibrated_params.json \u2014 confirm which is used"
+  ],
+  "deleted": "NONE (no deletions \u2014 only gitignore additions)"
+}

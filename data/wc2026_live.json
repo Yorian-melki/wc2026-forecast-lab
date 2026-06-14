@@ -1,10 +1,27 @@
 {
   "tournament": "FIFA World Cup 2026",
-  "last_updated": "2026-06-13 23:13 UTC",
+  "last_updated": "2026-06-14 00:24 UTC",
   "source": "api_football (primary, date-bypass) + openfootball (fallback for older matches)",
   "data_quality": "A",
   "status": "group_stage",
   "completed_matches": [
+    {
+      "date": "2026-06-11",
+      "group": "A",
+      "matchday": 1,
+      "home": "KOR",
+      "away": "CZE",
+      "home_goals": 2,
+      "away_goals": 1,
+      "decided_in": "90",
+      "scorers": [
+        "Hwang In-Beom 67",
+        "Oh Hyeon-Gyu 80",
+        "Ladislav Krejc\u00ed 59"
+      ],
+      "notes": "",
+      "source": "openfootball"
+    },
     {
       "date": "2026-06-11",
       "group": "A",
@@ -35,15 +52,15 @@
         "Jovo Luki\u0107 21"
       ],
       "notes": "",
-      "source": "api_football"
+      "source": "openfootball"
     },
     {
-      "date": "2026-06-12",
-      "group": "A",
+      "date": "2026-06-13",
+      "group": "C",
       "matchday": 1,
-      "home": "KOR",
-      "away": "CZE",
-      "home_goals": 2,
+      "home": "BRA",
+      "away": "MAR",
+      "home_goals": 1,
       "away_goals": 1,
       "decided_in": "90",
       "scorers": [],
@@ -208,6 +225,56 @@
         "points": 1
       }
     ],
+    "C": [
+      {
+        "team": "BRA",
+        "group": "C",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "gf": 1,
+        "ga": 1,
+        "gd": 0,
+        "points": 1
+      },
+      {
+        "team": "MAR",
+        "group": "C",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "gf": 1,
+        "ga": 1,
+        "gd": 0,
+        "points": 1
+      },
+      {
+        "team": "HAI",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      },
+      {
+        "team": "SCO",
+        "group": "C",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "gf": 0,
+        "ga": 0,
+        "gd": 0,
+        "points": 0
+      }
+    ],
     "D": [
       {
         "team": "USA",
@@ -255,56 +322,6 @@
         "gf": 1,
         "ga": 4,
         "gd": -3,
-        "points": 0
-      }
-    ],
-    "C": [
-      {
-        "team": "BRA",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
-        "team": "HAI",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
-        "team": "MAR",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
-        "points": 0
-      },
-      {
-        "team": "SCO",
-        "group": "C",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "gf": 0,
-        "ga": 0,
-        "gd": 0,
         "points": 0
       }
     ],
@@ -710,20 +727,6 @@
     ]
   },
   "upcoming_today": [
-    {
-      "group": "B",
-      "home": "QAT",
-      "away": "SUI",
-      "time_utc": "12:00 UTC-7",
-      "status": "SCHEDULED"
-    },
-    {
-      "group": "C",
-      "home": "BRA",
-      "away": "MAR",
-      "time_utc": "18:00 UTC-4",
-      "status": "SCHEDULED"
-    },
     {
       "group": "C",
       "home": "HAI",

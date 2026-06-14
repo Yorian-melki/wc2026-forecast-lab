@@ -155,8 +155,16 @@ def merge_and_persist(state: dict) -> dict:
         new_keys = set(by_pair) - before_keys
         res["n_new"] = len(new_keys); res["total"] = len(merged)
         had_dupes = len(cur) != len(before_keys)
-        if new_keys or changed_scores or had_dupes:
+        # Prune any finished match out of upcoming_today so the persisted data is truthful
+        # too (not just filtered at render). Fixes the QAT-SUI "completed + upcoming" duplicate.
+        done_pairs = set(by_pair)
+        up = existing.get("upcoming_today")
+        up_pruned = [m for m in up if (m.get("home"), m.get("away")) not in done_pairs] if up else up
+        up_changed = up is not None and len(up_pruned) != len(up)
+        if new_keys or changed_scores or had_dupes or up_changed:
             existing["completed_matches"] = merged
+            if up_pruned is not None:
+                existing["upcoming_today"] = up_pruned
             existing["group_standings"] = build_standings(merged)
             existing["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
             existing.setdefault("tournament", "FIFA World Cup 2026")

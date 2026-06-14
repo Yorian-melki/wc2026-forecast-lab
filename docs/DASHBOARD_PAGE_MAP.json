@@ -1,0 +1,197 @@
+{
+  "generated_at": "2026-06-14T00:19:03.350628+00:00",
+  "app": "app.py",
+  "page_selector": "st.radio @ app.py:356",
+  "n_pages": 10,
+  "pages": [
+    {
+      "label": "\ud83d\ude80 Release Status",
+      "approx_line": 383,
+      "data_files": [
+        "outputs/audit/final_maturity_score_v6.json",
+        "data/model_stack_config.json"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "none",
+      "product_rating_1_10": 8,
+      "technical_rating_1_10": 9,
+      "next_fixes": "none",
+      "status": "WORKING"
+    },
+    {
+      "label": "\ud83c\udfc6 Champion Tracker",
+      "approx_line": 448,
+      "data_files": [
+        "outputs/tournament_run/*summary.csv",
+        "data/live/champion_probability_intervals.json"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "none",
+      "product_rating_1_10": 8,
+      "technical_rating_1_10": 9,
+      "next_fixes": "none",
+      "status": "WORKING"
+    },
+    {
+      "label": "\u26bd Live Standings",
+      "approx_line": 627,
+      "data_files": [
+        "wc2026_live.json (persisted)",
+        "live providers via live_engine"
+      ],
+      "modules": [
+        "wc2026.live_engine"
+      ],
+      "refresh": "st.fragment run_every=45s when AUTO_LIVE",
+      "cache": "yes (cached_live_state ttl=45)",
+      "live_api": "YES (API-Football)",
+      "known_issues": "product polish pending; depends on API_FOOTBALL_KEY for auto-refresh",
+      "product_rating_1_10": 6,
+      "technical_rating_1_10": 8,
+      "next_fixes": "UI/UX polish; richer live cards",
+      "status": "WORKING"
+    },
+    {
+      "label": "\ud83c\udfaf Match Predictor",
+      "approx_line": 778,
+      "data_files": [
+        "data/teams.csv",
+        "elo_calibrated_params.json"
+      ],
+      "modules": [
+        "wc2026.calibrated_elo_model"
+      ],
+      "refresh": "on input",
+      "cache": "partial",
+      "live_api": "no",
+      "known_issues": "none",
+      "product_rating_1_10": 7,
+      "technical_rating_1_10": 8,
+      "next_fixes": "none",
+      "status": "WORKING"
+    },
+    {
+      "label": "\ud83e\uddec Nation DNA",
+      "approx_line": 1038,
+      "data_files": [
+        "data/teams.csv",
+        "data/style_metrics.csv"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "none",
+      "product_rating_1_10": 7,
+      "technical_rating_1_10": 8,
+      "next_fixes": "none",
+      "status": "WORKING"
+    },
+    {
+      "label": "\u2694\ufe0f Head-to-Head",
+      "approx_line": 1353,
+      "data_files": [
+        "data/h2h_records.csv"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "FIXED: was crashing (duplicate xaxis)",
+      "product_rating_1_10": 7,
+      "technical_rating_1_10": 9,
+      "next_fixes": "none \u2014 crash fixed",
+      "status": "WORKING"
+    },
+    {
+      "label": "\ud83d\udcdc Historical Records",
+      "approx_line": 1449,
+      "data_files": [
+        "data/wc_history.csv"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "none",
+      "product_rating_1_10": 7,
+      "technical_rating_1_10": 8,
+      "next_fixes": "none",
+      "status": "WORKING"
+    },
+    {
+      "label": "\ud83d\udd2e Bracket Paths",
+      "approx_line": 1563,
+      "data_files": [
+        "outputs/tournament_run/*"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "none",
+      "product_rating_1_10": 7,
+      "technical_rating_1_10": 8,
+      "next_fixes": "none",
+      "status": "WORKING"
+    },
+    {
+      "label": "\ud83e\uddee Model Lab",
+      "approx_line": 1691,
+      "data_files": [
+        "outputs/audit/final_maturity_score_v6.json",
+        "outputs/calibration/*",
+        "ablation"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "maturity gauge now v6 (was stale 5.25); some roadmap text could be refreshed further",
+      "product_rating_1_10": 7,
+      "technical_rating_1_10": 8,
+      "next_fixes": "refresh remaining roadmap text to v6",
+      "status": "WORKING"
+    },
+    {
+      "label": "\ud83d\udce1 Data Quality",
+      "approx_line": 1945,
+      "data_files": [
+        "data/live/provider_status.json",
+        "wc2026_live.json",
+        "outputs/audit/*"
+      ],
+      "modules": [
+        "-"
+      ],
+      "refresh": "on load",
+      "cache": "yes",
+      "live_api": "no",
+      "known_issues": "none",
+      "product_rating_1_10": 8,
+      "technical_rating_1_10": 9,
+      "next_fixes": "none",
+      "status": "WORKING"
+    }
+  ]
+}

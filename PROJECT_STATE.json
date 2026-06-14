@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-06-14T00:22:47.001399+00:00",
+  "source_of_truth": true,
+  "public": {
+    "github": "https://github.com/Yorian-melki/wc2026-forecast-lab (PUBLIC)",
+    "portfolio": "https://www.yorian-melki.com (LIVE)",
+    "streamlit_public": false,
+    "wc2026_subdomain": false,
+    "render": "blueprint ready, not deployed",
+    "dns": "pending"
+  },
+  "local": {
+    "path": "~/FinderProjects/wc2026_june2026",
+    "run": "PYTHONPATH=src .venv/bin/python -m streamlit run app.py --server.port 8512",
+    "url": "http://localhost:8512",
+    "commit": "8484b07+",
+    "tests": "571 passed",
+    "apptest": "all 10 pages OK"
+  },
+  "model": {
+    "core": "Elo->Dixon-Coles Poisson",
+    "ml_accepted": true,
+    "ml_weight": 0.2,
+    "ml_wired": true,
+    "validation": [
+      "WC2010",
+      "WC2014",
+      "WC2018",
+      "WC2022"
+    ],
+    "intervals": "beta bootstrap (floor)",
+    "market": "benchmark only",
+    "dynamic_ml": "exists, not default"
+  },
+  "providers": {
+    "api_football": "active/primary-live",
+    "thestatsapi": "active (shotmap xG/odds)",
+    "highlightly": "active (xG)",
+    "football_data_org": "active (standings)",
+    "xg_caveat": "Highlightly~TheStatsAPI shared upstream",
+    "fallback": "static snapshot if no key"
+  },
+  "pages": {
+    "Release Status": "WORKING",
+    "Champion Tracker": "WORKING",
+    "Live Standings (polish pending)": "WORKING",
+    "Match Predictor": "WORKING",
+    "Nation DNA": "WORKING",
+    "Head-to-Head (crash fixed)": "WORKING",
+    "Historical Records": "WORKING",
+    "Bracket Paths": "WORKING",
+    "Model Lab (gauge->v6)": "WORKING",
+    "Data Quality": "WORKING"
+  },
+  "known_issues": [
+    "Live Standings UX not premium",
+    "QAT-SUI duplicate fixed at render (prune upcoming_today for full fix)",
+    "Model Lab roadmap prose partly pre-v6",
+    "legacy files retained (global_maturity 5.25, MODEL_CARD, session_handoff)",
+    "live needs API_FOOTBALL_KEY"
+  ],
+  "manual_patches": {
+    "app.py.bak_before_dashboard_hotfix": "created by manual hotfix, now gitignored",
+    "reconciled": true
+  },
+  "next_actions": {
+    "critical": [],
+    "high": [
+      "polish Live Standings UX",
+      "deploy Render + wc2026 CNAME",
+      "re-verify QAT-SUI on running app"
+    ],
+    "medium": [
+      "refresh Model Lab roadmap to v6",
+      "archive session_handoff"
+    ],
+    "later": [
+      "structural uncertainty",
+      "expand validation beyond 4 WCs"
+    ]
+  }
+}

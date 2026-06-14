@@ -650,7 +650,11 @@ elif page == "⚽ Live Standings":
             src = "offline snapshot (set API_FOOTBALL_KEY for live auto-update)"
         meta     = load_live_json()
         injuries = meta.get("key_injuries", {})
-        upcoming = meta.get("upcoming_today", [])
+        # Filter out matches that are already finished or currently live — a finished match
+        # must never appear under "Today's Upcoming" (fixes the QAT–SUI duplicate).
+        _done_or_live = {(m["home"], m["away"]) for m in completed} | {(m["home"], m["away"]) for m in live_now}
+        upcoming = [m for m in meta.get("upcoming_today", [])
+                    if (m.get("home"), m.get("away")) not in _done_or_live]
 
         # status line
         dot = TEAL if ok_live else MUTED

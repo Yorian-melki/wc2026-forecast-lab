@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-06-14T00:24:36.482627+00:00",
+  "py_compile": "OK",
+  "pytest": "571 passed",
+  "apptest": "all 10 pages OK",
+  "secret_scan": "CLEAN",
+  "qat_sui_dedup": "fixed at render AND data layer (upcoming_today pruned)",
+  "git": "docs + app.py + live_engine.py staged",
+  "pages_tested": 10
+}
