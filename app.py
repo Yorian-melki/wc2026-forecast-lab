@@ -522,17 +522,17 @@ elif page == "🏆 Champion Tracker":
             yaxis_range=[0, top16["champion_prob"].max() * 100 * 1.22],
             showlegend=False,
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
-        if "ci_lower_95" in elo_df.columns:
+        if "champion_ci_low" in elo_df.columns:
             with st.expander("Wilson 95% confidence intervals (sampling uncertainty only — not parameter uncertainty)"):
                 ci_tbl = elo_df.nlargest(16, "champion_prob")[
-                    ["team", "champion_prob", "ci_lower_95", "ci_upper_95"]
+                    ["team", "champion_prob", "champion_ci_low", "champion_ci_high"]
                 ].copy()
                 ci_tbl.columns = ["Team", "P(Champion)", "CI−95%", "CI+95%"]
                 for c in ["P(Champion)", "CI−95%", "CI+95%"]:
                     ci_tbl[c] = (ci_tbl[c] * 100).round(2).astype(str) + "%"
-                st.dataframe(ci_tbl, use_container_width=True, hide_index=True)
+                st.dataframe(ci_tbl, width="stretch", hide_index=True)
                 st.markdown("""<div class="caveat-box">
                 CIs reflect sampling variance (N=100K) only.
                 Parameter uncertainty (β_elo ± ~0.05) adds ±3–4 pp for top teams.
@@ -577,7 +577,7 @@ elif page == "🏆 Champion Tracker":
                 barmode="group",
                 yaxis_title="P(Champion) %",
             )
-            st.plotly_chart(fig2, use_container_width=True)
+            st.plotly_chart(fig2, width="stretch")
 
             st.markdown("**Largest model divergences (Elo vs Expert):**")
             for _, r in pd.concat([merged.nlargest(5, "delta"), merged.nsmallest(3, "delta")]).iterrows():
@@ -605,7 +605,7 @@ elif page == "🏆 Champion Tracker":
         for col in ["P(Win)", "P(Final)", "P(SF)", "P(QF)", "P(Advance)"]:
             if col in disp_full.columns:
                 disp_full[col] = (disp_full[col] * 100).round(2).astype(str) + "%"
-        st.dataframe(disp_full, use_container_width=True, hide_index=True, height=600)
+        st.dataframe(disp_full, width="stretch", hide_index=True, height=600)
 
     # Confederation breakdown
     st.markdown("---")
@@ -623,7 +623,7 @@ elif page == "🏆 Champion Tracker":
             hovertemplate="%{label}: %{value:.2f}%<extra></extra>",
         ))
         fig_conf.update_layout(**plotly_layout(height=340), showlegend=True)
-        st.plotly_chart(fig_conf, use_container_width=True)
+        st.plotly_chart(fig_conf, width="stretch")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -881,7 +881,7 @@ elif page == "🎯 Match Predictor":
                     font=dict(size=16, color=WHITE), showarrow=False,
                 )],
             )
-            st.plotly_chart(fig_pie, use_container_width=True)
+            st.plotly_chart(fig_pie, width="stretch")
             st.caption(
                 f"Expected goals: {team_a} λ={mu_a:.3f}, {team_b} λ={mu_b:.3f} "
                 f"(Elo-fitted Poisson, DC correction ρ={rho:.3f})"
@@ -907,7 +907,7 @@ elif page == "🎯 Match Predictor":
                 yaxis_title=f"{team_a} goals",
                 yaxis_autorange="reversed",
             )
-            st.plotly_chart(fig_heat, use_container_width=True)
+            st.plotly_chart(fig_heat, width="stretch")
 
             # If knockout: penalty probability
             if is_ko:
@@ -1003,7 +1003,7 @@ elif page == "🎯 Match Predictor":
                     barmode="stack", showlegend=True,
                     yaxis_range=[0, 100], xaxis_visible=False,
                 )
-                st.plotly_chart(fig_h2h, use_container_width=True)
+                st.plotly_chart(fig_h2h, width="stretch")
 
                 # Nemesis detection
                 if total >= 5:
@@ -1109,7 +1109,7 @@ elif page == "🧬 Nation DNA":
                     **plotly_layout(height=320),
                     yaxis_title="Probability %", yaxis_range=[0, 115],
                 )
-                st.plotly_chart(fig_st, use_container_width=True)
+                st.plotly_chart(fig_st, width="stretch")
 
             # Rank
             if "champion_prob" in elo_df.columns:
@@ -1215,12 +1215,12 @@ elif page == "🧬 Nation DNA":
                 **plotly_layout(height=260),
                 yaxis_title="Goal Differential", xaxis_title=None,
             )
-            st.plotly_chart(fig_form, use_container_width=True)
+            st.plotly_chart(fig_form, width="stretch")
 
             disp_form = team_form[["date", "opponent", "gf", "ga", "result", "tournament"]].copy()
             disp_form.columns = ["Date", "Opponent", "GF", "GA", "Result", "Tournament"]
             st.dataframe(disp_form.sort_values("Date", ascending=False),
-                         use_container_width=True, hide_index=True)
+                         width="stretch", hide_index=True)
 
     with t4:
         if tm_row is None:
@@ -1255,7 +1255,7 @@ elif page == "🧬 Nation DNA":
                     angularaxis=dict(gridcolor=BORDER),
                 ),
             )
-            st.plotly_chart(fig_radar, use_container_width=True)
+            st.plotly_chart(fig_radar, width="stretch")
             st.markdown("""<div class="caveat-box">
             ⚠️ <b>Analyst-prior ratings.</b> Attack/Defense/Midfield are hand-tuned,
             not statistically estimated. Used only in the Expert model — not in the primary Elo model.
@@ -1422,7 +1422,7 @@ elif page == "⚔️ Head-to-Head":
             **plotly_layout(height=600, xaxis=dict(tickangle=-45, gridcolor=BORDER,
                                                    linecolor=BORDER, tickcolor=BORDER, zeroline=False)),
         )
-        st.plotly_chart(fig_mat, use_container_width=True)
+        st.plotly_chart(fig_mat, width="stretch")
         st.caption("Row team win% vs column team (all competitive, not WC only). "
                    "0.5 / '—' = insufficient data.")
 
@@ -1484,7 +1484,7 @@ elif page == "📜 Historical Records":
                   "wc_runner_up": "🥈", "wc_third": "🥉", "wc_fourth": "4th"}
     st.dataframe(
         wch_display[cols_have].rename(columns=rename_map),
-        use_container_width=True, hide_index=True, height=400,
+        width="stretch", hide_index=True, height=400,
     )
 
     st.markdown("---")
@@ -1505,7 +1505,7 @@ elif page == "📜 Historical Records":
         textfont=dict(size=16, color=WHITE),
     ))
     fig_tit.update_layout(**plotly_layout(height=280), xaxis_title=None, yaxis_title="Titles")
-    st.plotly_chart(fig_tit, use_container_width=True)
+    st.plotly_chart(fig_tit, width="stretch")
 
     # Historical deep run rate vs current champion probability
     st.markdown("---")
@@ -1546,7 +1546,7 @@ elif page == "📜 Historical Records":
         fig_sc.update_xaxes(tickformat=".0%")
         fig_sc.update_yaxes(tickformat=".1%")
         fig_sc.update_layout(**plotly_layout(height=500))
-        st.plotly_chart(fig_sc, use_container_width=True)
+        st.plotly_chart(fig_sc, width="stretch")
         st.caption(
             "Bubble size = WC appearances. Teams above the trend line: model sees more potential "
             "than history. Below: model is skeptical despite historical pedigree."
@@ -1613,7 +1613,7 @@ elif page == "🔮 Bracket Paths":
             ),
             yaxis_title="Probability %",
         )
-        st.plotly_chart(fig_fun, use_container_width=True)
+        st.plotly_chart(fig_fun, width="stretch")
 
     # WC2026 format explainer
     st.markdown("---")
@@ -1799,7 +1799,7 @@ and runners-up were top-3 pre-tournament favourites in 5/7 editions).
                 ), row=1, col=2)
             fig2.update_layout(**plotly_layout(height=380), showlegend=False)
             fig2.update_xaxes(tickangle=-45)
-            st.plotly_chart(fig2, use_container_width=True)
+            st.plotly_chart(fig2, width="stretch")
 
             st.markdown("""
 **Decision:** Promote Model E (Elo-Calibrated) as primary.
@@ -1847,7 +1847,7 @@ Occam's razor: simpler model wins when calibration gap is material.
              "No external validation criterion. Internal consistency only."),
             (RED, "Expert model coefficients are analyst priors",
              "16 hand-tuned parameters (attack, defense, ppda, etc.) — zero statistical estimation. "
-             "Described correctly in MODEL_CARD.md but must not be conflated with MLE."),
+             "Described correctly in outputs/audit/model_card_public.md but must not be conflated with MLE."),
             (GOLD, "WC historical backtest: honest scope",
              "WC2022: ARG #1 pick (19.3%), actual winner. WC2018: FRA #5 (5.6%), actual winner. "
              "Champion-level mean-Brier (~0.027) ≈ uniform 1/48 null; discrimination shows at "
@@ -1912,7 +1912,7 @@ Occam's razor: simpler model wins when calibration gap is material.
                 number={"font": {"color": WHITE, "size": 48}},
             ))
             fig_gauge.update_layout(**plotly_layout(height=280))
-            st.plotly_chart(fig_gauge, use_container_width=True)
+            st.plotly_chart(fig_gauge, width="stretch")
 
             dim_names = [k.replace("_", " ").title() for k in scores.keys()]
             dim_vals  = list(scores.values())
@@ -1936,7 +1936,7 @@ Occam's razor: simpler model wins when calibration gap is material.
                 x=7, line_dash="dash", line_color=TEAL,
                 annotation_text="Publication floor", annotation_font_color=TEAL,
             )
-            st.plotly_chart(fig_dim, use_container_width=True)
+            st.plotly_chart(fig_dim, width="stretch")
 
             st.markdown(f"""
 **{g_avg:.2f}/10 → Serious, auditable lab. Not investment-grade forecasting.**
@@ -2089,7 +2089,7 @@ elif page == "📡 Data Quality":
                             "Domain stats", "Red card adj", "Injury proxy", "Context",
                             "Media", "Manual only", "Calibration"],
     }
-    st.dataframe(pd.DataFrame(coverage_data), use_container_width=True, hide_index=True)
+    st.dataframe(pd.DataFrame(coverage_data), width="stretch", hide_index=True)
 
     st.markdown("---")
 
@@ -2191,7 +2191,7 @@ elif page == "📡 Data Quality":
             show["champ_xg"] = (show["champ_xg"] * 100).round(2).astype(str) + "%"
             show["champ_delta_pp"] = show["champ_delta_pp"].round(3)
             show.columns = ["Team", "Champ (score-only)", "Champ (xG-adj)", "Δ pp"]
-            st.dataframe(show, use_container_width=True, hide_index=True)
+            st.dataframe(show, width="stretch", hide_index=True)
 
     # ── ML 1X2 gate (Phase 7) ────────────────────────────────────────────────
     ml_report_path = ROOT / "outputs" / "audit" / "ml_validation_report.json"
@@ -2213,7 +2213,7 @@ elif page == "📡 Data Quality":
             {"Model": "ML (logistic)", **{k: m["ml"][k] for k in ["brier", "nll", "ece"]}},
         ])
         cmp.columns = ["Model", "Brier ↓", "NLL ↓", "ECE ↓"]
-        st.dataframe(cmp, use_container_width=True, hide_index=True)
+        st.dataframe(cmp, width="stretch", hide_index=True)
         st.caption(
             f"Gate: {mr['gate']['reason']} "
             "Honest scope: this panel validates the **single-match 1X2 model** on a leak-free temporal "
@@ -2244,7 +2244,7 @@ elif page == "📡 Data Quality":
                 t["champ_ml"] = (t["champ_ml"] * 100).round(2).astype(str) + "%"
                 t["champ_delta_pp"] = t["champ_delta_pp"].round(3)
                 t.columns = ["Team", "Champ (Elo-only)", "Champ (ML-ens)", "Δ pp"]
-                st.dataframe(t, use_container_width=True, hide_index=True)
+                st.dataframe(t, width="stretch", hide_index=True)
             st.caption(
                 f"Max champion move {ens.get('max_champion_move_pp')}pp shown at the 0.50 evaluation "
                 "weight (the integration A/B); the **production weight is 0.20**. "
@@ -2276,7 +2276,7 @@ elif page == "📡 Data Quality":
             wf = json.loads(wf_path.read_text())
             agg = pd.DataFrame(wf["aggregate_by_weight"])[["ml_weight", "mean_champ_brier", "mean_entropy"]]
             agg.columns = ["ML weight", "Champ Brier (WC18+22)", "Entropy"]
-            st.dataframe(agg.round(5), use_container_width=True, hide_index=True)
+            st.dataframe(agg.round(5), width="stretch", hide_index=True)
         st.warning(
             f"**Tournament validation (2 WCs):** {ke.get('tournament_disagreement')} "
             f"Best raw weight 0.5 was flagged overconcentrated → chose 0.20. "
@@ -2294,7 +2294,7 @@ elif page == "📡 Data Quality":
             mat = json.loads(mat_path.read_text())
             with st.expander(f"Maturity {mat['before']} → {mat['after']} (by dimension) + hard cap"):
                 ms = pd.DataFrame([{"Dimension": k, "Score": v} for k, v in mat["scores_after"].items()])
-                st.dataframe(ms, use_container_width=True, hide_index=True)
+                st.dataframe(ms, width="stretch", hide_index=True)
                 st.caption(f"**Hard cap:** {mat['hard_cap']}")
 
     # ── Forecast Uncertainty & Robustness (Batch A–D) ────────────────────────
@@ -2313,7 +2313,7 @@ elif page == "📡 Data Quality":
         iv = ci.get("intervals", {})
         ivrows = [{"Team": t, "Low (P5)": f"{d['low']*100:.2f}%", "Base": f"{d['base']*100:.2f}%",
                    "High (P95)": f"{d['high']*100:.2f}%"} for t, d in list(iv.items())[:10]]
-        st.dataframe(pd.DataFrame(ivrows), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(ivrows), width="stretch", hide_index=True)
         st.caption(
             "Bands propagate **beta sampling uncertainty only** (small — the 10.5k-match dataset "
             "pins beta tightly). They are a FLOOR: they exclude the temperature-calibration choice, "

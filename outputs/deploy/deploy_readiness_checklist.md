@@ -11,9 +11,9 @@ Status as of 2026-06-14. ☑ done · ☐ user action.
 
 ## Reproducibility
 - ☑ One-command rebuild: `scripts/rebuild_publication_forecast.py` (smoke + `--full`)
-- ☑ `requirements.txt` updated (scipy, scikit-learn, statsmodels, penaltyblog, dotenv, requests)
+- ☑ `requirements.txt` updated (numpy, pandas, scipy, scikit-learn, statsmodels, streamlit<2, plotly, dotenv, requests, pytest)
 - ☑ Offline reproduction proven (no keys needed for forecast/validation)
-- ☑ 558 tests passing
+- ☑ 571 tests passing
 
 ## Documentation
 - ☑ Public model card (`outputs/audit/model_card_public.md`)

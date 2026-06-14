@@ -51,4 +51,8 @@ app.py.bak_before_dashboard_hotfix
 *.bak_*
 app.py.bak_*
 data/*.bak
+*_BACKUP_PRE_P0.csv
 .DS_Store
+
+# Internal AI session-handoff notes — kept locally, not part of the public repo.
+/session_handoff/

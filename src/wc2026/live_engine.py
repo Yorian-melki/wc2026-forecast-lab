@@ -13,6 +13,7 @@ key, or parse error returns the last-known state and never raises, so the UI nev
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -168,7 +169,11 @@ def merge_and_persist(state: dict) -> dict:
             existing["group_standings"] = build_standings(merged)
             existing["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
             existing.setdefault("tournament", "FIFA World Cup 2026")
-            LIVE_PATH.write_text(json.dumps(existing, indent=2))
+            # Persist to disk UNLESS explicitly disabled (tests / AppTest set
+            # WC2026_DISABLE_PERSIST=1 so they never mutate the committed snapshot).
+            # Live deploy leaves it unset → standings persist normally.
+            if os.getenv("WC2026_DISABLE_PERSIST") != "1":
+                LIVE_PATH.write_text(json.dumps(existing, indent=2))
             res["changed"] = True
     except Exception:
         pass

@@ -107,7 +107,7 @@ def write_pack(smoke_res, full_res=None):
         "key_inputs": KEY_INPUTS, "key_outputs": KEY_OUTPUTS,
         "pipeline": [{"step": s[0], "cmd": s[1], "approx_seconds": s[2], "offline": s[3]} for s in FULL_PIPELINE],
         "expected_total_runtime_min": round(sum(s[2] for s in FULL_PIPELINE) / 60, 1),
-        "expected_tests": "558 passed (PYTHONPATH=src .venv/bin/python -m pytest tests/ -q)",
+        "expected_tests": "571 passed (PYTHONPATH=src .venv/bin/python -m pytest tests/ -q)",
         "smoke_result": smoke_res,
         "full_result": full_res,
         "offline_vs_live": {

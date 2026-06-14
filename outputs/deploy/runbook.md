@@ -5,7 +5,7 @@
 cd ~/FinderProjects/wc2026_june2026
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-PYTHONPATH=src python -m pytest tests/ -q            # expect 558 passed
+PYTHONPATH=src python -m pytest tests/ -q            # expect 571 passed
 streamlit run app.py                                  # dashboard at localhost:8501
 ```
 

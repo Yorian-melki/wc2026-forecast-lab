@@ -28,7 +28,7 @@ PYTHONPATH=src .venv/bin/python scripts/rebuild_publication_forecast.py
 | expanded_validation | `PYTHONPATH=src .venv/bin/python scripts/run_expanded_validation_and_dynamic_ml.py --n 30000` | 280 |
 | beta_intervals | `PYTHONPATH=src .venv/bin/python scripts/run_beta_uncertainty_intervals.py --b 300 --n 50000` | 190 |
 
-**Expected tests:** 558 passed (PYTHONPATH=src .venv/bin/python -m pytest tests/ -q)
+**Expected tests:** 571 passed (PYTHONPATH=src .venv/bin/python -m pytest tests/ -q)
 
 ## Inputs
 

@@ -1,6 +1,6 @@
 # Model Card — WC2026 Probabilistic Forecast Lab
 
-**Version:** publication-grade (2026-06-14) · **Maturity (self-assessed):** 6.43/10 · **Tests:** 558 passing
+**Version:** publication-grade (2026-06-14) · **Maturity (self-assessed):** 6.93/10 · **Tests:** 571 passing
 
 ## Purpose
 Produce an auditable probability distribution over the 2026 FIFA World Cup champion (and every

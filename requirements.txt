@@ -3,9 +3,13 @@ pandas>=2.2
 scipy>=1.13
 scikit-learn>=1.5
 statsmodels>=0.14
-penaltyblog>=1.1
-pytest>=8.0
-streamlit>=1.44
+streamlit>=1.44,<2
 plotly>=5.24
 python-dotenv>=1.0
 requests>=2.31
+pytest>=8.0
+# NOTE: the offline chart/ablation scripts (scripts/generate_*_chart.py,
+# scripts/run_hybrid_ablations.py) additionally need matplotlib. The deployed app
+# does NOT import matplotlib, so it is deliberately kept OUT of the Render build to
+# stay lean. For local chart generation: pip install matplotlib
+# penaltyblog removed 2026-06-14 — it was declared but imported nowhere in the codebase.

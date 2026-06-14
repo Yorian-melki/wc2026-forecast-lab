@@ -26,8 +26,9 @@ without it. Read in this order, then act.
 cd ~/FinderProjects/wc2026_june2026
 PYTHONPATH=src .venv/bin/python -m py_compile app.py
 PYTHONPATH=src .venv/bin/python -m pytest tests/ -q          # expect 571 passed
-# AppTest all pages:
-PYTHONPATH=src .venv/bin/python - <<'PY'
+# AppTest all pages. WC2026_DISABLE_PERSIST=1 stops the live fragment from rewriting
+# data/wc2026_live.json during the test (live behavior is otherwise unchanged):
+WC2026_DISABLE_PERSIST=1 PYTHONPATH=src .venv/bin/python - <<'PY'
 from dotenv import load_dotenv; load_dotenv(".env")
 from streamlit.testing.v1 import AppTest
 pages=["🚀 Release Status","🏆 Champion Tracker","⚽ Live Standings","🎯 Match Predictor","🧬 Nation DNA","⚔️ Head-to-Head","📜 Historical Records","🔮 Bracket Paths","🧮 Model Lab","📡 Data Quality"]
