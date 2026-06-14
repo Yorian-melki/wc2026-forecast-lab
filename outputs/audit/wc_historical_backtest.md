@@ -1,6 +1,6 @@
 # WC Historical Backtest — Calibrated Elo Model
 
-Generated: 2026-06-13  |  Elapsed: 127s
+Generated: 2026-06-14  |  Elapsed: 134s
 
 ## Methodology
 
@@ -17,15 +17,16 @@ Generated: 2026-06-13  |  Elapsed: 127s
 
 | Tournament | Group | SF | Champion | Model Pick | Actual | Rank |
 |---|---|---|---|---|---|---|
-| FIFA World Cup 2022 | 0.2130 | 0.0975 | 0.0231 | ARG (17.2%) | ARG (17.2%) | #1 |
-| FIFA World Cup 2018 | 0.1836 | 0.1035 | 0.0302 | BRA (16.9%) | FRA (5.5%) | #6 |
-| **Random baseline** | 0.2500 | 0.2500 | 0.2500 | — | — | — |
+| FIFA World Cup 2022 | 0.2132 | 0.0967 | 0.0222 | ARG (19.3%) | ARG (19.3%) | #1 |
+| FIFA World Cup 2018 | 0.1785 | 0.1046 | 0.0304 | BRA (19.4%) | FRA (5.6%) | #5 |
+| **Uniform 1/48 null (champion)** | — | — | 0.0204 | — | — | — |
 
 ## Combined
 
-- Average champion Brier: **0.0266**
-- Skill vs random: **89% below random baseline**
-- Actual champion ranks: {'wc2022': 1, 'wc2018': 6}
+- Average champion Brier: **0.0263**
+- Uniform 1/48 null (champion): **0.0204** — the honest no-information baseline (mean-Brier over 48 teams, not a 0.50 coin-flip).
+- Champion-level Brier is on par with that null; the model's discrimination is at group/round granularity. n=2 tournaments — a track record, not a skill guarantee.
+- Actual champion ranks: {'wc2022': 1, 'wc2018': 5}
 
 ## Top 10 Champion Probabilities
 
@@ -33,36 +34,36 @@ Generated: 2026-06-13  |  Elapsed: 127s
 
 | # | Team | Prob | Outcome |
 |---|---|---|---|
-| 1 | ARG | 17.2% | **CHAMPION** |
-| 2 | BRA | 16.6% |  |
-| 3 | ESP | 7.0% |  |
-| 4 | NED | 6.9% |  |
-| 5 | FRA | 6.3% |  |
+| 1 | ARG | 19.3% | **CHAMPION** |
+| 2 | BRA | 18.2% |  |
+| 3 | ESP | 7.2% |  |
+| 4 | NED | 7.2% |  |
+| 5 | FRA | 6.7% |  |
 | 6 | BEL | 5.3% |  |
-| 7 | POR | 4.6% |  |
-| 8 | ENG | 3.6% |  |
-| 9 | URU | 3.6% |  |
-| 10 | DEN | 3.4% |  |
+| 7 | POR | 4.4% |  |
+| 8 | ENG | 3.5% |  |
+| 9 | URU | 3.5% |  |
+| 10 | DEN | 3.2% |  |
 
 ### FIFA World Cup 2018
 
 | # | Team | Prob | Outcome |
 |---|---|---|---|
-| 1 | BRA | 16.9% |  |
-| 2 | ESP | 10.3% |  |
-| 3 | ARG | 9.0% |  |
-| 4 | GER | 7.8% |  |
-| 5 | POR | 5.5% |  |
-| 6 | FRA | 5.5% | **CHAMPION** |
-| 7 | ENG | 5.4% |  |
+| 1 | BRA | 19.4% |  |
+| 2 | ESP | 11.1% |  |
+| 3 | ARG | 9.4% |  |
+| 4 | GER | 8.2% |  |
+| 5 | FRA | 5.6% | **CHAMPION** |
+| 6 | POR | 5.5% |  |
+| 7 | ENG | 5.3% |  |
 | 8 | BEL | 4.9% |  |
-| 9 | PER | 4.9% |  |
-| 10 | COL | 4.7% |  |
+| 9 | PER | 4.8% |  |
+| 10 | COL | 4.4% |  |
 
 ## Interpretation
 
-A Brier score below 0.250 (random) confirms the model has real discriminative power.
-A lower score is better. The model is useful if champion Brier < ~0.150.
-
-Note: The actual champion appearing in the top 5 model picks is consistent with
-a well-calibrated model — a single-tournament upset does not invalidate the model.
+Because this Brier is averaged over 48 teams, the no-information baseline is the uniform
+1/48 null (~0.0204), not a coin-flip baseline. At champion granularity the model sits on that
+null — it does not reliably pinpoint the single winner. Its useful discrimination is at the
+group/round level, where each stage has many positive teams. Two backtested tournaments are a
+track record, not a skill guarantee; a single upset (FRA 2018) is expected.

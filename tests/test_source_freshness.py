@@ -74,11 +74,15 @@ class TestSourceFreshnessFiles:
         assert "wc2022" in data["tournaments"]
         wc22 = data["tournaments"]["wc2022"]
         assert "brier_scores" in wc22
-        # Brier score for champion must be below random baseline (0.250)
+        # Champion Brier is a per-team mean over 48 teams; sanity-check it is a finite small value
+        # and that the model ranked the actual champion sensibly. No 0.250 coin-flip framing — the
+        # honest null for this metric is the uniform 1/48 baseline (~0.0204), not 0.250.
         brier_champ = wc22["brier_scores"]["champion"]
-        assert brier_champ < 0.250, (
-            f"WC2022 champion Brier={brier_champ:.4f} must be < 0.250 (random baseline). "
-            "Model has no discriminative power."
+        assert 0.0 < brier_champ < 0.05, (
+            f"WC2022 champion Brier={brier_champ:.4f} outside the sane range for a 48-team mean-Brier."
+        )
+        assert wc22.get("actual_champion_rank", 99) <= 8, (
+            "WC2022 actual champion (ARG) should rank within the model's top 8 picks."
         )
 
     def test_bootstrap_ci_json_exists(self):

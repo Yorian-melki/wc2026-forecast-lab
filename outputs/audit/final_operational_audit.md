@@ -64,10 +64,10 @@ Generated: 2026-06-13 | Session: Phase 0–10 complete
 
 ### Validation (real, done this session)
 - **WC 2022**: ARG was model's #1 pick (17.2%), actual winner ✓
-- **WC 2022 champion Brier**: 0.0231 (91% below random=0.250)
+- **WC 2022 champion Brier**: 0.0231 (per-team mean over 48 teams)
 - **WC 2018**: FRA model's #6 pick (5.5%), actual winner (6th pick winning is plausible — upsets happen)
-- **WC 2018 champion Brier**: 0.0302 (88% below random)
-- **Average champion Brier**: 0.0266 vs 0.250 random = **89% skill ratio**
+- **WC 2018 champion Brier**: 0.0302 (per-team mean over 48 teams)
+- **Average champion Brier**: 0.0266 vs uniform 1/48 null ≈ 0.0204 — **on par with the no-information baseline; no champion-level skill claimed** (a coin-flip baseline does not apply to a 48-team mean-Brier). Discrimination is at group/round granularity; n=2 tournaments.
 
 ### β_elo uncertainty (done this session)
 - Bootstrap 200 iterations: β_raw CI [0.9592, 1.0127] — **5.4% CI width = STABLE**

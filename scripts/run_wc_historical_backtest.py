@@ -151,6 +151,18 @@ def _brier(probs: dict[str, float], positive: set[str], all_teams: set[str]) -> 
     return float(np.mean(squares)) if squares else 1.0
 
 
+def _uniform_brier(n_positive: int, n_teams: int) -> float:
+    """Mean-Brier (over n_teams) of the no-information model predicting n_positive/n_teams for all.
+
+    This is the correct null for a per-team mean-Brier: for the champion event (1 positive of 48)
+    it is ~0.0204 — NOT a 0.50 coin-flip (0.25). Used so the report never overstates 'skill'.
+    """
+    if n_teams <= 0:
+        return 0.0
+    p = n_positive / n_teams
+    return (n_positive * (1.0 - p) ** 2 + (n_teams - n_positive) * p ** 2) / n_teams
+
+
 def _rps(probs_dict: dict[str, float], thresholds: list[tuple[set, set, set]]) -> float:
     """
     Ranked Probability Score across ordinal stages.
@@ -369,7 +381,7 @@ def run_backtest(
     actual_rank = next((i+1 for i, (t,_) in enumerate(sorted_by_champion) if t == actual_champ_code), 99)
 
     print(f"  [4/4] Results:")
-    print(f"    Brier (group survival):  {bs_group:.4f}  [random=0.250]")
+    print(f"    Brier (group survival):  {bs_group:.4f}")
     print(f"    Brier (R16/QF advance):  {bs_r16:.4f}")
     print(f"    Brier (SF):              {bs_sf:.4f}")
     print(f"    Brier (champion):        {bs_champ:.4f}")
@@ -399,7 +411,7 @@ def run_backtest(
             "r16_advance":    round(bs_r16, 5),
             "semifinal":      round(bs_sf, 5),
             "champion":       round(bs_champ, 5),
-            "random_baseline": 0.250,
+            "uniform_null_champion": round(_uniform_brier(1, len(all_codes)), 5),
         },
         "model_champion": model_champ,
         "model_champion_prob": round(model_champ_prob, 4),
@@ -447,10 +459,10 @@ def main() -> None:
     print(f"\n{'='*60}")
     print(f"  COMBINED SUMMARY")
     print(f"{'='*60}")
-    print(f"  Avg champion Brier:  {avg_champ_brier:.4f}")
-    print(f"  Random baseline:     0.250")
-    print(f"  Skill ratio:         {(0.250 - avg_champ_brier) / 0.250 * 100:.0f}% below random")
-    print(f"  Actual champion rank: {champ_ranks}")
+    uniform_champ = _uniform_brier(1, 48)
+    print(f"  Avg champion Brier:      {avg_champ_brier:.4f}")
+    print(f"  Uniform 1/48 null:       {uniform_champ:.4f}  (no-information baseline)")
+    print(f"  Actual champion ranks:   {champ_ranks}  (n={len(results)})")
     print(f"  Elapsed: {elapsed:.0f}s")
 
     # Save JSON
@@ -472,8 +484,13 @@ def main() -> None:
         "tournaments": results,
         "combined": {
             "avg_champion_brier": round(avg_champ_brier, 5),
-            "random_baseline": 0.250,
-            "skill_pct_below_random": round((0.250 - avg_champ_brier) / 0.250 * 100, 1),
+            "uniform_null_champion_brier": round(_uniform_brier(1, 48), 5),
+            "baseline_note": (
+                "Brier is a mean over 48 teams; the no-information baseline is the uniform 1/48 null "
+                "(~0.0204), not a 0.50 coin-flip. At champion granularity the model is on par with that "
+                "null — discrimination shows at group/round stages. n=2 tournaments: a track record, "
+                "not a skill guarantee."
+            ),
             "actual_champion_ranks": {wc: r["actual_champion_rank"] for wc, r in results.items()},
         },
     }
@@ -521,12 +538,13 @@ def _make_markdown_report(output: dict) -> str:
             f"{r['actual_champion']} ({r['actual_champion_prob']*100:.1f}%) | #{r['actual_champion_rank']} |"
         )
     lines.extend([
-        f"| **Random baseline** | 0.2500 | 0.2500 | 0.2500 | — | — | — |",
+        f"| **Uniform 1/48 null (champion)** | — | — | {c['uniform_null_champion_brier']:.4f} | — | — | — |",
         "",
         "## Combined",
         "",
         f"- Average champion Brier: **{c['avg_champion_brier']:.4f}**",
-        f"- Skill vs random: **{c['skill_pct_below_random']:.0f}% below random baseline**",
+        f"- Uniform 1/48 null (champion): **{c['uniform_null_champion_brier']:.4f}** — the honest no-information baseline (mean-Brier over 48 teams, not a 0.50 coin-flip).",
+        f"- Champion-level Brier is on par with that null; the model's discrimination is at group/round granularity. n={len(output['tournaments'])} tournaments — a track record, not a skill guarantee.",
         f"- Actual champion ranks: {c['actual_champion_ranks']}",
         "",
         "## Top 10 Champion Probabilities",
@@ -544,11 +562,11 @@ def _make_markdown_report(output: dict) -> str:
     lines.extend([
         "## Interpretation",
         "",
-        "A Brier score below 0.250 (random) confirms the model has real discriminative power.",
-        "A lower score is better. The model is useful if champion Brier < ~0.150.",
-        "",
-        "Note: The actual champion appearing in the top 5 model picks is consistent with",
-        "a well-calibrated model — a single-tournament upset does not invalidate the model.",
+        "Because this Brier is averaged over 48 teams, the no-information baseline is the uniform",
+        "1/48 null (~0.0204), not a coin-flip baseline. At champion granularity the model sits on that",
+        "null — it does not reliably pinpoint the single winner. Its useful discrimination is at the",
+        "group/round level, where each stage has many positive teams. Two backtested tournaments are a",
+        "track record, not a skill guarantee; a single upset (FRA 2018) is expected.",
     ])
     return "\n".join(lines)
 

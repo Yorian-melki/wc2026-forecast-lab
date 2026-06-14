@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-06-13T16:20:11.529050+00:00",
+  "selected_model_mode": "Elo-Poisson/Dixon-Coles + xG live adjustment + ML ensemble @0.20 (rollback-enabled); market-benchmarked, NOT market-integrated",
+  "components": {
+    "core": "CalibratedEloMatchModel (Elo->Dixon-Coles Poisson) \u2014 robust spine, KEPT",
+    "xg_live_adjustment": "KEPT \u2014 bounded \u00b18 Elo/match, guardrail passed (0.2pp), live-conditioning only",
+    "ml_ensemble": {
+      "status": "INTEGRATED",
+      "weight": 0.2,
+      "evidence": "Match-level: Brier 0.508<0.529 (leak-free 3580 matches). Tournament walk-forward (WC2018+WC2022, per-cutoff retrained ML): aggregate champ Brier improves but w=0.5 OVERCONCENTRATES (hurts WC2018 upset). Robust choice = 0.20.",
+      "rollback": "use_ml_match_model=false reverts to Elo-only"
+    },
+    "market_odds": {
+      "status": "BENCHMARK_ONLY",
+      "reason": "4 WC2026 matches only; model slightly overconfident vs market (entropy 0.970 vs 1.004); not enough to justify integration"
+    }
+  },
+  "why_not_more_complex": "w=0.5 ML and market integration were both REJECTED on evidence/robustness grounds, not adopted by default. The chosen stack is the best evidence/robustness tradeoff.",
+  "key_evidence": {
+    "tournament_chosen_weight": 0.2,
+    "tournament_improvement_vs_elo_pct": 1.49,
+    "overconcentration_flag_at_best_brier_weight": true,
+    "tournament_disagreement": "ML helps when the favorite wins (WC2022) and hurts on an upset winner (WC2018). 2-tournament sample.",
+    "market_confidence": "overconfident",
+    "market_large_disagreements": [
+      "USA-PAR"
+    ],
+    "beta_sensitivity_level": "HIGH",
+    "beta_max_champion_range_pp": 8.36
+  },
+  "honest_caveats": [
+    "Tournament validation = 2 tournaments. Directional, not statistically powered.",
+    "ML helps favorites, hurts upsets \u2014 0.20 limits but does not eliminate this.",
+    "beta sensitivity is HIGH (8.36pp) \u2014 forecast intervals should widen; no beta CI yet.",
+    "Market integration deferred (4-match sample)."
+  ]
+}

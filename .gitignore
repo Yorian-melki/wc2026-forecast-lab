@@ -31,6 +31,21 @@ app.py.bak_before_dashboard_hotfix
 !outputs/audit/final_maturity_score_v6.json
 !outputs/audit/final_maturity_score_v5.json
 
+# Allowlist: audit artifacts the live dashboard (app.py) reads at runtime. Verified
+# secret-clean (no key fragments) so the deployed Data Quality page renders instead of
+# showing "Run: ..." placeholders. Keep this list in sync with the artifacts app.py reads.
+!outputs/audit/final_maturity_score_v4.json
+!outputs/audit/wc_historical_backtest.json
+!outputs/audit/ml_validation_report.json
+!outputs/audit/beta_bootstrap_ci.json
+!outputs/audit/xg_adjustment_audit.json
+!outputs/audit/xg_probability_delta.csv
+!outputs/audit/ml_ensemble_integration_decision.json
+!outputs/audit/ml_ensemble_probability_delta.csv
+!outputs/audit/model_stack_final_decision.json
+!outputs/audit/tournament_walkforward_validation.json
+!outputs/audit/upset_robust_ml_weighting.json
+
 # Backup / junk (never commit)
 *.bak
 *.bak_*

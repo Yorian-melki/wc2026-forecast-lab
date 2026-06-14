@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-06-13T16:22:59.161290+00:00",
+  "decision": "INTEGRATED",
+  "integration_point": "CalibratedEloMatchModel._dc_sample \u2014 DC scoreline PMF reweighted so W/D/L marginals match a 0.5/0.5 ensemble of DC-implied and ML-logistic 1X2.",
+  "why_safe": [
+    "Reweighting scales the 3 win/draw/loss regions of the joint scoreline PMF; the conditional scoreline distribution WITHIN each region is preserved (verified np.allclose).",
+    "Goal-difference distribution intact -> group tiebreakers unaffected.",
+    "Draw scorelines preserved -> knockout ET/penalty logic unaffected.",
+    "Extra-time increment PMF is NOT reweighted (ML predicts full-match 1X2, not ET-conditional).",
+    "Rollback verified: use_ml=False reproduces the Elo-only distribution exactly."
+  ],
+  "why_justified": "Match-level: ML beats Elo-only (Brier 0.508<0.529). Tournament walk-forward set weight to 0.20 (down from 0.50) for upset robustness.",
+  "ensemble_weight": {
+    "elo_calibrated": 0.8,
+    "ml_logistic": 0.2,
+    "source": "tournament_walkforward_validation"
+  },
+  "rollback": "set use_ml_match_model=false in data/model_stack_config.json (or CalibratedEloMatchModel(use_ml=False))",
+  "max_champion_move_pp": 1.861,
+  "top_deltas": [
+    {
+      "team": "ESP",
+      "champ_elo_only": 0.173,
+      "champ_ml_ensemble": 0.1916,
+      "delta_pp": 1.861
+    },
+    {
+      "team": "ARG",
+      "champ_elo_only": 0.1484,
+      "champ_ml_ensemble": 0.1606,
+      "delta_pp": 1.22
+    },
+    {
+      "team": "FRA",
+      "champ_elo_only": 0.0965,
+      "champ_ml_ensemble": 0.1069,
+      "delta_pp": 1.036
+    },
+    {
+      "team": "ENG",
+      "champ_elo_only": 0.0689,
+      "champ_ml_ensemble": 0.0703,
+      "delta_pp": 0.137
+    },
+    {
+      "team": "BRA",
+      "champ_elo_only": 0.056,
+      "champ_ml_ensemble": 0.0565,
+      "delta_pp": 0.053
+    },
+    {
+      "team": "POR",
+      "champ_elo_only": 0.0491,
+      "champ_ml_ensemble": 0.0493,
+      "delta_pp": 0.022
+    },
+    {
+      "team": "COL",
+      "champ_elo_only": 0.0474,
+      "champ_ml_ensemble": 0.0467,
+      "delta_pp": -0.069
+    },
+    {
+      "team": "NED",
+      "champ_elo_only": 0.0322,
+      "champ_ml_ensemble": 0.0323,
+      "delta_pp": 0.012
+    }
+  ],
+  "conservation": {
+    "champion_sum_elo_only": 1.0,
+    "champion_sum_ml_ensemble": 1.0
+  },
+  "honest_caveats": [
+    "Weight reduced 0.50 -> 0.20 by WC2018+WC2022 walk-forward: 0.50 overconcentrated favorites (hurt the WC2018 upset).",
+    "ML helps when the favorite wins, hurts on upsets; 0.20 limits but does not remove this.",
+    "Tournament validation = 2 WCs. Directional evidence."
+  ],
+  "next_step": "Tournament-level walk-forward CV (refit beta per held-out WC, score champion Brier with vs without ML ensemble) to confirm the favorite concentration is calibrated, then tune the 0.5 weight."
+}

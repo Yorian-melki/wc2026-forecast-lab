@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-06-13T12:28:18.185028+00:00",
+  "n": 100000,
+  "seed": 20260613,
+  "config": {
+    "weight_per_xg_margin": 6.0,
+    "max_abs_delta": 8.0
+  },
+  "max_champion_move_pp": 0.203,
+  "guardrail_pp": 1.0,
+  "guardrail_passed": true,
+  "default_mode_recommendation": "xg_adjusted",
+  "n_matches_with_xg": 4,
+  "elo_delta_xg_vs_score": {
+    "MEX": -3.66,
+    "USA": -8.0,
+    "PAR": 8.0,
+    "KOR": 2.82,
+    "CZE": -2.82,
+    "BIH": -1.62,
+    "RSA": 3.66,
+    "CAN": 1.62
+  }
+}

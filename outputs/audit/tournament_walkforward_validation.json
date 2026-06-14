@@ -1,0 +1,474 @@
+{
+  "generated_at": "2026-06-13T16:02:28.916877+00:00",
+  "n_sims_per_config": 30000,
+  "seed": 20260613,
+  "weights_tested": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.5
+  ],
+  "aggregate_by_weight": [
+    {
+      "ml_weight": 0.0,
+      "mean_champ_brier": 0.026632,
+      "mean_sf_brier": 0.100492,
+      "mean_group_brier": 0.19844,
+      "mean_entropy": 2.8903,
+      "mean_top1": 0.17145
+    },
+    {
+      "ml_weight": 0.1,
+      "mean_champ_brier": 0.026361,
+      "mean_sf_brier": 0.100682,
+      "mean_group_brier": 0.197205,
+      "mean_entropy": 2.829,
+      "mean_top1": 0.1838
+    },
+    {
+      "ml_weight": 0.2,
+      "mean_champ_brier": 0.026236,
+      "mean_sf_brier": 0.100954,
+      "mean_group_brier": 0.196146,
+      "mean_entropy": 2.775,
+      "mean_top1": 0.19155
+    },
+    {
+      "ml_weight": 0.3,
+      "mean_champ_brier": 0.026178,
+      "mean_sf_brier": 0.101053,
+      "mean_group_brier": 0.194892,
+      "mean_entropy": 2.7196,
+      "mean_top1": 0.204
+    },
+    {
+      "ml_weight": 0.5,
+      "mean_champ_brier": 0.026084,
+      "mean_sf_brier": 0.10206,
+      "mean_group_brier": 0.194104,
+      "mean_entropy": 2.6109,
+      "mean_top1": 0.2263
+    }
+  ],
+  "elo_only_champ_brier": 0.026632,
+  "best_weight_by_brier": 0.5,
+  "best_brier": 0.026084,
+  "worst_case_regret_by_weight": {
+    "0.00": 0.0,
+    "0.10": 0.0057,
+    "0.20": 0.0045,
+    "0.30": 0.0151,
+    "0.50": 0.0333
+  },
+  "chosen_weight": 0.2,
+  "chosen_rule": "smallest ML weight that improves aggregate champ Brier, captures >=60% of best improvement, AND keeps worst-case per-tournament regret <=3%; else 0 (ML tournament-diagnostic-only)",
+  "chosen_champ_brier": 0.026236,
+  "improvement_vs_elo_only_pct": 1.49,
+  "tournament_disagreement": "ML helps when the favorite wins (WC2022) and hurts on an upset winner (WC2018). 2-tournament sample.",
+  "overconcentration_flag": true,
+  "entropy_elo_only": 2.8903,
+  "entropy_chosen": 2.775,
+  "leakage_notes": [
+    "Team Elos: leak-free (pre-cutoff rolling Elo).",
+    "ML model: leak-free (retrained per cutoff; never sees the test tournament).",
+    "beta_elo: FIXED across weights (full-history fit) -> absolute Brier mildly optimistic, but weight comparison valid.",
+    "Sample = 2 tournaments. Treat as directional evidence, not proof."
+  ],
+  "per_tournament": {
+    "FIFA World Cup 2018": {
+      "cutoff": "2018-06-14",
+      "n_teams": 32,
+      "random_champ_brier": 0.96875,
+      "by_weight": {
+        "0.00": {
+          "champ_brier": 0.030162,
+          "group_brier": 0.183924,
+          "sf_brier": 0.103436,
+          "qf_brier": 0.187101,
+          "actual_champ": "FRA",
+          "actual_champ_prob": 0.0547,
+          "actual_champ_rank": 5,
+          "top3_cover": 0,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.9093,
+          "top1_prob": 0.1708,
+          "top1_team": "BRA",
+          "top5": [
+            {
+              "team": "BRA",
+              "p": 0.1708
+            },
+            {
+              "team": "ESP",
+              "p": 0.1029
+            },
+            {
+              "team": "ARG",
+              "p": 0.0909
+            },
+            {
+              "team": "GER",
+              "p": 0.0761
+            },
+            {
+              "team": "FRA",
+              "p": 0.0547
+            }
+          ],
+          "weight": 0.0
+        },
+        "0.10": {
+          "champ_brier": 0.030335,
+          "group_brier": 0.181077,
+          "sf_brier": 0.104225,
+          "qf_brier": 0.187294,
+          "actual_champ": "FRA",
+          "actual_champ_prob": 0.0542,
+          "actual_champ_rank": 6,
+          "top3_cover": 0,
+          "top5_cover": 0,
+          "top10_cover": 1,
+          "champ_entropy": 2.8589,
+          "top1_prob": 0.1802,
+          "top1_team": "BRA",
+          "top5": [
+            {
+              "team": "BRA",
+              "p": 0.1802
+            },
+            {
+              "team": "ESP",
+              "p": 0.1064
+            },
+            {
+              "team": "ARG",
+              "p": 0.091
+            },
+            {
+              "team": "GER",
+              "p": 0.0808
+            },
+            {
+              "team": "POR",
+              "p": 0.0574
+            }
+          ],
+          "weight": 0.1
+        },
+        "0.20": {
+          "champ_brier": 0.030298,
+          "group_brier": 0.179195,
+          "sf_brier": 0.105097,
+          "qf_brier": 0.187291,
+          "actual_champ": "FRA",
+          "actual_champ_prob": 0.0573,
+          "actual_champ_rank": 5,
+          "top3_cover": 0,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.8046,
+          "top1_prob": 0.1893,
+          "top1_team": "BRA",
+          "top5": [
+            {
+              "team": "BRA",
+              "p": 0.1893
+            },
+            {
+              "team": "ESP",
+              "p": 0.1105
+            },
+            {
+              "team": "ARG",
+              "p": 0.0981
+            },
+            {
+              "team": "GER",
+              "p": 0.0796
+            },
+            {
+              "team": "FRA",
+              "p": 0.0573
+            }
+          ],
+          "weight": 0.2
+        },
+        "0.30": {
+          "champ_brier": 0.030617,
+          "group_brier": 0.175662,
+          "sf_brier": 0.105475,
+          "qf_brier": 0.186379,
+          "actual_champ": "FRA",
+          "actual_champ_prob": 0.0556,
+          "actual_champ_rank": 5,
+          "top3_cover": 0,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.7429,
+          "top1_prob": 0.2044,
+          "top1_team": "BRA",
+          "top5": [
+            {
+              "team": "BRA",
+              "p": 0.2044
+            },
+            {
+              "team": "ESP",
+              "p": 0.1147
+            },
+            {
+              "team": "ARG",
+              "p": 0.099
+            },
+            {
+              "team": "GER",
+              "p": 0.0835
+            },
+            {
+              "team": "FRA",
+              "p": 0.0556
+            }
+          ],
+          "weight": 0.3
+        },
+        "0.50": {
+          "champ_brier": 0.031165,
+          "group_brier": 0.172825,
+          "sf_brier": 0.107647,
+          "qf_brier": 0.186791,
+          "actual_champ": "FRA",
+          "actual_champ_prob": 0.0529,
+          "actual_champ_rank": 6,
+          "top3_cover": 0,
+          "top5_cover": 0,
+          "top10_cover": 1,
+          "champ_entropy": 2.6407,
+          "top1_prob": 0.2299,
+          "top1_team": "BRA",
+          "top5": [
+            {
+              "team": "BRA",
+              "p": 0.2299
+            },
+            {
+              "team": "ESP",
+              "p": 0.1215
+            },
+            {
+              "team": "ARG",
+              "p": 0.1005
+            },
+            {
+              "team": "GER",
+              "p": 0.0873
+            },
+            {
+              "team": "POR",
+              "p": 0.055
+            }
+          ],
+          "weight": 0.5
+        }
+      }
+    },
+    "FIFA World Cup 2022": {
+      "cutoff": "2022-11-20",
+      "n_teams": 32,
+      "random_champ_brier": 0.96875,
+      "by_weight": {
+        "0.00": {
+          "champ_brier": 0.023101,
+          "group_brier": 0.212955,
+          "sf_brier": 0.097548,
+          "qf_brier": 0.160917,
+          "actual_champ": "ARG",
+          "actual_champ_prob": 0.1721,
+          "actual_champ_rank": 1,
+          "top3_cover": 1,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.8713,
+          "top1_prob": 0.1721,
+          "top1_team": "ARG",
+          "top5": [
+            {
+              "team": "ARG",
+              "p": 0.1721
+            },
+            {
+              "team": "BRA",
+              "p": 0.1659
+            },
+            {
+              "team": "ESP",
+              "p": 0.0697
+            },
+            {
+              "team": "NED",
+              "p": 0.066
+            },
+            {
+              "team": "FRA",
+              "p": 0.061
+            }
+          ],
+          "weight": 0.0
+        },
+        "0.10": {
+          "champ_brier": 0.022387,
+          "group_brier": 0.213333,
+          "sf_brier": 0.097139,
+          "qf_brier": 0.15915,
+          "actual_champ": "ARG",
+          "actual_champ_prob": 0.1874,
+          "actual_champ_rank": 1,
+          "top3_cover": 1,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.7991,
+          "top1_prob": 0.1874,
+          "top1_team": "ARG",
+          "top5": [
+            {
+              "team": "ARG",
+              "p": 0.1874
+            },
+            {
+              "team": "BRA",
+              "p": 0.1722
+            },
+            {
+              "team": "NED",
+              "p": 0.0699
+            },
+            {
+              "team": "ESP",
+              "p": 0.0698
+            },
+            {
+              "team": "FRA",
+              "p": 0.0634
+            }
+          ],
+          "weight": 0.1
+        },
+        "0.20": {
+          "champ_brier": 0.022174,
+          "group_brier": 0.213097,
+          "sf_brier": 0.096812,
+          "qf_brier": 0.157045,
+          "actual_champ": "ARG",
+          "actual_champ_prob": 0.1938,
+          "actual_champ_rank": 1,
+          "top3_cover": 1,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.7454,
+          "top1_prob": 0.1938,
+          "top1_team": "ARG",
+          "top5": [
+            {
+              "team": "ARG",
+              "p": 0.1938
+            },
+            {
+              "team": "BRA",
+              "p": 0.1815
+            },
+            {
+              "team": "NED",
+              "p": 0.0721
+            },
+            {
+              "team": "ESP",
+              "p": 0.0714
+            },
+            {
+              "team": "FRA",
+              "p": 0.0669
+            }
+          ],
+          "weight": 0.2
+        },
+        "0.30": {
+          "champ_brier": 0.021738,
+          "group_brier": 0.214122,
+          "sf_brier": 0.096632,
+          "qf_brier": 0.155842,
+          "actual_champ": "ARG",
+          "actual_champ_prob": 0.2036,
+          "actual_champ_rank": 1,
+          "top3_cover": 1,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.6963,
+          "top1_prob": 0.2036,
+          "top1_team": "ARG",
+          "top5": [
+            {
+              "team": "ARG",
+              "p": 0.2036
+            },
+            {
+              "team": "BRA",
+              "p": 0.1862
+            },
+            {
+              "team": "ESP",
+              "p": 0.0765
+            },
+            {
+              "team": "NED",
+              "p": 0.0729
+            },
+            {
+              "team": "FRA",
+              "p": 0.0663
+            }
+          ],
+          "weight": 0.3
+        },
+        "0.50": {
+          "champ_brier": 0.021002,
+          "group_brier": 0.215384,
+          "sf_brier": 0.096472,
+          "qf_brier": 0.152526,
+          "actual_champ": "ARG",
+          "actual_champ_prob": 0.2227,
+          "actual_champ_rank": 1,
+          "top3_cover": 1,
+          "top5_cover": 1,
+          "top10_cover": 1,
+          "champ_entropy": 2.5811,
+          "top1_prob": 0.2227,
+          "top1_team": "ARG",
+          "top5": [
+            {
+              "team": "ARG",
+              "p": 0.2227
+            },
+            {
+              "team": "BRA",
+              "p": 0.2048
+            },
+            {
+              "team": "ESP",
+              "p": 0.0764
+            },
+            {
+              "team": "NED",
+              "p": 0.0751
+            },
+            {
+              "team": "FRA",
+              "p": 0.0674
+            }
+          ],
+          "weight": 0.5
+        }
+      }
+    }
+  }
+}

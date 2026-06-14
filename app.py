@@ -456,12 +456,14 @@ elif page == "🏆 Champion Tracker":
     st.markdown("""<div class="caveat-box">
     <b>Honest model disclosure:</b> Temperature correction β×0.55 is heuristic — not optimized against
     external outcomes. WC2022 backtest: ARG was model's #1 pick (17.2%), actual winner ✓.
-    WC2018: FRA model's #6 pick (5.5%), actual winner. Avg champion Brier 0.027 vs 0.250 random (89% skill).
+    WC2018: FRA model's #6 pick (5.5%), actual winner. At champion granularity the model's mean-Brier
+    (~0.027) is on par with a uniform 1/48 null — the edge is in narrowing the field, not pinpointing
+    one winner (n=2 backtested WCs).
     These are not betting probabilities.
     </div>""", unsafe_allow_html=True)
 
     if elo_df.empty:
-        st.error("Simulation output not found. Run scripts/run_live_simulation.py first.")
+        st.error("Forecast output not found. Run `PYTHONPATH=src python scripts/run_live_simulation.py` to (re)generate it.")
         st.stop()
 
     # Top-line metrics
@@ -1838,9 +1840,10 @@ Occam's razor: simpler model wins when calibration gap is material.
             (RED, "Expert model coefficients are analyst priors",
              "16 hand-tuned parameters (attack, defense, ppda, etc.) — zero statistical estimation. "
              "Described correctly in MODEL_CARD.md but must not be conflated with MLE."),
-            (TEAL, "WC historical backtest done",
+            (GOLD, "WC historical backtest: honest scope",
              "WC2022: ARG #1 pick (17.2%), actual winner. WC2018: FRA #6 (5.5%), actual winner. "
-             "Avg champion Brier 0.027 vs 0.250 random = 89% skill. See Data Quality page."),
+             "Champion-level mean-Brier (~0.027) ≈ uniform 1/48 null; discrimination shows at "
+             "group/round stages, not at the single winner (n=2 WCs). See Data Quality page."),
             (GOLD, "StatsBomb data: 30/48 teams",
              "18 teams use analyst-assigned defaults. Coverage bias favors UEFA and CONMEBOL."),
             (GOLD, "Temporal form: 16/48 teams",
@@ -2335,24 +2338,31 @@ elif page == "📡 Data Quality":
 
         cols = st.columns(3)
         with cols[0]:
-            st.metric("Avg Champion Brier", f"{combined.get('avg_champion_brier', 0):.4f}",
-                      delta=f"{combined.get('skill_pct_below_random', 0):.0f}% below random",
-                      delta_color="normal")
+            st.metric("Avg Champion Brier", f"{combined.get('avg_champion_brier', 0):.4f}")
         with cols[1]:
-            st.metric("Random Baseline", "0.2500")
+            st.metric("Uniform 1/48 null", f"{combined.get('uniform_null_champion_brier', 0.0204):.4f}",
+                      help="Mean-Brier of predicting 1/48 for every team — the honest no-information baseline.")
         with cols[2]:
             ranks = combined.get("actual_champion_ranks", {})
             st.metric("Actual Champion Ranks", f"{list(ranks.values())}")
+
+        st.markdown(f"""<div class="caveat-box">
+        <b>How to read this:</b> Brier here is a mean over 48 teams, so the no-information baseline is the
+        <b>uniform 1/48 null (~{combined.get('uniform_null_champion_brier', 0.0204):.4f})</b>, NOT a 0.50 coin-flip.
+        At champion granularity the model is on par with that null — its discrimination shows at the
+        group/round level (more positives per stage), not at pinpointing the single winner.
+        <b>n = 2 tournaments</b>: a track record, not a skill guarantee.
+        </div>""", unsafe_allow_html=True)
 
         for wc_key, wc_data in bt.get("tournaments", {}).items():
             with st.expander(f"**{wc_data['tournament']}**"):
                 bs = wc_data["brier_scores"]
                 st.markdown(f"""
-| Stage | Brier Score | vs Random (0.250) |
-|---|---|---|
-| Group survival | {bs['group_survival']:.4f} | {(0.25 - bs['group_survival'])/0.25*100:.0f}% better |
-| Semifinal | {bs['semifinal']:.4f} | {(0.25 - bs['semifinal'])/0.25*100:.0f}% better |
-| Champion | {bs['champion']:.4f} | {(0.25 - bs['champion'])/0.25*100:.0f}% better |
+| Stage | Brier Score |
+|---|---|
+| Group survival | {bs['group_survival']:.4f} |
+| Semifinal | {bs['semifinal']:.4f} |
+| Champion | {bs['champion']:.4f} |
 
 **Model's #1 champion pick**: {wc_data['model_champion']} ({wc_data['model_champion_prob']*100:.1f}%)
 

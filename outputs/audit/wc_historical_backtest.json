@@ -1,0 +1,667 @@
+{
+  "generated_at": "2026-06-14T18:48:33.766972",
+  "elapsed_seconds": 133.8,
+  "methodology": {
+    "model": "CalibratedEloMatchModel",
+    "beta_elo": 0.543593,
+    "log_base": 0.262464,
+    "rho": -0.021,
+    "elo_source": "martj42 results.csv rolling Elo (eloratings.net K-factors)",
+    "known_limitation": "beta_elo fit on 2010-2025 full data \u2014 includes post-WC2022 matches. This makes backtest partially optimistic (~5% Brier improvement estimate). Full walk-forward cross-validation not performed."
+  },
+  "tournaments": {
+    "wc2022": {
+      "tournament": "FIFA World Cup 2022",
+      "cutoff": "2022-11-20",
+      "iterations": 100000,
+      "seed": 20221120,
+      "model": "CalibratedEloMatchModel (beta_elo=0.543593)",
+      "limitation": "beta_elo fit on 2010-2025 full history \u2014 partial future-peek relative to WC2022. Team Elos are genuinely pre-tournament (no future data). Full held-out-year validation would require refitting beta.",
+      "brier_scores": {
+        "group_survival": 0.21315,
+        "r16_advance": 0.1303,
+        "semifinal": 0.09669,
+        "champion": 0.02224,
+        "uniform_null_champion": 0.03027
+      },
+      "model_champion": "ARG",
+      "model_champion_prob": 0.1927,
+      "actual_champion": "ARG",
+      "actual_champion_prob": 0.1927,
+      "actual_champion_rank": 1,
+      "top10_champion_probs": [
+        {
+          "team": "ARG",
+          "prob": 0.1927
+        },
+        {
+          "team": "BRA",
+          "prob": 0.1817
+        },
+        {
+          "team": "ESP",
+          "prob": 0.0725
+        },
+        {
+          "team": "NED",
+          "prob": 0.0722
+        },
+        {
+          "team": "FRA",
+          "prob": 0.0666
+        },
+        {
+          "team": "BEL",
+          "prob": 0.0531
+        },
+        {
+          "team": "POR",
+          "prob": 0.0438
+        },
+        {
+          "team": "ENG",
+          "prob": 0.0354
+        },
+        {
+          "team": "URU",
+          "prob": 0.0349
+        },
+        {
+          "team": "DEN",
+          "prob": 0.0321
+        }
+      ],
+      "all_probs": {
+        "JPN": {
+          "group": 0.3629,
+          "r16": 0.1515,
+          "qf": 0.0575,
+          "sf": 0.0575,
+          "champion": 0.0069
+        },
+        "KSA": {
+          "group": 0.2241,
+          "r16": 0.0677,
+          "qf": 0.0216,
+          "sf": 0.0216,
+          "champion": 0.0014
+        },
+        "SUI": {
+          "group": 0.4914,
+          "r16": 0.2387,
+          "qf": 0.1073,
+          "sf": 0.1073,
+          "champion": 0.0179
+        },
+        "CRC": {
+          "group": 0.3429,
+          "r16": 0.139,
+          "qf": 0.0506,
+          "sf": 0.0506,
+          "champion": 0.0058
+        },
+        "IRN": {
+          "group": 0.5061,
+          "r16": 0.2481,
+          "qf": 0.1013,
+          "sf": 0.1013,
+          "champion": 0.0146
+        },
+        "URU": {
+          "group": 0.6675,
+          "r16": 0.3152,
+          "qf": 0.1602,
+          "sf": 0.1602,
+          "champion": 0.0349
+        },
+        "TUN": {
+          "group": 0.3021,
+          "r16": 0.0948,
+          "qf": 0.0352,
+          "sf": 0.0352,
+          "champion": 0.0031
+        },
+        "SEN": {
+          "group": 0.357,
+          "r16": 0.1386,
+          "qf": 0.0449,
+          "sf": 0.0449,
+          "champion": 0.004
+        },
+        "ENG": {
+          "group": 0.6302,
+          "r16": 0.3574,
+          "qf": 0.1718,
+          "sf": 0.1718,
+          "champion": 0.0354
+        },
+        "WAL": {
+          "group": 0.3508,
+          "r16": 0.1387,
+          "qf": 0.0463,
+          "sf": 0.0463,
+          "champion": 0.0042
+        },
+        "MEX": {
+          "group": 0.5007,
+          "r16": 0.2245,
+          "qf": 0.1059,
+          "sf": 0.1059,
+          "champion": 0.0148
+        },
+        "SRB": {
+          "group": 0.4847,
+          "r16": 0.2319,
+          "qf": 0.1035,
+          "sf": 0.1035,
+          "champion": 0.0162
+        },
+        "CAN": {
+          "group": 0.388,
+          "r16": 0.1567,
+          "qf": 0.0586,
+          "sf": 0.0586,
+          "champion": 0.0074
+        },
+        "USA": {
+          "group": 0.513,
+          "r16": 0.2527,
+          "qf": 0.1055,
+          "sf": 0.1055,
+          "champion": 0.0155
+        },
+        "NED": {
+          "group": 0.7859,
+          "r16": 0.4978,
+          "qf": 0.2625,
+          "sf": 0.2625,
+          "champion": 0.0722
+        },
+        "ARG": {
+          "group": 0.8724,
+          "r16": 0.6261,
+          "qf": 0.448,
+          "sf": 0.448,
+          "champion": 0.1927
+        },
+        "CRO": {
+          "group": 0.595,
+          "r16": 0.2999,
+          "qf": 0.1424,
+          "sf": 0.1424,
+          "champion": 0.0295
+        },
+        "BRA": {
+          "group": 0.8551,
+          "r16": 0.6129,
+          "qf": 0.4156,
+          "sf": 0.4156,
+          "champion": 0.1817
+        },
+        "BEL": {
+          "group": 0.6851,
+          "r16": 0.3845,
+          "qf": 0.2028,
+          "sf": 0.2028,
+          "champion": 0.0531
+        },
+        "POL": {
+          "group": 0.4028,
+          "r16": 0.1615,
+          "qf": 0.0677,
+          "sf": 0.0677,
+          "champion": 0.0071
+        },
+        "MAR": {
+          "group": 0.3319,
+          "r16": 0.1244,
+          "qf": 0.0429,
+          "sf": 0.0429,
+          "champion": 0.005
+        },
+        "FRA": {
+          "group": 0.723,
+          "r16": 0.4055,
+          "qf": 0.246,
+          "sf": 0.246,
+          "champion": 0.0666
+        },
+        "DEN": {
+          "group": 0.6295,
+          "r16": 0.3043,
+          "qf": 0.1648,
+          "sf": 0.1648,
+          "champion": 0.0321
+        },
+        "ECU": {
+          "group": 0.5224,
+          "r16": 0.2447,
+          "qf": 0.0953,
+          "sf": 0.0953,
+          "champion": 0.0122
+        },
+        "AUS": {
+          "group": 0.3453,
+          "r16": 0.1156,
+          "qf": 0.0466,
+          "sf": 0.0466,
+          "champion": 0.0049
+        },
+        "QAT": {
+          "group": 0.3346,
+          "r16": 0.1219,
+          "qf": 0.0368,
+          "sf": 0.0368,
+          "champion": 0.0027
+        },
+        "CMR": {
+          "group": 0.1689,
+          "r16": 0.0492,
+          "qf": 0.0138,
+          "sf": 0.0138,
+          "champion": 0.0008
+        },
+        "POR": {
+          "group": 0.6949,
+          "r16": 0.3467,
+          "qf": 0.1826,
+          "sf": 0.1826,
+          "champion": 0.0438
+        },
+        "KOR": {
+          "group": 0.4677,
+          "r16": 0.1697,
+          "qf": 0.0674,
+          "sf": 0.0674,
+          "champion": 0.0092
+        },
+        "ESP": {
+          "group": 0.7193,
+          "r16": 0.44,
+          "qf": 0.2413,
+          "sf": 0.2413,
+          "champion": 0.0725
+        },
+        "GER": {
+          "group": 0.5748,
+          "r16": 0.3039,
+          "qf": 0.1447,
+          "sf": 0.1447,
+          "champion": 0.0315
+        },
+        "GHA": {
+          "group": 0.1699,
+          "r16": 0.0356,
+          "qf": 0.0088,
+          "sf": 0.0088,
+          "champion": 0.0004
+        }
+      },
+      "pre_tournament_elos": {
+        "CMR": 1681.5,
+        "JPN": 1818.8,
+        "MEX": 1832.5,
+        "SUI": 1885.0,
+        "CRO": 1921.2,
+        "DEN": 1927.0,
+        "BEL": 1974.4,
+        "USA": 1836.9,
+        "CAN": 1803.6,
+        "POL": 1807.7,
+        "KOR": 1830.5,
+        "CRC": 1810.3,
+        "GER": 1927.8,
+        "AUS": 1779.4,
+        "ECU": 1835.8,
+        "SEN": 1751.7,
+        "MAR": 1791.8,
+        "GHA": 1639.4,
+        "FRA": 1978.5,
+        "ESP": 2007.6,
+        "SRB": 1879.7,
+        "IRN": 1851.9,
+        "POR": 1947.1,
+        "WAL": 1770.0,
+        "QAT": 1733.9,
+        "ARG": 2107.1,
+        "TUN": 1751.2,
+        "URU": 1932.9,
+        "NED": 1988.8,
+        "BRA": 2115.9,
+        "KSA": 1696.2,
+        "ENG": 1913.5
+      }
+    },
+    "wc2018": {
+      "tournament": "FIFA World Cup 2018",
+      "cutoff": "2018-06-14",
+      "iterations": 100000,
+      "seed": 20180614,
+      "model": "CalibratedEloMatchModel (beta_elo=0.543593)",
+      "limitation": "beta_elo fit on 2010-2025 full history \u2014 partial future-peek relative to WC2022. Team Elos are genuinely pre-tournament (no future data). Full held-out-year validation would require refitting beta.",
+      "brier_scores": {
+        "group_survival": 0.17847,
+        "r16_advance": 0.16706,
+        "semifinal": 0.10455,
+        "champion": 0.03041,
+        "uniform_null_champion": 0.03027
+      },
+      "model_champion": "BRA",
+      "model_champion_prob": 0.1936,
+      "actual_champion": "FRA",
+      "actual_champion_prob": 0.0561,
+      "actual_champion_rank": 5,
+      "top10_champion_probs": [
+        {
+          "team": "BRA",
+          "prob": 0.1936
+        },
+        {
+          "team": "ESP",
+          "prob": 0.1114
+        },
+        {
+          "team": "ARG",
+          "prob": 0.094
+        },
+        {
+          "team": "GER",
+          "prob": 0.0818
+        },
+        {
+          "team": "FRA",
+          "prob": 0.0561
+        },
+        {
+          "team": "POR",
+          "prob": 0.0552
+        },
+        {
+          "team": "ENG",
+          "prob": 0.0532
+        },
+        {
+          "team": "BEL",
+          "prob": 0.0487
+        },
+        {
+          "team": "PER",
+          "prob": 0.0478
+        },
+        {
+          "team": "COL",
+          "prob": 0.0441
+        }
+      ],
+      "all_probs": {
+        "JPN": {
+          "group": 0.3345,
+          "r16": 0.1177,
+          "qf": 0.0342,
+          "sf": 0.0342,
+          "champion": 0.0031
+        },
+        "KSA": {
+          "group": 0.3518,
+          "r16": 0.0852,
+          "qf": 0.0223,
+          "sf": 0.0223,
+          "champion": 0.0013
+        },
+        "SUI": {
+          "group": 0.5232,
+          "r16": 0.2566,
+          "qf": 0.1341,
+          "sf": 0.1341,
+          "champion": 0.0266
+        },
+        "CRC": {
+          "group": 0.3343,
+          "r16": 0.1295,
+          "qf": 0.0548,
+          "sf": 0.0548,
+          "champion": 0.0068
+        },
+        "IRN": {
+          "group": 0.4014,
+          "r16": 0.2324,
+          "qf": 0.1026,
+          "sf": 0.1026,
+          "champion": 0.0162
+        },
+        "URU": {
+          "group": 0.7751,
+          "r16": 0.3613,
+          "qf": 0.1757,
+          "sf": 0.1757,
+          "champion": 0.0354
+        },
+        "PAN": {
+          "group": 0.2963,
+          "r16": 0.1117,
+          "qf": 0.0321,
+          "sf": 0.0321,
+          "champion": 0.0025
+        },
+        "TUN": {
+          "group": 0.3217,
+          "r16": 0.1293,
+          "qf": 0.0395,
+          "sf": 0.0395,
+          "champion": 0.0038
+        },
+        "SEN": {
+          "group": 0.4623,
+          "r16": 0.1952,
+          "qf": 0.0682,
+          "sf": 0.0682,
+          "champion": 0.0092
+        },
+        "ENG": {
+          "group": 0.6945,
+          "r16": 0.424,
+          "qf": 0.2069,
+          "sf": 0.2069,
+          "champion": 0.0532
+        },
+        "RUS": {
+          "group": 0.4292,
+          "r16": 0.1167,
+          "qf": 0.0346,
+          "sf": 0.0346,
+          "champion": 0.0025
+        },
+        "MEX": {
+          "group": 0.6039,
+          "r16": 0.2767,
+          "qf": 0.1497,
+          "sf": 0.1497,
+          "champion": 0.0303
+        },
+        "SRB": {
+          "group": 0.2949,
+          "r16": 0.1094,
+          "qf": 0.0438,
+          "sf": 0.0438,
+          "champion": 0.0049
+        },
+        "ARG": {
+          "group": 0.7908,
+          "r16": 0.4884,
+          "qf": 0.2955,
+          "sf": 0.2955,
+          "champion": 0.094
+        },
+        "NIG": {
+          "group": 0.2775,
+          "r16": 0.0872,
+          "qf": 0.0282,
+          "sf": 0.0282,
+          "champion": 0.0022
+        },
+        "CRO": {
+          "group": 0.5771,
+          "r16": 0.272,
+          "qf": 0.1292,
+          "sf": 0.1292,
+          "champion": 0.0233
+        },
+        "BRA": {
+          "group": 0.8476,
+          "r16": 0.5983,
+          "qf": 0.4285,
+          "sf": 0.4285,
+          "champion": 0.1936
+        },
+        "PER": {
+          "group": 0.6473,
+          "r16": 0.3621,
+          "qf": 0.1968,
+          "sf": 0.1968,
+          "champion": 0.0478
+        },
+        "COL": {
+          "group": 0.7011,
+          "r16": 0.3893,
+          "qf": 0.1864,
+          "sf": 0.1864,
+          "champion": 0.0441
+        },
+        "BEL": {
+          "group": 0.6876,
+          "r16": 0.4134,
+          "qf": 0.1966,
+          "sf": 0.1966,
+          "champion": 0.0487
+        },
+        "POL": {
+          "group": 0.5021,
+          "r16": 0.2195,
+          "qf": 0.0788,
+          "sf": 0.0788,
+          "champion": 0.0103
+        },
+        "EGY": {
+          "group": 0.4439,
+          "r16": 0.1282,
+          "qf": 0.0414,
+          "sf": 0.0414,
+          "champion": 0.0032
+        },
+        "MAR": {
+          "group": 0.2726,
+          "r16": 0.1367,
+          "qf": 0.0517,
+          "sf": 0.0517,
+          "champion": 0.0059
+        },
+        "FRA": {
+          "group": 0.653,
+          "r16": 0.3786,
+          "qf": 0.2124,
+          "sf": 0.2124,
+          "champion": 0.0561
+        },
+        "DEN": {
+          "group": 0.3692,
+          "r16": 0.154,
+          "qf": 0.0625,
+          "sf": 0.0625,
+          "champion": 0.008
+        },
+        "AUS": {
+          "group": 0.3305,
+          "r16": 0.1332,
+          "qf": 0.0519,
+          "sf": 0.0519,
+          "champion": 0.006
+        },
+        "POR": {
+          "group": 0.603,
+          "r16": 0.4068,
+          "qf": 0.222,
+          "sf": 0.222,
+          "champion": 0.0552
+        },
+        "KOR": {
+          "group": 0.2933,
+          "r16": 0.0882,
+          "qf": 0.0326,
+          "sf": 0.0326,
+          "champion": 0.0035
+        },
+        "ESP": {
+          "group": 0.723,
+          "r16": 0.5327,
+          "qf": 0.3278,
+          "sf": 0.3278,
+          "champion": 0.1114
+        },
+        "GER": {
+          "group": 0.7566,
+          "r16": 0.4262,
+          "qf": 0.2669,
+          "sf": 0.2669,
+          "champion": 0.0818
+        },
+        "ISL": {
+          "group": 0.3546,
+          "r16": 0.1245,
+          "qf": 0.0455,
+          "sf": 0.0455,
+          "champion": 0.0042
+        },
+        "SWE": {
+          "group": 0.3462,
+          "r16": 0.1151,
+          "qf": 0.0468,
+          "sf": 0.0468,
+          "champion": 0.0051
+        }
+      },
+      "pre_tournament_elos": {
+        "JPN": 1715.3,
+        "NIG": 1698.6,
+        "MEX": 1872.9,
+        "SUI": 1881.0,
+        "CRO": 1856.6,
+        "SWE": 1764.9,
+        "DEN": 1794.7,
+        "BEL": 1923.2,
+        "POL": 1804.2,
+        "PER": 1938.5,
+        "KOR": 1731.5,
+        "CRC": 1786.8,
+        "COL": 1914.1,
+        "RUS": 1684.3,
+        "GER": 1984.2,
+        "AUS": 1775.9,
+        "MAR": 1759.0,
+        "SEN": 1787.1,
+        "FRA": 1938.2,
+        "ESP": 2007.3,
+        "SRB": 1760.3,
+        "EGY": 1697.7,
+        "IRN": 1834.8,
+        "POR": 1932.0,
+        "PAN": 1718.3,
+        "ARG": 1986.4,
+        "TUN": 1734.6,
+        "ISL": 1744.5,
+        "URU": 1879.1,
+        "BRA": 2090.2,
+        "KSA": 1646.8,
+        "ENG": 1925.6
+      }
+    }
+  },
+  "combined": {
+    "avg_champion_brier": 0.02633,
+    "uniform_null_champion_brier": 0.0204,
+    "baseline_note": "Brier is a mean over 48 teams; the no-information baseline is the uniform 1/48 null (~0.0204), not a 0.50 coin-flip. At champion granularity the model is on par with that null \u2014 discrimination shows at group/round stages. n=2 tournaments: a track record, not a skill guarantee.",
+    "actual_champion_ranks": {
+      "wc2022": 1,
+      "wc2018": 5
+    }
+  }
+}

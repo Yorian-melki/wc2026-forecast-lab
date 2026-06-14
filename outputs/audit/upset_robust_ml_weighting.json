@@ -1,0 +1,161 @@
+{
+  "generated_at": "2026-06-13T16:43:02.182797+00:00",
+  "decision": "KEEP_FIXED",
+  "worst_case_regret_vs_elo": {
+    "fixed_0.20": 0.0129,
+    "dynamic_0.20": 0.0061
+  },
+  "aggregate_brier": {
+    "dynamic_0.20": 0.025288,
+    "elo_only": 0.025498,
+    "fixed_0.20": 0.025159
+  },
+  "decision_rule": "adopt dynamic only if it lowers worst-case upset regret AND aggregate champ Brier within 0.2% of fixed",
+  "gap_scale": 300.0,
+  "per_tournament": [
+    {
+      "tournament": "FIFA World Cup 2010",
+      "config": "elo_only",
+      "champ_brier": 0.021093,
+      "sf_brier": 0.084639,
+      "actual_rank": 1,
+      "actual_prob": 0.2097,
+      "entropy": 2.7707,
+      "top1": 0.2097,
+      "top1_team": "ESP",
+      "actual_champ": "ESP"
+    },
+    {
+      "tournament": "FIFA World Cup 2010",
+      "config": "fixed_0.20",
+      "champ_brier": 0.020173,
+      "sf_brier": 0.082775,
+      "actual_rank": 1,
+      "actual_prob": 0.232,
+      "entropy": 2.6359,
+      "top1": 0.232,
+      "top1_team": "ESP",
+      "actual_champ": "ESP"
+    },
+    {
+      "tournament": "FIFA World Cup 2010",
+      "config": "dynamic_0.20",
+      "champ_brier": 0.020556,
+      "sf_brier": 0.083081,
+      "actual_rank": 1,
+      "actual_prob": 0.2225,
+      "entropy": 2.6954,
+      "top1": 0.2225,
+      "top1_team": "ESP",
+      "actual_champ": "ESP"
+    },
+    {
+      "tournament": "FIFA World Cup 2014",
+      "config": "elo_only",
+      "champ_brier": 0.027634,
+      "sf_brier": 0.081108,
+      "actual_rank": 4,
+      "actual_prob": 0.0944,
+      "entropy": 2.9601,
+      "top1": 0.1531,
+      "top1_team": "ESP",
+      "actual_champ": "GER"
+    },
+    {
+      "tournament": "FIFA World Cup 2014",
+      "config": "fixed_0.20",
+      "champ_brier": 0.02799,
+      "sf_brier": 0.078283,
+      "actual_rank": 4,
+      "actual_prob": 0.0955,
+      "entropy": 2.838,
+      "top1": 0.1777,
+      "top1_team": "ESP",
+      "actual_champ": "GER"
+    },
+    {
+      "tournament": "FIFA World Cup 2014",
+      "config": "dynamic_0.20",
+      "champ_brier": 0.027714,
+      "sf_brier": 0.079537,
+      "actual_rank": 4,
+      "actual_prob": 0.0965,
+      "entropy": 2.8964,
+      "top1": 0.1648,
+      "top1_team": "ESP",
+      "actual_champ": "GER"
+    },
+    {
+      "tournament": "FIFA World Cup 2018",
+      "config": "elo_only",
+      "champ_brier": 0.030162,
+      "sf_brier": 0.103436,
+      "actual_rank": 5,
+      "actual_prob": 0.0547,
+      "entropy": 2.9093,
+      "top1": 0.1708,
+      "top1_team": "BRA",
+      "actual_champ": "FRA"
+    },
+    {
+      "tournament": "FIFA World Cup 2018",
+      "config": "fixed_0.20",
+      "champ_brier": 0.030298,
+      "sf_brier": 0.105097,
+      "actual_rank": 5,
+      "actual_prob": 0.0573,
+      "entropy": 2.8046,
+      "top1": 0.1893,
+      "top1_team": "BRA",
+      "actual_champ": "FRA"
+    },
+    {
+      "tournament": "FIFA World Cup 2018",
+      "config": "dynamic_0.20",
+      "champ_brier": 0.030347,
+      "sf_brier": 0.104746,
+      "actual_rank": 6,
+      "actual_prob": 0.0548,
+      "entropy": 2.8462,
+      "top1": 0.1836,
+      "top1_team": "BRA",
+      "actual_champ": "FRA"
+    },
+    {
+      "tournament": "FIFA World Cup 2022",
+      "config": "elo_only",
+      "champ_brier": 0.023101,
+      "sf_brier": 0.097548,
+      "actual_rank": 1,
+      "actual_prob": 0.1721,
+      "entropy": 2.8713,
+      "top1": 0.1721,
+      "top1_team": "ARG",
+      "actual_champ": "ARG"
+    },
+    {
+      "tournament": "FIFA World Cup 2022",
+      "config": "fixed_0.20",
+      "champ_brier": 0.022174,
+      "sf_brier": 0.096812,
+      "actual_rank": 1,
+      "actual_prob": 0.1938,
+      "entropy": 2.7454,
+      "top1": 0.1938,
+      "top1_team": "ARG",
+      "actual_champ": "ARG"
+    },
+    {
+      "tournament": "FIFA World Cup 2022",
+      "config": "dynamic_0.20",
+      "champ_brier": 0.022534,
+      "sf_brier": 0.097003,
+      "actual_rank": 1,
+      "actual_prob": 0.1854,
+      "entropy": 2.7961,
+      "top1": 0.1854,
+      "top1_team": "ARG",
+      "actual_champ": "ARG"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "before": 5.21,
+  "after": 6.18,
+  "delta": 0.97,
+  "scores_after": {
+    "data_quality": 7.5,
+    "feature_engineering": 4.5,
+    "model_specification": 6.0,
+    "parameter_estimation": 4.0,
+    "model_selection_rigor": 7.0,
+    "calibration_quality": 5.0,
+    "validation_methodology": 6.0,
+    "uncertainty_quantification": 4.5,
+    "code_quality": 7.0,
+    "test_quality": 5.5,
+    "reproducibility": 8.0,
+    "documentation": 7.0,
+    "claims_honesty": 9.0,
+    "publication_readiness": 5.5
+  },
+  "hard_cap": "~6.5: (1) tournament validation is only 2 WCs; (2) no beta bootstrap CI despite HIGH sensitivity; (3) ML still hurts on upsets; (4) market not integrated; (5) no per-era beta refit.",
+  "next_unlocks": [
+    "Bootstrap CI on beta_elo -> widen forecast intervals (HIGH sensitivity makes this top priority)",
+    "Expand tournament validation to WC2010/2014 + EUROs for a real sample",
+    "Per-era beta refit to test stability",
+    "Upset-robust ML: down-weight ML when Elo gap is large (where it overconcentrates)"
+  ]
+}

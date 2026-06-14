@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-06-13T13:16:50.358187+00:00",
+  "split": "train<=2018-12-31, test 2019-2022 (leak-free temporal)",
+  "n_train": 25108,
+  "n_test": 3580,
+  "features": [
+    "elo_diff",
+    "neutral_int"
+  ],
+  "model": "multinomial LogisticRegression (sklearn 1.9, C=1.0)",
+  "metrics": {
+    "random": {
+      "nll": 1.09861,
+      "brier": 0.66667,
+      "ece": 0.0,
+      "accuracy": 0.486,
+      "n": 3580
+    },
+    "elo_only": {
+      "nll": 0.89954,
+      "brier": 0.52903,
+      "ece": 0.0541,
+      "accuracy": 0.6064,
+      "n": 3580
+    },
+    "ml": {
+      "nll": 0.86663,
+      "brier": 0.50847,
+      "ece": 0.00845,
+      "accuracy": 0.6059,
+      "n": 3580
+    },
+    "ml_isotonic_calibrated": {
+      "nll": 0.86714,
+      "brier": 0.50844,
+      "ece": 0.00855,
+      "accuracy": 0.6056,
+      "n": 3580
+    }
+  },
+  "gate": {
+    "accepted": true,
+    "reason": "ML beats Elo-only on Brier (0.50847 < 0.52903) and NLL (0.86663 < 0.89954) on held-out 3580 matches.",
+    "rule": "ML must beat Elo-only on BOTH held-out Brier and NLL"
+  },
+  "calibration": {
+    "isotonic_reduces_ece": false,
+    "decision": "reject isotonic (no ECE gain)"
+  },
+  "honest_notes": [
+    "Elo-only baseline uses the SAME pre-match elo_diff feature -> fair test of learned vs hand-set mapping.",
+    "Features are intentionally lean (elo_diff, neutral) to avoid overfitting.",
+    "Test set is strictly after train -> no temporal leakage.",
+    "This validates a single-match 1X2 model, NOT the tournament Monte Carlo directly."
+  ]
+}
