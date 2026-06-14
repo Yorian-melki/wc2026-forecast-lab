@@ -187,13 +187,16 @@ st.markdown(f"""
 # ─── data loaders ─────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300, show_spinner=False)
 def load_live_summary() -> pd.DataFrame:
+    # Displayed forecast = the CALIBRATED model (Elo→Dixon-Coles + ML@0.20).
+    # Order: live-conditioned calibrated → pre-tournament calibrated. We deliberately do NOT
+    # fall back to summary.csv (that is the legacy EXPERT analyst-prior model — different favourite)
+    # so the dashboard can never silently display a different model. See outputs/tournament_run/ARTIFACTS.md.
     p = OUTPUTS / "live_summary.csv"
     if p.exists():
         return pd.read_csv(p)
-    candidates = [OUTPUTS / "elo_calibrated_summary.csv", OUTPUTS / "summary.csv"]
-    for c in candidates:
-        if c.exists():
-            return pd.read_csv(c)
+    cal = OUTPUTS / "elo_calibrated_summary.csv"
+    if cal.exists():
+        return pd.read_csv(cal)
     return pd.DataFrame()
 
 @st.cache_data(ttl=300, show_spinner=False)
@@ -455,8 +458,8 @@ elif page == "🏆 Champion Tracker":
     )
     st.markdown("""<div class="caveat-box">
     <b>Honest model disclosure:</b> Temperature correction β×0.55 is heuristic — not optimized against
-    external outcomes. WC2022 backtest: ARG was model's #1 pick (17.2%), actual winner ✓.
-    WC2018: FRA model's #6 pick (5.5%), actual winner. At champion granularity the model's mean-Brier
+    external outcomes. WC2022 backtest: ARG was model's #1 pick (19.3%), actual winner ✓.
+    WC2018: FRA model's #5 pick (5.6%), actual winner. At champion granularity the model's mean-Brier
     (~0.027) is on par with a uniform 1/48 null — the edge is in narrowing the field, not pinpointing
     one winner (n=2 backtested WCs).
     These are not betting probabilities.
@@ -1714,15 +1717,20 @@ elif page == "🧮 Model Lab":
         st.latex(r"\tau(0,0) = 1 - \rho\mu_A\mu_B, \quad \tau(1,0) = 1 + \rho\mu_B, \quad "
                   r"\tau(0,1) = 1 + \rho\mu_A, \quad \tau(1,1) = 1 - \rho")
 
-        st.markdown("**Parameters (MLE on 10,555 international matches, 2010–2025):**")
+        st.markdown("**Parameters actually used by the model** "
+                    "(fit on 10,555 international matches, 2010–2025; raw MLE then temperature-corrected ×0.55):")
         try:
             lpp = DATA / "elo_live_params.json"
             lp  = json.loads(lpp.read_text())
+            beta_prod = float(lp["beta_elo"])        # value the model actually uses
+            beta_raw  = beta_prod / 0.55              # raw MLE before the ×0.55 temperature correction
             c1, c2, c3, c4 = st.columns(4)
-            c1.metric("β_elo (MLE)", f"{lp['beta_elo']:.6f}")
-            c2.metric("log_base (MLE)", f"{lp['log_base']:.6f}")
-            c3.metric("ρ (DC)", f"{lp.get('rho', -0.021):.6f}")
-            c4.metric("β_elo × 0.55 (heuristic)", f"{lp['beta_elo']*0.55:.6f}")
+            c1.metric("β_elo raw (MLE)", f"{beta_raw:.4f}",
+                      help="Maximum-likelihood fit before the temperature correction.")
+            c2.metric("β_elo production (used)", f"{beta_prod:.4f}",
+                      help="raw × 0.55 — this is the β the model uses in every match.")
+            c3.metric("log_base (used)", f"{lp['log_base']:.4f}")
+            c4.metric("ρ Dixon-Coles (used)", f"{lp.get('rho', -0.021):.4f}")
         except Exception:
             pass
 
@@ -1841,7 +1849,7 @@ Occam's razor: simpler model wins when calibration gap is material.
              "16 hand-tuned parameters (attack, defense, ppda, etc.) — zero statistical estimation. "
              "Described correctly in MODEL_CARD.md but must not be conflated with MLE."),
             (GOLD, "WC historical backtest: honest scope",
-             "WC2022: ARG #1 pick (17.2%), actual winner. WC2018: FRA #6 (5.5%), actual winner. "
+             "WC2022: ARG #1 pick (19.3%), actual winner. WC2018: FRA #5 (5.6%), actual winner. "
              "Champion-level mean-Brier (~0.027) ≈ uniform 1/48 null; discrimination shows at "
              "group/round stages, not at the single winner (n=2 WCs). See Data Quality page."),
             (GOLD, "StatsBomb data: 30/48 teams",
@@ -2058,7 +2066,7 @@ elif page == "📡 Data Quality":
 | <span style='color:{GOLD}'>**C**</span> | Score + result only | Goals, half-time score, scorers |
 | <span style='color:{RED}'>**D**</span> | Stale / manual / unavailable | Manual notes only |
 
-**Current status: Quality A** — Highlightly BASIC provides team xG / advanced stats. TheStatsAPI is active and provides shotmap xG, odds, lineups, timeline, player-stats and referee data. API-Football FREE via date-bypass provides live scores/events/lineups/stats. football-data.org provides standings/scorers/fixtures. Current score disagreement check: zero disagreements across 4 providers.
+**Current status: Quality A** — Highlightly BASIC provides team xG / advanced stats. **TheStatsAPI is active** (Stats API trial, key present locally; re-activated 2026-06-13 after an earlier revocation) for **finished-match** per-shot shotmap xG, bookmaker odds, lineups, timeline, player-stats and referee data — live in-progress stats are **not** on this plan, and its team-xG shares an upstream with Highlightly (not independent). API-Football FREE via date-bypass provides live scores/events/lineups/stats. football-data.org provides standings/scorers/fixtures. Current score disagreement check: zero disagreements across 4 providers.
 """, unsafe_allow_html=True)
 
     st.markdown("---")
@@ -2075,7 +2083,7 @@ elif page == "📡 Data Quality":
         "Highlightly BASIC": ["✅", "✅", "✅", "✅", "✅ (A)", "✅", "✅", "❌", "✅", "✅", "✅", "⚠️ pending", "❌", "⚠️ pending"],
         "Football-data.org FREE": ["❌", "✅", "✅", "❌", "❌", "❌", "❌", "❌", "❌", "❌", "❌", "❌", "❌", "❌"],
         "TheStatsAPI": ["—", "—", "—", "—", "✅ (A)", "✅", "✅", "—", "—", "—", "—", "—", "—", "✅"],
-        "Note (TSA)": ["", "", "", "", "KEY_REVOKED", "", "", "", "", "", "", "", "", ""],
+        "Note (TSA)": ["", "", "", "", "ACTIVE (stats trial)", "", "", "", "", "", "", "", "", "ACTIVE"],
         "Impact on model": ["In-play probs", "Elo update", "HT signal",
                             "xG proxy (B)", "xG direct (A)", "Chance quality", "Assist xG",
                             "Domain stats", "Red card adj", "Injury proxy", "Context",
@@ -2208,9 +2216,11 @@ elif page == "📡 Data Quality":
         st.dataframe(cmp, use_container_width=True, hide_index=True)
         st.caption(
             f"Gate: {mr['gate']['reason']} "
-            "Honest scope: this validates a **single-match 1X2 model** on a leak-free temporal "
-            "split (train ≤2018, test 2019–2022). It is NOT yet wired into the tournament Monte "
-            "Carlo, and is NOT an xG-trained model. `model_stack_config.json` carries a rollback flag."
+            "Honest scope: this panel validates the **single-match 1X2 model** on a leak-free temporal "
+            "split (train ≤2018, test 2019–2022). That model **is** wired into the tournament Monte "
+            "Carlo at weight **0.20** — it reweights the Dixon-Coles W/D/L marginals per match (group + "
+            "knockout 90'); extra-time increments and the market layer are NOT reweighted, and it is NOT "
+            "an xG-trained model. `model_stack_config.json` carries a rollback flag (set use_ml_match_model=false)."
         )
 
         # ML ensemble integration into the tournament sim
@@ -2221,7 +2231,9 @@ elif page == "📡 Data Quality":
             badge = TEAL if integrated else GOLD
             st.markdown(
                 f"<span style='color:{badge}'>**Tournament integration: {ens.get('decision')}**</span> "
-                f"· 0.5 Elo + 0.5 ML, reweighting DC scoreline W/D/L · rollback flag in config",
+                f"· the Dixon-Coles scoreline W/D/L marginals are reweighted toward the ML 1X2 model at "
+                f"**production weight 0.20** (cut from the 0.50 match-gate weight by tournament walk-forward) "
+                f"· rollback flag in config",
                 unsafe_allow_html=True,
             )
             ens_csv = ROOT / "outputs" / "audit" / "ml_ensemble_probability_delta.csv"
@@ -2234,7 +2246,8 @@ elif page == "📡 Data Quality":
                 t.columns = ["Team", "Champ (Elo-only)", "Champ (ML-ens)", "Δ pp"]
                 st.dataframe(t, use_container_width=True, hide_index=True)
             st.caption(
-                f"Max champion move {ens.get('max_champion_move_pp')}pp at the original 0.5 weight. "
+                f"Max champion move {ens.get('max_champion_move_pp')}pp shown at the 0.50 evaluation "
+                "weight (the integration A/B); the **production weight is 0.20**. "
                 "Scoreline/knockout logic preserved; champion probabilities still sum to 1. See the "
                 "Model Stack panel below for the evidence-tuned weight."
             )

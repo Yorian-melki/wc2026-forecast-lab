@@ -13,6 +13,10 @@ Generated 2026-06-14T00:19:03 UTC · which files are TRUTH vs legacy/backup.
 | `data/model_stack_config.json` | AUTHORITATIVE_SOURCE | yes | ML weight 0.20, rollback flag |
 | `data/groups.json` | AUTHORITATIVE_SOURCE | yes | 48-team group map (team->group) |
 | `data/teams.csv` | AUTHORITATIVE_SOURCE | yes | team Elo + attributes |
+| `outputs/tournament_run/live_summary.csv` | AUTHORITATIVE_GENERATED | yes — **this is the displayed forecast** | calibrated Elo→DC + ML@0.20, live-conditioned; regenerate via `scripts/run_live_simulation.py` |
+| `outputs/tournament_run/elo_calibrated_summary.csv` | AUTHORITATIVE_GENERATED | yes (fallback) | calibrated, pre-tournament (no live conditioning) |
+| `outputs/tournament_run/summary.csv` · `summary.json` | LEGACY_REFERENCE | no — **EXPERT model, NOT displayed** | analyst-prior model; different favourite; feeds offline odds/value-detector demo only. See `outputs/tournament_run/ARTIFACTS.md` |
+| `outputs/tournament_run/expert_summary.csv` | LEGACY_REFERENCE | no — expert model | identical to summary.csv; comparison baseline only |
 | `outputs/audit/final_maturity_score_v6.json` | AUTHORITATIVE_GENERATED | yes | supersedes global_maturity_score.json |
 | `outputs/audit/global_maturity_score.json` | LEGACY_REFERENCE | no — historical only | final_maturity_score_v6.json |
 | `outputs/audit/*.md` | AUDIT_DOC | yes | curated audits (reviewer, lineage, model card) |

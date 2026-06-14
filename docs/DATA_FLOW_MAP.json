@@ -3,7 +3,7 @@
   "flows": {
     "live_refresh": "API-Football/TheStatsAPI/Highlightly/football-data.org \u2192 providers/router.py \u2192 live_engine.fetch_live_state() \u2192 merge_and_persist() \u2192 data/wc2026_live.json \u2192 Live Standings page (st.fragment 45s).",
     "offline_snapshot": "No API key \u2192 live_engine returns ok=False \u2192 app reads committed data/wc2026_live.json (static). Never crashes.",
-    "tournament_sim": "data/elo_calibrated_params.json + teams.csv + groups.json \u2192 calibrated_elo_model + tournament.py \u2192 outputs/tournament_run/*summary.csv \u2192 Champion Tracker.",
+    "tournament_sim": "data/elo_calibrated_params.json + teams.csv + groups.json \u2192 CalibratedEloMatchModel (+ ML 1X2 @ 0.20) \u2192 scripts/run_live_simulation.py \u2192 outputs/tournament_run/live_summary.csv (+ live_stage_probs.csv, live_group_position_probs.csv) \u2192 Champion Tracker / Bracket Paths. NOTE: outputs/tournament_run/summary.csv & summary.json are the LEGACY EXPERT (analyst-prior) model, NOT displayed (different favourite); they feed offline odds/value-detector demo scripts only. See outputs/tournament_run/ARTIFACTS.md.",
     "ml_validation": "martj42 results.csv \u2192 ml/features+train_match_model \u2192 outputs/audit/ml_validation_report.* (Brier 0.508).",
     "tournament_validation": "results.csv \u2192 run_expanded_validation_and_dynamic_ml.py (WC2010/14/18/22) \u2192 outputs/audit/expanded_tournament_validation.*",
     "uncertainty_intervals": "results.csv \u2192 run_beta_uncertainty_intervals.py (bootstrap) \u2192 data/live/champion_probability_intervals.json \u2192 Champion Tracker/Release Status.",

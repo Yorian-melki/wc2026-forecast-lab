@@ -27,7 +27,7 @@
       "label": "\ud83c\udfc6 Champion Tracker",
       "approx_line": 448,
       "data_files": [
-        "outputs/tournament_run/*summary.csv",
+        "outputs/tournament_run/live_summary.csv (calibrated Elo->DC + ML@0.20 — displayed; NOT summary.csv=legacy expert)",
         "data/live/champion_probability_intervals.json"
       ],
       "modules": [

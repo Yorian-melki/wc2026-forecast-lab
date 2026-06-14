@@ -1,7 +1,8 @@
 """Tests for TheStatsAPI provider.
 
-TheStatsAPI key is currently KEY_REVOKED (confirmed 2026-06-13).
-All tests use mocked HTTP to avoid live calls.
+The fapi_r key was KEY_REVOKED early 2026-06-13, then re-activated the same day via a Stats
+API trial (runtime authority: data/live/provider_status.json = ACTIVE). These tests use mocked
+HTTP regardless and exercise the 403 KEY_REVOKED error path, which stays valid if the trial lapses.
 xG extraction logic is tested against the documented response structure.
 """
 from __future__ import annotations

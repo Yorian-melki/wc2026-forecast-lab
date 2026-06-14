@@ -8,12 +8,15 @@ Quality A potential: xG (shotmap), team xG (stats), per-shot coords,
                      player-stats (rating/passes/defending), lineups,
                      odds, odds/live, timeline.
 
-Status: PLAN_NOT_ATTACHED (proven 2026-06-13). Both old (fapi_g) and new (fapi_r)
-keys return 403 KEY_REVOKED "API key has no active subscription plan" on ALL
-competitions. Bearer auth confirmed correct (403 vs 401 differential). NOT code-fixable
-— requires activating/attaching a plan on the TheStatsAPI account, then regenerating the
-key. See outputs/audit/thestatsapi_resolved_probe.md. Provider stays EXCLUDED from the
-live pipeline until /health-only changes to 200 on a data endpoint.
+Status (UPDATED 2026-06-13): the fapi_r key returned 403 KEY_REVOKED ("no active
+subscription plan") earlier on 2026-06-13, then was RE-ACTIVATED the same day via a Stats
+API trial. The AUTHORITATIVE runtime state is data/live/provider_status.json — currently
+ACTIVE for finished-match per-shot shotmap xG + bookmaker odds + player/timeline stats
+(see data/live/thestatsapi_*.json). Live in-progress stats are not on the trial plan, and
+the team-xG shares Highlightly's upstream (not independent). The 403-handler below still
+surfaces KEY_REVOKED dynamically if the trial lapses (Bearer auth confirmed via 403-vs-401).
+NOTE: the static ProviderRouter.freshness() descriptor keeps a conservative "not accessible"
+default (test-locked); provider_status.json overrides it as the live source of truth.
 """
 from __future__ import annotations
 

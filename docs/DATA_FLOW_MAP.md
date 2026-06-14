@@ -10,8 +10,10 @@ API-Football/TheStatsAPI/Highlightly/football-data.org → providers/router.py �
 ### offline_snapshot
 No API key → live_engine returns ok=False → app reads committed data/wc2026_live.json (static). Never crashes.
 
-### tournament_sim
-data/elo_calibrated_params.json + teams.csv + groups.json → calibrated_elo_model + tournament.py → outputs/tournament_run/*summary.csv → Champion Tracker.
+### tournament_sim (the DISPLAYED forecast)
+data/elo_calibrated_params.json + teams.csv + groups.json → **CalibratedEloMatchModel (+ ML 1X2 @ 0.20)** → `scripts/run_live_simulation.py` (live-conditioned on data/wc2026_live.json) → **outputs/tournament_run/live_summary.csv** (+ live_stage_probs.csv, live_group_position_probs.csv) → Champion Tracker / Bracket Paths.
+
+⚠️ **Do not confuse models.** `outputs/tournament_run/summary.csv` & `summary.json` are the **LEGACY EXPERT (analyst-prior) model** — a *different* favourite (FRA ~8% vs the displayed ESP ~19%). They are **NOT displayed**; they only feed the offline odds/value-detector demo scripts. The dashboard reads `live_summary.csv` only. Full per-file map: `outputs/tournament_run/ARTIFACTS.md`.
 
 ### ml_validation
 martj42 results.csv → ml/features+train_match_model → outputs/audit/ml_validation_report.* (Brier 0.508).

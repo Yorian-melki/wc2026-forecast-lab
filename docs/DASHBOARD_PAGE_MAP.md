@@ -27,7 +27,7 @@ Generated 2026-06-14T00:19:03 UTC · app.py · selector at line 356 · all pages
 
 ### 🏆 Champion Tracker  (app.py ~L448)
 
-- Data: outputs/tournament_run/*summary.csv, data/live/champion_probability_intervals.json
+- Data: outputs/tournament_run/live_summary.csv (calibrated Elo→DC + ML@0.20 — the displayed forecast; NOT summary.csv, which is the legacy expert model), data/live/champion_probability_intervals.json
 - Modules: -
 - Refresh: on load · Cache: yes · Live API: no
 - Known issues: none
