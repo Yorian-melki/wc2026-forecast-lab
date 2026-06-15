@@ -183,6 +183,211 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
+# ─── premium UI layer (additive overrides; existing classes preserved above) ────
+st.markdown(f"""<style>:root{{
+  --bg0:{BG0};--bg1:{BG1};--bg2:{BG2};--bg3:{BG3};
+  --red:{RED};--teal:{TEAL};--gold:{GOLD};--white:{WHITE};--muted:{MUTED};--border:{BORDER};
+}}</style>""", unsafe_allow_html=True)
+
+st.markdown("""<style>
+/* hide raw-Streamlit chrome for a product feel */
+header[data-testid="stHeader"]{background:transparent;height:0}
+[data-testid="stToolbar"],[data-testid="stDecoration"],[data-testid="stStatusWidget"],#MainMenu,footer{display:none!important}
+/* content rhythm + ambient depth */
+.block-container{max-width:1320px;padding-top:1.4rem;padding-bottom:4rem}
+.stApp{background:radial-gradient(1100px 560px at 82% -12%, rgba(42,157,143,0.06), transparent 60%), var(--bg0)}
+h1{letter-spacing:-0.02em;line-height:1.08}
+/* eyebrow + page description */
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px}
+.page-desc{color:var(--muted);font-size:14px;max-width:780px;line-height:1.6;margin:2px 0 18px}
+/* hero */
+.hero{border:1px solid var(--border);border-radius:18px;padding:26px 30px;margin:2px 0 16px;background:linear-gradient(180deg,rgba(255,255,255,0.025),transparent),var(--bg1)}
+.hero-title{font-family:'DM Serif Display',serif;font-size:2.5rem;line-height:1.04;color:var(--white);margin:0}
+.hero-sub{color:var(--muted);font-size:15px;line-height:1.6;max-width:700px;margin-top:10px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.kpi{flex:1;min-width:118px;border:1px solid var(--border);border-radius:13px;padding:14px 16px;background:var(--bg2)}
+.kpi .v{font-family:'DM Serif Display',serif;font-size:1.65rem;color:var(--white);line-height:1}
+.kpi .l{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:7px;font-weight:600}
+/* favourite strip */
+.fav-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.fav-card{border:1px solid var(--border);border-radius:13px;padding:11px 15px;min-width:106px;background:var(--bg2);transition:.15s}
+.fav-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+.fav-rank{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.fav-team{font-size:15px;font-weight:600;color:var(--white);margin:3px 0 1px}
+.fav-prob{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--teal)}
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 11px;border-radius:999px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:0.03em}
+.pill-live{background:rgba(230,57,70,0.14);color:#ff6b78;border:1px solid rgba(230,57,70,0.4)}
+.pill-snap{background:rgba(107,107,138,0.14);color:var(--muted);border:1px solid var(--border)}
+.pill-ok{background:rgba(42,157,143,0.14);color:var(--teal);border:1px solid rgba(42,157,143,0.4)}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.dot-live{background:#ff6b78;animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,107,120,.6)}70%{box-shadow:0 0 0 6px rgba(255,107,120,0)}100%{box-shadow:0 0 0 0 rgba(255,107,120,0)}}
+/* trust chips */
+.trust-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.trust-chip{font-size:11.5px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:4px 12px;background:var(--bg2)}
+.trust-chip b{color:var(--white)}
+/* premium metric cards */
+[data-testid="stMetric"]{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:15px 18px;transition:.15s}
+[data-testid="stMetric"]:hover{border-color:rgba(42,157,143,0.45)}
+[data-testid="stMetricValue"]{font-family:'DM Serif Display',serif!important}
+.card{border-radius:14px}.caveat-box{border-radius:12px;line-height:1.55}.info-box{border-radius:12px;line-height:1.55}
+/* sidebar */
+section[data-testid="stSidebar"]{background:var(--bg1)!important}
+.side-brand{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--white);letter-spacing:-0.01em}
+.side-tag{font-size:11px;color:var(--muted);margin:2px 0 12px;line-height:1.5}
+.side-card{border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--bg2);font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:8px}
+.side-card b{color:var(--white)}
+.side-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:14px 0 6px}
+/* nav radio -> clean menu */
+section[data-testid="stSidebar"] div[role="radiogroup"]{gap:2px}
+section[data-testid="stSidebar"] div[role="radiogroup"] label{padding:6px 10px;border-radius:9px;transition:.12s;border:1px solid transparent}
+section[data-testid="stSidebar"] div[role="radiogroup"] label:hover{background:var(--bg2)}
+section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked){background:var(--bg2);border-color:var(--border)}
+section[data-testid="stSidebar"] div[role="radiogroup"] label p{font-size:13.5px!important;font-weight:500}
+section[data-testid="stSidebar"] div[role="radiogroup"] label>div:first-child{display:none}
+/* links + scrollbar + focus */
+a,a:visited{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#23233a;border-radius:8px}::-webkit-scrollbar-track{background:transparent}
+::selection{background:rgba(42,157,143,0.3)}:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+</style>""", unsafe_allow_html=True)
+
+
+# ─── bilingual layer (EN/FR) ───────────────────────────────────────────────────
+st.session_state.setdefault("lang_code", "EN")
+
+TXT = {
+    "EN": {
+        "brand_tag": "World Cup 2026 · Forecast Lab",
+        "lang_label": "Language",
+        "nav_section": "Explore",
+        "nav_overview": "🚀 Overview", "nav_champion": "🏆 Champion Tracker",
+        "nav_live": "⚽ Live Standings", "nav_predictor": "🎯 Match Predictor",
+        "nav_dna": "🧬 Nation DNA", "nav_h2h": "⚔️ Head-to-Head",
+        "nav_history": "📜 Historical Records", "nav_bracket": "🔮 Bracket Paths",
+        "nav_modellab": "🧮 Model Lab", "nav_data": "📡 Data Quality",
+        "matches_played": "{n} / 104 matches played",
+        "updated": "Updated", "model": "Model",
+        "model_body": "Calibrated Elo → Dixon-Coles Poisson<br>+ ML 1X2 ensemble @ weight 0.20<br>100,000 Monte Carlo simulations<br>Live-conditioned on WC2026 results",
+        "trust_label": "Trust",
+        "trust_tests": "{n} tests passing", "trust_val": "4 World Cups validated",
+        "trust_oss": "Open source on GitHub",
+        "disclaimer": "Probabilities, not predictions. Not a betting product.",
+        # Overview / hero
+        "ov_eyebrow": "World Cup 2026 · Live forecast",
+        "ov_title": "Tournament Command Center",
+        "ov_sub": "A probabilistic forecast of the 2026 World Cup — calibrated Elo → Dixon-Coles with a validated ML layer, re-simulated live as results come in. Probabilities, not predictions.",
+        "kpi_fav": "Favourite", "kpi_live": "Matches played", "kpi_sims": "Simulations",
+        "kpi_tests": "Tests passing", "kpi_val": "World Cups validated",
+        "ov_topfav": "Top contenders", "ov_links": "Project & links",
+        "ov_data": "Data & providers", "ov_model": "Model & validation",
+        "ov_uncert": "Uncertainty & honesty", "ov_deploy": "Deployment",
+        "ov_status": "Public release · live",
+        "ov_data_sum": "Four providers cross-checked; live scores from API-Football.",
+        "ov_model_sum": "Calibrated Elo → Dixon-Coles with a leak-free ML layer at weight 0.20.",
+        "ov_uncert_sum": "Champion figures are P5/P50/P95 intervals — a floor, not total uncertainty.",
+        "ov_deploy_sum": "Live on Render; open source on GitHub; portfolio on Vercel.",
+        "lk_live": "Live app", "lk_oss": "Open source", "lk_portfolio": "Portfolio",
+        # Champion Tracker
+        "ct_eyebrow": "Title race", "ct_title": "Champion Probabilities",
+        "ct_desc": "100,000 Monte Carlo simulations · live-conditioned ({n}/104 played) · calibrated Elo→Dixon-Coles (β=0.544) with ML@0.20.",
+        "ct_fav": "Favourite", "ct_top3": "Top-3 concentration", "ct_top5": "Top-5 combined", "ct_entropy": "Entropy (bits)",
+        # Live Standings
+        "ls_eyebrow": "Group stage · live", "ls_title": "Live Group Standings",
+        "ls_desc": "Auto-updating group tables. Live scores tick in; a result locks into the standings at full time.",
+        "ls_live_now": "Live now", "ls_played": "Played matches",
+        "ls_upcoming": "Today's upcoming matches", "ls_groups": "All 12 groups — current standings",
+        "ls_injuries": "Key injury & fitness updates",
+        "src_live": "live providers", "src_snap": "offline snapshot (set API_FOOTBALL_KEY for live auto-update)",
+        # Data Quality
+        "dq_eyebrow": "Sources & audit", "dq_title": "Data Quality & Source Audit",
+        "dq_desc": "Every figure on this site is backed by a documented source. This page shows exactly what data we have, what we are missing, and how fresh it is.",
+        # Model Lab
+        "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
+        "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
+        # other page headers
+        "mp_eyebrow": "Single match", "mp_title": "Match Probability Engine",
+        "mp_desc": "Win / draw / loss and scoreline probabilities for any pairing, from the same calibrated engine.",
+        "dna_eyebrow": "Team profiles", "dna_title": "Nation DNA",
+        "dna_desc": "Style and rating fingerprints for every qualified nation.",
+        "h2h_eyebrow": "Rivalries", "h2h_title": "Head-to-Head",
+        "h2h_desc": "Historical meetings and the model's read on any matchup.",
+        "hist_eyebrow": "Archive", "hist_title": "Historical Records",
+        "hist_desc": "World Cup winners, hosts and records since 1930.",
+        "br_eyebrow": "Knockout map", "br_title": "Bracket & Path Analysis",
+        "br_desc": "Stage-by-stage progression and the road each contender must travel.",
+    },
+    "FR": {
+        "brand_tag": "Coupe du monde 2026 · Labo de prévision",
+        "lang_label": "Langue",
+        "nav_section": "Explorer",
+        "nav_overview": "🚀 Vue d'ensemble", "nav_champion": "🏆 Course au titre",
+        "nav_live": "⚽ Classements en direct", "nav_predictor": "🎯 Prédiction de match",
+        "nav_dna": "🧬 ADN des nations", "nav_h2h": "⚔️ Confrontations",
+        "nav_history": "📜 Palmarès historique", "nav_bracket": "🔮 Parcours & tableau",
+        "nav_modellab": "🧮 Labo du modèle", "nav_data": "📡 Qualité des données",
+        "matches_played": "{n} / 104 matchs joués",
+        "updated": "Mis à jour", "model": "Modèle",
+        "model_body": "Elo calibré → Poisson Dixon-Coles<br>+ ensemble ML 1X2 (poids 0,20)<br>100 000 simulations Monte-Carlo<br>Conditionné en direct sur les résultats CDM2026",
+        "trust_label": "Confiance",
+        "trust_tests": "{n} tests au vert", "trust_val": "4 Coupes du monde validées",
+        "trust_oss": "Open source sur GitHub",
+        "disclaimer": "Des probabilités, pas des prédictions. Ce n'est pas un outil de paris.",
+        "ov_eyebrow": "Coupe du monde 2026 · Prévision en direct",
+        "ov_title": "Centre de commande du tournoi",
+        "ov_sub": "Une prévision probabiliste de la Coupe du monde 2026 — Elo calibré → Dixon-Coles avec une couche ML validée, re-simulée en direct au fil des résultats. Des probabilités, pas des prédictions.",
+        "kpi_fav": "Favori", "kpi_live": "Matchs joués", "kpi_sims": "Simulations",
+        "kpi_tests": "Tests au vert", "kpi_val": "Coupes du monde validées",
+        "ov_topfav": "Principaux prétendants", "ov_links": "Projet & liens",
+        "ov_data": "Données & fournisseurs", "ov_model": "Modèle & validation",
+        "ov_uncert": "Incertitude & honnêteté", "ov_deploy": "Déploiement",
+        "ov_status": "Version publique · en ligne",
+        "ov_data_sum": "Quatre fournisseurs recoupés ; scores en direct via API-Football.",
+        "ov_model_sum": "Elo → Dixon-Coles calibré avec une couche ML sans fuite, poids 0,20.",
+        "ov_uncert_sum": "Les chiffres de titre sont des intervalles P5/P50/P95 — un plancher, pas l'incertitude totale.",
+        "ov_deploy_sum": "En ligne sur Render ; open source sur GitHub ; portfolio sur Vercel.",
+        "lk_live": "Appli en direct", "lk_oss": "Open source", "lk_portfolio": "Portfolio",
+        "ct_eyebrow": "Course au titre", "ct_title": "Probabilités de titre",
+        "ct_desc": "100 000 simulations Monte-Carlo · conditionné en direct ({n}/104 joués) · Elo→Dixon-Coles calibré (β=0,544) avec ML@0,20.",
+        "ct_fav": "Favori", "ct_top3": "Concentration top-3", "ct_top5": "Cumul top-5", "ct_entropy": "Entropie (bits)",
+        "ls_eyebrow": "Phase de groupes · direct", "ls_title": "Classements de groupe en direct",
+        "ls_desc": "Tableaux de groupes mis à jour automatiquement. Les scores défilent en direct ; un résultat est verrouillé au classement au coup de sifflet final.",
+        "ls_live_now": "En direct", "ls_played": "Matchs joués",
+        "ls_upcoming": "Matchs du jour à venir", "ls_groups": "Les 12 groupes — classement actuel",
+        "ls_injuries": "Blessures & infos forme",
+        "src_live": "fournisseurs en direct", "src_snap": "instantané hors-ligne (définir API_FOOTBALL_KEY pour le direct)",
+        "dq_eyebrow": "Sources & audit", "dq_title": "Qualité des données & audit des sources",
+        "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
+        "ml_eyebrow": "Méthodologie", "ml_title": "Laboratoire du modèle",
+        "ml_desc": "Transparence mathématique complète, limites assumées, et un audit de maturité auto-évalué.",
+        "mp_eyebrow": "Match unique", "mp_title": "Moteur de probabilités de match",
+        "mp_desc": "Probabilités victoire / nul / défaite et de score pour toute affiche, depuis le même moteur calibré.",
+        "dna_eyebrow": "Profils d'équipe", "dna_title": "ADN des nations",
+        "dna_desc": "Empreintes de style et de niveau pour chaque nation qualifiée.",
+        "h2h_eyebrow": "Rivalités", "h2h_title": "Confrontations",
+        "h2h_desc": "Rencontres historiques et la lecture du modèle sur chaque affiche.",
+        "hist_eyebrow": "Archives", "hist_title": "Palmarès historique",
+        "hist_desc": "Vainqueurs, hôtes et records de la Coupe du monde depuis 1930.",
+        "br_eyebrow": "Tableau final", "br_title": "Tableau & analyse des parcours",
+        "br_desc": "Progression étape par étape et la route que chaque prétendant doit parcourir.",
+    },
+}
+
+def t(key: str, **kw) -> str:
+    """Bilingual lookup with EN fallback; never raises on a missing key."""
+    lang = st.session_state.get("lang_code") or "EN"
+    s = TXT.get(lang, TXT["EN"]).get(key)
+    if s is None:
+        s = TXT["EN"].get(key, key)
+    return s.format(**kw) if kw else s
+
+def page_header(eyebrow_key: str, title_key: str, desc_key: Optional[str] = None, **kw) -> None:
+    """Consistent premium page header: eyebrow + title + optional description."""
+    st.markdown(f"<span class='eyebrow'>{t(eyebrow_key)}</span>", unsafe_allow_html=True)
+    st.markdown(f"# {t(title_key)}")
+    if desc_key:
+        st.markdown(f"<div class='page-desc'>{t(desc_key, **kw)}</div>", unsafe_allow_html=True)
+
 
 # ─── data loaders ─────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300, show_spinner=False)
@@ -341,107 +546,142 @@ if not elo_df.empty and not disp_df.empty and "full_name" not in elo_df.columns:
 
 # ─── sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">⚽ WC2026</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sidebar-sub">Probabilistic Analytics Platform</div>', unsafe_allow_html=True)
+    st.markdown('<div class="side-brand">⚽ WC2026</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="side-tag">{t("brand_tag")}</div>', unsafe_allow_html=True)
+
+    # Language selector (EN / FR). Stored in session_state["lang_code"]; t() reads it.
+    st.segmented_control(t("lang_label"), ["EN", "FR"], key="lang_code",
+                         label_visibility="collapsed")
 
     n_played = len(live_data.get("completed_matches", []))
+    live_pill = ('<span class="pill pill-live"><span class="dot dot-live"></span>LIVE</span>'
+                 if AUTO_LIVE else '<span class="pill pill-snap">SNAPSHOT</span>')
     st.markdown(
-        f'<span class="badge badge-teal">{n_played} / 104 matches played</span> '
-        f'<span class="badge badge-red">Live</span>',
+        f'<div style="margin:10px 0 2px">'
+        f'<span class="pill pill-ok">{t("matches_played", n=n_played)}</span> {live_pill}</div>',
         unsafe_allow_html=True,
     )
     last_upd = live_data.get("last_updated", "—")
     st.markdown(
-        f"<div style='font-size:11px;color:{MUTED};margin:4px 0 16px'>Updated: {last_upd}</div>",
+        f"<div style='font-size:11px;color:{MUTED};margin:6px 0 12px'>{t('updated')}: {last_upd}</div>",
         unsafe_allow_html=True,
     )
 
-    page = st.radio(
-        "Navigate",
-        ["🚀 Release Status", "🏆 Champion Tracker", "⚽ Live Standings", "🎯 Match Predictor",
-         "🧬 Nation DNA", "⚔️ Head-to-Head", "📜 Historical Records",
-         "🔮 Bracket Paths", "🧮 Model Lab", "📡 Data Quality"],
-        label_visibility="collapsed",
-    )
+    st.markdown(f'<div class="side-label">{t("nav_section")}</div>', unsafe_allow_html=True)
+    # Stable dispatch keys (left) → translated display labels (right). The page body
+    # dispatch below still matches on the stable key, so translation is display-only.
+    NAV = {
+        "🚀 Release Status": t("nav_overview"), "🏆 Champion Tracker": t("nav_champion"),
+        "⚽ Live Standings": t("nav_live"), "🎯 Match Predictor": t("nav_predictor"),
+        "🧬 Nation DNA": t("nav_dna"), "⚔️ Head-to-Head": t("nav_h2h"),
+        "📜 Historical Records": t("nav_history"), "🔮 Bracket Paths": t("nav_bracket"),
+        "🧮 Model Lab": t("nav_modellab"), "📡 Data Quality": t("nav_data"),
+    }
+    page = st.radio("nav", list(NAV.keys()), format_func=lambda k: NAV[k],
+                    label_visibility="collapsed")
 
-    st.markdown("---")
-    st.markdown(f"""
-    <div style='font-size:11px;color:{MUTED};line-height:1.9'>
-    <b style='color:{WHITE}'>Model</b><br>
-    Elo→Dixon-Coles Poisson · β_raw=0.988 × T=0.55<br>
-    + ML 1X2 ensemble @ weight 0.20<br>
-    100,000 Monte Carlo simulations<br>
-    Live-conditioned on WC2026 results<br><br>
-    <b style='color:{WHITE}'>Public release · v6</b><br>
-    <span style='color:{GOLD}'>6.93 / 10</span> maturity (self, honest)<br>
-    <span style='color:{TEAL}'>571 tests</span> · 4 WCs validated<br>
-    Weakest: structural uncertainty
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f'<div class="side-label">{t("model")}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="side-card">{t("model_body")}</div>', unsafe_allow_html=True)
+
+    st.markdown(f'<div class="side-label">{t("trust_label")}</div>', unsafe_allow_html=True)
+    st.markdown(
+        f"""<div class="side-card">
+        <b>{t("trust_tests", n=571)}</b> · <span style='color:{GOLD}'>6.93 / 10</span> maturity (self, honest)<br>
+        {t("trust_val")} · Elo→Dixon-Coles + Monte Carlo<br>
+        <a href="https://github.com/Yorian-melki/wc2026-forecast-lab" target="_blank">{t("trust_oss")}</a>
+        </div>""",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        f"<div style='font-size:10.5px;color:{MUTED};margin-top:12px;line-height:1.5'>{t('disclaimer')}</div>",
+        unsafe_allow_html=True,
+    )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
 # PAGE 0 — RELEASE STATUS (v6 public release)
 # ══════════════════════════════════════════════════════════════════════════════
 if page == "🚀 Release Status":
-    st.markdown("# WC2026 Forecast Lab — Public Release (v6)")
+    # ── hero cockpit ──────────────────────────────────────────────────────────
+    live_pill = ('<span class="pill pill-live"><span class="dot dot-live"></span>LIVE</span>'
+                 if AUTO_LIVE else '<span class="pill pill-snap">SNAPSHOT</span>')
+    fav_val, contenders_html = "—", ""
+    if not elo_df.empty and "champion_prob" in elo_df.columns:
+        top = elo_df.nlargest(1, "champion_prob").iloc[0]
+        fav_val = f"{flag(top['team'], disp_df)} {top['team']}"
+        fav_sub = f"{top['champion_prob']*100:.1f}% · {t('kpi_fav')}"
+        for i, (_, r) in enumerate(elo_df.nlargest(6, "champion_prob").iterrows(), 1):
+            contenders_html += (
+                f"<div class='fav-card'><div class='fav-rank'>#{i}</div>"
+                f"<div class='fav-team'>{flag(r['team'], disp_df)} {r['team']}</div>"
+                f"<div class='fav-prob'>{r['champion_prob']*100:.1f}%</div></div>")
+    else:
+        fav_sub = t("kpi_fav")
+
     st.markdown(
-        f"<div style='color:{MUTED};font-size:13px'>The current, audited state of the project. "
-        "Every claim below is reflected in the repo, tests, and audit trail.</div>",
-        unsafe_allow_html=True,
-    )
+        f"""<div class="hero">
+          <span class="eyebrow">{t('ov_eyebrow')}</span>&nbsp;&nbsp;{live_pill}
+          <div class="hero-title">{t('ov_title')}</div>
+          <div class="hero-sub">{t('ov_sub')}</div>
+          <div class="kpi-row">
+            <div class="kpi"><div class="v">{fav_val}</div><div class="l">{fav_sub}</div></div>
+            <div class="kpi"><div class="v">{n_played} / 104</div><div class="l">{t('kpi_live')}</div></div>
+            <div class="kpi"><div class="v">100K</div><div class="l">{t('kpi_sims')}</div></div>
+            <div class="kpi"><div class="v">571</div><div class="l">{t('kpi_tests')}</div></div>
+            <div class="kpi"><div class="v">4</div><div class="l">{t('kpi_val')}</div></div>
+          </div>
+        </div>""", unsafe_allow_html=True)
+
+    # ── top contenders strip ──────────────────────────────────────────────────
+    if contenders_html:
+        st.markdown(f"<span class='eyebrow'>{t('ov_topfav')}</span>", unsafe_allow_html=True)
+        st.markdown(f"<div class='fav-strip'>{contenders_html}</div>", unsafe_allow_html=True)
+
+    # ── trust chips ───────────────────────────────────────────────────────────
+    st.markdown(
+        f"""<div class="trust-row">
+          <span class="trust-chip"><b>571</b> {t('trust_tests', n='').strip()}</span>
+          <span class="trust-chip"><b>4</b> {t('kpi_val')}</span>
+          <span class="trust-chip"><b>6.93</b> / 10 maturity</span>
+          <span class="trust-chip">Elo → Dixon-Coles + ML@0.20</span>
+          <span class="trust-chip">100,000 Monte Carlo</span>
+        </div>""", unsafe_allow_html=True)
     st.markdown("")
-    c = st.columns(4)
-    c[0].metric("Tests", "571 passing")
-    c[1].metric("Maturity (self)", "6.93 / 10")
-    c[2].metric("ML ensemble weight", "0.20 (fixed)")
-    c[3].metric("Tournaments validated", "4 World Cups")
 
-    st.markdown("### Live links")
-    st.markdown(
-        f"- 🧪 **Open source:** [github.com/Yorian-melki/wc2026-forecast-lab](https://github.com/Yorian-melki/wc2026-forecast-lab)\n"
-        f"- 🌐 **Portfolio (live):** [www.yorian-melki.com](https://www.yorian-melki.com)\n"
-        f"- 📡 **Live app:** `wc2026.yorian-melki.com` — <span style='color:{GOLD}'>pending Render + DNS</span>",
-        unsafe_allow_html=True,
-    )
+    # ── info cards (2×2): data · model · uncertainty · deployment ──────────────
+    def _card(title_key, sum_key, facts_html):
+        return (f"<div class='card'><div class='eyebrow'>{t(title_key)}</div>"
+                f"<div style='color:{WHITE};font-size:13.5px;margin:2px 0 8px'>{t(sum_key)}</div>"
+                f"<div style='color:{MUTED};font-size:12px;line-height:1.7'>{facts_html}</div></div>")
 
-    st.markdown("### Data & providers")
-    st.markdown(
-        f"<span style='color:{TEAL}'>●</span> **TheStatsAPI** — active · per-shot shotmap xG, odds, player-stats, lineups, timeline, referee  \n"
-        f"<span style='color:{TEAL}'>●</span> **Highlightly** — active · team xG / advanced stats  \n"
-        f"<span style='color:{TEAL}'>●</span> **API-Football** — active · live score / events / lineups / stats  \n"
-        f"<span style='color:{TEAL}'>●</span> **football-data.org** — active · standings / scorers / fixtures  \n"
-        f"<span style='color:{MUTED};font-size:12px'>Multi-provider score-disagreement check across 4 providers. "
-        "xG caveat: Highlightly and TheStatsAPI likely share an upstream on team xG — not independent.</span>",
-        unsafe_allow_html=True,
-    )
+    r1 = st.columns(2)
+    r1[0].markdown(_card("ov_data", "ov_data_sum",
+        "● TheStatsAPI — shotmap xG · odds · stats (active, trial)<br>"
+        "● API-Football — live score / events / lineups<br>"
+        "● Highlightly — team xG · ● football-data.org — standings<br>"
+        "<i>xG caveat: Highlightly ≈ TheStatsAPI upstream — not independent.</i>"), unsafe_allow_html=True)
+    r1[1].markdown(_card("ov_model", "ov_model_sum",
+        "Leak-free ML 1X2 (Brier 0.508 vs 0.529) wired at weight 0.20.<br>"
+        "0.50 weight rejected — over-concentrated favourites.<br>"
+        "Walk-forward: WC2010 / 2014 / 2018 / 2022.<br>"
+        "Market odds = benchmark, not blended."), unsafe_allow_html=True)
+    r2 = st.columns(2)
+    r2[0].markdown(_card("ov_uncert", "ov_uncert_sum",
+        "Champion bands propagate β sampling only — a documented floor.<br>"
+        "Not tournament-calibrated (4 WCs). Not a betting product.<br>"
+        "Audit trail: model card · data lineage · reviewer attack audit."), unsafe_allow_html=True)
+    r2[1].markdown(_card("ov_deploy", "ov_deploy_sum",
+        "✅ Live app — wc2026.yorian-melki.com (Render)<br>"
+        "✅ Open source — github.com/Yorian-melki/wc2026-forecast-lab<br>"
+        "✅ Portfolio — yorian-melki.com (Vercel)"), unsafe_allow_html=True)
 
-    st.markdown("### Validation & model")
+    # ── links row ─────────────────────────────────────────────────────────────
     st.markdown(
-        "- Calibrated **Elo → Dixon-Coles** Poisson core; bounded xG live adjustment.\n"
-        "- **ML 1X2** accepted (leak-free, Brier 0.508 vs 0.529) and **wired into the tournament sim**.\n"
-        "- ML weight **0.20**; the 0.50 weight was rejected — it over-concentrated favorites and hurt the 2018 upset.\n"
-        "- Walk-forward validation: **WC2010 / 2014 / 2018 / 2022** (ML retrained per cutoff).\n"
-        "- Market odds are a **benchmark / control layer**, not blended into the model by default.\n"
-        "- A **dynamic upset-robust ML** mode exists but is not the default."
-    )
-
-    st.markdown("### Uncertainty & audit")
-    st.markdown(
-        "- Champion probabilities are reported as **P5/P50/P95 intervals**, not point estimates.\n"
-        "- Intervals are a **floor** — they propagate beta sampling uncertainty only, not total uncertainty.\n"
-        "- Artifacts: model card · data lineage map · 20-point reviewer attack audit · reproducibility pack · final release report (`outputs/audit/`, `outputs/release/`)."
-    )
-
-    st.markdown("### Deployment")
-    st.markdown(
-        f"- ✅ **yorian-melki.com** — live on Vercel.\n"
-        f"- ✅ **GitHub repo** — public.\n"
-        f"- ✅ **`render.yaml`** blueprint present for the live Streamlit app.\n"
-        f"- ⏳ **`wc2026.yorian-melki.com`** — pending: connect Render to the repo, then add a Spaceship DNS record:\n"
-        f"  `CNAME · host wc2026 · value <render-target> · TTL 1min`. **Do not touch the @ / www records.**\n"
-        f"- Local launch: `PYTHONPATH=src .venv/bin/python -m streamlit run app.py`"
-    )
+        f"<div style='margin-top:6px;font-size:13px'>"
+        f"🌐 <a href='https://wc2026.yorian-melki.com' target='_blank'>{t('lk_live')}</a> &nbsp;·&nbsp; "
+        f"🧪 <a href='https://github.com/Yorian-melki/wc2026-forecast-lab' target='_blank'>{t('lk_oss')}</a> &nbsp;·&nbsp; "
+        f"💼 <a href='https://www.yorian-melki.com' target='_blank'>{t('lk_portfolio')}</a></div>",
+        unsafe_allow_html=True)
     st.markdown("---")
 
 
@@ -449,13 +689,7 @@ if page == "🚀 Release Status":
 # PAGE 1 — CHAMPION TRACKER
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🏆 Champion Tracker":
-    st.markdown("# World Cup 2026 — Champion Probabilities")
-    st.markdown(
-        f"<div style='color:{MUTED};font-size:13px;margin-bottom:16px'>"
-        f"100,000 Monte Carlo simulations · Live-conditioned ({n_played}/104 matches played) · "
-        "Elo-fitted temperature-adjusted Poisson (β=0.543)</div>",
-        unsafe_allow_html=True,
-    )
+    page_header("ct_eyebrow", "ct_title", "ct_desc", n=n_played)
     st.markdown("""<div class="caveat-box">
     <b>Honest model disclosure:</b> Temperature correction β×0.55 is heuristic — not optimized against
     external outcomes. WC2022 backtest: ARG was model's #1 pick (19.3%), actual winner ✓.
@@ -476,12 +710,12 @@ elif page == "🏆 Champion Tracker":
     ent       = float(-np.sum(elo_df["champion_prob"] * np.log2(elo_df["champion_prob"] + 1e-15)))
 
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("🏆 Favourite",
+    c1.metric(f"🏆 {t('ct_fav')}",
               f"{top_team.get('flag', '')} {top_team['team']}",
               f"{top_team['champion_prob']*100:.1f}%")
-    c2.metric("Top-3 concentration", f"{top3_sum*100:.1f}%", delta_color="off")
-    c3.metric("Top-5 combined",      f"{top5_sum*100:.1f}%", delta_color="off")
-    c4.metric("Entropy (bits)",
+    c2.metric(t("ct_top3"), f"{top3_sum*100:.1f}%", delta_color="off")
+    c3.metric(t("ct_top5"),      f"{top5_sum*100:.1f}%", delta_color="off")
+    c4.metric(t("ct_entropy"),
               f"{ent:.2f} / {math.log2(48):.2f}",
               f"{ent/math.log2(48)*100:.0f}% of max uncertainty",
               delta_color="off")
@@ -630,7 +864,7 @@ elif page == "🏆 Champion Tracker":
 # PAGE 2 — LIVE STANDINGS
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "⚽ Live Standings":
-    st.markdown("# Live Group Standings — WC2026")
+    page_header("ls_eyebrow", "ls_title", "ls_desc")
 
     @st.fragment(run_every=(LIVE_REFRESH if AUTO_LIVE else None))
     def _live_standings():
@@ -645,14 +879,14 @@ elif page == "⚽ Live Standings":
             live_now  = state.get("live", [])
             completed = sorted(state.get("all_completed", []), key=lambda c: (c.get("date", ""), c["home"]))
             standings = build_standings(state.get("all_completed", []))
-            src = f"live providers · updated {datetime.now().strftime('%H:%M:%S')}"
+            src = f"{t('src_live')} · {datetime.now().strftime('%H:%M:%S')}"
             ok_live = True
         else:
             ld = load_live_json()
             live_now, ok_live = [], False
             completed = ld.get("completed_matches", [])
             standings = ld.get("group_standings", {})
-            src = "offline snapshot (set API_FOOTBALL_KEY for live auto-update)"
+            src = t("src_snap")
         meta     = load_live_json()
         injuries = meta.get("key_injuries", {})
         # Filter out matches that are already finished or currently live — a finished match
@@ -661,19 +895,18 @@ elif page == "⚽ Live Standings":
         upcoming = [m for m in meta.get("upcoming_today", [])
                     if (m.get("home"), m.get("away")) not in _done_or_live]
 
-        # status line
-        dot = TEAL if ok_live else MUTED
+        # status line (premium pill)
+        badge = ('<span class="pill pill-live"><span class="dot dot-live"></span>LIVE</span>'
+                 if ok_live else '<span class="pill pill-snap">SNAPSHOT</span>')
+        refresh_note = f" · auto-refresh {LIVE_REFRESH}s" if AUTO_LIVE else ""
         st.markdown(
-            f"<span style='color:{dot};font-size:18px'>●</span> "
-            f"<b>{'LIVE' if ok_live else 'SNAPSHOT'}</b> "
-            f"<span style='color:{MUTED};font-size:12px'>· {src}"
-            + (f" · auto-refresh every {LIVE_REFRESH}s" if AUTO_LIVE else "") + "</span>",
+            f"{badge} <span style='color:{MUTED};font-size:12px'>&nbsp;· {src}{refresh_note}</span>",
             unsafe_allow_html=True,
         )
 
         # live-now banner (scores tick; result locks into standings at full time)
         if live_now:
-            st.markdown("### 🔴 Live now")
+            st.markdown(f"### 🔴 {t('ls_live_now')}")
             for m in live_now:
                 fh, fa = flag(m["home"], disp_df), flag(m["away"], disp_df)
                 gh = m["home_goals"] if m["home_goals"] is not None else 0
@@ -690,7 +923,7 @@ elif page == "⚽ Live Standings":
 
         # played matches
         if completed:
-            st.markdown("### Played Matches")
+            st.markdown(f"### {t('ls_played')}")
             for m in completed:
                 grp = m.get("group", "")
                 h, a   = m["home"], m["away"]
@@ -716,7 +949,7 @@ elif page == "⚽ Live Standings":
 
         # upcoming
         if upcoming:
-            st.markdown("### Today's Upcoming Matches")
+            st.markdown(f"### {t('ls_upcoming')}")
             for m in upcoming:
                 fh = flag(m["home"], disp_df)
                 fa = flag(m["away"], disp_df)
@@ -729,7 +962,7 @@ elif page == "⚽ Live Standings":
         # group tables
         if standings:
             st.markdown("---")
-            st.markdown("### All 12 Groups — Current Standings")
+            st.markdown(f"### {t('ls_groups')}")
             grp_list = sorted(standings.keys())
             cols_row = 3
             for row_start in range(0, len(grp_list), cols_row):
@@ -766,7 +999,7 @@ elif page == "⚽ Live Standings":
 
         # injuries
         st.markdown("---")
-        st.markdown("### ⚕️ Key Injury & Fitness Updates")
+        st.markdown(f"### ⚕️ {t('ls_injuries')}")
         any_injury = False
         for code, inj_list in injuries.items():
             if inj_list:
@@ -785,13 +1018,7 @@ elif page == "⚽ Live Standings":
 # PAGE 3 — MATCH PREDICTOR
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🎯 Match Predictor":
-    st.markdown("# Match Probability Engine")
-    st.markdown(
-        f"<div style='color:{MUTED};font-size:13px'>"
-        "Elo-fitted Poisson · Dixon-Coles low-score correction · "
-        "Live-updated Elo (post matchday 1)</div>",
-        unsafe_allow_html=True,
-    )
+    page_header("mp_eyebrow", "mp_title", "mp_desc")
 
     all_codes = sorted(elo_df["team"].tolist()) if not elo_df.empty else []
     if not all_codes:
@@ -1045,7 +1272,7 @@ elif page == "🎯 Match Predictor":
 # PAGE 4 — NATION DNA
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🧬 Nation DNA":
-    st.markdown("# Nation DNA — Deep Team Analysis")
+    page_header("dna_eyebrow", "dna_title", "dna_desc")
 
     all_codes = sorted(elo_df["team"].tolist()) if not elo_df.empty else []
     if not all_codes:
@@ -1360,12 +1587,7 @@ elif page == "🧬 Nation DNA":
 # PAGE 5 — HEAD-TO-HEAD MATRIX
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "⚔️ Head-to-Head":
-    st.markdown("# Head-to-Head Analysis")
-    st.markdown(
-        f"<div style='color:{MUTED};font-size:13px'>"
-        "All competitive matches from 1872–present · Source: martj42/international-football-results</div>",
-        unsafe_allow_html=True,
-    )
+    page_header("h2h_eyebrow", "h2h_title", "h2h_desc")
 
     if h2h_df.empty:
         st.warning("H2H data not loaded. Run scripts/build_enrichment_data.py first.")
@@ -1456,7 +1678,7 @@ elif page == "⚔️ Head-to-Head":
 # PAGE 6 — HISTORICAL RECORDS
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "📜 Historical Records":
-    st.markdown("# Historical World Cup Records — All 48 Nations")
+    page_header("hist_eyebrow", "hist_title", "hist_desc")
 
     if wch_df.empty:
         st.warning("WC history data not loaded. Run scripts/build_enrichment_data.py first.")
@@ -1570,12 +1792,7 @@ elif page == "📜 Historical Records":
 # PAGE 7 — BRACKET PATHS
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🔮 Bracket Paths":
-    st.markdown("# Tournament Bracket & Path Analysis")
-    st.markdown(
-        f"<div style='color:{MUTED};font-size:13px'>"
-        "Stage progression probabilities · Conditional path analysis · Bracket difficulty</div>",
-        unsafe_allow_html=True,
-    )
+    page_header("br_eyebrow", "br_title", "br_desc")
 
     # Stage funnel — top 12
     if not elo_df.empty:
@@ -1698,13 +1915,7 @@ elif page == "🔮 Bracket Paths":
 # PAGE 8 — MODEL LAB
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🧮 Model Lab":
-    st.markdown("# Model Laboratory")
-    st.markdown(
-        f"<div style='color:{MUTED};font-size:13px'>"
-        "Full mathematical transparency · Honest limitations · "
-        "Global maturity audit</div>",
-        unsafe_allow_html=True,
-    )
+    page_header("ml_eyebrow", "ml_title", "ml_desc")
 
     t1, t2, t3, t4, t5 = st.tabs(
         ["📐 Mathematics", "📊 Ablation", "🔬 Calibration", "⚠️ Limitations", "📋 Maturity Score"])
@@ -1958,13 +2169,7 @@ only 4 World Cups validated, market is benchmark-only, xG sources share an upstr
 # PAGE 9 — DATA QUALITY
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "📡 Data Quality":
-    st.markdown("# Data Quality & Source Audit")
-    st.markdown(
-        f"<div style='color:{MUTED};font-size:13px'>Every claim on this site is backed by a "
-        "documented source. This page shows exactly what data we have, what we're missing, "
-        "and how fresh it is.</div>",
-        unsafe_allow_html=True,
-    )
+    page_header("dq_eyebrow", "dq_title", "dq_desc")
     st.markdown("")
 
     # ── What this forecast is / is not (defensibility) ───────────────────────
