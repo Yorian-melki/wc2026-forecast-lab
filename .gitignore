@@ -56,3 +56,6 @@ data/*.bak
 
 # Internal AI session-handoff notes — kept locally, not part of the public repo.
 /session_handoff/
+
+# Streamlit secrets (never commit) — config.toml (theme) is safe to track
+.streamlit/secrets.toml

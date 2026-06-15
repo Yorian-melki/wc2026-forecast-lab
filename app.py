@@ -58,8 +58,8 @@ RED    = "#E63946"
 TEAL   = "#2A9D8F"
 GOLD   = "#E9C46A"
 WHITE  = "#F0F0F8"
-MUTED  = "#6B6B8A"
-BORDER = "#1e1e32"
+MUTED  = "#9C9CBD"   # readability patch: lifted from #6B6B8A for small/secondary text contrast
+BORDER = "#2a2a42"   # readability patch: lifted from #1e1e32 so cards/gridlines separate from bg
 
 CONF_COLORS = {
     "UEFA": TEAL, "CONMEBOL": RED, "CONCACAF": GOLD,
@@ -250,6 +250,21 @@ section[data-testid="stSidebar"] div[role="radiogroup"] label>div:first-child{di
 a,a:visited{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#23233a;border-radius:8px}::-webkit-scrollbar-track{background:transparent}
 ::selection{background:rgba(42,157,143,0.3)}:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+/* ── readability patch: contrast + card separation (surgical, not overbright) ── */
+/* captions / small secondary text — lift off dark-on-dark */
+[data-testid="stCaptionContainer"],[data-testid="stCaptionContainer"] p,[data-testid="stCaptionContainer"] *{color:#A7A7C8!important}
+.page-desc,.hero-sub,.side-tag,.side-card,.trust-chip{color:#A7A7C8}
+.side-card b,.trust-chip b{color:var(--white)}
+.fav-rank,.kpi .l{color:#A7A7C8}
+.side-label{color:#8C8CB0}
+/* lift card surfaces slightly + soft shadow so they read as panels, not flat dark */
+.card,.kpi,.fav-card,.side-card,[data-testid="stMetric"]{background:#15151f;box-shadow:0 6px 18px rgba(0,0,0,0.30)}
+.hero{box-shadow:0 10px 30px rgba(0,0,0,0.34)}
+[data-testid="stMetricLabel"]{color:#A7A7C8!important}
+/* dataframes / tables: readable header + cell text on dark */
+[data-testid="stDataFrame"] *{color:#E6E6F2}
+/* expander + tab labels a touch brighter */
+.streamlit-expanderHeader,details summary{color:#D7D7E6}
 </style>""", unsafe_allow_html=True)
 
 
@@ -2229,18 +2244,20 @@ elif page == "📡 Data Quality":
             qcolor = QUALITY_COLOR.get(qlevel, MUTED)
 
             if accessible:
-                status_dot = f"<span style='color:{TEAL}'>●</span>"
+                status_dot = "🟢"
                 status_label = "ACTIVE"
             elif avail:
-                status_dot = f"<span style='color:{GOLD}'>●</span>"
+                status_dot = "🟡"
                 status_label = "AVAILABLE (limited)"
             else:
-                status_dot = f"<span style='color:{RED}'>●</span>"
+                status_dot = "🔴"
                 status_label = "UNAVAILABLE"
 
-            with st.expander(f"{status_dot} **{pname.replace('_',' ').title()}** — Quality: "
-                             f"<span style='color:{qcolor}'>{qlevel}</span> — {status_label}",
-                             expanded=accessible):
+            # Plain markdown label — st.expander does not render raw HTML spans.
+            with st.expander(
+                f"{status_dot}  **{pname.replace('_',' ').title()}** — Quality {qlevel} — {status_label}",
+                expanded=accessible,
+            ):
                 lag = pdata.get("lag_note", "")
                 if lag:
                     st.markdown(f"**Lag**: {lag}")

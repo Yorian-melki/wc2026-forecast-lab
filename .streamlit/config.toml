@@ -1,0 +1,12 @@
+# Native theme = dark, so Streamlit's built-in widgets (expanders, dataframes, dropdowns,
+# tooltips) inherit dark surfaces instead of leaking the default LIGHT secondaryBackground.
+# Readability patch — pairs with the injected CSS in app.py. No secrets here.
+[theme]
+base = "dark"
+primaryColor = "#2A9D8F"
+backgroundColor = "#06060a"
+secondaryBackgroundColor = "#15151f"
+textColor = "#F0F0F8"
+
+[client]
+toolbarMode = "minimal"
