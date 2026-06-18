@@ -13,19 +13,31 @@ These snapshots are the record. After WC2026 they let you score the model honest
 
 This replaces hand-wavy skill claims with a measured, dated track record.
 
-## How to capture (run before the day's first kickoff)
+## How to capture
+**One command (recommended — evolving capture):**
 ```bash
-PYTHONPATH=src python scripts/update_live_data.py        # refresh results (needs API keys)
-PYTHONPATH=src python scripts/run_live_simulation.py      # regenerate the displayed forecast
-PYTHONPATH=src python scripts/log_forecast_snapshot.py    # freeze the proof
+PYTHONPATH=src python scripts/daily_forecast_capture.py
 ```
-The logger alone (last line) snapshots whatever forecast is currently committed — safe and
-dependency-free. It never mutates `data/wc2026_live.json` or any model input.
+It refreshes results → re-simulates the calibrated forecast → snapshots it → restores the
+tracked runtime files so the working tree stays clean. Degrades gracefully (still snapshots)
+if there's no key/network. NO git commit, NO push, NO deploy.
 
-## Schedule it (deterministic, no LLM needed) — example launchd/cron
-Daily at 14:00 UTC:
+**Snapshot only (static, no refresh):** `scripts/log_forecast_snapshot.py` — freezes whatever
+forecast is currently committed; dependency-free; never mutates any input.
+
+## Schedule it (deterministic, no LLM needed) — launchd is installed for you
+A launchd agent runs the capture daily — see `~/Library/LaunchAgents/com.wc2026.forecastlog.plist`.
+Activate it once (your machine, your call):
+```bash
+launchctl load -w ~/Library/LaunchAgents/com.wc2026.forecastlog.plist
+launchctl unload ~/Library/LaunchAgents/com.wc2026.forecastlog.plist   # to stop
 ```
-0 14 * * *  cd ~/FinderProjects/wc2026_june2026 && PYTHONPATH=src .venv/bin/python scripts/log_forecast_snapshot.py
+A plain OS cron equivalent (daily 14:00 UTC):
 ```
-A plain OS cron is the robust, free, survives-everything way to run this — it does not need
-an AI agent.
+0 14 * * *  cd ~/FinderProjects/wc2026_june2026 && PYTHONPATH=src .venv/bin/python scripts/daily_forecast_capture.py
+```
+
+## Tamper-evidence
+Snapshots accumulate locally. Commit them to the public repo in batches (`git add
+outputs/forecast_log && git commit -m "forecast log"`) — each snapshot's internal UTC
+timestamp plus the public commit date is the dated, scoreable record.
