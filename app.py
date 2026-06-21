@@ -319,6 +319,7 @@ TXT = {
         "ct_entropy_help": "How open the race is, in bits. Higher = more teams have a real shot (more uncertainty).",
         "ct_takeaway": "👉 <b>{flag} {team}</b> is the model's favourite at <b>{p}% to win</b> — but far from a lock: the top 5 teams share only <b>{top5}%</b> of the title between them. A probability, not a prediction.",
         "ct_caveat_title": "How to read this · honest limits",
+        "ct_caveat_body": "**Honest model disclosure:** Temperature correction β×0.55 is heuristic — not optimized against external outcomes. WC2022 backtest: ARG was the model's #1 pick (19.3%), actual winner ✓. WC2018: FRA the #5 pick (5.6%), actual winner. At champion granularity the model's mean-Brier (~0.027) is on par with a uniform 1/48 null — the edge is in narrowing the field, not pinpointing one winner (n=2 backtested WCs). These are not betting probabilities.",
         # Live Standings
         "ls_eyebrow": "Group stage · live", "ls_title": "Live Group Standings",
         "ls_desc": "Auto-updating group tables. Live scores tick in; a result locks into the standings at full time.",
@@ -332,6 +333,18 @@ TXT = {
         "ls_takeaway": "👉 <b>{n}/104</b> group matches played. Top 2 of each group (plus the 8 best 3rd-placed teams) reach the knockouts. Scores update live.",
         "ml_takeaway": "👉 In plain words: Elo rates each team, Dixon-Coles turns ratings into score probabilities, a small ML layer (20%) sharpens it, then 100,000 simulations produce the odds. Everything below is the proof — dive in or skip it.",
         "dq_takeaway": "👉 Every number on this site is sourced. 4 live providers cross-checked, zero score disagreements. Below: what we have, what's missing, how fresh — skip unless you want the receipts.",
+        "nav_scorecard": "📊 Scorecard",
+        "sc_eyebrow": "Track record", "sc_title": "Model Scorecard",
+        "sc_desc": "How the model's pre-match forecasts have actually held up, match by match — updated live, never cherry-picked.",
+        "sc_take": "👉 Over <b>{n}</b> played matches, the model called <b>{acc}%</b> of results right and put on average <b>{p}%</b> on the exact final score. Judged on its full ranked forecast — not just its #1 pick.",
+        "sc_acc": "Results called right", "sc_p": "Avg % on exact score",
+        "sc_t1": "Exact score = #1 pick", "sc_t3": "Exact score in top 3",
+        "sc_rps": "RPS (model)", "sc_rps_base": "RPS (coin-flip)", "sc_rank": "Avg rank of real score",
+        "sc_best": "Best-called match", "sc_worst": "Biggest surprise",
+        "sc_table": "Every match — forecast vs reality", "sc_live": "LIVE (provisional)",
+        "sc_note": "RPS = the standard proper score for football forecasts (lower is better); shown next to the same-matches coin-flip (1/3-1/3-1/3) baseline — no inflated 'skill %'. Early on, small samples swing hard, so this can sit above the baseline before settling.",
+        "sc_empty": "No finished matches yet — the scorecard fills as the tournament plays.",
+        "sc_cols": "match · real score · model's top scores · % on real score · rank · result",
         # Model Lab
         "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
         "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
@@ -388,6 +401,7 @@ TXT = {
         "ct_entropy_help": "À quel point la course est ouverte, en bits. Plus c'est haut, plus d'équipes ont une vraie chance.",
         "ct_takeaway": "👉 <b>{flag} {team}</b> est le favori du modèle à <b>{p}% de chances</b> — mais loin d'être plié : les 5 premiers ne cumulent que <b>{top5}%</b> du titre à eux tous. Une probabilité, pas une prédiction.",
         "ct_caveat_title": "Comment lire ça · limites honnêtes",
+        "ct_caveat_body": "**Divulgation honnête :** la correction de température β×0,55 est heuristique — non optimisée sur des résultats externes. Backtest CDM2022 : ARG était le favori du modèle (19,3%), vainqueur réel ✓. CDM2018 : FRA était le 5e choix (5,6%), vainqueur réel. Au niveau du titre, le mean-Brier du modèle (~0,027) équivaut à un tirage uniforme 1/48 — l'avantage est de resserrer le peloton, pas de désigner le vainqueur unique (n=2 CDM backtestées). Ce ne sont pas des probabilités de paris.",
         "ls_eyebrow": "Phase de groupes · direct", "ls_title": "Classements de groupe en direct",
         "ls_desc": "Tableaux de groupes mis à jour automatiquement. Les scores défilent en direct ; un résultat est verrouillé au classement au coup de sifflet final.",
         "ls_live_now": "En direct", "ls_played": "Matchs joués",
@@ -399,6 +413,18 @@ TXT = {
         "ls_takeaway": "👉 <b>{n}/104</b> matchs de poule joués. Les 2 premiers de chaque groupe (plus les 8 meilleurs 3es) filent en élimination directe. Scores en direct.",
         "ml_takeaway": "👉 En clair : Elo note chaque équipe, Dixon-Coles transforme ça en probabilités de score, une petite couche ML (20%) affine, puis 100 000 simulations donnent les cotes. Tout ce qui suit est la preuve — plonge ou passe.",
         "dq_takeaway": "👉 Chaque chiffre du site est sourcé. 4 fournisseurs recoupés, zéro désaccord de score. Ci-dessous : ce qu'on a, ce qui manque, la fraîcheur — à sauter sauf si tu veux les preuves.",
+        "nav_scorecard": "📊 Bulletin",
+        "sc_eyebrow": "Bilan réel", "sc_title": "Bulletin du modèle",
+        "sc_desc": "Comment les prévisions d'avant-match tiennent vraiment, match par match — en direct, jamais trié sur le volet.",
+        "sc_take": "👉 Sur <b>{n}</b> matchs joués, le modèle a vu juste sur <b>{acc}%</b> des résultats et a misé en moyenne <b>{p}%</b> sur le score exact final. Jugé sur sa prévision classée complète — pas seulement son 1er choix.",
+        "sc_acc": "Résultats vus juste", "sc_p": "% moyen sur le score exact",
+        "sc_t1": "Score exact = 1er choix", "sc_t3": "Score exact dans le top 3",
+        "sc_rps": "RPS (modèle)", "sc_rps_base": "RPS (pile ou face)", "sc_rank": "Rang moyen du vrai score",
+        "sc_best": "Match le mieux vu", "sc_worst": "Plus grosse surprise",
+        "sc_table": "Chaque match — prévu vs réalité", "sc_live": "EN DIRECT (provisoire)",
+        "sc_note": "RPS = le score de référence pour les prévisions foot (plus bas = mieux) ; affiché à côté du baseline pile-ou-face (1/3-1/3-1/3) sur les mêmes matchs — aucun « % de skill » gonflé. Au début, les petits échantillons font tout bouger, donc ça peut dépasser le baseline avant de se stabiliser.",
+        "sc_empty": "Aucun match terminé pour l'instant — le bulletin se remplit au fil du tournoi.",
+        "sc_cols": "match · score réel · meilleurs scores du modèle · % sur le score réel · rang · résultat",
         "ml_eyebrow": "Méthodologie", "ml_title": "Laboratoire du modèle",
         "ml_desc": "Transparence mathématique complète, limites assumées, et un audit de maturité auto-évalué.",
         "ml_hint": "💡 La section \"on montre nos calculs\" — les maths et les limites assumées derrière la prévision. Curieux ? Plonge. Pressé ? Tu peux passer.",
@@ -643,6 +669,7 @@ with st.sidebar:
     # dispatch below still matches on the stable key, so translation is display-only.
     NAV = {
         "🚀 Release Status": t("nav_overview"), "🏆 Champion Tracker": t("nav_champion"),
+        "📊 Scorecard": t("nav_scorecard"),
         "⚽ Live Standings": t("nav_live"), "🎯 Match Predictor": t("nav_predictor"),
         "🧬 Nation DNA": t("nav_dna"), "⚔️ Head-to-Head": t("nav_h2h"),
         "📜 Historical Records": t("nav_history"), "🔮 Bracket Paths": t("nav_bracket"),
@@ -783,12 +810,7 @@ elif page == "🏆 Champion Tracker":
 
     # Honest caveats — COLLAPSED (depth on demand for quants; everyone else just skips it).
     with st.expander("ℹ️ " + t("ct_caveat_title")):
-        st.markdown(
-            "**Honest model disclosure:** Temperature correction β×0.55 is heuristic — not optimized "
-            "against external outcomes. WC2022 backtest: ARG was the model's #1 pick (19.3%), actual "
-            "winner ✓. WC2018: FRA the #5 pick (5.6%), actual winner. At champion granularity the model's "
-            "mean-Brier (~0.027) is on par with a uniform 1/48 null — the edge is in narrowing the field, "
-            "not pinpointing one winner (n=2 backtested WCs). These are not betting probabilities.")
+        st.markdown(t("ct_caveat_body"))
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric(f"🏆 {t('ct_fav')}",
@@ -939,6 +961,72 @@ elif page == "🏆 Champion Tracker":
         ))
         fig_conf.update_layout(**plotly_layout(height=340), showlegend=True)
         st.plotly_chart(fig_conf, width="stretch")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PAGE 1b — MODEL SCORECARD (live track record: forecast vs reality)
+# ══════════════════════════════════════════════════════════════════════════════
+elif page == "📊 Scorecard":
+    page_header("sc_eyebrow", "sc_title", "sc_desc")
+    import time as _t
+    from wc2026.scorecard import compute_scorecard
+    _state = cached_live_state(int(_t.time() // LIVE_REFRESH)) if AUTO_LIVE else {}
+    if _state.get("ok"):
+        _completed, _live = _state.get("all_completed", []), _state.get("live", [])
+    else:
+        _completed, _live = live_data.get("completed_matches", []), []
+    sc = compute_scorecard(_completed, live=_live or None)
+    s = sc["summary"]
+    if s["n_matches"] == 0:
+        st.info(t("sc_empty")); st.stop()
+
+    takeaway(t("sc_take", n=s["n_matches"],
+              acc=f"{s['outcome_accuracy']*100:.0f}", p=f"{s['mean_prob_actual_score']*100:.0f}"))
+    a1, a2, a3, a4 = st.columns(4)
+    a1.metric(t("sc_acc"), f"{s['outcome_accuracy']*100:.0f}%")
+    a2.metric(t("sc_p"), f"{s['mean_prob_actual_score']*100:.1f}%")
+    a3.metric(t("sc_t1"), f"{s['exact_hit_top1']*100:.0f}%")
+    a4.metric(t("sc_t3"), f"{s['exact_hit_top3']*100:.0f}%")
+    b1, b2, b3 = st.columns(3)
+    rps_better = s["mean_rps"] <= s["rps_baseline_uniform"]
+    b1.metric(t("sc_rps"), f"{s['mean_rps']:.3f}",
+              delta=("✓ beats coin-flip" if rps_better else "✗ below coin-flip"),
+              delta_color="normal" if rps_better else "inverse")
+    b2.metric(t("sc_rps_base"), f"{s['rps_baseline_uniform']:.3f}", delta_color="off")
+    b3.metric(t("sc_rank"), f"{s['mean_score_rank']:.1f}", delta_color="off")
+
+    bst, wst = sc["best"], sc["worst"]
+    if bst and wst:
+        cb, cw = st.columns(2)
+        cb.markdown(
+            f"<div class='card'><div class='eyebrow'>{t('sc_best')}</div>"
+            f"<div style='font-size:15px'>{flag(bst['home'],disp_df)} {bst['home']} "
+            f"<b>{bst['score']}</b> {bst['away']} {flag(bst['away'],disp_df)}</div>"
+            f"<div style='color:{TEAL};font-size:13px'>{bst['p_actual']*100:.1f}% on that exact score · rank {bst['rank']}</div></div>",
+            unsafe_allow_html=True)
+        cw.markdown(
+            f"<div class='card'><div class='eyebrow'>{t('sc_worst')}</div>"
+            f"<div style='font-size:15px'>{flag(wst['home'],disp_df)} {wst['home']} "
+            f"<b>{wst['score']}</b> {wst['away']} {flag(wst['away'],disp_df)}</div>"
+            f"<div style='color:{RED};font-size:13px'>only {wst['p_actual']*100:.1f}% · rank {wst['rank']}</div></div>",
+            unsafe_allow_html=True)
+
+    st.markdown(f"### {t('sc_table')}")
+    st.caption(t("sc_cols"))
+    table = []
+    for m in sc["matches"]:
+        tops = " · ".join(f"{x['s']} {x['p']*100:.0f}%" for x in m["top_scores"][:3])
+        table.append({
+            "·": (f"🔴 {m['minute']}'" if m.get("minute") else "🔴") if m["live"] else "",
+            "Match": f"{flag(m['home'],disp_df)} {m['home']}–{m['away']} {flag(m['away'],disp_df)}",
+            "Score": m["score"],
+            "Model's top scores": tops,
+            "% real": f"{m['p_actual']*100:.1f}%",
+            "Rank": m["rank"],
+            "Result": "✅" if m["outcome_ok"] else "❌",
+        })
+    st.dataframe(pd.DataFrame(table), hide_index=True, width="stretch")
+    st.caption(t("sc_note"))
 
 
 # ══════════════════════════════════════════════════════════════════════════════

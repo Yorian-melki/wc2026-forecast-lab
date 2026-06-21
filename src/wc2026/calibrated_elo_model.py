@@ -371,22 +371,30 @@ class CalibratedEloMatchModel:
         flat /= flat.sum()
         return flat
 
+    def scoreline_probs(self, team_a: Team, team_b: Team, knockout: bool = False) -> np.ndarray:
+        """Flat scoreline distribution (incl. ML reweighting) the model samples from.
+
+        Index idx -> goals (idx // g, idx % g) with g = dc_max_goals + 1; sums to 1.
+        Exposed publicly so the live scorecard scores real results against the SAME
+        distribution the Monte Carlo actually simulates (no re-derivation, no drift)."""
+        mu_a, mu_b = self.expected_goals(team_a, team_b, knockout=knockout)
+        flat = self._build_dc_flat(mu_a, mu_b)
+        if self.use_ml:
+            ml = self._ml_wdl(team_a, team_b)
+            if ml is not None:
+                w_ml = self._effective_ml_weight(team_a, team_b)  # per-pair (fixed or dynamic)
+                w_elo = 1.0 - w_ml
+                dc = self._implied_wdl(flat)
+                target = tuple(w_elo * d + w_ml * m for d, m in zip(dc, ml))
+                flat = self._reweight_flat_to_wdl(flat, target)
+        return flat
+
     def _dc_sample(self, team_a: Team, team_b: Team,
                    knockout: bool, rng: np.random.Generator) -> Tuple[int, int]:
         ctx = "ko" if knockout else "group"
         key = (team_a.code, team_b.code, ctx)
         if key not in self._dc_cache:
-            mu_a, mu_b = self.expected_goals(team_a, team_b, knockout=knockout)
-            flat = self._build_dc_flat(mu_a, mu_b)
-            if self.use_ml:
-                ml = self._ml_wdl(team_a, team_b)
-                if ml is not None:
-                    w_ml = self._effective_ml_weight(team_a, team_b)  # per-pair (fixed or dynamic)
-                    w_elo = 1.0 - w_ml
-                    dc = self._implied_wdl(flat)
-                    target = tuple(w_elo * d + w_ml * m for d, m in zip(dc, ml))
-                    flat = self._reweight_flat_to_wdl(flat, target)
-            self._dc_cache[key] = flat
+            self._dc_cache[key] = self.scoreline_probs(team_a, team_b, knockout=knockout)
         flat = self._dc_cache[key]
         idx = int(rng.choice(len(flat), p=flat))
         g = self.dc_max_goals + 1
