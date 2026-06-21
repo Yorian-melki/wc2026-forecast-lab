@@ -297,7 +297,7 @@ TXT = {
         # Overview / hero
         "ov_eyebrow": "World Cup 2026 · Live forecast",
         "ov_title": "Tournament Command Center",
-        "ov_sub": "A probabilistic forecast of the 2026 World Cup — calibrated Elo → Dixon-Coles with a validated ML layer, re-simulated live as results come in. Probabilities, not predictions.",
+        "ov_sub": "Who's most likely to win the 2026 World Cup? Live winning chances for all 48 teams, updated automatically after every match. It's a probability — not a prediction.",
         "kpi_fav": "Favourite", "kpi_live": "Matches played", "kpi_sims": "Simulations",
         "kpi_tests": "Tests passing", "kpi_val": "World Cups validated",
         "ov_topfav": "Top contenders", "ov_links": "Project & links",
@@ -313,6 +313,10 @@ TXT = {
         "ct_eyebrow": "Title race", "ct_title": "Champion Probabilities",
         "ct_desc": "100,000 Monte Carlo simulations · live-conditioned ({n}/104 played) · calibrated Elo→Dixon-Coles (β=0.544) with ML@0.20.",
         "ct_fav": "Favourite", "ct_top3": "Top-3 concentration", "ct_top5": "Top-5 combined", "ct_entropy": "Entropy (bits)",
+        "ct_fav_help": "The single most likely winner — but far from certain.",
+        "ct_top3_help": "Combined chance the winner is one of the 3 favourites. Higher = the race is concentrated.",
+        "ct_top5_help": "Combined chance the winner is in the top 5 — a quick read on how open it is.",
+        "ct_entropy_help": "How open the race is, in bits. Higher = more teams have a real shot (more uncertainty).",
         # Live Standings
         "ls_eyebrow": "Group stage · live", "ls_title": "Live Group Standings",
         "ls_desc": "Auto-updating group tables. Live scores tick in; a result locks into the standings at full time.",
@@ -356,7 +360,7 @@ TXT = {
         "disclaimer": "Des probabilités, pas des prédictions. Ce n'est pas un outil de paris.",
         "ov_eyebrow": "Coupe du monde 2026 · Prévision en direct",
         "ov_title": "Centre de commande du tournoi",
-        "ov_sub": "Une prévision probabiliste de la Coupe du monde 2026 — Elo calibré → Dixon-Coles avec une couche ML validée, re-simulée en direct au fil des résultats. Des probabilités, pas des prédictions.",
+        "ov_sub": "Qui a le plus de chances de gagner la Coupe du monde 2026 ? Les chances de victoire des 48 équipes, en direct, mises à jour automatiquement après chaque match. Une probabilité — pas une prédiction.",
         "kpi_fav": "Favori", "kpi_live": "Matchs joués", "kpi_sims": "Simulations",
         "kpi_tests": "Tests au vert", "kpi_val": "Coupes du monde validées",
         "ov_topfav": "Principaux prétendants", "ov_links": "Projet & liens",
@@ -371,6 +375,10 @@ TXT = {
         "ct_eyebrow": "Course au titre", "ct_title": "Probabilités de titre",
         "ct_desc": "100 000 simulations Monte-Carlo · conditionné en direct ({n}/104 joués) · Elo→Dixon-Coles calibré (β=0,544) avec ML@0,20.",
         "ct_fav": "Favori", "ct_top3": "Concentration top-3", "ct_top5": "Cumul top-5", "ct_entropy": "Entropie (bits)",
+        "ct_fav_help": "Le vainqueur le plus probable — mais loin d'être certain.",
+        "ct_top3_help": "Probabilité cumulée que le vainqueur soit l'un des 3 favoris. Plus c'est haut, plus la course est resserrée.",
+        "ct_top5_help": "Probabilité cumulée que le vainqueur soit dans le top 5 — un coup d'œil sur l'ouverture de la course.",
+        "ct_entropy_help": "À quel point la course est ouverte, en bits. Plus c'est haut, plus d'équipes ont une vraie chance.",
         "ls_eyebrow": "Phase de groupes · direct", "ls_title": "Classements de groupe en direct",
         "ls_desc": "Tableaux de groupes mis à jour automatiquement. Les scores défilent en direct ; un résultat est verrouillé au classement au coup de sifflet final.",
         "ls_live_now": "En direct", "ls_played": "Matchs joués",
@@ -754,13 +762,13 @@ elif page == "🏆 Champion Tracker":
     c1, c2, c3, c4 = st.columns(4)
     c1.metric(f"🏆 {t('ct_fav')}",
               f"{top_team.get('flag', '')} {top_team['team']}",
-              f"{top_team['champion_prob']*100:.1f}%")
-    c2.metric(t("ct_top3"), f"{top3_sum*100:.1f}%", delta_color="off")
-    c3.metric(t("ct_top5"),      f"{top5_sum*100:.1f}%", delta_color="off")
+              f"{top_team['champion_prob']*100:.1f}%", help=t("ct_fav_help"))
+    c2.metric(t("ct_top3"), f"{top3_sum*100:.1f}%", delta_color="off", help=t("ct_top3_help"))
+    c3.metric(t("ct_top5"),      f"{top5_sum*100:.1f}%", delta_color="off", help=t("ct_top5_help"))
     c4.metric(t("ct_entropy"),
               f"{ent:.2f} / {math.log2(48):.2f}",
               f"{ent/math.log2(48)*100:.0f}% of max uncertainty",
-              delta_color="off")
+              delta_color="off", help=t("ct_entropy_help"))
 
     st.markdown("---")
 
