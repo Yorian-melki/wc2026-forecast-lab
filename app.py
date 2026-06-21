@@ -330,6 +330,8 @@ TXT = {
         # Model Lab
         "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
         "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
+        "ml_hint": "💡 The \"show-your-work\" section — the math and honest limits behind the forecast. Curious? Dive in. In a hurry? You can skip it.",
+        "dq_hint": "💡 Where every number comes from — sources, freshness and honest caveats. Skip it unless you want to check the receipts.",
         # other page headers
         "mp_eyebrow": "Single match", "mp_title": "Match Probability Engine",
         "mp_desc": "Win / draw / loss and scoreline probabilities for any pairing, from the same calibrated engine.",
@@ -389,6 +391,8 @@ TXT = {
         "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
         "ml_eyebrow": "Méthodologie", "ml_title": "Laboratoire du modèle",
         "ml_desc": "Transparence mathématique complète, limites assumées, et un audit de maturité auto-évalué.",
+        "ml_hint": "💡 La section \"on montre nos calculs\" — les maths et les limites assumées derrière la prévision. Curieux ? Plonge. Pressé ? Tu peux passer.",
+        "dq_hint": "💡 D'où vient chaque chiffre — sources, fraîcheur et limites assumées. À sauter, sauf si tu veux vérifier nos sources.",
         "mp_eyebrow": "Match unique", "mp_title": "Moteur de probabilités de match",
         "mp_desc": "Probabilités victoire / nul / défaite et de score pour toute affiche, depuis le même moteur calibré.",
         "dna_eyebrow": "Profils d'équipe", "dna_title": "ADN des nations",
@@ -1966,6 +1970,7 @@ elif page == "🔮 Bracket Paths":
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🧮 Model Lab":
     page_header("ml_eyebrow", "ml_title", "ml_desc")
+    st.caption(t("ml_hint"))
 
     t1, t2, t3, t4, t5 = st.tabs(
         ["📐 Mathematics", "📊 Ablation", "🔬 Calibration", "⚠️ Limitations", "📋 Maturity Score"])
@@ -2220,6 +2225,7 @@ only 4 World Cups validated, market is benchmark-only, xG sources share an upstr
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "📡 Data Quality":
     page_header("dq_eyebrow", "dq_title", "dq_desc")
+    st.caption(t("dq_hint"))
     st.markdown("")
 
     # ── What this forecast is / is not (defensibility) ───────────────────────
