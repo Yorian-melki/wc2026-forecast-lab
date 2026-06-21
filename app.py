@@ -562,6 +562,23 @@ stage_df   = load_stage_probs()
 gpos_df    = load_group_pos()
 live_data  = load_live_json()
 
+# The headline match counter (sidebar, hero, Champion Tracker) must reflect the LIVE state —
+# not the persisted snapshot, which only updates when a visitor opens Live Standings. Without
+# this, "/104" stays frozen on the committed snapshot. Failure-safe; falls back to the snapshot.
+def _live_count_and_updated():
+    if AUTO_LIVE:
+        try:
+            import time as _t
+            from datetime import datetime as _dt
+            _s = cached_live_state(int(_t.time() // LIVE_REFRESH))
+            if _s.get("ok"):
+                return len(_s.get("all_completed", [])), "live · " + _dt.utcnow().strftime("%H:%M UTC")
+        except Exception:
+            pass
+    return len(live_data.get("completed_matches", [])), live_data.get("last_updated", "—")
+
+n_played, last_upd_global = _live_count_and_updated()
+
 # Merge display names into elo_df
 if not elo_df.empty and not disp_df.empty and "full_name" not in elo_df.columns:
     elo_df = elo_df.merge(
@@ -579,7 +596,6 @@ with st.sidebar:
     st.segmented_control(t("lang_label"), ["EN", "FR"], key="lang_code",
                          label_visibility="collapsed")
 
-    n_played = len(live_data.get("completed_matches", []))
     live_pill = ('<span class="pill pill-live"><span class="dot dot-live"></span>LIVE</span>'
                  if AUTO_LIVE else '<span class="pill pill-snap">SNAPSHOT</span>')
     st.markdown(
@@ -587,7 +603,7 @@ with st.sidebar:
         f'<span class="pill pill-ok">{t("matches_played", n=n_played)}</span> {live_pill}</div>',
         unsafe_allow_html=True,
     )
-    last_upd = live_data.get("last_updated", "—")
+    last_upd = last_upd_global
     st.markdown(
         f"<div style='font-size:11px;color:{MUTED};margin:6px 0 12px'>{t('updated')}: {last_upd}</div>",
         unsafe_allow_html=True,
