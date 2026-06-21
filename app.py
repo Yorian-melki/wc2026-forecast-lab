@@ -355,6 +355,8 @@ TXT = {
         # other page headers
         "mp_eyebrow": "Single match", "mp_title": "Match Probability Engine",
         "mp_desc": "Win / draw / loss and scoreline probabilities for any pairing, from the same calibrated engine.",
+        "mp_dna": "DNA matchup — both squads overlaid", "mp_dna_full": "Full DNA:",
+        "mp_dna_note": "Analyst-prior squad ratings (Expert model only) — not used in the live probability forecast.",
         "dna_eyebrow": "Team profiles", "dna_title": "Nation DNA",
         "dna_desc": "Style and rating fingerprints for every qualified nation.",
         "h2h_eyebrow": "Rivalries", "h2h_title": "Head-to-Head",
@@ -435,6 +437,8 @@ TXT = {
         "dq_hint": "💡 D'où vient chaque chiffre — sources, fraîcheur et limites assumées. À sauter, sauf si tu veux vérifier nos sources.",
         "mp_eyebrow": "Match unique", "mp_title": "Moteur de probabilités de match",
         "mp_desc": "Probabilités victoire / nul / défaite et de score pour toute affiche, depuis le même moteur calibré.",
+        "mp_dna": "ADN croisé — les deux squads superposés", "mp_dna_full": "ADN complet :",
+        "mp_dna_note": "Notes analystes des effectifs (modèle Expert) — non utilisées dans la prévision live.",
         "dna_eyebrow": "Profils d'équipe", "dna_title": "ADN des nations",
         "dna_desc": "Empreintes de style et de niveau pour chaque nation qualifiée.",
         "h2h_eyebrow": "Rivalités", "h2h_title": "Confrontations",
@@ -1250,6 +1254,47 @@ elif page == "🎯 Match Predictor":
         )
 
     match_type = st.radio("Match context", ["Group Stage", "Knockout"], horizontal=True)
+
+    # 🧬 DNA matchup — both squads' Nation-DNA radars overlaid (extract; full view one click away).
+    def _dna_attrs(code):
+        if "code" not in teams_df.columns:
+            return None
+        row = teams_df[teams_df["code"] == code]
+        if not len(row):
+            return None
+        r = row.iloc[0]
+        keys = [("Attack", "attack"), ("Defense", "defense"), ("Midfield", "midfield"),
+                ("Goalkeeper", "goalkeeper"), ("Depth", "depth"), ("Penalties", "penalties"),
+                ("Set Pieces", "setpiece"), ("Form", "form"), ("Health", "health"),
+                ("Discipline", "discipline")]
+        return {lbl: float(r.get(c, 75)) for lbl, c in keys}
+    if team_a != team_b:
+        _aa, _ab = _dna_attrs(team_a), _dna_attrs(team_b)
+        if _aa and _ab:
+            with st.expander("🧬 " + t("mp_dna"), expanded=True):
+                _figd = go.Figure()
+                _figd.add_trace(go.Scatterpolar(
+                    r=list(_aa.values()) + [list(_aa.values())[0]],
+                    theta=list(_aa.keys()) + [list(_aa.keys())[0]], fill="toself",
+                    name=f"{flag(team_a, disp_df)} {team_a}", fillcolor="rgba(42,157,143,0.18)",
+                    line=dict(color=TEAL, width=2)))
+                _figd.add_trace(go.Scatterpolar(
+                    r=list(_ab.values()) + [list(_ab.values())[0]],
+                    theta=list(_ab.keys()) + [list(_ab.keys())[0]], fill="toself",
+                    name=f"{flag(team_b, disp_df)} {team_b}", fillcolor="rgba(230,57,70,0.15)",
+                    line=dict(color=RED, width=2)))
+                _figd.update_layout(
+                    **plotly_layout(height=420), showlegend=True,
+                    polar=dict(bgcolor=BG2, radialaxis=dict(visible=True, range=[0, 100], gridcolor=BORDER),
+                               angularaxis=dict(gridcolor=BORDER)))
+                st.plotly_chart(_figd, width="stretch")
+                _d1, _d2 = st.columns(2)
+                if _d1.button(f"🧬 {t('mp_dna_full')} {team_a}", key="dna_full_a"):
+                    st.session_state["_goto"] = "🧬 Nation DNA"; st.session_state["dna_sel"] = team_a; st.rerun()
+                if _d2.button(f"🧬 {t('mp_dna_full')} {team_b}", key="dna_full_b"):
+                    st.session_state["_goto"] = "🧬 Nation DNA"; st.session_state["dna_sel"] = team_b; st.rerun()
+                st.caption(t("mp_dna_note"))
+
     is_ko = match_type == "Knockout"
 
     if team_a == team_b:
@@ -1484,9 +1529,10 @@ elif page == "🧬 Nation DNA":
     if not all_codes:
         st.error("No data loaded."); st.stop()
 
+    st.session_state.setdefault("dna_sel", all_codes[0])
     selected = st.selectbox(
         "Select nation",
-        all_codes,
+        all_codes, key="dna_sel",
         format_func=lambda x: f"{flag(x, disp_df)} {x} — {full_name(x, disp_df)}",
     )
 
