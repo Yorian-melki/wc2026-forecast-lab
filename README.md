@@ -57,7 +57,7 @@ intervals**.
 pip install -r requirements.txt
 PYTHONPATH=src .venv/bin/python scripts/rebuild_publication_forecast.py          # smoke (<60s)
 PYTHONPATH=src .venv/bin/python scripts/rebuild_publication_forecast.py --full    # full (~25 min)
-PYTHONPATH=src .venv/bin/python -m pytest tests/ -q                                # 571 passed
+PYTHONPATH=src .venv/bin/python -m pytest tests/ -q                                # 574 passed
 streamlit run app.py
 ```
 

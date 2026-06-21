@@ -649,10 +649,10 @@ def _live_count_and_updated():
     if AUTO_LIVE:
         try:
             import time as _t
-            from datetime import datetime as _dt
+            from datetime import datetime as _dt, timezone as _tz
             _s = cached_live_state(int(_t.time() // LIVE_REFRESH))
             if _s.get("ok"):
-                return len(_s.get("all_completed", [])), "live · " + _dt.utcnow().strftime("%H:%M UTC")
+                return len(_s.get("all_completed", [])), "live · " + _dt.now(_tz.utc).strftime("%H:%M UTC")
         except Exception:
             pass
     return len(live_data.get("completed_matches", [])), live_data.get("last_updated", "—")
@@ -709,7 +709,7 @@ with st.sidebar:
     st.markdown(f'<div class="side-label">{t("trust_label")}</div>', unsafe_allow_html=True)
     st.markdown(
         f"""<div class="side-card">
-        <b>{t("trust_tests", n=571)}</b> · <span style='color:{GOLD}'>6.93 / 10</span> maturity (self, honest)<br>
+        <b>{t("trust_tests", n=574)}</b> · <span style='color:{GOLD}'>6.93 / 10</span> maturity (self, honest)<br>
         {t("trust_val")} · Elo→Dixon-Coles + Monte Carlo<br>
         <a href="https://github.com/Yorian-melki/wc2026-forecast-lab" target="_blank">{t("trust_oss")}</a>
         </div>""",
@@ -750,7 +750,7 @@ if page == "🚀 Release Status":
             <div class="kpi"><div class="v">{fav_val}</div><div class="l">{fav_sub}</div></div>
             <div class="kpi"><div class="v">{n_played} / 104</div><div class="l">{t('kpi_live')}</div></div>
             <div class="kpi"><div class="v">100K</div><div class="l">{t('kpi_sims')}</div></div>
-            <div class="kpi"><div class="v">571</div><div class="l">{t('kpi_tests')}</div></div>
+            <div class="kpi"><div class="v">574</div><div class="l">{t('kpi_tests')}</div></div>
             <div class="kpi"><div class="v">4</div><div class="l">{t('kpi_val')}</div></div>
           </div>
         </div>""", unsafe_allow_html=True)
@@ -763,7 +763,7 @@ if page == "🚀 Release Status":
     # ── trust chips ───────────────────────────────────────────────────────────
     st.markdown(
         f"""<div class="trust-row">
-          <span class="trust-chip"><b>571</b> {t('trust_tests', n='').strip()}</span>
+          <span class="trust-chip"><b>574</b> {t('trust_tests', n='').strip()}</span>
           <span class="trust-chip"><b>4</b> {t('kpi_val')}</span>
           <span class="trust-chip"><b>6.93</b> / 10 maturity</span>
           <span class="trust-chip">Elo → Dixon-Coles + ML@0.20</span>
@@ -1121,6 +1121,11 @@ elif page == "⚽ Live Standings":
             unsafe_allow_html=True,
         )
 
+        def _fmt_pct(p):
+            # Avoid a misleading "0%" next to a ✅: tiny exact-score probs show as "<0.1%".
+            v = p * 100
+            return "<0.1%" if 0 < v < 0.1 else f"{v:.1f}%"
+
         def _predict_btn(h, a, key):
             # Click a match -> pre-fill Match Predictor and jump there (see _goto at top of script).
             if st.button("🎯 " + t("ls_predict"), key=key):
@@ -1145,7 +1150,7 @@ elif page == "⚽ Live Standings":
                 if r:
                     st.markdown(
                         f"<div style='font-size:11.5px;color:{MUTED};margin:-4px 0 2px'>{t('ls_pred_live')}: "
-                        f"<b style='color:{TEAL}'>{r['p_actual']*100:.0f}%</b> ({t('ls_rank')} {r['rank']})</div>",
+                        f"<b style='color:{TEAL}'>{_fmt_pct(r['p_actual'])}</b> ({t('ls_rank')} {r['rank']})</div>",
                         unsafe_allow_html=True)
                 _predict_btn(m["home"], m["away"], f"livep_{i}")
             st.markdown("---")
@@ -1222,7 +1227,7 @@ elif page == "⚽ Live Standings":
                             f"<span style='color:{wcol};font-weight:700;font-size:17px'>{gh}–{ga}</span> "
                             f"<b>{m['away']}</b> {flag(m['away'],disp_df)}</span>"
                             + (f"<br><span style='font-size:11px;color:{MUTED}'>{t('ls_pred')}: "
-                               f"<b style='color:{TEAL}'>{r['p_actual']*100:.0f}%</b> ({t('ls_rank')} {r['rank']}) "
+                               f"<b style='color:{TEAL}'>{_fmt_pct(r['p_actual'])}</b> ({t('ls_rank')} {r['rank']}) "
                                f"{'✅' if r['outcome_ok'] else '❌'}</span>" if r else "")
                             + "</div>", unsafe_allow_html=True)
                         if m.get("scorers"):
@@ -2461,7 +2466,7 @@ elif page == "📡 Data Quality":
                 "- Validated leak-free at match level (Brier 0.508 vs 0.529 Elo) and tournament "
                 "level (walk-forward WC2010/14/18/22).\n"
                 "- Reported with P5/P50/P95 champion intervals.\n"
-                "- Fully reproducible offline; 571 tests."
+                "- Fully reproducible offline; 574 tests."
             )
         with cwb:
             st.markdown(
