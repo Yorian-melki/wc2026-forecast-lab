@@ -329,6 +329,9 @@ TXT = {
         # Data Quality
         "dq_eyebrow": "Sources & audit", "dq_title": "Data Quality & Source Audit",
         "dq_desc": "Every figure on this site is backed by a documented source. This page shows exactly what data we have, what we are missing, and how fresh it is.",
+        "ls_takeaway": "👉 <b>{n}/104</b> group matches played. Top 2 of each group (plus the 8 best 3rd-placed teams) reach the knockouts. Scores update live.",
+        "ml_takeaway": "👉 In plain words: Elo rates each team, Dixon-Coles turns ratings into score probabilities, a small ML layer (20%) sharpens it, then 100,000 simulations produce the odds. Everything below is the proof — dive in or skip it.",
+        "dq_takeaway": "👉 Every number on this site is sourced. 4 live providers cross-checked, zero score disagreements. Below: what we have, what's missing, how fresh — skip unless you want the receipts.",
         # Model Lab
         "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
         "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
@@ -393,6 +396,9 @@ TXT = {
         "src_live": "fournisseurs en direct", "src_snap": "instantané hors-ligne (définir API_FOOTBALL_KEY pour le direct)",
         "dq_eyebrow": "Sources & audit", "dq_title": "Qualité des données & audit des sources",
         "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
+        "ls_takeaway": "👉 <b>{n}/104</b> matchs de poule joués. Les 2 premiers de chaque groupe (plus les 8 meilleurs 3es) filent en élimination directe. Scores en direct.",
+        "ml_takeaway": "👉 En clair : Elo note chaque équipe, Dixon-Coles transforme ça en probabilités de score, une petite couche ML (20%) affine, puis 100 000 simulations donnent les cotes. Tout ce qui suit est la preuve — plonge ou passe.",
+        "dq_takeaway": "👉 Chaque chiffre du site est sourcé. 4 fournisseurs recoupés, zéro désaccord de score. Ci-dessous : ce qu'on a, ce qui manque, la fraîcheur — à sauter sauf si tu veux les preuves.",
         "ml_eyebrow": "Méthodologie", "ml_title": "Laboratoire du modèle",
         "ml_desc": "Transparence mathématique complète, limites assumées, et un audit de maturité auto-évalué.",
         "ml_hint": "💡 La section \"on montre nos calculs\" — les maths et les limites assumées derrière la prévision. Curieux ? Plonge. Pressé ? Tu peux passer.",
@@ -424,6 +430,13 @@ def page_header(eyebrow_key: str, title_key: str, desc_key: Optional[str] = None
     st.markdown(f"# {t(title_key)}")
     if desc_key:
         st.markdown(f"<div class='page-desc'>{t(desc_key, **kw)}</div>", unsafe_allow_html=True)
+
+def takeaway(html: str) -> None:
+    """Plain one-line 'answer first' banner — instant payoff before any dense content."""
+    st.markdown(
+        f"<div style='font-size:15.5px;line-height:1.55;background:{BG2};border:1px solid {BORDER};"
+        f"border-left:3px solid {TEAL};border-radius:10px;padding:12px 16px;margin:2px 0 14px'>"
+        f"{html}</div>", unsafe_allow_html=True)
 
 
 # Consent-gated PostHog analytics (no-op unless POSTHOG_KEY is set in env). Privacy-first:
@@ -933,6 +946,7 @@ elif page == "🏆 Champion Tracker":
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "⚽ Live Standings":
     page_header("ls_eyebrow", "ls_title", "ls_desc")
+    takeaway(t("ls_takeaway", n=n_played))
 
     @st.fragment(run_every=(LIVE_REFRESH if AUTO_LIVE else None))
     def _live_standings():
@@ -1984,6 +1998,7 @@ elif page == "🔮 Bracket Paths":
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🧮 Model Lab":
     page_header("ml_eyebrow", "ml_title", "ml_desc")
+    takeaway(t("ml_takeaway"))
     st.caption(t("ml_hint"))
 
     t1, t2, t3, t4, t5 = st.tabs(
@@ -2239,6 +2254,7 @@ only 4 World Cups validated, market is benchmark-only, xG sources share an upstr
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "📡 Data Quality":
     page_header("dq_eyebrow", "dq_title", "dq_desc")
+    takeaway(t("dq_takeaway"))
     st.caption(t("dq_hint"))
     st.markdown("")
 
