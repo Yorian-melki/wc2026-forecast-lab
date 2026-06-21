@@ -347,6 +347,8 @@ TXT = {
         "sc_note": "RPS = the standard proper score for football forecasts (lower is better); shown next to the same-matches coin-flip (1/3-1/3-1/3) baseline — no inflated 'skill %'. Early on, small samples swing hard, so this can sit above the baseline before settling.",
         "sc_empty": "No finished matches yet — the scorecard fills as the tournament plays.",
         "sc_cols": "match · real score · model's top scores · % on real score · rank · result",
+        "sc_comp_title": "Across competitions — same model, scored the same way",
+        "sc_comp_note": "The Elo→Dixon-Coles core scored on every competition since 2010 (rolling pre-match Elos). 'WC2026 (live)' is this tournament so far. Lower RPS = better; every competition beats the coin-flip baseline.",
         # Model Lab
         "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
         "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
@@ -431,6 +433,8 @@ TXT = {
         "sc_note": "RPS = le score de référence pour les prévisions foot (plus bas = mieux) ; affiché à côté du baseline pile-ou-face (1/3-1/3-1/3) sur les mêmes matchs — aucun « % de skill » gonflé. Au début, les petits échantillons font tout bouger, donc ça peut dépasser le baseline avant de se stabiliser.",
         "sc_empty": "Aucun match terminé pour l'instant — le bulletin se remplit au fil du tournoi.",
         "sc_cols": "match · score réel · meilleurs scores du modèle · % sur le score réel · rang · résultat",
+        "sc_comp_title": "Sur les compétitions — même modèle, même mesure",
+        "sc_comp_note": "Le cœur Elo→Dixon-Coles mesuré sur chaque compétition depuis 2010 (Elos roulants d'avant-match). « CDM2026 (live) » = ce tournoi jusqu'ici. RPS plus bas = mieux ; chaque compétition bat le pile-ou-face.",
         "ml_eyebrow": "Méthodologie", "ml_title": "Laboratoire du modèle",
         "ml_desc": "Transparence mathématique complète, limites assumées, et un audit de maturité auto-évalué.",
         "ml_hint": "💡 La section \"on montre nos calculs\" — les maths et les limites assumées derrière la prévision. Curieux ? Plonge. Pressé ? Tu peux passer.",
@@ -1048,6 +1052,25 @@ elif page == "📊 Scorecard":
         })
     st.dataframe(pd.DataFrame(table), hide_index=True, width="stretch")
     st.caption(t("sc_note"))
+
+    # ── across competitions (backtest comparison) ─────────────────────────────
+    comp_path = AUDIT / "competition_backtest.json"
+    if comp_path.exists():
+        st.markdown(f"### {t('sc_comp_title')}")
+        comp = json.loads(comp_path.read_text())
+        crows = [{
+            "Competition": "🔴 WC2026 (live)", "Matches": s["n_matches"],
+            "Outcome %": f"{s['outcome_accuracy']*100:.0f}%", "RPS": f"{s['mean_rps']:.3f}",
+            "vs coin-flip": f"{s['rps_baseline_uniform']:.3f}", "Top-3 exact": f"{s['exact_hit_top3']*100:.0f}%",
+        }]
+        for name, r in comp.get("competitions", {}).items():
+            crows.append({
+                "Competition": name, "Matches": r["n"],
+                "Outcome %": f"{r['outcome_accuracy']*100:.0f}%", "RPS": f"{r['mean_rps']:.3f}",
+                "vs coin-flip": f"{r['rps_uniform']:.3f}", "Top-3 exact": f"{r['exact_top3']*100:.0f}%",
+            })
+        st.dataframe(pd.DataFrame(crows), hide_index=True, width="stretch")
+        st.caption(t("sc_comp_note"))
 
 
 # ══════════════════════════════════════════════════════════════════════════════

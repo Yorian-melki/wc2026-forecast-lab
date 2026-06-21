@@ -1,0 +1,56 @@
+{
+  "since": 2010,
+  "model": "Elo->Dixon-Coles core (no ML)",
+  "competitions": {
+    "FIFA World Cup": {
+      "n": 256,
+      "outcome_accuracy": 0.5625,
+      "mean_rps": 0.2078,
+      "rps_uniform": 0.2407,
+      "exact_top1": 0.1094,
+      "exact_top3": 0.3594,
+      "mean_prob_actual": 0.0748,
+      "mean_rank": 7.09
+    },
+    "Copa Am\u00e9rica": {
+      "n": 170,
+      "outcome_accuracy": 0.5471,
+      "mean_rps": 0.1803,
+      "rps_uniform": 0.2268,
+      "exact_top1": 0.1294,
+      "exact_top3": 0.3647,
+      "mean_prob_actual": 0.0768,
+      "mean_rank": 6.52
+    },
+    "African Cup of Nations": {
+      "n": 365,
+      "outcome_accuracy": 0.4795,
+      "mean_rps": 0.1973,
+      "rps_uniform": 0.2239,
+      "exact_top1": 0.1726,
+      "exact_top3": 0.4356,
+      "mean_prob_actual": 0.0829,
+      "mean_rank": 5.48
+    },
+    "UEFA Nations League": {
+      "n": 658,
+      "outcome_accuracy": 0.5304,
+      "mean_rps": 0.2008,
+      "rps_uniform": 0.236,
+      "exact_top1": 0.1292,
+      "exact_top3": 0.3419,
+      "mean_prob_actual": 0.0754,
+      "mean_rank": 6.84
+    },
+    "Friendly": {
+      "n": 5053,
+      "outcome_accuracy": 0.5306,
+      "mean_rps": 0.1968,
+      "rps_uniform": 0.2346,
+      "exact_top1": 0.132,
+      "exact_top3": 0.3495,
+      "mean_prob_actual": 0.0743,
+      "mean_rank": 7.15
+    }
+  }
+}
