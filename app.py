@@ -39,6 +39,12 @@ try:
 except Exception:
     _LIVE_ENGINE = False
 
+try:
+    from wc2026.web_analytics import inject as _inject_analytics
+except Exception:
+    def _inject_analytics(_st):  # analytics must never break the app
+        return False
+
 LIVE_REFRESH = max(20, int(os.getenv("LIVE_REFRESH_SECONDS", "45")))
 # Auto-refresh only when a live provider key is available (offline/deploy = static snapshot).
 AUTO_LIVE = _LIVE_ENGINE and bool(os.getenv("API_FOOTBALL_KEY"))
@@ -402,6 +408,11 @@ def page_header(eyebrow_key: str, title_key: str, desc_key: Optional[str] = None
     st.markdown(f"# {t(title_key)}")
     if desc_key:
         st.markdown(f"<div class='page-desc'>{t(desc_key, **kw)}</div>", unsafe_allow_html=True)
+
+
+# Consent-gated PostHog analytics (no-op unless POSTHOG_KEY is set in env). Privacy-first:
+# nothing loads or tracks until the visitor clicks Accept. See src/wc2026/web_analytics.py.
+_inject_analytics(st)
 
 
 # ─── data loaders ─────────────────────────────────────────────────────────────
