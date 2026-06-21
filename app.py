@@ -326,6 +326,8 @@ TXT = {
         "ls_live_now": "Live now", "ls_played": "Played matches",
         "ls_upcoming": "Today's upcoming matches", "ls_groups": "All 12 groups — current standings",
         "ls_injuries": "Key injury & fitness updates",
+        "ls_predict": "Predict", "ls_pred": "model", "ls_pred_live": "model gave this score",
+        "ls_rank": "rank", "ls_calendar": "Full calendar — all upcoming",
         "src_live": "live providers", "src_snap": "offline snapshot (set API_FOOTBALL_KEY for live auto-update)",
         # Data Quality
         "dq_eyebrow": "Sources & audit", "dq_title": "Data Quality & Source Audit",
@@ -407,6 +409,8 @@ TXT = {
         "ls_live_now": "En direct", "ls_played": "Matchs joués",
         "ls_upcoming": "Matchs du jour à venir", "ls_groups": "Les 12 groupes — classement actuel",
         "ls_injuries": "Blessures & infos forme",
+        "ls_predict": "Prédire", "ls_pred": "modèle", "ls_pred_live": "le modèle donnait ce score",
+        "ls_rank": "rang", "ls_calendar": "Calendrier complet — tous les prochains",
         "src_live": "fournisseurs en direct", "src_snap": "instantané hors-ligne (définir API_FOOTBALL_KEY pour le direct)",
         "dq_eyebrow": "Sources & audit", "dq_title": "Qualité des données & audit des sources",
         "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
@@ -463,6 +467,19 @@ def takeaway(html: str) -> None:
         f"<div style='font-size:15.5px;line-height:1.55;background:{BG2};border:1px solid {BORDER};"
         f"border-left:3px solid {TEAL};border-radius:10px;padding:12px 16px;margin:2px 0 14px'>"
         f"{html}</div>", unsafe_allow_html=True)
+
+
+@st.cache_resource(show_spinner=False)
+def _score_engine():
+    """Cached production model + pre-tournament teams, for live per-match score predictions."""
+    from wc2026.scorecard import get_model_and_teams
+    return get_model_and_teams()
+
+# Cross-page navigation: a button sets st.session_state["_goto"] (a NON-widget key) + reruns;
+# this transfers it onto the nav radio BEFORE that widget is created (Streamlit forbids setting
+# a widget's state after it renders). Used by "click a match → Match Predictor".
+if st.session_state.get("_goto"):
+    st.session_state["page_nav"] = st.session_state.pop("_goto")
 
 
 # Consent-gated PostHog analytics (no-op unless POSTHOG_KEY is set in env). Privacy-first:
@@ -676,7 +693,7 @@ with st.sidebar:
         "🧮 Model Lab": t("nav_modellab"), "📡 Data Quality": t("nav_data"),
     }
     page = st.radio("nav", list(NAV.keys()), format_func=lambda k: NAV[k],
-                    label_visibility="collapsed")
+                    label_visibility="collapsed", key="page_nav")
 
     st.markdown(f'<div class="side-label">{t("model")}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="side-card">{t("model_body")}</div>', unsafe_allow_html=True)
@@ -1039,6 +1056,8 @@ elif page == "⚽ Live Standings":
     @st.fragment(run_every=(LIVE_REFRESH if AUTO_LIVE else None))
     def _live_standings():
         import time as _t
+        from wc2026.scorecard import score_match, predicted_scores
+        model, teams = _score_engine()
         # Fresh provider fetch (auto-refreshing). Falls back to the static snapshot when
         # no live key is set (deploy/offline) — the page never crashes.
         state = cached_live_state(int(_t.time() // LIVE_REFRESH)) if AUTO_LIVE else {"ok": False}
@@ -1047,14 +1066,15 @@ elif page == "⚽ Live Standings":
             if mg.get("changed"):
                 load_live_json.clear()
             live_now  = state.get("live", [])
-            completed = sorted(state.get("all_completed", []), key=lambda c: (c.get("date", ""), c["home"]))
+            completed = sorted(state.get("all_completed", []),
+                               key=lambda c: (c.get("date", ""), c["home"]), reverse=True)  # most recent first
             standings = build_standings(state.get("all_completed", []))
             src = f"{t('src_live')} · {datetime.now().strftime('%H:%M:%S')}"
             ok_live = True
         else:
             ld = load_live_json()
             live_now, ok_live = [], False
-            completed = ld.get("completed_matches", [])
+            completed = list(reversed(ld.get("completed_matches", [])))
             standings = ld.get("group_standings", {})
             src = t("src_snap")
         meta     = load_live_json()
@@ -1074,112 +1094,122 @@ elif page == "⚽ Live Standings":
             unsafe_allow_html=True,
         )
 
-        # live-now banner (scores tick; result locks into standings at full time)
+        def _predict_btn(h, a, key):
+            # Click a match -> pre-fill Match Predictor and jump there (see _goto at top of script).
+            if st.button("🎯 " + t("ls_predict"), key=key):
+                st.session_state["_goto"] = "🎯 Match Predictor"
+                st.session_state["mp_prefill"] = (h, a)
+                st.rerun()
+
+        # ── 🔴 LIVE NOW (compact score + what the model gave that scoreline) ──
         if live_now:
             st.markdown(f"### 🔴 {t('ls_live_now')}")
-            for m in live_now:
-                fh, fa = flag(m["home"], disp_df), flag(m["away"], disp_df)
+            for i, m in enumerate(live_now):
                 gh = m["home_goals"] if m["home_goals"] is not None else 0
                 ga = m["away_goals"] if m["away_goals"] is not None else 0
                 mn = f"{m['minute']}'" if m.get("minute") else (m.get("status") or "LIVE")
-                c1, c2, c3 = st.columns([3, 1.4, 3])
-                c1.markdown(f"**{fh} {m['home']}**", unsafe_allow_html=True)
+                r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
+                c1, c2, c3 = st.columns([3, 2, 3])
+                c1.markdown(f"**{flag(m['home'],disp_df)} {m['home']}**")
                 c2.markdown(
-                    f"<h2 style='text-align:center;margin:0;color:{RED}'>{gh}–{ga}</h2>"
-                    f"<div style='text-align:center;color:{GOLD};font-size:11px'>{mn} · {m.get('status','')}</div>",
-                    unsafe_allow_html=True)
-                c3.markdown(f"**{fa} {m['away']}**", unsafe_allow_html=True)
+                    f"<div style='text-align:center'><span style='font-size:22px;font-weight:700;color:{RED}'>{gh}–{ga}</span>"
+                    f"<div style='color:{GOLD};font-size:11px'>{mn}</div></div>", unsafe_allow_html=True)
+                c3.markdown(f"**{flag(m['away'],disp_df)} {m['away']}**")
+                if r:
+                    st.markdown(
+                        f"<div style='font-size:11.5px;color:{MUTED};margin:-4px 0 2px'>{t('ls_pred_live')}: "
+                        f"<b style='color:{TEAL}'>{r['p_actual']*100:.0f}%</b> ({t('ls_rank')} {r['rank']})</div>",
+                        unsafe_allow_html=True)
+                _predict_btn(m["home"], m["away"], f"livep_{i}")
             st.markdown("---")
 
-        # played matches
-        if completed:
-            st.markdown(f"### {t('ls_played')}")
-            for m in completed:
-                grp = m.get("group", "")
-                h, a   = m["home"], m["away"]
-                gh, ga = m["home_goals"], m["away_goals"]
-                date   = m.get("date", "")
-                scorers = " · ".join(m.get("scorers", []) or [])
-                notes   = m.get("notes", "")
-                fh, fa  = flag(h, disp_df), flag(a, disp_df)
-                winner_color = TEAL if gh > ga else (RED if gh < ga else GOLD)
-                c1, c2, c3, c4, c5 = st.columns([1, 2.5, 1, 2.5, 2])
-                c1.markdown(f'<span class="badge badge-teal">Group {grp}</span>', unsafe_allow_html=True)
-                c2.markdown(f"**{fh} {h}**  \n<span style='color:{MUTED};font-size:12px'>{full_name(h,disp_df)}</span>", unsafe_allow_html=True)
-                c3.markdown(f"<h2 style='text-align:center;color:{winner_color};margin:0'>{gh}–{ga}</h2>", unsafe_allow_html=True)
-                c4.markdown(f"**{fa} {a}**  \n<span style='color:{MUTED};font-size:12px'>{full_name(a,disp_df)}</span>", unsafe_allow_html=True)
-                c5.markdown(f"<span style='color:{MUTED};font-size:12px'>{date}</span>", unsafe_allow_html=True)
-                if scorers:
-                    st.caption(f"⚽ {scorers}")
-                if notes:
-                    st.caption(f"📋 {notes}")
-                st.markdown("---")
-        else:
-            st.info("No matches played yet in the loaded data.")
-
-        # upcoming
+        # ── ⏭️ NEXT (upcoming + the model's predicted scoreline) ─────────────
         if upcoming:
-            st.markdown(f"### {t('ls_upcoming')}")
-            for m in upcoming:
-                fh = flag(m["home"], disp_df)
-                fa = flag(m["away"], disp_df)
-                st.markdown(
-                    f'<span class="badge badge-gold">Group {m["group"]}</span> '
-                    f'**{fh} {m["home"]}** vs **{fa} {m["away"]}** — {m.get("time_et","TBD")} ET',
-                    unsafe_allow_html=True,
-                )
-
-        # group tables
-        if standings:
+            st.markdown(f"### ⏭️ {t('ls_upcoming')}")
+            for i, m in enumerate(upcoming[:6]):
+                preds = predicted_scores(model, teams, m["home"], m["away"], k=3, knockout=not m.get("group"))
+                pred_str = " · ".join(f"{p['s']} {p['p']*100:.0f}%" for p in preds)
+                cc1, cc2 = st.columns([3, 2])
+                cc1.markdown(
+                    f'<span class="badge badge-gold">Grp {m.get("group","?")}</span> '
+                    f'**{flag(m["home"],disp_df)} {m["home"]}** vs **{flag(m["away"],disp_df)} {m["away"]}** '
+                    f'<span style="color:{MUTED};font-size:11px">{m.get("time_et","TBD")} ET</span>',
+                    unsafe_allow_html=True)
+                with cc2:
+                    if pred_str:
+                        st.markdown(f"<div style='font-size:11.5px;color:{GOLD}'>{t('ls_pred')}: {pred_str}</div>",
+                                    unsafe_allow_html=True)
+                    _predict_btn(m["home"], m["away"], f"upcp_{i}")
+            if len(upcoming) > 6:
+                with st.expander(t("ls_calendar")):
+                    for m in upcoming[6:]:
+                        st.markdown(
+                            f'{flag(m["home"],disp_df)} {m["home"]} vs {flag(m["away"],disp_df)} {m["away"]} '
+                            f'— Grp {m.get("group","?")} · {m.get("time_et","TBD")} ET')
             st.markdown("---")
+
+        # ── 📊 STANDINGS (moved up — visible without scrolling) ───────────────
+        if standings:
             st.markdown(f"### {t('ls_groups')}")
             grp_list = sorted(standings.keys())
-            cols_row = 3
-            for row_start in range(0, len(grp_list), cols_row):
-                row_grps = grp_list[row_start: row_start + cols_row]
-                cols = st.columns(cols_row)
-                for col_idx, grp in enumerate(row_grps):
+            for row_start in range(0, len(grp_list), 4):
+                cols = st.columns(4)
+                for col_idx, grp in enumerate(grp_list[row_start: row_start + 4]):
                     with cols[col_idx]:
                         st.markdown(f"**Group {grp}**")
                         grp_sorted = sorted(standings[grp], key=lambda x: (-x["points"], -x["gd"], -x["gf"]))
                         rows_html = ""
                         for rank, row in enumerate(grp_sorted, 1):
-                            code = row["team"]
-                            f_icon = flag(code, disp_df)
                             pts_color = TEAL if rank <= 2 else (GOLD if rank == 3 else MUTED)
                             rows_html += (
                                 f'<tr style="border-bottom:1px solid {BORDER}">'
-                                f'<td style="color:{MUTED};width:16px">{rank}</td>'
-                                f'<td>{f_icon} <b>{code}</b></td>'
+                                f'<td style="color:{MUTED};width:14px">{rank}</td>'
+                                f'<td>{flag(row["team"],disp_df)} <b>{row["team"]}</b></td>'
                                 f'<td style="text-align:center">{row["played"]}</td>'
-                                f'<td style="text-align:center">{row["gf"]}</td>'
-                                f'<td style="text-align:center">{row["ga"]}</td>'
                                 f'<td style="text-align:center">{row["gd"]:+d}</td>'
-                                f'<td style="text-align:center;color:{pts_color};font-weight:700">{row["points"]}</td>'
-                                f'</tr>'
-                            )
+                                f'<td style="text-align:center;color:{pts_color};font-weight:700">{row["points"]}</td></tr>')
                         st.markdown(
-                            f'<table style="width:100%;font-size:12px;border-collapse:collapse">'
-                            f'<thead><tr style="color:{MUTED}">'
-                            f'<th></th><th>Team</th><th>P</th><th>F</th><th>A</th>'
-                            f'<th>GD</th><th style="color:{TEAL}">Pts</th></tr></thead>'
-                            f'<tbody>{rows_html}</tbody></table>',
-                            unsafe_allow_html=True,
-                        )
+                            f'<table style="width:100%;font-size:11.5px;border-collapse:collapse">'
+                            f'<thead><tr style="color:{MUTED}"><th></th><th>Team</th><th>P</th><th>GD</th>'
+                            f'<th style="color:{TEAL}">Pts</th></tr></thead><tbody>{rows_html}</tbody></table>',
+                            unsafe_allow_html=True)
+            st.markdown("---")
 
-        # injuries
-        st.markdown("---")
-        st.markdown(f"### ⚕️ {t('ls_injuries')}")
-        any_injury = False
-        for code, inj_list in injuries.items():
-            if inj_list:
-                any_injury = True
-                f_icon = flag(code, disp_df)
-                for inj in inj_list:
-                    sev = RED if "OUT" in inj.upper() else GOLD
-                    st.markdown(f"{f_icon} **{code}**: <span style='color:{sev}'>{inj}</span>", unsafe_allow_html=True)
-        if not any_injury:
-            st.info("No key injury updates in current data file.")
+        # ── ✅ PLAYED (2-col compact cards, most-recent first, with prediction) ─
+        if completed:
+            st.markdown(f"### {t('ls_played')}")
+            for row_start in range(0, len(completed), 2):
+                cols = st.columns(2)
+                for ci, m in enumerate(completed[row_start: row_start + 2]):
+                    gh, ga = m["home_goals"], m["away_goals"]
+                    if gh is None:
+                        continue
+                    r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
+                    wcol = TEAL if gh > ga else (RED if gh < ga else GOLD)
+                    with cols[ci]:
+                        st.markdown(
+                            f"<div style='border:1px solid {BORDER};border-radius:10px;padding:8px 12px'>"
+                            f"<span class='badge badge-teal'>Grp {m.get('group','?')}</span> "
+                            f"<span style='color:{MUTED};font-size:10px'>{m.get('date','')}</span><br>"
+                            f"<span style='font-size:14px'>{flag(m['home'],disp_df)} <b>{m['home']}</b> "
+                            f"<span style='color:{wcol};font-weight:700;font-size:17px'>{gh}–{ga}</span> "
+                            f"<b>{m['away']}</b> {flag(m['away'],disp_df)}</span>"
+                            + (f"<br><span style='font-size:11px;color:{MUTED}'>{t('ls_pred')}: "
+                               f"<b style='color:{TEAL}'>{r['p_actual']*100:.0f}%</b> ({t('ls_rank')} {r['rank']}) "
+                               f"{'✅' if r['outcome_ok'] else '❌'}</span>" if r else "")
+                            + "</div>", unsafe_allow_html=True)
+                        if m.get("scorers"):
+                            st.caption("⚽ " + " · ".join(m["scorers"]))
+                        _predict_btn(m["home"], m["away"], f"playp_{row_start}_{ci}")
+
+        # ── ⚕️ injuries (collapsed) ───────────────────────────────────────────
+        if any(inj_list for inj_list in injuries.values()):
+            with st.expander(f"⚕️ {t('ls_injuries')}"):
+                for code, inj_list in injuries.items():
+                    for inj in (inj_list or []):
+                        sev = RED if "OUT" in inj.upper() else GOLD
+                        st.markdown(f"{flag(code,disp_df)} **{code}**: <span style='color:{sev}'>{inj}</span>",
+                                    unsafe_allow_html=True)
 
     _live_standings()
 
@@ -1195,21 +1225,27 @@ elif page == "🎯 Match Predictor":
         st.error("No team data loaded.")
         st.stop()
 
+    # Pre-fill from a "click a match → Predict" jump (Live Standings): set the selectbox
+    # session-state keys BEFORE the widgets render.
+    _pf = st.session_state.pop("mp_prefill", None)
+    if _pf and _pf[0] in all_codes:
+        st.session_state["mp_a"] = _pf[0]
+    if _pf and _pf[1] in all_codes:
+        st.session_state["mp_b"] = _pf[1]
+    st.session_state.setdefault("mp_a", "ESP" if "ESP" in all_codes else all_codes[0])
+    st.session_state.setdefault("mp_b", "ARG" if "ARG" in all_codes else all_codes[-1])
+
     c1, c2, c3 = st.columns([2, 1, 2])
     with c1:
         team_a = st.selectbox(
-            "🏠 Team A",
-            all_codes,
-            index=all_codes.index("ESP") if "ESP" in all_codes else 0,
+            "🏠 Team A", all_codes, key="mp_a",
             format_func=lambda x: f"{flag(x, disp_df)} {x} — {full_name(x, disp_df)}",
         )
     with c2:
         st.markdown(f"<br><h2 style='text-align:center;color:{MUTED}'>vs</h2>", unsafe_allow_html=True)
     with c3:
         team_b = st.selectbox(
-            "✈️ Team B",
-            all_codes,
-            index=all_codes.index("ARG") if "ARG" in all_codes else 1,
+            "✈️ Team B", all_codes, key="mp_b",
             format_func=lambda x: f"{flag(x, disp_df)} {x} — {full_name(x, disp_df)}",
         )
 

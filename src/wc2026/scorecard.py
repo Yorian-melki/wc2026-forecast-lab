@@ -68,6 +68,24 @@ def score_match(model, teams: dict, home: str, away: str, ha: int, ab: int,
     }
 
 
+def predicted_scores(model, teams: dict, home: str, away: str, k: int = 3,
+                     knockout: bool = False) -> list[dict]:
+    """Top-k most-likely scorelines for a fixture (used for upcoming matches with no result yet)."""
+    if home not in teams or away not in teams:
+        return []
+    flat = model.scoreline_probs(teams[home], teams[away], knockout=knockout)
+    g = int(round(len(flat) ** 0.5))
+    order = np.argsort(flat)[::-1][:k]
+    return [{"s": f"{int(o // g)}-{int(o % g)}", "p": float(flat[o])} for o in order]
+
+
+def get_model_and_teams():
+    """Build the production model + pre-tournament teams (cache this at the app layer)."""
+    from .calibrated_elo_model import CalibratedEloMatchModel
+    from .data_loader import load_teams
+    return CalibratedEloMatchModel(use_ml=None), load_teams(apply_temporal_form=True)
+
+
 def compute_scorecard(completed, live=None, model=None, teams=None) -> dict:
     """Accumulate the scorecard over completed (and optionally live in-progress) matches."""
     if model is None:
