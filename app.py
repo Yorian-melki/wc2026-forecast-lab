@@ -317,6 +317,8 @@ TXT = {
         "ct_top3_help": "Combined chance the winner is one of the 3 favourites. Higher = the race is concentrated.",
         "ct_top5_help": "Combined chance the winner is in the top 5 — a quick read on how open it is.",
         "ct_entropy_help": "How open the race is, in bits. Higher = more teams have a real shot (more uncertainty).",
+        "ct_takeaway": "👉 <b>{flag} {team}</b> is the model's favourite at <b>{p}% to win</b> — but far from a lock: the top 5 teams share only <b>{top5}%</b> of the title between them. A probability, not a prediction.",
+        "ct_caveat_title": "How to read this · honest limits",
         # Live Standings
         "ls_eyebrow": "Group stage · live", "ls_title": "Live Group Standings",
         "ls_desc": "Auto-updating group tables. Live scores tick in; a result locks into the standings at full time.",
@@ -381,6 +383,8 @@ TXT = {
         "ct_top3_help": "Probabilité cumulée que le vainqueur soit l'un des 3 favoris. Plus c'est haut, plus la course est resserrée.",
         "ct_top5_help": "Probabilité cumulée que le vainqueur soit dans le top 5 — un coup d'œil sur l'ouverture de la course.",
         "ct_entropy_help": "À quel point la course est ouverte, en bits. Plus c'est haut, plus d'équipes ont une vraie chance.",
+        "ct_takeaway": "👉 <b>{flag} {team}</b> est le favori du modèle à <b>{p}% de chances</b> — mais loin d'être plié : les 5 premiers ne cumulent que <b>{top5}%</b> du titre à eux tous. Une probabilité, pas une prédiction.",
+        "ct_caveat_title": "Comment lire ça · limites honnêtes",
         "ls_eyebrow": "Phase de groupes · direct", "ls_title": "Classements de groupe en direct",
         "ls_desc": "Tableaux de groupes mis à jour automatiquement. Les scores défilent en direct ; un résultat est verrouillé au classement au coup de sifflet final.",
         "ls_live_now": "En direct", "ls_played": "Matchs joués",
@@ -744,14 +748,6 @@ if page == "🚀 Release Status":
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🏆 Champion Tracker":
     page_header("ct_eyebrow", "ct_title", "ct_desc", n=n_played)
-    st.markdown("""<div class="caveat-box">
-    <b>Honest model disclosure:</b> Temperature correction β×0.55 is heuristic — not optimized against
-    external outcomes. WC2022 backtest: ARG was model's #1 pick (19.3%), actual winner ✓.
-    WC2018: FRA model's #5 pick (5.6%), actual winner. At champion granularity the model's mean-Brier
-    (~0.027) is on par with a uniform 1/48 null — the edge is in narrowing the field, not pinpointing
-    one winner (n=2 backtested WCs).
-    These are not betting probabilities.
-    </div>""", unsafe_allow_html=True)
 
     if elo_df.empty:
         st.error("Forecast output not found. Run `PYTHONPATH=src python scripts/run_live_simulation.py` to (re)generate it.")
@@ -762,6 +758,24 @@ elif page == "🏆 Champion Tracker":
     top3_sum  = float(elo_df.nlargest(3, "champion_prob")["champion_prob"].sum())
     top5_sum  = float(elo_df.nlargest(5, "champion_prob")["champion_prob"].sum())
     ent       = float(-np.sum(elo_df["champion_prob"] * np.log2(elo_df["champion_prob"] + 1e-15)))
+
+    # Plain one-line takeaway FIRST — instant payoff for any reader (the TDAH-friendly TL;DR).
+    st.markdown(
+        f"<div style='font-size:15.5px;line-height:1.55;background:{BG2};border:1px solid {BORDER};"
+        f"border-left:3px solid {TEAL};border-radius:10px;padding:12px 16px;margin:2px 0 14px'>"
+        + t("ct_takeaway", flag=top_team.get('flag', ''), team=top_team['team'],
+            p=f"{top_team['champion_prob']*100:.0f}", top5=f"{top5_sum*100:.0f}")
+        + "</div>",
+        unsafe_allow_html=True)
+
+    # Honest caveats — COLLAPSED (depth on demand for quants; everyone else just skips it).
+    with st.expander("ℹ️ " + t("ct_caveat_title")):
+        st.markdown(
+            "**Honest model disclosure:** Temperature correction β×0.55 is heuristic — not optimized "
+            "against external outcomes. WC2022 backtest: ARG was the model's #1 pick (19.3%), actual "
+            "winner ✓. WC2018: FRA the #5 pick (5.6%), actual winner. At champion granularity the model's "
+            "mean-Brier (~0.027) is on par with a uniform 1/48 null — the edge is in narrowing the field, "
+            "not pinpointing one winner (n=2 backtested WCs). These are not betting probabilities.")
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric(f"🏆 {t('ct_fav')}",
