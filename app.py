@@ -1277,10 +1277,12 @@ elif page == "⚽ Live Standings":
                     _big = (_pos == 0 and not live_now)
                     _aff = 26 if _big else 18
                     _csz = 18 if _big else 14
-                    if kdt <= _now:                      # kicked off, awaiting the live feed
+                    if kdt <= _now:                      # kicked off → 0–0 scoreboard until the feed syncs
+                        _mid = f"<span style='color:{RED}'>0–0</span>"
                         _line = (f"<div style='color:{RED};font-size:{_csz}px;font-weight:800;margin-top:2px'>"
                                  f"🔴 {t('ls_kickoff_passed')}</div>")
                     else:                                # future → live ticking countdown
+                        _mid = f"<span style='color:{MUTED};font-weight:500'>vs</span>"
                         _cid = f"wccd{_ci}"; _ci += 1
                         _line = (f"<div id='{_cid}' style='color:{RED};font-size:{_csz}px;font-weight:800;margin-top:2px'>"
                                  f"⏱ {t('ls_kickoff_in')} —</div>")
@@ -1289,7 +1291,7 @@ elif page == "⚽ Live Standings":
                         st.markdown(
                             f"<div style='text-align:center'>"
                             f"<div style='font-size:{_aff}px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
-                            f"<span style='color:{MUTED};font-weight:500'>vs</span> {m['away']} {flag(m['away'],disp_df)}</div>"
+                            f"{_mid} {m['away']} {flag(m['away'],disp_df)}</div>"
                             f"{_line}</div>", unsafe_allow_html=True)
                         _predict_btn(m["home"], m["away"], f"spot_{_pos}", t("ls_predict_fut"))
                 if _cd_js:
