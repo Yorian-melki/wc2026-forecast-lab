@@ -1190,13 +1190,13 @@ elif page == "⚽ Live Standings":
                   if ok_live else f"<span style='color:{MUTED};font-weight:700'>● SNAPSHOT</span>")
         _refresh = f" · auto-refresh {LIVE_REFRESH}s" if AUTO_LIVE else ""
         st.markdown(
-            f"<div style='border:1px solid {BORDER};border-radius:12px;padding:11px 18px;margin-bottom:14px;"
+            f"<div style='margin:-1.7rem -2.6rem 10px;padding:7px 2.6rem 8px;border-bottom:1px solid {BORDER};"
             f"background:linear-gradient(180deg,{BG2},{BG0})'>"
-            f"<span style='color:{GOLD};font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase'>{t('ls_eyebrow')}</span>"
-            f"<span style='font-size:21px;font-weight:700;margin-left:10px'>{t('ls_title')}</span>"
-            f"<div style='color:{MUTED};font-size:12px;margin-top:3px'>{t('ls_desc')}</div>"
-            f"<div style='color:{WHITE};font-size:12.5px;margin-top:3px'>{t('ls_takeaway', n=len(completed))}</div>"
-            f"<div style='color:{MUTED};font-size:11px;margin-top:5px'>{_badge} &nbsp;·&nbsp; {src}{_refresh}</div>"
+            f"<span style='color:{GOLD};font-size:10px;letter-spacing:1.4px;text-transform:uppercase'>{t('ls_eyebrow')}</span>"
+            f"<span style='font-size:17px;font-weight:700;margin-left:9px'>{t('ls_title')}</span>"
+            f"<span style='color:{MUTED};font-size:11px;margin-left:10px'>{t('ls_desc')}</span>"
+            f"<div style='font-size:11px;margin-top:2px'><span style='color:{WHITE}'>{t('ls_takeaway', n=len(completed))}</span>"
+            f"<span style='color:{MUTED}'> &nbsp;·&nbsp; {_badge} · {src}{_refresh}</span></div>"
             f"</div>", unsafe_allow_html=True)
 
         # ── 🔝 SPOTLIGHT (centered): live score(s) vs prediction + the two next kick-offs with
@@ -1210,33 +1210,35 @@ elif page == "⚽ Live Standings":
             _pred = ""
             if r:
                 pw = r["p_wdl"]
-                _pred = (f"<div style='font-size:12px;color:{MUTED};margin-top:3px'>{t('ls_live_vs')}: "
+                _pred = (f"<div style='font-size:11px;color:{MUTED};margin-top:2px'>{t('ls_live_vs')}: "
                          f"<b style='color:{TEAL}'>{m['home']} {pw['home']*100:.0f}%</b> · "
-                         f"{t('ls_pred')} {pw['draw']*100:.0f}% · "
-                         f"<b style='color:{TEAL}'>{m['away']} {pw['away']*100:.0f}%</b> · {r['top_scores'][0]['s']}</div>")
+                         f"{pw['draw']*100:.0f}% · <b style='color:{TEAL}'>{m['away']} {pw['away']*100:.0f}%</b> · {r['top_scores'][0]['s']}</div>")
+            _sc = " · ".join(m.get("scorers", []) or [])
+            _scorers = f"<div style='font-size:11px;color:{GOLD};margin-top:1px'>⚽ {_sc}</div>" if _sc else ""
             _spot.append(
-                f"<div style='margin:6px 0'>"
-                f"<div style='color:{RED};font-weight:700;font-size:12px'>● {t('ls_live_now').upper()} · {mn}</div>"
-                f"<div style='font-size:30px;font-weight:800;line-height:1.15'>{flag(m['home'],disp_df)} {m['home']} "
+                f"<div style='margin:3px 0'>"
+                f"<div style='color:{RED};font-weight:700;font-size:11px'>● {t('ls_live_now').upper()} · {mn}</div>"
+                f"<div style='font-size:25px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
                 f"<span style='color:{RED}'>{gh}–{ga}</span> {m['away']} {flag(m['away'],disp_df)}</div>"
-                f"{_pred}</div>")
+                f"{_scorers}{_pred}</div>")
         _cd_js = ""
         for _idx, (kdt, m) in enumerate(upc[:2]):
             _big = (_idx == 0 and not live_now)
-            _sz = 32 if _big else 18
+            _aff = 24 if _big else 16
+            _cdz = 15 if _big else 13
             _cid = f"wccd{_idx}"
             _spot.append(
-                f"<div style='margin:9px 0'>"
-                f"<div style='font-size:{_sz}px;font-weight:800;line-height:1.15'>{flag(m['home'],disp_df)} {m['home']} "
+                f"<div style='margin:4px 0'>"
+                f"<div style='font-size:{_aff}px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
                 f"<span style='color:{MUTED};font-weight:500'>vs</span> {m['away']} {flag(m['away'],disp_df)}</div>"
-                f"<div style='color:{RED};font-size:{max(15,_sz-6)}px;font-weight:800;margin-top:3px'>"
+                f"<div style='color:{RED};font-size:{_cdz}px;font-weight:700;margin-top:1px'>"
                 f"⏱ {t('ls_kickoff_in')} <span id='{_cid}'>—</span></div></div>")
             _cd_js += f"wcCountdown('{_cid}',{int(kdt.timestamp()*1000)});"
         if _spot:
-            _sep = f"<hr style='border:none;border-top:1px solid {BORDER};margin:10px 0'>"
+            _sep = f"<hr style='border:none;border-top:1px solid {BORDER};margin:7px 0'>"
             _card = (
                 f"<div style='font-family:Inter,system-ui,sans-serif;color:{WHITE};text-align:center;"
-                f"border:1px solid {BORDER};border-radius:16px;padding:16px 22px;margin:0 auto 12px;max-width:660px;"
+                f"border:1px solid {BORDER};border-radius:14px;padding:11px 18px;margin:0 auto 8px;max-width:600px;"
                 f"background:radial-gradient(130% 130% at 50% 0%,{BG2},{BG0})'>" + _sep.join(_spot) + "</div>")
             _js = ("<script>function wcCountdown(id,target){function u(){var el=document.getElementById(id);"
                    "if(!el)return;var d=target-Date.now();if(d<=0){el.innerHTML='⚽ KOWORD';return;}"
@@ -1244,15 +1246,13 @@ elif page == "⚽ Live Standings":
                    "mm=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);"
                    "el.innerHTML=(dd>0?dd+'j ':'')+(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
                    "u();setInterval(u,1000);}" + _cd_js + "</script>").replace("KOWORD", t('ls_kickoff'))
-            _components.html(_card + _js, height=min(140 + 92 * len(_spot), 460))
-            # action buttons live OUTSIDE the iframe (Streamlit can't be called from inside it)
-            _bc = st.columns(2)
+            _components.html(_card + _js, height=min(92 + 70 * len(_spot), 360))
+            # small, centered "see prediction" buttons (outside the iframe — Streamlit can't run inside it)
+            _pl, _b1, _b2, _pr = st.columns([1.4, 2, 2, 1.4])
+            _cells = [_b1, _b2]
             for _idx, (kdt, m) in enumerate(upc[:2]):
-                with _bc[_idx]:
-                    _predict_btn(m["home"], m["away"], f"spot_{_idx}",
-                                 f"{t('ls_predict_past')} · {m['home']}–{m['away']}")
-            if st.button(t("ls_see_all"), key="show_all_up"):
-                st.session_state["_show_all_up"] = not st.session_state.get("_show_all_up", False)
+                with _cells[_idx]:
+                    _predict_btn(m["home"], m["away"], f"spot_{_idx}", f"👁️ {m['home']}–{m['away']}")
 
         # ── 3 COLUMNS: played | standings (center) | upcoming ─────────────────
         _cpast, _cstd, _cfut = st.columns([1.05, 1.25, 1.05], gap="medium")
@@ -1325,8 +1325,12 @@ elif page == "⚽ Live Standings":
                 _fut_card(kdt, m, f"fp_{_i}")
             if not upc:
                 st.caption("—")
-            elif not _show_all and len(upc) > 6:
-                st.caption(f"+{len(upc) - 6} {t('ls_col_fut').lower()} — {t('ls_see_all')}")
+            elif len(upc) > 6:
+                # "see all upcoming" lives HERE — at the bottom of the upcoming column.
+                if st.button(("▲ " + t("ls_col_fut")) if _show_all else f"{t('ls_see_all')} (+{len(upc) - 6})",
+                             key="show_all_up"):
+                    st.session_state["_show_all_up"] = not _show_all
+                    st.rerun()
 
         if any(inj_list for inj_list in injuries.values()):
             with st.expander(f"⚕️ {t('ls_injuries')}"):
