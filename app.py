@@ -328,6 +328,11 @@ TXT = {
         "ls_injuries": "Key injury & fitness updates",
         "ls_predict": "Predict", "ls_pred": "model", "ls_pred_live": "model gave this score",
         "ls_rank": "rank", "ls_calendar": "Full calendar — all upcoming",
+        "ls_predict_past": "👁️ See pre-match prediction", "ls_predict_fut": "🎯 Predict",
+        "ls_see_all": "📅 See all upcoming matches", "ls_kickoff_in": "kick-off in",
+        "ls_next_up": "Next up", "ls_prematch": "Pre-match", "ls_live_vs": "live score vs pre-match prediction",
+        "ls_result_ok": "result called right", "ls_result_no": "result missed",
+        "ls_col_past": "Played", "ls_col_std": "Standings", "ls_col_fut": "Upcoming", "ls_kickoff": "KICK-OFF",
         "src_live": "live providers", "src_snap": "offline snapshot (set API_FOOTBALL_KEY for live auto-update)",
         # Data Quality
         "dq_eyebrow": "Sources & audit", "dq_title": "Data Quality & Source Audit",
@@ -422,6 +427,11 @@ TXT = {
         "ls_injuries": "Blessures & infos forme",
         "ls_predict": "Prédire", "ls_pred": "modèle", "ls_pred_live": "le modèle donnait ce score",
         "ls_rank": "rang", "ls_calendar": "Calendrier complet — tous les prochains",
+        "ls_predict_past": "👁️ Voir prédiction avant match", "ls_predict_fut": "🎯 Prédire",
+        "ls_see_all": "📅 Voir tous les futurs matchs", "ls_kickoff_in": "coup d'envoi dans",
+        "ls_next_up": "Prochains matchs", "ls_prematch": "Avant-match", "ls_live_vs": "score en direct vs prédiction d'avant-match",
+        "ls_result_ok": "résultat bien vu", "ls_result_no": "résultat manqué",
+        "ls_col_past": "Matchs joués", "ls_col_std": "Classements", "ls_col_fut": "Matchs à venir", "ls_kickoff": "COUP D’ENVOI",
         "src_live": "fournisseurs en direct", "src_snap": "instantané hors-ligne (définir API_FOOTBALL_KEY pour le direct)",
         "dq_eyebrow": "Sources & audit", "dq_title": "Qualité des données & audit des sources",
         "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
@@ -1091,24 +1101,23 @@ elif page == "📊 Scorecard":
 # PAGE 2 — LIVE STANDINGS
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "⚽ Live Standings":
-    page_header("ls_eyebrow", "ls_title", "ls_desc")
-    takeaway(t("ls_takeaway", n=n_played))
-
     @st.fragment(run_every=(LIVE_REFRESH if AUTO_LIVE else None))
     def _live_standings():
         import time as _t
+        import re as _re
+        from datetime import datetime as _dt2, timedelta as _td2, timezone as _tz2
+        import streamlit.components.v1 as _components
         from wc2026.scorecard import score_match, predicted_scores
         model, teams = _score_engine()
-        # Fresh provider fetch (auto-refreshing). Falls back to the static snapshot when
-        # no live key is set (deploy/offline) — the page never crashes.
+
         state = cached_live_state(int(_t.time() // LIVE_REFRESH)) if AUTO_LIVE else {"ok": False}
         if state.get("ok"):
-            mg = merge_and_persist(state)          # lock finished results into standings
+            mg = merge_and_persist(state)              # lock finished results into standings
             if mg.get("changed"):
                 load_live_json.clear()
             live_now  = state.get("live", [])
             completed = sorted(state.get("all_completed", []),
-                               key=lambda c: (c.get("date", ""), c["home"]), reverse=True)  # most recent first
+                               key=lambda c: (c.get("date", ""), c["home"]), reverse=True)
             standings = build_standings(state.get("all_completed", []))
             src = f"{t('src_live')} · {datetime.now().strftime('%H:%M:%S')}"
             ok_live = True
@@ -1120,135 +1129,173 @@ elif page == "⚽ Live Standings":
             src = t("src_snap")
         meta     = load_live_json()
         injuries = meta.get("key_injuries", {})
-        # Filter out matches that are already finished or currently live — a finished match
-        # must never appear under "Today's Upcoming" (fixes the QAT–SUI duplicate).
         _done_or_live = {(m["home"], m["away"]) for m in completed} | {(m["home"], m["away"]) for m in live_now}
         upcoming = [m for m in meta.get("upcoming_today", [])
                     if (m.get("home"), m.get("away")) not in _done_or_live]
 
-        # status line (premium pill)
-        badge = ('<span class="pill pill-live"><span class="dot dot-live"></span>LIVE</span>'
-                 if ok_live else '<span class="pill pill-snap">SNAPSHOT</span>')
-        refresh_note = f" · auto-refresh {LIVE_REFRESH}s" if AUTO_LIVE else ""
-        st.markdown(
-            f"{badge} <span style='color:{MUTED};font-size:12px'>&nbsp;· {src}{refresh_note}</span>",
-            unsafe_allow_html=True,
-        )
-
+        # ── helpers ──────────────────────────────────────────────────────────
         def _fmt_pct(p):
-            # Avoid a misleading "0%" next to a ✅: tiny exact-score probs show as "<0.1%".
             v = p * 100
             return "<0.1%" if 0 < v < 0.1 else f"{v:.1f}%"
 
-        def _predict_btn(h, a, key):
-            # Click a match -> pre-fill Match Predictor and jump there (see _goto at top of script).
-            if st.button("🎯 " + t("ls_predict"), key=key):
+        def _predict_btn(h, a, key, label):
+            if st.button(label, key=key):
                 st.session_state["_goto"] = "🎯 Match Predictor"
                 st.session_state["mp_prefill"] = (h, a)
                 st.rerun()
 
-        # ── 🔴 LIVE NOW (compact score + what the model gave that scoreline) ──
-        if live_now:
-            st.markdown(f"### 🔴 {t('ls_live_now')}")
-            for i, m in enumerate(live_now):
-                gh = m["home_goals"] if m["home_goals"] is not None else 0
-                ga = m["away_goals"] if m["away_goals"] is not None else 0
-                mn = f"{m['minute']}'" if m.get("minute") else (m.get("status") or "LIVE")
-                r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
-                c1, c2, c3 = st.columns([3, 2, 3])
-                c1.markdown(f"**{flag(m['home'],disp_df)} {m['home']}**")
-                c2.markdown(
-                    f"<div style='text-align:center'><span style='font-size:22px;font-weight:700;color:{RED}'>{gh}–{ga}</span>"
-                    f"<div style='color:{GOLD};font-size:11px'>{mn}</div></div>", unsafe_allow_html=True)
-                c3.markdown(f"**{flag(m['away'],disp_df)} {m['away']}**")
-                if r:
-                    st.markdown(
-                        f"<div style='font-size:11.5px;color:{MUTED};margin:-4px 0 2px'>{t('ls_pred_live')}: "
-                        f"<b style='color:{TEAL}'>{_fmt_pct(r['p_actual'])}</b> ({t('ls_rank')} {r['rank']})</div>",
-                        unsafe_allow_html=True)
-                _predict_btn(m["home"], m["away"], f"livep_{i}")
-            st.markdown("---")
+        _ref_date = (meta.get("last_updated", "") or "")[:10]
+        def _kickoff_ms(m):
+            ss = (m.get("time_utc") or m.get("time_et") or "").strip()
+            mt = _re.match(r"(\d{1,2}):(\d{2})\s*UTC\s*([+-]\d{1,2})?", ss)
+            if not mt:
+                return None
+            hh, mm, off = int(mt.group(1)), int(mt.group(2)), int(mt.group(3) or 0)
+            try:
+                base = _dt2.strptime(_ref_date, "%Y-%m-%d").replace(tzinfo=_tz2.utc)
+            except Exception:
+                base = _dt2.now(_tz2.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+            kick = base.replace(hour=hh, minute=mm) - _td2(hours=off)
+            now = _dt2.now(_tz2.utc)
+            while kick < now - _td2(hours=3):
+                kick += _td2(days=1)
+            return int(kick.timestamp() * 1000)
 
-        # ── ⏭️ NEXT (upcoming + the model's predicted scoreline) ─────────────
-        if upcoming:
-            st.markdown(f"### ⏭️ {t('ls_upcoming')}")
-            for i, m in enumerate(upcoming[:6]):
-                preds = predicted_scores(model, teams, m["home"], m["away"], k=3, knockout=not m.get("group"))
-                pred_str = " · ".join(f"{p['s']} {p['p']*100:.0f}%" for p in preds)
-                cc1, cc2 = st.columns([3, 2])
-                cc1.markdown(
-                    f'<span class="badge badge-gold">Grp {m.get("group","?")}</span> '
-                    f'**{flag(m["home"],disp_df)} {m["home"]}** vs **{flag(m["away"],disp_df)} {m["away"]}** '
-                    f'<span style="color:{MUTED};font-size:11px">{m.get("time_et","TBD")} ET</span>',
+        # ── COMPACT BANNER (the whole top folded into one strip) ──────────────
+        _badge = (f"<span style='color:{RED};font-weight:700'>● {t('ls_live_now').upper()}</span>"
+                  if ok_live else f"<span style='color:{MUTED};font-weight:700'>● SNAPSHOT</span>")
+        _refresh = f" · auto-refresh {LIVE_REFRESH}s" if AUTO_LIVE else ""
+        st.markdown(
+            f"<div style='border:1px solid {BORDER};border-radius:12px;padding:11px 18px;margin-bottom:14px;"
+            f"background:linear-gradient(180deg,{BG2},{BG0})'>"
+            f"<span style='color:{GOLD};font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase'>{t('ls_eyebrow')}</span>"
+            f"<span style='font-size:21px;font-weight:700;margin-left:10px'>{t('ls_title')}</span>"
+            f"<div style='color:{MUTED};font-size:12px;margin-top:3px'>{t('ls_desc')}</div>"
+            f"<div style='color:{WHITE};font-size:12.5px;margin-top:3px'>{t('ls_takeaway', n=len(completed))}</div>"
+            f"<div style='color:{MUTED};font-size:11px;margin-top:5px'>{_badge} &nbsp;·&nbsp; {src}{_refresh}</div>"
+            f"</div>", unsafe_allow_html=True)
+
+        # ── 🔝 SPOTLIGHT (centered): live score(s) vs prediction + the two next
+        #    kick-offs with live, ticking countdowns. One HTML/JS card so it ticks.
+        _spot = []
+        for m in live_now:
+            gh = m["home_goals"] if m.get("home_goals") is not None else 0
+            ga = m["away_goals"] if m.get("away_goals") is not None else 0
+            mn = f"{m['minute']}'" if m.get("minute") else (m.get("status") or "LIVE")
+            r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
+            _pred = ""
+            if r:
+                pw = r["p_wdl"]
+                _pred = (f"<div style='font-size:12px;color:{MUTED};margin-top:3px'>{t('ls_live_vs')}: "
+                         f"<b style='color:{TEAL}'>{m['home']} {pw['home']*100:.0f}%</b> · "
+                         f"{t('ls_pred')} {pw['draw']*100:.0f}% · "
+                         f"<b style='color:{TEAL}'>{m['away']} {pw['away']*100:.0f}%</b> · "
+                         f"{r['top_scores'][0]['s']}</div>")
+            _spot.append(
+                f"<div style='margin:6px 0'>"
+                f"<div style='color:{RED};font-weight:700;font-size:12px'>● {t('ls_live_now').upper()} · {mn}</div>"
+                f"<div style='font-size:30px;font-weight:800;line-height:1.15'>{flag(m['home'],disp_df)} {m['home']} "
+                f"<span style='color:{RED}'>{gh}–{ga}</span> {m['away']} {flag(m['away'],disp_df)}</div>"
+                f"{_pred}</div>")
+        _nexts = sorted([(ms, m) for m in upcoming if (ms := _kickoff_ms(m))], key=lambda x: x[0])
+        _cd_js = ""
+        for _idx, (ms, m) in enumerate(_nexts[:2]):
+            _big = (_idx == 0 and not live_now)
+            _sz = 30 if _big else 18
+            _cid = f"wccd{_idx}"
+            _spot.append(
+                f"<div style='margin:9px 0'>"
+                f"<div style='font-size:{_sz}px;font-weight:800;line-height:1.15'>{flag(m['home'],disp_df)} {m['home']} "
+                f"<span style='color:{MUTED};font-weight:500'>vs</span> {m['away']} {flag(m['away'],disp_df)}</div>"
+                f"<div style='color:{GOLD};font-size:{max(14,_sz-6)}px;font-weight:700;margin-top:2px'>"
+                f"⏱ {t('ls_kickoff_in')} <span id='{_cid}'>—</span></div></div>")
+            _cd_js += f"wcCountdown('{_cid}',{ms});"
+        if _spot:
+            _sep = f"<hr style='border:none;border-top:1px solid {BORDER};margin:10px 0'>"
+            _card = (
+                f"<div style='font-family:Inter,system-ui,sans-serif;color:{WHITE};text-align:center;"
+                f"border:1px solid {BORDER};border-radius:16px;padding:16px 22px;margin:0 auto 16px;max-width:660px;"
+                f"background:radial-gradient(130% 130% at 50% 0%,{BG2},{BG0})'>" + _sep.join(_spot) + "</div>")
+            _js = ("<script>function wcCountdown(id,target){function u(){var el=document.getElementById(id);"
+                   "if(!el)return;var d=target-Date.now();if(d<=0){el.innerHTML='⚽ KOWORD';return;}"
+                   "var h=Math.floor(d/3600000),mm=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);"
+                   "el.innerHTML=(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
+                   "u();setInterval(u,1000);}" + _cd_js + "</script>").replace("KOWORD", t('ls_kickoff'))
+            _components.html(_card + _js, height=min(150 + 92 * len(_spot), 470))
+
+        # ── 3 COLUMNS: played | standings (center) | upcoming ─────────────────
+        _cpast, _cstd, _cfut = st.columns([1.05, 1.25, 1.05], gap="medium")
+
+        with _cstd:
+            st.markdown(f"#### {t('ls_col_std')}")
+            for grp in sorted(standings.keys()):
+                grp_sorted = sorted(standings[grp], key=lambda x: (-x["points"], -x["gd"], -x["gf"]))
+                _rows = ""
+                for _rnk, row in enumerate(grp_sorted, 1):
+                    _pc = TEAL if _rnk <= 2 else (GOLD if _rnk == 3 else MUTED)
+                    _rows += (f'<tr style="border-bottom:1px solid {BORDER}">'
+                              f'<td style="color:{MUTED};width:14px">{_rnk}</td>'
+                              f'<td>{flag(row["team"],disp_df)} <b>{row["team"]}</b></td>'
+                              f'<td style="text-align:center">{row["played"]}</td>'
+                              f'<td style="text-align:center">{row["gd"]:+d}</td>'
+                              f'<td style="text-align:center;color:{_pc};font-weight:700">{row["points"]}</td></tr>')
+                st.markdown(
+                    f'<div style="font-weight:700;font-size:12px;margin-top:9px;color:{GOLD}">Group {grp}</div>'
+                    f'<table style="width:100%;font-size:11px;border-collapse:collapse">'
+                    f'<thead><tr style="color:{MUTED}"><th></th><th>Team</th><th>P</th><th>GD</th>'
+                    f'<th style="color:{TEAL}">Pts</th></tr></thead><tbody>{_rows}</tbody></table>',
                     unsafe_allow_html=True)
-                with cc2:
-                    if pred_str:
-                        st.markdown(f"<div style='font-size:11.5px;color:{GOLD}'>{t('ls_pred')}: {pred_str}</div>",
-                                    unsafe_allow_html=True)
-                    _predict_btn(m["home"], m["away"], f"upcp_{i}")
+            if not standings:
+                st.caption("—")
+
+        with _cpast:
+            st.markdown(f"#### {t('ls_col_past')}")
+            _np = 0
+            for _i, m in enumerate(completed):
+                gh, ga = m.get("home_goals"), m.get("away_goals")
+                if gh is None:
+                    continue
+                _np += 1
+                r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
+                _wc = TEAL if gh > ga else (RED if gh < ga else GOLD)
+                _verdict = ""
+                if r:
+                    _mark = ("✅ " + t("ls_result_ok")) if r["outcome_ok"] else ("❌ " + t("ls_result_no"))
+                    _verdict = (f"<div style='font-size:10px;color:{MUTED};margin-top:2px'>"
+                                f"{t('ls_prematch')} {r['top_scores'][0]['s']} · {_mark} "
+                                f"<span style='opacity:.65'>(P {_fmt_pct(r['p_actual'])}, {t('ls_rank')} {r['rank']})</span></div>")
+                st.markdown(
+                    f"<div style='border:1px solid {BORDER};border-radius:9px;padding:6px 9px;margin-bottom:5px'>"
+                    f"<span style='font-size:9px;color:{MUTED}'>Grp {m.get('group','?')} · {m.get('date','')}</span><br>"
+                    f"<span style='font-size:13px'>{flag(m['home'],disp_df)} <b>{m['home']}</b> "
+                    f"<span style='color:{_wc};font-weight:700;font-size:15px'>{gh}–{ga}</span> "
+                    f"<b>{m['away']}</b> {flag(m['away'],disp_df)}</span>{_verdict}</div>", unsafe_allow_html=True)
+                _predict_btn(m["home"], m["away"], f"pp_{_i}", t("ls_predict_past"))
+            if not _np:
+                st.caption("—")
+
+        with _cfut:
+            st.markdown(f"#### {t('ls_col_fut')}")
+            def _fut_card(m, key):
+                preds = predicted_scores(model, teams, m["home"], m["away"], k=2, knockout=not m.get("group"))
+                _ps = " · ".join(f"{pp['s']} {pp['p']*100:.0f}%" for pp in preds)
+                st.markdown(
+                    f"<div style='border:1px solid {BORDER};border-radius:9px;padding:6px 9px;margin-bottom:5px'>"
+                    f"<span style='font-size:9px;color:{MUTED}'>Grp {m.get('group','?')} · {m.get('time_utc','TBD')}</span><br>"
+                    f"<span style='font-size:13px'>{flag(m['home'],disp_df)} <b>{m['home']}</b> "
+                    f"<span style='color:{MUTED}'>vs</span> <b>{m['away']}</b> {flag(m['away'],disp_df)}</span>"
+                    + (f"<div style='font-size:10px;color:{GOLD};margin-top:2px'>{t('ls_pred')}: {_ps}</div>" if _ps else "")
+                    + "</div>", unsafe_allow_html=True)
+                _predict_btn(m["home"], m["away"], key, t("ls_predict_fut"))
+            for _i, m in enumerate(upcoming[:6]):
+                _fut_card(m, f"fp_{_i}")
             if len(upcoming) > 6:
-                with st.expander(t("ls_calendar")):
-                    for m in upcoming[6:]:
-                        st.markdown(
-                            f'{flag(m["home"],disp_df)} {m["home"]} vs {flag(m["away"],disp_df)} {m["away"]} '
-                            f'— Grp {m.get("group","?")} · {m.get("time_et","TBD")} ET')
-            st.markdown("---")
+                with st.expander(t("ls_see_all")):
+                    for _j, m in enumerate(upcoming[6:]):
+                        _fut_card(m, f"fpx_{_j}")
+            if not upcoming:
+                st.caption("—")
 
-        # ── 📊 STANDINGS (moved up — visible without scrolling) ───────────────
-        if standings:
-            st.markdown(f"### {t('ls_groups')}")
-            grp_list = sorted(standings.keys())
-            for row_start in range(0, len(grp_list), 4):
-                cols = st.columns(4)
-                for col_idx, grp in enumerate(grp_list[row_start: row_start + 4]):
-                    with cols[col_idx]:
-                        st.markdown(f"**Group {grp}**")
-                        grp_sorted = sorted(standings[grp], key=lambda x: (-x["points"], -x["gd"], -x["gf"]))
-                        rows_html = ""
-                        for rank, row in enumerate(grp_sorted, 1):
-                            pts_color = TEAL if rank <= 2 else (GOLD if rank == 3 else MUTED)
-                            rows_html += (
-                                f'<tr style="border-bottom:1px solid {BORDER}">'
-                                f'<td style="color:{MUTED};width:14px">{rank}</td>'
-                                f'<td>{flag(row["team"],disp_df)} <b>{row["team"]}</b></td>'
-                                f'<td style="text-align:center">{row["played"]}</td>'
-                                f'<td style="text-align:center">{row["gd"]:+d}</td>'
-                                f'<td style="text-align:center;color:{pts_color};font-weight:700">{row["points"]}</td></tr>')
-                        st.markdown(
-                            f'<table style="width:100%;font-size:11.5px;border-collapse:collapse">'
-                            f'<thead><tr style="color:{MUTED}"><th></th><th>Team</th><th>P</th><th>GD</th>'
-                            f'<th style="color:{TEAL}">Pts</th></tr></thead><tbody>{rows_html}</tbody></table>',
-                            unsafe_allow_html=True)
-            st.markdown("---")
-
-        # ── ✅ PLAYED (2-col compact cards, most-recent first, with prediction) ─
-        if completed:
-            st.markdown(f"### {t('ls_played')}")
-            for row_start in range(0, len(completed), 2):
-                cols = st.columns(2)
-                for ci, m in enumerate(completed[row_start: row_start + 2]):
-                    gh, ga = m["home_goals"], m["away_goals"]
-                    if gh is None:
-                        continue
-                    r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
-                    wcol = TEAL if gh > ga else (RED if gh < ga else GOLD)
-                    with cols[ci]:
-                        st.markdown(
-                            f"<div style='border:1px solid {BORDER};border-radius:10px;padding:8px 12px'>"
-                            f"<span class='badge badge-teal'>Grp {m.get('group','?')}</span> "
-                            f"<span style='color:{MUTED};font-size:10px'>{m.get('date','')}</span><br>"
-                            f"<span style='font-size:14px'>{flag(m['home'],disp_df)} <b>{m['home']}</b> "
-                            f"<span style='color:{wcol};font-weight:700;font-size:17px'>{gh}–{ga}</span> "
-                            f"<b>{m['away']}</b> {flag(m['away'],disp_df)}</span>"
-                            + (f"<br><span style='font-size:11px;color:{MUTED}'>{t('ls_pred')}: "
-                               f"<b style='color:{TEAL}'>{_fmt_pct(r['p_actual'])}</b> ({t('ls_rank')} {r['rank']}) "
-                               f"{'✅' if r['outcome_ok'] else '❌'}</span>" if r else "")
-                            + "</div>", unsafe_allow_html=True)
-                        if m.get("scorers"):
-                            st.caption("⚽ " + " · ".join(m["scorers"]))
-                        _predict_btn(m["home"], m["away"], f"playp_{row_start}_{ci}")
-
-        # ── ⚕️ injuries (collapsed) ───────────────────────────────────────────
         if any(inj_list for inj_list in injuries.values()):
             with st.expander(f"⚕️ {t('ls_injuries')}"):
                 for code, inj_list in injuries.items():
@@ -1256,7 +1303,6 @@ elif page == "⚽ Live Standings":
                         sev = RED if "OUT" in inj.upper() else GOLD
                         st.markdown(f"{flag(code,disp_df)} **{code}**: <span style='color:{sev}'>{inj}</span>",
                                     unsafe_allow_html=True)
-
     _live_standings()
 
 
