@@ -537,6 +537,21 @@ def _predictor_model():
     params = json.loads(_lp.read_text()) if _lp.exists() else None
     return teams_obj, cfg, params, CalibratedEloMatchModel(config=cfg, params=params)
 
+@st.cache_data(ttl=3600, show_spinner=False)
+def _csc(home, away, ha, ab, knockout):
+    """Memoised score_match — the Live Standings renders ~40 finished matches per refresh; without
+    this each render recomputes every scoreline distribution (the main on-Render lag)."""
+    from wc2026.scorecard import score_match
+    model, teams = _score_engine()
+    return score_match(model, teams, home, away, ha, ab, knockout=knockout)
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _cpred(home, away, k, knockout):
+    """Memoised predicted_scores for upcoming fixtures (static → cache hard)."""
+    from wc2026.scorecard import predicted_scores
+    model, teams = _score_engine()
+    return predicted_scores(model, teams, home, away, k=k, knockout=knockout)
+
 # Cross-page navigation: a button sets st.session_state["_goto"] (a NON-widget key) + reruns;
 # this transfers it onto the nav radio BEFORE that widget is created (Streamlit forbids setting
 # a widget's state after it renders). Used by "click a match → Match Predictor".
@@ -1221,59 +1236,58 @@ elif page == "⚽ Live Standings":
 
         # ── 🔝 SPOTLIGHT (centered): live score(s) vs prediction + the two next kick-offs with
         #    live, ticking RED countdowns. One HTML/JS card so it ticks per second.
-        _spot = []
-        for m in live_now:
-            gh = m["home_goals"] if m.get("home_goals") is not None else 0
-            ga = m["away_goals"] if m.get("away_goals") is not None else 0
-            mn = f"{m['minute']}'" if m.get("minute") else (m.get("status") or "LIVE")
-            r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
-            _pred = ""
-            if r:
-                pw = r["p_wdl"]
-                _pred = (f"<div style='font-size:11px;color:{MUTED};margin-top:2px'>{t('ls_live_vs')}: "
-                         f"<b style='color:{TEAL}'>{m['home']} {pw['home']*100:.0f}%</b> · "
-                         f"{pw['draw']*100:.0f}% · <b style='color:{TEAL}'>{m['away']} {pw['away']*100:.0f}%</b> · {r['top_scores'][0]['s']}</div>")
-            _sc = " · ".join(m.get("scorers", []) or [])
-            _scorers = f"<div style='font-size:11px;color:{GOLD};margin-top:1px'>⚽ {_sc}</div>" if _sc else ""
-            _spot.append(
-                f"<div style='margin:3px 0'>"
-                f"<div style='color:{RED};font-weight:700;font-size:11px'>● {t('ls_live_now').upper()} · {mn}</div>"
-                f"<div style='font-size:25px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
-                f"<span style='color:{RED}'>{gh}–{ga}</span> {m['away']} {flag(m['away'],disp_df)}</div>"
-                f"{_scorers}{_pred}</div>")
-        _cd_js = ""
-        for _idx, (kdt, m) in enumerate(upc[:2]):
-            _big = (_idx == 0 and not live_now)
-            _aff = 24 if _big else 16
-            _cdz = 15 if _big else 13
-            _cid = f"wccd{_idx}"
-            _spot.append(
-                f"<div style='margin:4px 0'>"
-                f"<div style='font-size:{_aff}px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
-                f"<span style='color:{MUTED};font-weight:500'>vs</span> {m['away']} {flag(m['away'],disp_df)}</div>"
-                f"<div style='color:{RED};font-size:{_cdz}px;font-weight:700;margin-top:1px'>"
-                f"⏱ {t('ls_kickoff_in')} <span id='{_cid}'>—</span></div></div>")
-            _cd_js += f"wcCountdown('{_cid}',{int(kdt.timestamp()*1000)});"
-        if _spot:
-            _sep = f"<hr style='border:none;border-top:1px solid {BORDER};margin:7px 0'>"
-            _card = (
-                f"<div style='font-family:Inter,system-ui,sans-serif;color:{WHITE};text-align:center;"
-                f"border:1px solid {BORDER};border-radius:14px;padding:11px 18px;margin:0 auto 8px;max-width:600px;"
-                f"background:radial-gradient(130% 130% at 50% 0%,{BG2},{BG0})'>" + _sep.join(_spot) + "</div>")
-            _js = ("<script>function wcCountdown(id,target){function u(){var el=document.getElementById(id);"
-                   "if(!el)return;var d=target-Date.now();if(d<=0){el.innerHTML='⚽ KOWORD';return;}"
-                   "var dd=Math.floor(d/86400000),h=Math.floor((d%86400000)/3600000),"
-                   "mm=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);"
-                   "el.innerHTML=(dd>0?dd+'j ':'')+(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
-                   "u();setInterval(u,1000);}" + _cd_js + "</script>").replace("KOWORD", t('ls_kickoff'))
-            _components.html(_card + _js, height=min(92 + 70 * len(_spot), 360))
-            # "see prediction" buttons stacked + centered under the card, mirroring the two
-            # stacked fixtures above (outside the iframe — Streamlit can't run inside it).
-            for _idx, (kdt, m) in enumerate(upc[:2]):
-                _l, _mid, _r = st.columns([1.2, 3.6, 1.2])
-                with _mid:
-                    _predict_btn(m["home"], m["away"], f"spot_{_idx}",
-                                 f"{t('ls_predict_past')} · {m['home']}–{m['away']}")
+        # ── 🔝 SPOTLIGHT (broadcaster-style): each fixture is its OWN bordered block, with the
+        #    "see prediction" button INSIDE it, right under its red countdown. Countdowns tick
+        #    per-second via a 0-height JS component reaching the parent DOM (same trick as analytics).
+        if live_now or upc[:2]:
+            _sl, _sc_col, _sr = st.columns([1.25, 2.1, 1.25])
+            with _sc_col:
+                for m in live_now:
+                    gh = m["home_goals"] if m.get("home_goals") is not None else 0
+                    ga = m["away_goals"] if m.get("away_goals") is not None else 0
+                    mn = f"{m['minute']}'" if m.get("minute") else (m.get("status") or "LIVE")
+                    r = _csc(m["home"], m["away"], gh, ga, not m.get("group"))
+                    _extra = ""
+                    if r:
+                        pw = r["p_wdl"]
+                        _extra = (f"<div style='font-size:11px;color:{MUTED};margin-top:3px'>{t('ls_live_vs')}: "
+                                  f"<b style='color:{TEAL}'>{m['home']} {pw['home']*100:.0f}%</b> · "
+                                  f"{pw['draw']*100:.0f}% · <b style='color:{TEAL}'>{m['away']} {pw['away']*100:.0f}%</b> · {r['top_scores'][0]['s']}</div>")
+                    _scl = " · ".join(m.get("scorers", []) or [])
+                    if _scl:
+                        _extra = f"<div style='font-size:11px;color:{GOLD};margin-top:2px'>⚽ {_scl}</div>" + _extra
+                    with st.container(border=True):
+                        st.markdown(
+                            f"<div style='text-align:center'>"
+                            f"<div style='color:{RED};font-weight:700;font-size:11px'>● {t('ls_live_now').upper()} · {mn}</div>"
+                            f"<div style='font-size:26px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
+                            f"<span style='color:{RED}'>{gh}–{ga}</span> {m['away']} {flag(m['away'],disp_df)}</div>"
+                            f"{_extra}</div>", unsafe_allow_html=True)
+                        _predict_btn(m["home"], m["away"], f"livespot_{m['home']}_{m['away']}", t("ls_predict_fut"))
+                _cd_js = ""
+                for _idx, (kdt, m) in enumerate(upc[:2]):
+                    _big = (_idx == 0 and not live_now)
+                    _aff = 26 if _big else 18
+                    _cdz = 18 if _big else 14
+                    _cid = f"wccd{_idx}"
+                    with st.container(border=True):
+                        st.markdown(
+                            f"<div style='text-align:center'>"
+                            f"<div style='font-size:{_aff}px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
+                            f"<span style='color:{MUTED};font-weight:500'>vs</span> {m['away']} {flag(m['away'],disp_df)}</div>"
+                            f"<div style='color:{RED};font-size:{_cdz}px;font-weight:800;margin-top:2px'>"
+                            f"⏱ {t('ls_kickoff_in')} <span id='{_cid}'>—</span></div></div>", unsafe_allow_html=True)
+                        _predict_btn(m["home"], m["away"], f"spot_{_idx}", t("ls_predict_fut"))
+                    _cd_js += f"wcCountdown('{_cid}',{int(kdt.timestamp()*1000)});"
+                if _cd_js:
+                    _js = ("<script>function wcCountdown(id,target){function u(){"
+                           "var el=window.parent.document.getElementById(id);if(!el)return;"
+                           "var d=target-Date.now();if(d<=0){el.innerHTML='⚽ KOWORD';return;}"
+                           "var dd=Math.floor(d/86400000),h=Math.floor((d%86400000)/3600000),"
+                           "mm=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);"
+                           "el.innerHTML=(dd>0?dd+'j ':'')+(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
+                           "u();setInterval(u,1000);}" + _cd_js + "</script>").replace("KOWORD", t('ls_kickoff'))
+                    _components.html(_js, height=0)
 
         # ── 3 COLUMNS: played | standings (center) | upcoming ─────────────────
         _cpast, _cstd, _cfut = st.columns([1.05, 1.25, 1.05], gap="medium")
@@ -1308,7 +1322,7 @@ elif page == "⚽ Live Standings":
                 if gh is None:
                     continue
                 _np += 1
-                r = score_match(model, teams, m["home"], m["away"], gh, ga, knockout=not m.get("group"))
+                r = _csc(m["home"], m["away"], gh, ga, not m.get("group"))
                 _wc = TEAL if gh > ga else (RED if gh < ga else GOLD)
                 _verdict = ""
                 if r:
@@ -1331,7 +1345,7 @@ elif page == "⚽ Live Standings":
             _show_all = st.session_state.get("_show_all_up", False)
             _list = upc if _show_all else upc[:6]
             def _fut_card(kdt, m, key):
-                preds = predicted_scores(model, teams, m["home"], m["away"], k=2, knockout=not m.get("group"))
+                preds = _cpred(m["home"], m["away"], 2, not m.get("group"))
                 _ps = " · ".join(f"{pp['s']} {pp['p']*100:.0f}%" for pp in preds)
                 st.markdown(
                     f"<div style='border:1px solid {BORDER};border-radius:9px;padding:6px 9px;margin-bottom:5px'>"
