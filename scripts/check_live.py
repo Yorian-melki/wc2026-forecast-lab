@@ -41,10 +41,11 @@ def main() -> int:
     from wc2026.providers.thestatsapi import TheStatsAPIProvider
     from wc2026.providers.highlightly import HighlightlyProvider
     from wc2026.providers.thesportsdb import TheSportsDBProvider
+    from wc2026.providers.espn import EspnProvider
 
-    provs = [("api_football", ApiFootballProvider()), ("football_data_org", FootballDataOrgProvider()),
-             ("thestatsapi", TheStatsAPIProvider()), ("highlightly", HighlightlyProvider()),
-             ("thesportsdb", TheSportsDBProvider())]
+    provs = [("espn (official clock)", EspnProvider()), ("api_football", ApiFootballProvider()),
+             ("football_data_org", FootballDataOrgProvider()), ("thestatsapi", TheStatsAPIProvider()),
+             ("highlightly", HighlightlyProvider()), ("thesportsdb", TheSportsDBProvider())]
 
     print("\n── live in-play matches, per provider ──")
     any_live = False

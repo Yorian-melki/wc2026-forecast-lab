@@ -15,6 +15,7 @@ from .thestatsapi import TheStatsAPIProvider
 from .highlightly import HighlightlyProvider
 from .thesportsdb import TheSportsDBProvider
 from .football_data_org import FootballDataOrgProvider
+from .espn import EspnProvider
 
 ROOT = Path(__file__).resolve().parents[4]
 LIVE_DIR = ROOT / "data" / "live"
@@ -40,6 +41,7 @@ class ProviderRouter:
         self._fdo = FootballDataOrgProvider()
         self._tsa = TheStatsAPIProvider()
         self._hl  = HighlightlyProvider()
+        self._espn = EspnProvider()
         self._statuses: dict[str, ProviderStatus] = {}
         LIVE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -80,7 +82,9 @@ class ProviderRouter:
         actually reports a live match — so a single dead/limited key (e.g. API-Football's free
         plan not exposing live WC games) no longer leaves the board stuck on the schedule.
         Whichever provider answers, the score + minute + status flow through automatically."""
-        for prov in (self._af, self._fdo, self._tsa, self._hl, self._tsdb):
+        # ESPN first: free, key-less, and the only source that reliably carries the OFFICIAL clock
+        # (exact minute + stoppage time + half-time/extra-time/shootout state).
+        for prov in (self._espn, self._fdo, self._tsa, self._hl, self._af, self._tsdb):
             try:
                 live = prov.get_live_matches()
             except Exception:
