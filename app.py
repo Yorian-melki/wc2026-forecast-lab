@@ -197,8 +197,16 @@ st.markdown(f"""<style>:root{{
 
 st.markdown("""<style>
 /* hide raw-Streamlit chrome for a product feel */
-header[data-testid="stHeader"]{background:transparent;height:0}
-[data-testid="stToolbar"],[data-testid="stDecoration"],[data-testid="stStatusWidget"],#MainMenu,footer{display:none!important}
+header[data-testid="stHeader"]{background:transparent;height:0;overflow:visible!important}
+[data-testid="stToolbarActions"],[data-testid="stDecoration"],[data-testid="stStatusWidget"],#MainMenu,footer{display:none!important}
+/* keep the sidebar re-open arrow reachable even though the header is height:0 (else collapsing
+   the sidebar leaves no way to reopen it) — float it top-left, on top, when Streamlit shows it. */
+[data-testid="stExpandSidebarButton"], [data-testid="stSidebarCollapsedControl"],
+header[data-testid="stHeader"] [data-testid="stBaseButton-headerNoPadding"]{
+  position:fixed!important;top:10px;left:10px;z-index:2147483000!important;
+  display:flex!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  background:var(--bg2)!important;border:1px solid var(--border)!important;border-radius:9px!important}
+[data-testid="stExpandSidebarButton"] *{opacity:1!important;visibility:visible!important}
 /* content rhythm + ambient depth */
 .block-container{max-width:1320px;padding-top:1.4rem;padding-bottom:4rem}
 .stApp{background:radial-gradient(1100px 560px at 82% -12%, rgba(42,157,143,0.06), transparent 60%), var(--bg0)}
@@ -516,6 +524,18 @@ def _full_schedule():
         return ProviderRouter().get_full_schedule() or []
     except Exception:
         return []
+
+@st.cache_resource(show_spinner=False)
+def _predictor_model():
+    """Cached (teams, config, params, model) for the Match Predictor — built ONCE, not on every
+    selectbox change (was reloading teams + rebuilding the model on each keystroke → page lag)."""
+    from wc2026.data_loader import load_teams, load_config
+    from wc2026.calibrated_elo_model import CalibratedEloMatchModel
+    teams_obj = load_teams(apply_temporal_form=True)
+    cfg = load_config()
+    _lp = DATA / "elo_live_params.json"
+    params = json.loads(_lp.read_text()) if _lp.exists() else None
+    return teams_obj, cfg, params, CalibratedEloMatchModel(config=cfg, params=params)
 
 # Cross-page navigation: a button sets st.session_state["_goto"] (a NON-widget key) + reruns;
 # this transfers it onto the nav radio BEFORE that widget is created (Streamlit forbids setting
@@ -1247,12 +1267,13 @@ elif page == "⚽ Live Standings":
                    "el.innerHTML=(dd>0?dd+'j ':'')+(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
                    "u();setInterval(u,1000);}" + _cd_js + "</script>").replace("KOWORD", t('ls_kickoff'))
             _components.html(_card + _js, height=min(92 + 70 * len(_spot), 360))
-            # small, centered "see prediction" buttons (outside the iframe — Streamlit can't run inside it)
-            _pl, _b1, _b2, _pr = st.columns([1.4, 2, 2, 1.4])
-            _cells = [_b1, _b2]
+            # "see prediction" buttons stacked + centered under the card, mirroring the two
+            # stacked fixtures above (outside the iframe — Streamlit can't run inside it).
             for _idx, (kdt, m) in enumerate(upc[:2]):
-                with _cells[_idx]:
-                    _predict_btn(m["home"], m["away"], f"spot_{_idx}", f"👁️ {m['home']}–{m['away']}")
+                _l, _mid, _r = st.columns([1.2, 3.6, 1.2])
+                with _mid:
+                    _predict_btn(m["home"], m["away"], f"spot_{_idx}",
+                                 f"{t('ls_predict_past')} · {m['home']}–{m['away']}")
 
         # ── 3 COLUMNS: played | standings (center) | upcoming ─────────────────
         _cpast, _cstd, _cfut = st.columns([1.05, 1.25, 1.05], gap="medium")
@@ -1425,14 +1446,7 @@ elif page == "🎯 Match Predictor":
         st.warning(t("empty_same_team"))
     else:
         try:
-            from wc2026.data_loader import load_teams, load_config
-            from wc2026.calibrated_elo_model import CalibratedEloMatchModel
-
-            teams_obj  = load_teams(apply_temporal_form=True)
-            cfg        = load_config()
-            live_p_path = DATA / "elo_live_params.json"
-            params     = json.loads(live_p_path.read_text()) if live_p_path.exists() else None
-            model      = CalibratedEloMatchModel(config=cfg, params=params)
+            teams_obj, cfg, params, model = _predictor_model()   # cached: no rebuild per keystroke
 
             ta, tb = teams_obj[team_a], teams_obj[team_b]
             mu_a, mu_b = model.expected_goals(ta, tb, knockout=is_ko)
