@@ -117,26 +117,32 @@ class TestProviderRouterLive:
         result = router.get_live_matches()
         assert isinstance(result, list)
 
+    _LIVE_PROVS = ("_espn", "_af", "_fdo", "_tsa", "_hl", "_tsdb")
+
     def test_live_normalizes_to_normalized_match(self):
         from wc2026.providers.router import ProviderRouter
         router = ProviderRouter()
         live_match = {
-            "provider": "api_football", "home": "ESP", "away": "ARG",
+            "provider": "espn", "home": "ESP", "away": "ARG",
             "home_goals": 1, "away_goals": 0, "date": "2026-06-15",
             "status": "1H", "minute": 35, "quality_level": "B",
         }
-        router._af.get_live_matches = MagicMock(return_value=[live_match])
+        # all live providers empty except the first in the chain (deterministic, no network)
+        for name in self._LIVE_PROVS:
+            getattr(router, name).get_live_matches = MagicMock(return_value=[])
+        router._espn.get_live_matches = MagicMock(return_value=[live_match])
         result = router.get_live_matches()
         assert len(result) == 1
         assert isinstance(result[0], NormalizedMatch)
         assert result[0].is_live
 
-    def test_live_empty_when_af_fails(self):
+    def test_live_empty_when_all_providers_fail(self):
         from wc2026.providers.router import ProviderRouter
         router = ProviderRouter()
-        router._af.get_live_matches = MagicMock(side_effect=Exception("timeout"))
-        result = router.get_live_matches()
-        assert result == []
+        # the multi-provider live fallback returns [] only when EVERY source is down/empty
+        for name in self._LIVE_PROVS:
+            getattr(router, name).get_live_matches = MagicMock(side_effect=Exception("timeout"))
+        assert router.get_live_matches() == []
 
 
 class TestOverallQualityUpgrade:
