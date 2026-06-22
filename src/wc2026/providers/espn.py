@@ -25,7 +25,9 @@ _UA = {
     "Referer": "https://www.espn.com/",
 }
 
-# ESPN state name → our compact status (consumed by app._live_label).
+# ESPN status name → our compact status (consumed by app._live_label). Liveness itself is decided
+# by ESPN's type.state == "in" (in-progress) — that auto-covers ANY in-play reason (half-time,
+# weather delay, suspension, extra time) without us enumerating every status name.
 _STATE = {
     "STATUS_FIRST_HALF": "1H", "STATUS_SECOND_HALF": "2H", "STATUS_IN_PROGRESS": "2H",
     "STATUS_HALFTIME": "HT",
@@ -33,8 +35,9 @@ _STATE = {
     "STATUS_HALFTIME_ET": "ET", "STATUS_SECOND_HALF_EXTRA_TIME": "ET",
     "STATUS_END_OF_EXTRATIME": "ET", "STATUS_END_OF_REGULATION": "ET",
     "STATUS_SHOOTOUT": "P", "STATUS_PENALTIES": "P",
+    "STATUS_DELAYED": "SUSP", "STATUS_DELAY": "SUSP", "STATUS_SUSPENDED": "SUSP",
+    "STATUS_RAIN_DELAY": "SUSP", "STATUS_ABANDONED": "SUSP",
 }
-_LIVE_STATES = set(_STATE)  # everything here means "the match is being played right now"
 
 
 def _int(v):
@@ -74,8 +77,9 @@ class EspnProvider(BaseProvider):
         out = []
         for e in data.get("events", []):
             comp = (e.get("competitions") or [{}])[0]
-            state = comp.get("status", {}).get("type", {}).get("name", "")
-            if only_live and state not in _LIVE_STATES:
+            typ = comp.get("status", {}).get("type", {})
+            name, phase = typ.get("name", ""), typ.get("state", "")   # phase: pre | in | post
+            if only_live and phase != "in":      # "in" = being played (incl. HT / delay / suspension)
                 continue
             cs = comp.get("competitors", [])
             home = next((c for c in cs if c.get("homeAway") == "home"), None)
@@ -91,7 +95,7 @@ class EspnProvider(BaseProvider):
                 "home_goals": _int(home.get("score")),
                 "away_goals": _int(away.get("score")),
                 "date": (e.get("date", "") or "")[:10],
-                "status": _STATE.get(state, state),
+                "status": _STATE.get(name, "2H"),    # unknown in-progress name → treat as a half (show minute)
                 "minute": clock or None,             # "70" or "90+3" (added time) — no trailing quote
                 "quality_level": self.quality_level,
                 "source_timestamp": datetime.now(timezone.utc).isoformat(),

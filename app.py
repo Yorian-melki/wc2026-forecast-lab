@@ -343,6 +343,7 @@ TXT = {
         "ls_col_past": "Played", "ls_col_std": "Standings", "ls_col_fut": "Upcoming", "ls_kickoff": "KICK-OFF",
         "ls_kickoff_passed": "kicked off · live score syncing", "ls_live_short": "LIVE",
         "ls_halftime": "HALF-TIME", "ls_extratime": "EXTRA TIME", "ls_penalties": "PENALTIES",
+        "ls_suspended": "SUSPENDED",
         "src_live": "live providers", "src_snap": "offline snapshot (set API_FOOTBALL_KEY for live auto-update)",
         # Data Quality
         "dq_eyebrow": "Sources & audit", "dq_title": "Data Quality & Source Audit",
@@ -444,6 +445,7 @@ TXT = {
         "ls_col_past": "Matchs joués", "ls_col_std": "Classements", "ls_col_fut": "Matchs à venir", "ls_kickoff": "COUP D’ENVOI",
         "ls_kickoff_passed": "coup d’envoi donné · score en direct imminent", "ls_live_short": "EN DIRECT",
         "ls_halftime": "MI-TEMPS", "ls_extratime": "PROL.", "ls_penalties": "TIRS AU BUT",
+        "ls_suspended": "SUSPENDU",
         "src_live": "fournisseurs en direct", "src_snap": "instantané hors-ligne (définir API_FOOTBALL_KEY pour le direct)",
         "dq_eyebrow": "Sources & audit", "dq_title": "Qualité des données & audit des sources",
         "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
@@ -1201,6 +1203,8 @@ elif page == "⚽ Live Standings":
                 return t("ls_halftime")
             if s in ("P", "PEN", "PENALTIES", "PENALTY_SHOOTOUT"):
                 return t("ls_penalties")
+            if s in ("SUSP", "DELAYED", "SUSPENDED"):   # weather/storm delay, abandonment, etc.
+                return f"⏸ {t('ls_suspended')}" + (f" · {mn}'" if mn else "")
             if s in ("ET", "BT", "AET", "ETB") or "EXTRA" in s:
                 return f"{t('ls_extratime')} {mn}'" if mn else t("ls_extratime")
             if mn:
