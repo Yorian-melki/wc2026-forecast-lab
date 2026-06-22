@@ -128,7 +128,7 @@ class FootballDataOrgProvider(BaseProvider):
         r = self._get(f"competitions/{_WC_CODE}/matches", {"status": "IN_PLAY,PAUSED"})
         if "_status_code" in r:
             return []
-        return []
+        return [self._normalize(m) for m in r.get("matches", [])]
 
     def get_today_fixtures(self) -> list[dict]:
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -164,6 +164,7 @@ class FootballDataOrgProvider(BaseProvider):
             "away_goals": score.get("away"),
             "date": m.get("utcDate", "")[:10],
             "status": m.get("status", ""),
+            "minute": m.get("minute") or m.get("injuryTime"),
             "group": m.get("group", ""),
             "quality_level": self.quality_level,
             "source_timestamp": datetime.now(timezone.utc).isoformat(),

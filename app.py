@@ -342,6 +342,7 @@ TXT = {
         "ls_result_ok": "result called right", "ls_result_no": "result missed",
         "ls_col_past": "Played", "ls_col_std": "Standings", "ls_col_fut": "Upcoming", "ls_kickoff": "KICK-OFF",
         "ls_kickoff_passed": "kicked off · live score syncing", "ls_live_short": "LIVE",
+        "ls_halftime": "HALF-TIME", "ls_extratime": "EXTRA TIME", "ls_penalties": "PENALTIES",
         "src_live": "live providers", "src_snap": "offline snapshot (set API_FOOTBALL_KEY for live auto-update)",
         # Data Quality
         "dq_eyebrow": "Sources & audit", "dq_title": "Data Quality & Source Audit",
@@ -442,6 +443,7 @@ TXT = {
         "ls_result_ok": "résultat bien vu", "ls_result_no": "résultat manqué",
         "ls_col_past": "Matchs joués", "ls_col_std": "Classements", "ls_col_fut": "Matchs à venir", "ls_kickoff": "COUP D’ENVOI",
         "ls_kickoff_passed": "coup d’envoi donné · score en direct imminent", "ls_live_short": "EN DIRECT",
+        "ls_halftime": "MI-TEMPS", "ls_extratime": "PROL.", "ls_penalties": "TIRS AU BUT",
         "src_live": "fournisseurs en direct", "src_snap": "instantané hors-ligne (définir API_FOOTBALL_KEY pour le direct)",
         "dq_eyebrow": "Sources & audit", "dq_title": "Qualité des données & audit des sources",
         "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
@@ -1189,6 +1191,20 @@ elif page == "⚽ Live Standings":
                 st.session_state["mp_prefill"] = (h, a)
                 st.rerun()
 
+        def _live_label(m):
+            # friendly in-play status across providers (min'/half-time/extra time/penalties).
+            s = (m.get("status") or "").upper()
+            mn = m.get("minute")
+            if s in ("HT", "PAUSED", "PAUS", "PEN_LIVE_BREAK") or s.startswith("HALF"):
+                return t("ls_halftime")
+            if s in ("P", "PEN", "PENALTIES", "PENALTY_SHOOTOUT"):
+                return t("ls_penalties")
+            if s in ("ET", "BT", "AET", "ETB") or "EXTRA" in s:
+                return f"{t('ls_extratime')} {mn}'" if mn else t("ls_extratime")
+            if mn:
+                return f"{mn}'"
+            return t("ls_live_short")   # in-play but no minute/known phase → just "LIVE"
+
         _now = _dt2.now(_tz2.utc)
         def _kickoff_dt(m):
             # full schedule rows carry date='YYYY-MM-DD' + time='HH:MM UTC-6' (real kick-off) — exact.
@@ -1249,7 +1265,7 @@ elif page == "⚽ Live Standings":
                 for m in live_now:
                     gh = m["home_goals"] if m.get("home_goals") is not None else 0
                     ga = m["away_goals"] if m.get("away_goals") is not None else 0
-                    mn = f"{m['minute']}'" if m.get("minute") else (m.get("status") or "LIVE")
+                    mn = _live_label(m)
                     r = _csc(m["home"], m["away"], gh, ga, not m.get("group"))
                     _extra = ""
                     if r:

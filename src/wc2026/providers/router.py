@@ -14,6 +14,7 @@ from .api_football import ApiFootballProvider
 from .thestatsapi import TheStatsAPIProvider
 from .highlightly import HighlightlyProvider
 from .thesportsdb import TheSportsDBProvider
+from .football_data_org import FootballDataOrgProvider
 
 ROOT = Path(__file__).resolve().parents[4]
 LIVE_DIR = ROOT / "data" / "live"
@@ -36,6 +37,9 @@ class ProviderRouter:
         self._of  = OpenFootballProvider(local_cache=LOCAL_LIVE)
         self._af  = ApiFootballProvider()
         self._tsdb = TheSportsDBProvider()
+        self._fdo = FootballDataOrgProvider()
+        self._tsa = TheStatsAPIProvider()
+        self._hl  = HighlightlyProvider()
         self._statuses: dict[str, ProviderStatus] = {}
         LIVE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -72,13 +76,17 @@ class ProviderRouter:
         return self._local_completed()
 
     def get_live_matches(self) -> list[NormalizedMatch]:
-        """In-play WC2026 matches via API-Football live=all (works on Free plan)."""
-        try:
-            live = self._af.get_live_matches()
+        """In-play WC2026 matches. Tries every live-capable provider and returns the first that
+        actually reports a live match — so a single dead/limited key (e.g. API-Football's free
+        plan not exposing live WC games) no longer leaves the board stuck on the schedule.
+        Whichever provider answers, the score + minute + status flow through automatically."""
+        for prov in (self._af, self._fdo, self._tsa, self._hl, self._tsdb):
+            try:
+                live = prov.get_live_matches()
+            except Exception:
+                continue
             if live:
                 return [from_provider_dict(m) for m in live]
-        except Exception:
-            pass
         return []
 
     def get_today_fixtures(self) -> list[NormalizedMatch]:
