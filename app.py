@@ -507,6 +507,16 @@ def _score_engine():
     from wc2026.scorecard import get_model_and_teams
     return get_model_and_teams()
 
+@st.cache_data(ttl=900, show_spinner=False)
+def _full_schedule():
+    """All 104 WC2026 fixtures with real dates + kick-off times (offline OpenFootball schedule).
+    The reliable forward source for 'next matches' + countdowns — independent of the live feed."""
+    try:
+        from wc2026.providers.router import ProviderRouter
+        return ProviderRouter().get_full_schedule() or []
+    except Exception:
+        return []
+
 # Cross-page navigation: a button sets st.session_state["_goto"] (a NON-widget key) + reruns;
 # this transfers it onto the nav radio BEFORE that widget is created (Streamlit forbids setting
 # a widget's state after it renders). Used by "click a match → Match Predictor".
@@ -1130,8 +1140,6 @@ elif page == "⚽ Live Standings":
         meta     = load_live_json()
         injuries = meta.get("key_injuries", {})
         _done_or_live = {(m["home"], m["away"]) for m in completed} | {(m["home"], m["away"]) for m in live_now}
-        upcoming = [m for m in meta.get("upcoming_today", [])
-                    if (m.get("home"), m.get("away")) not in _done_or_live]
 
         # ── helpers ──────────────────────────────────────────────────────────
         def _fmt_pct(p):
@@ -1144,22 +1152,38 @@ elif page == "⚽ Live Standings":
                 st.session_state["mp_prefill"] = (h, a)
                 st.rerun()
 
-        _ref_date = (meta.get("last_updated", "") or "")[:10]
-        def _kickoff_ms(m):
-            ss = (m.get("time_utc") or m.get("time_et") or "").strip()
-            mt = _re.match(r"(\d{1,2}):(\d{2})\s*UTC\s*([+-]\d{1,2})?", ss)
-            if not mt:
+        _now = _dt2.now(_tz2.utc)
+        def _kickoff_dt(m):
+            # full schedule rows carry date='YYYY-MM-DD' + time='HH:MM UTC-6' (real kick-off) — exact.
+            ds, ts = (m.get("date") or "").strip(), (m.get("time") or m.get("time_utc") or "").strip()
+            mt = _re.match(r"(\d{1,2}):(\d{2})\s*UTC\s*([+-]\d{1,2})?", ts)
+            if not ds or not mt:
                 return None
             hh, mm, off = int(mt.group(1)), int(mt.group(2)), int(mt.group(3) or 0)
             try:
-                base = _dt2.strptime(_ref_date, "%Y-%m-%d").replace(tzinfo=_tz2.utc)
+                return _dt2.strptime(ds, "%Y-%m-%d").replace(tzinfo=_tz2.utc, hour=hh, minute=mm) - _td2(hours=off)
             except Exception:
-                base = _dt2.now(_tz2.utc).replace(hour=0, minute=0, second=0, microsecond=0)
-            kick = base.replace(hour=hh, minute=mm) - _td2(hours=off)
-            now = _dt2.now(_tz2.utc)
-            while kick < now - _td2(hours=3):
-                kick += _td2(days=1)
-            return int(kick.timestamp() * 1000)
+                return None
+
+        def _cd_text(kdt):
+            secs = int((kdt - _now).total_seconds())
+            if secs <= 0:
+                return t("ls_kickoff")
+            if secs >= 86400:
+                return f"{secs // 86400}j {(secs % 86400) // 3600}h"
+            return f"{secs // 3600}h {(secs % 3600) // 60:02d}m"
+
+        # The forward schedule (all 104 fixtures, real kick-off times) is the reliable source for
+        # "next matches" — independent of the live feed, so the countdown always shows.
+        upc = []
+        for m in _full_schedule():
+            if m.get("status") == "FT" or (m.get("home"), m.get("away")) in _done_or_live:
+                continue
+            kdt = _kickoff_dt(m)
+            if kdt is None or kdt < _now - _td2(hours=2):
+                continue
+            upc.append((kdt, m))
+        upc.sort(key=lambda x: x[0])
 
         # ── COMPACT BANNER (the whole top folded into one strip) ──────────────
         _badge = (f"<span style='color:{RED};font-weight:700'>● {t('ls_live_now').upper()}</span>"
@@ -1175,8 +1199,8 @@ elif page == "⚽ Live Standings":
             f"<div style='color:{MUTED};font-size:11px;margin-top:5px'>{_badge} &nbsp;·&nbsp; {src}{_refresh}</div>"
             f"</div>", unsafe_allow_html=True)
 
-        # ── 🔝 SPOTLIGHT (centered): live score(s) vs prediction + the two next
-        #    kick-offs with live, ticking countdowns. One HTML/JS card so it ticks.
+        # ── 🔝 SPOTLIGHT (centered): live score(s) vs prediction + the two next kick-offs with
+        #    live, ticking RED countdowns. One HTML/JS card so it ticks per second.
         _spot = []
         for m in live_now:
             gh = m["home_goals"] if m.get("home_goals") is not None else 0
@@ -1189,39 +1213,46 @@ elif page == "⚽ Live Standings":
                 _pred = (f"<div style='font-size:12px;color:{MUTED};margin-top:3px'>{t('ls_live_vs')}: "
                          f"<b style='color:{TEAL}'>{m['home']} {pw['home']*100:.0f}%</b> · "
                          f"{t('ls_pred')} {pw['draw']*100:.0f}% · "
-                         f"<b style='color:{TEAL}'>{m['away']} {pw['away']*100:.0f}%</b> · "
-                         f"{r['top_scores'][0]['s']}</div>")
+                         f"<b style='color:{TEAL}'>{m['away']} {pw['away']*100:.0f}%</b> · {r['top_scores'][0]['s']}</div>")
             _spot.append(
                 f"<div style='margin:6px 0'>"
                 f"<div style='color:{RED};font-weight:700;font-size:12px'>● {t('ls_live_now').upper()} · {mn}</div>"
                 f"<div style='font-size:30px;font-weight:800;line-height:1.15'>{flag(m['home'],disp_df)} {m['home']} "
                 f"<span style='color:{RED}'>{gh}–{ga}</span> {m['away']} {flag(m['away'],disp_df)}</div>"
                 f"{_pred}</div>")
-        _nexts = sorted([(ms, m) for m in upcoming if (ms := _kickoff_ms(m))], key=lambda x: x[0])
         _cd_js = ""
-        for _idx, (ms, m) in enumerate(_nexts[:2]):
+        for _idx, (kdt, m) in enumerate(upc[:2]):
             _big = (_idx == 0 and not live_now)
-            _sz = 30 if _big else 18
+            _sz = 32 if _big else 18
             _cid = f"wccd{_idx}"
             _spot.append(
                 f"<div style='margin:9px 0'>"
                 f"<div style='font-size:{_sz}px;font-weight:800;line-height:1.15'>{flag(m['home'],disp_df)} {m['home']} "
                 f"<span style='color:{MUTED};font-weight:500'>vs</span> {m['away']} {flag(m['away'],disp_df)}</div>"
-                f"<div style='color:{GOLD};font-size:{max(14,_sz-6)}px;font-weight:700;margin-top:2px'>"
+                f"<div style='color:{RED};font-size:{max(15,_sz-6)}px;font-weight:800;margin-top:3px'>"
                 f"⏱ {t('ls_kickoff_in')} <span id='{_cid}'>—</span></div></div>")
-            _cd_js += f"wcCountdown('{_cid}',{ms});"
+            _cd_js += f"wcCountdown('{_cid}',{int(kdt.timestamp()*1000)});"
         if _spot:
             _sep = f"<hr style='border:none;border-top:1px solid {BORDER};margin:10px 0'>"
             _card = (
                 f"<div style='font-family:Inter,system-ui,sans-serif;color:{WHITE};text-align:center;"
-                f"border:1px solid {BORDER};border-radius:16px;padding:16px 22px;margin:0 auto 16px;max-width:660px;"
+                f"border:1px solid {BORDER};border-radius:16px;padding:16px 22px;margin:0 auto 12px;max-width:660px;"
                 f"background:radial-gradient(130% 130% at 50% 0%,{BG2},{BG0})'>" + _sep.join(_spot) + "</div>")
             _js = ("<script>function wcCountdown(id,target){function u(){var el=document.getElementById(id);"
                    "if(!el)return;var d=target-Date.now();if(d<=0){el.innerHTML='⚽ KOWORD';return;}"
-                   "var h=Math.floor(d/3600000),mm=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);"
-                   "el.innerHTML=(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
+                   "var dd=Math.floor(d/86400000),h=Math.floor((d%86400000)/3600000),"
+                   "mm=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);"
+                   "el.innerHTML=(dd>0?dd+'j ':'')+(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
                    "u();setInterval(u,1000);}" + _cd_js + "</script>").replace("KOWORD", t('ls_kickoff'))
-            _components.html(_card + _js, height=min(150 + 92 * len(_spot), 470))
+            _components.html(_card + _js, height=min(140 + 92 * len(_spot), 460))
+            # action buttons live OUTSIDE the iframe (Streamlit can't be called from inside it)
+            _bc = st.columns(2)
+            for _idx, (kdt, m) in enumerate(upc[:2]):
+                with _bc[_idx]:
+                    _predict_btn(m["home"], m["away"], f"spot_{_idx}",
+                                 f"{t('ls_predict_past')} · {m['home']}–{m['away']}")
+            if st.button(t("ls_see_all"), key="show_all_up"):
+                st.session_state["_show_all_up"] = not st.session_state.get("_show_all_up", False)
 
         # ── 3 COLUMNS: played | standings (center) | upcoming ─────────────────
         _cpast, _cstd, _cfut = st.columns([1.05, 1.25, 1.05], gap="medium")
@@ -1276,25 +1307,26 @@ elif page == "⚽ Live Standings":
 
         with _cfut:
             st.markdown(f"#### {t('ls_col_fut')}")
-            def _fut_card(m, key):
+            _show_all = st.session_state.get("_show_all_up", False)
+            _list = upc if _show_all else upc[:6]
+            def _fut_card(kdt, m, key):
                 preds = predicted_scores(model, teams, m["home"], m["away"], k=2, knockout=not m.get("group"))
                 _ps = " · ".join(f"{pp['s']} {pp['p']*100:.0f}%" for pp in preds)
                 st.markdown(
                     f"<div style='border:1px solid {BORDER};border-radius:9px;padding:6px 9px;margin-bottom:5px'>"
-                    f"<span style='font-size:9px;color:{MUTED}'>Grp {m.get('group','?')} · {m.get('time_utc','TBD')}</span><br>"
+                    f"<span style='font-size:9px;color:{MUTED}'>Grp {m.get('group','?')} · {m.get('date','')}</span><br>"
                     f"<span style='font-size:13px'>{flag(m['home'],disp_df)} <b>{m['home']}</b> "
                     f"<span style='color:{MUTED}'>vs</span> <b>{m['away']}</b> {flag(m['away'],disp_df)}</span>"
-                    + (f"<div style='font-size:10px;color:{GOLD};margin-top:2px'>{t('ls_pred')}: {_ps}</div>" if _ps else "")
+                    f"<div style='font-size:11px;color:{RED};font-weight:700;margin-top:2px'>⏱ {t('ls_kickoff_in')} {_cd_text(kdt)}</div>"
+                    + (f"<div style='font-size:10px;color:{GOLD};margin-top:1px'>{t('ls_pred')}: {_ps}</div>" if _ps else "")
                     + "</div>", unsafe_allow_html=True)
                 _predict_btn(m["home"], m["away"], key, t("ls_predict_fut"))
-            for _i, m in enumerate(upcoming[:6]):
-                _fut_card(m, f"fp_{_i}")
-            if len(upcoming) > 6:
-                with st.expander(t("ls_see_all")):
-                    for _j, m in enumerate(upcoming[6:]):
-                        _fut_card(m, f"fpx_{_j}")
-            if not upcoming:
+            for _i, (kdt, m) in enumerate(_list):
+                _fut_card(kdt, m, f"fp_{_i}")
+            if not upc:
                 st.caption("—")
+            elif not _show_all and len(upc) > 6:
+                st.caption(f"+{len(upc) - 6} {t('ls_col_fut').lower()} — {t('ls_see_all')}")
 
         if any(inj_list for inj_list in injuries.values()):
             with st.expander(f"⚕️ {t('ls_injuries')}"):
