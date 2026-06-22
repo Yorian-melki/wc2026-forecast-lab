@@ -1191,11 +1191,13 @@ elif page == "⚽ Live Standings":
                 st.session_state["mp_prefill"] = (h, a)
                 st.rerun()
 
-        def _live_label(m):
+        def _live_label(m, kdt=None):
             # friendly in-play status across providers (min'/half-time/extra time/penalties).
+            # Prefer the provider's real minute/phase; if none, estimate from the official kick-off
+            # time (marked ~) so a minute always shows.
             s = (m.get("status") or "").upper()
             mn = m.get("minute")
-            if s in ("HT", "PAUSED", "PAUS", "PEN_LIVE_BREAK") or s.startswith("HALF"):
+            if s in ("HT", "PAUSED", "PAUS", "PEN_LIVE_BREAK") or "HALF TIME" in s or s.startswith("HALF"):
                 return t("ls_halftime")
             if s in ("P", "PEN", "PENALTIES", "PENALTY_SHOOTOUT"):
                 return t("ls_penalties")
@@ -1203,6 +1205,14 @@ elif page == "⚽ Live Standings":
                 return f"{t('ls_extratime')} {mn}'" if mn else t("ls_extratime")
             if mn:
                 return f"{mn}'"
+            if kdt is not None:                          # estimate from kick-off (no provider minute)
+                el = int((_now - kdt).total_seconds() // 60)
+                if 0 <= el <= 48:
+                    return f"~{el}'"
+                if 48 < el <= 63:
+                    return t("ls_halftime")
+                if 63 < el <= 125:
+                    return f"~{el - 15}'"
             return t("ls_live_short")   # in-play but no minute/known phase → just "LIVE"
 
         _now = _dt2.now(_tz2.utc)
@@ -1239,6 +1249,13 @@ elif page == "⚽ Live Standings":
                 continue
             upc.append((kdt, m))
         upc.sort(key=lambda x: x[0])
+        # kick-off time of every fixture (incl. live ones) → lets us estimate a live minute when
+        # the provider doesn't send one.
+        _sched_kick = {}
+        for _sm in _full_schedule():
+            _sk = _kickoff_dt(_sm)
+            if _sk:
+                _sched_kick[(_sm.get("home"), _sm.get("away"))] = _sk
 
         # ── COMPACT BANNER (the whole top folded into one strip) ──────────────
         _badge = (f"<span style='color:{RED};font-weight:700'>● {t('ls_live_now').upper()}</span>"
@@ -1265,7 +1282,7 @@ elif page == "⚽ Live Standings":
                 for m in live_now:
                     gh = m["home_goals"] if m.get("home_goals") is not None else 0
                     ga = m["away_goals"] if m.get("away_goals") is not None else 0
-                    mn = _live_label(m)
+                    mn = _live_label(m, _sched_kick.get((m["home"], m["away"])))
                     r = _csc(m["home"], m["away"], gh, ga, not m.get("group"))
                     _extra = ""
                     if r:
