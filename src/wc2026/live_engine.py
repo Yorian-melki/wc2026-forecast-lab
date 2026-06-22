@@ -73,6 +73,14 @@ def fetch_live_state() -> dict:
             completed = [_m2d(m, tg) for m in (router.get_completed_matches() or [])]
         except Exception:
             completed = []
+        # ESPN flips a match to FULL_TIME instantly; prepend its today finals so a just-ended match
+        # appears in the played list right away (it wins the de-dup below over the laggy sources).
+        try:
+            from .providers.normalizer import from_provider_dict
+            espn_done = [_m2d(from_provider_dict(d), tg) for d in (router._espn.get_completed_matches() or [])]
+            completed = espn_done + completed
+        except Exception:
+            pass
         # de-dup completed by (home,away,date)
         seen, uniq = set(), []
         for c in completed:

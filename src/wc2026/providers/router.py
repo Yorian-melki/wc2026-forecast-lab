@@ -82,9 +82,14 @@ class ProviderRouter:
         actually reports a live match — so a single dead/limited key (e.g. API-Football's free
         plan not exposing live WC games) no longer leaves the board stuck on the schedule.
         Whichever provider answers, the score + minute + status flow through automatically."""
-        # ESPN first: free, key-less, and the only source that reliably carries the OFFICIAL clock
-        # (exact minute + stoppage time + half-time/extra-time/shootout state).
-        for prov in (self._espn, self._fdo, self._tsa, self._hl, self._af, self._tsdb):
+        # ESPN is the AUTHORITY: free, key-less, carries the official clock AND reports FULL_TIME
+        # immediately. If it's reachable we trust its answer even when empty — so a just-finished
+        # match doesn't linger as "live" via a laggy provider. Only if ESPN is unreachable do we
+        # fall back to the other live sources.
+        espn = self._espn.live_or_none()
+        if espn is not None:
+            return [from_provider_dict(m) for m in espn]
+        for prov in (self._fdo, self._tsa, self._hl, self._af, self._tsdb):
             try:
                 live = prov.get_live_matches()
             except Exception:

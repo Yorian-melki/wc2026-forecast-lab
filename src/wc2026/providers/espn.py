@@ -58,6 +58,19 @@ class EspnProvider(BaseProvider):
             data = self._fetch()
         except Exception:
             return []
+        return self._parse(data, only_live)
+
+    def live_or_none(self):
+        """Live matches, or None when ESPN itself is unreachable. Lets the router treat ESPN as the
+        AUTHORITY on live state: an empty list means 'nothing is live right now' (e.g. a match just
+        hit FULL_TIME), NOT 'fall back to a laggy provider that still reports it as in-play'."""
+        try:
+            data = self._fetch()
+        except Exception:
+            return None
+        return self._parse(data, only_live=True)
+
+    def _parse(self, data: dict, only_live: bool) -> list[dict]:
         out = []
         for e in data.get("events", []):
             comp = (e.get("competitions") or [{}])[0]
@@ -92,7 +105,35 @@ class EspnProvider(BaseProvider):
         return self._events(only_live=False)
 
     def get_completed_matches(self, since_date: Optional[str] = None) -> list[dict]:
-        return []
+        """Today's FINISHED matches (final score). ESPN flips a match to completed the moment it
+        ends, so the played list updates immediately instead of waiting on OpenFootball's lag."""
+        try:
+            data = self._fetch()
+        except Exception:
+            return []
+        out = []
+        for e in data.get("events", []):
+            comp = (e.get("competitions") or [{}])[0]
+            if not comp.get("status", {}).get("type", {}).get("completed"):
+                continue
+            cs = comp.get("competitors", [])
+            home = next((c for c in cs if c.get("homeAway") == "home"), None)
+            away = next((c for c in cs if c.get("homeAway") == "away"), None)
+            if not home or not away:
+                continue
+            hg, ag = _int(home.get("score")), _int(away.get("score"))
+            if hg is None or ag is None:
+                continue
+            out.append({
+                "provider": self.name, "match_id": str(e.get("id")),
+                "home": (home.get("team", {}).get("abbreviation") or "").upper(),
+                "away": (away.get("team", {}).get("abbreviation") or "").upper(),
+                "home_goals": hg, "away_goals": ag,
+                "date": (e.get("date", "") or "")[:10], "status": "FT",
+                "quality_level": self.quality_level,
+                "source_timestamp": datetime.now(timezone.utc).isoformat(),
+            })
+        return out
 
     def get_standings(self) -> list[dict]:
         return []

@@ -1245,7 +1245,7 @@ elif page == "⚽ Live Standings":
             if m.get("status") == "FT" or (m.get("home"), m.get("away")) in _done_or_live:
                 continue
             kdt = _kickoff_dt(m)
-            if kdt is None or kdt < _now - _td2(hours=2):
+            if kdt is None or kdt < _now - _td2(minutes=10):   # >10min past kick-off & not live → gone (finished/handled by live feed)
                 continue
             upc.append((kdt, m))
         upc.sort(key=lambda x: x[0])
