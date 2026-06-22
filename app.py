@@ -349,6 +349,13 @@ TXT = {
         "sc_cols": "match · real score · model's top scores · % on real score · rank · result",
         "sc_comp_title": "Across competitions — same model, scored the same way",
         "sc_comp_note": "The Elo→Dixon-Coles core scored on every competition since 2010 (rolling pre-match Elos). 'WC2026 (live)' is this tournament so far. Lower RPS = better; every competition beats the coin-flip baseline.",
+        "empty_same_team": "Please select two different teams.",
+        "empty_no_prob": "No probability data.",
+        "empty_no_wc_hist": "No WC history data.",
+        "empty_no_pen": "No WC penalty shootout history.",
+        "empty_no_form": "No form data available.",
+        "empty_no_squad": "No squad attribute data.",
+        "empty_no_pair": "No pair with 5+ meetings found in this selection.",
         # Model Lab
         "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
         "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
@@ -435,6 +442,13 @@ TXT = {
         "sc_cols": "match · score réel · meilleurs scores du modèle · % sur le score réel · rang · résultat",
         "sc_comp_title": "Sur les compétitions — même modèle, même mesure",
         "sc_comp_note": "Le cœur Elo→Dixon-Coles mesuré sur chaque compétition depuis 2010 (Elos roulants d'avant-match). « CDM2026 (live) » = ce tournoi jusqu'ici. RPS plus bas = mieux ; chaque compétition bat le pile-ou-face.",
+        "empty_same_team": "Choisis deux équipes différentes.",
+        "empty_no_prob": "Pas de données de probabilité.",
+        "empty_no_wc_hist": "Pas de données d'historique Coupe du monde.",
+        "empty_no_pen": "Pas d'historique de tirs au but en Coupe du monde.",
+        "empty_no_form": "Pas de données de forme disponibles.",
+        "empty_no_squad": "Pas de données d'attributs d'effectif.",
+        "empty_no_pair": "Aucune paire avec 5+ confrontations dans cette sélection.",
         "ml_eyebrow": "Méthodologie", "ml_title": "Laboratoire du modèle",
         "ml_desc": "Transparence mathématique complète, limites assumées, et un audit de maturité auto-évalué.",
         "ml_hint": "💡 La section \"on montre nos calculs\" — les maths et les limites assumées derrière la prévision. Curieux ? Plonge. Pressé ? Tu peux passer.",
@@ -1326,7 +1340,7 @@ elif page == "🎯 Match Predictor":
     is_ko = match_type == "Knockout"
 
     if team_a == team_b:
-        st.warning("Please select two different teams.")
+        st.warning(t("empty_same_team"))
     else:
         try:
             from wc2026.data_loader import load_teams, load_config
@@ -1595,7 +1609,7 @@ elif page == "🧬 Nation DNA":
 
     with t1:
         if elo_row is None:
-            st.warning("No probability data.")
+            st.warning(t("empty_no_prob"))
         else:
             stages  = ["group_survival_prob", "qf_prob", "sf_prob", "final_prob", "champion_prob"]
             labels  = ["Advance", "Reach QF", "Reach SF", "Reach Final", "Win WC2026"]
@@ -1638,7 +1652,7 @@ elif page == "🧬 Nation DNA":
 
     with t2:
         if wch_row is None:
-            st.info("No WC history data.")
+            st.info(t("empty_no_wc_hist"))
         else:
             app_count = int(wch_row.get("wc_appearances", 0))
             titles    = int(wch_row.get("wc_titles", 0))
@@ -1687,12 +1701,12 @@ elif page == "🧬 Nation DNA":
                 if pr_note:
                     st.caption(f"⚠️ {pr_note}")
             else:
-                st.caption("No WC penalty shootout history.")
+                st.caption(t("empty_no_pen"))
 
     with t3:
         team_form = form_df[form_df["code"] == selected].copy() if not form_df.empty else pd.DataFrame()
         if team_form.empty:
-            st.info("No form data available.")
+            st.info(t("empty_no_form"))
         else:
             team_form = team_form.sort_values("date").tail(15)
             team_form["gd"] = team_form["gf"] - team_form["ga"]
@@ -1731,7 +1745,7 @@ elif page == "🧬 Nation DNA":
 
     with t4:
         if tm_row is None:
-            st.info("No squad attribute data.")
+            st.info(t("empty_no_squad"))
         else:
             attrs = {
                 "Attack":      float(tm_row.get("attack", 75)),
@@ -1951,7 +1965,7 @@ elif page == "⚔️ Head-to-Head":
                     f"({r['Meetings']} meetings)"
                 )
         else:
-            st.info("No pair with 5+ meetings found in this selection.")
+            st.info(t("empty_no_pair"))
 
 
 # ══════════════════════════════════════════════════════════════════════════════
