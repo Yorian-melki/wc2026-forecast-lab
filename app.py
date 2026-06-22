@@ -341,6 +341,7 @@ TXT = {
         "ls_next_up": "Next up", "ls_prematch": "Pre-match", "ls_live_vs": "live score vs pre-match prediction",
         "ls_result_ok": "result called right", "ls_result_no": "result missed",
         "ls_col_past": "Played", "ls_col_std": "Standings", "ls_col_fut": "Upcoming", "ls_kickoff": "KICK-OFF",
+        "ls_kickoff_passed": "kicked off · live score syncing", "ls_live_short": "LIVE",
         "src_live": "live providers", "src_snap": "offline snapshot (set API_FOOTBALL_KEY for live auto-update)",
         # Data Quality
         "dq_eyebrow": "Sources & audit", "dq_title": "Data Quality & Source Audit",
@@ -440,6 +441,7 @@ TXT = {
         "ls_next_up": "Prochains matchs", "ls_prematch": "Avant-match", "ls_live_vs": "score en direct vs prédiction d'avant-match",
         "ls_result_ok": "résultat bien vu", "ls_result_no": "résultat manqué",
         "ls_col_past": "Matchs joués", "ls_col_std": "Classements", "ls_col_fut": "Matchs à venir", "ls_kickoff": "COUP D’ENVOI",
+        "ls_kickoff_passed": "coup d’envoi donné · score en direct imminent", "ls_live_short": "EN DIRECT",
         "src_live": "fournisseurs en direct", "src_snap": "instantané hors-ligne (définir API_FOOTBALL_KEY pour le direct)",
         "dq_eyebrow": "Sources & audit", "dq_title": "Qualité des données & audit des sources",
         "dq_desc": "Chaque chiffre de ce site repose sur une source documentée. Cette page montre exactement les données disponibles, ce qui manque, et leur fraîcheur.",
@@ -1182,7 +1184,7 @@ elif page == "⚽ Live Standings":
             return "<0.1%" if 0 < v < 0.1 else f"{v:.1f}%"
 
         def _predict_btn(h, a, key, label):
-            if st.button(label, key=key):
+            if st.button(label, key=key, width="stretch"):   # fill the block → centered, consistent
                 st.session_state["_goto"] = "🎯 Match Predictor"
                 st.session_state["mp_prefill"] = (h, a)
                 st.rerun()
@@ -1201,12 +1203,14 @@ elif page == "⚽ Live Standings":
                 return None
 
         def _cd_text(kdt):
+            # returns the FULL kick-off line (so a passed kick-off reads "🔴 kicked off…", not
+            # "kick-off in KICK-OFF").
             secs = int((kdt - _now).total_seconds())
             if secs <= 0:
-                return t("ls_kickoff")
-            if secs >= 86400:
-                return f"{secs // 86400}j {(secs % 86400) // 3600}h"
-            return f"{secs // 3600}h {(secs % 3600) // 60:02d}m"
+                return f"🔴 {t('ls_kickoff_passed')}"
+            d = (f"{secs // 86400}j {(secs % 86400) // 3600}h" if secs >= 86400
+                 else f"{secs // 3600}h {(secs % 3600) // 60:02d}m")
+            return f"⏱ {t('ls_kickoff_in')} {d}"
 
         # The forward schedule (all 104 fixtures, real kick-off times) is the reliable source for
         # "next matches" — independent of the live feed, so the countdown always shows.
@@ -1264,29 +1268,40 @@ elif page == "⚽ Live Standings":
                             f"<span style='color:{RED}'>{gh}–{ga}</span> {m['away']} {flag(m['away'],disp_df)}</div>"
                             f"{_extra}</div>", unsafe_allow_html=True)
                         _predict_btn(m["home"], m["away"], f"livespot_{m['home']}_{m['away']}", t("ls_predict_fut"))
+                # A kick-off that has already passed but isn't in the live feed yet must NOT show a
+                # dead countdown — render it as kicked-off (live-pending). Started first, then future.
+                _slots = [(k, m) for (k, m) in upc[:2] if k <= _now] + [(k, m) for (k, m) in upc if k > _now]
                 _cd_js = ""
-                for _idx, (kdt, m) in enumerate(upc[:2]):
-                    _big = (_idx == 0 and not live_now)
+                _ci = 0
+                for _pos, (kdt, m) in enumerate(_slots[:2]):
+                    _big = (_pos == 0 and not live_now)
                     _aff = 26 if _big else 18
-                    _cdz = 18 if _big else 14
-                    _cid = f"wccd{_idx}"
+                    _csz = 18 if _big else 14
+                    if kdt <= _now:                      # kicked off, awaiting the live feed
+                        _line = (f"<div style='color:{RED};font-size:{_csz}px;font-weight:800;margin-top:2px'>"
+                                 f"🔴 {t('ls_kickoff_passed')}</div>")
+                    else:                                # future → live ticking countdown
+                        _cid = f"wccd{_ci}"; _ci += 1
+                        _line = (f"<div id='{_cid}' style='color:{RED};font-size:{_csz}px;font-weight:800;margin-top:2px'>"
+                                 f"⏱ {t('ls_kickoff_in')} —</div>")
+                        _cd_js += f"wcCountdown('{_cid}',{int(kdt.timestamp()*1000)});"
                     with st.container(border=True):
                         st.markdown(
                             f"<div style='text-align:center'>"
                             f"<div style='font-size:{_aff}px;font-weight:800;line-height:1.1'>{flag(m['home'],disp_df)} {m['home']} "
                             f"<span style='color:{MUTED};font-weight:500'>vs</span> {m['away']} {flag(m['away'],disp_df)}</div>"
-                            f"<div style='color:{RED};font-size:{_cdz}px;font-weight:800;margin-top:2px'>"
-                            f"⏱ {t('ls_kickoff_in')} <span id='{_cid}'>—</span></div></div>", unsafe_allow_html=True)
-                        _predict_btn(m["home"], m["away"], f"spot_{_idx}", t("ls_predict_fut"))
-                    _cd_js += f"wcCountdown('{_cid}',{int(kdt.timestamp()*1000)});"
+                            f"{_line}</div>", unsafe_allow_html=True)
+                        _predict_btn(m["home"], m["away"], f"spot_{_pos}", t("ls_predict_fut"))
                 if _cd_js:
+                    import json as _json
+                    _kw, _lw = _json.dumps("⏱ " + t('ls_kickoff_in') + " "), _json.dumps("🔴 " + t('ls_live_short'))
                     _js = ("<script>function wcCountdown(id,target){function u(){"
                            "var el=window.parent.document.getElementById(id);if(!el)return;"
-                           "var d=target-Date.now();if(d<=0){el.innerHTML='⚽ KOWORD';return;}"
+                           "var d=target-Date.now();if(d<=0){el.innerHTML=" + _lw + ";return;}"
                            "var dd=Math.floor(d/86400000),h=Math.floor((d%86400000)/3600000),"
                            "mm=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);"
-                           "el.innerHTML=(dd>0?dd+'j ':'')+(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s;}"
-                           "u();setInterval(u,1000);}" + _cd_js + "</script>").replace("KOWORD", t('ls_kickoff'))
+                           "el.innerHTML=" + _kw + "+((dd>0?dd+'j ':'')+(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm+':'+(s<10?'0':'')+s);}"
+                           "u();setInterval(u,1000);}" + _cd_js + "</script>")
                     _components.html(_js, height=0)
 
         # ── 3 COLUMNS: played | standings (center) | upcoming ─────────────────
@@ -1352,7 +1367,7 @@ elif page == "⚽ Live Standings":
                     f"<span style='font-size:9px;color:{MUTED}'>Grp {m.get('group','?')} · {m.get('date','')}</span><br>"
                     f"<span style='font-size:13px'>{flag(m['home'],disp_df)} <b>{m['home']}</b> "
                     f"<span style='color:{MUTED}'>vs</span> <b>{m['away']}</b> {flag(m['away'],disp_df)}</span>"
-                    f"<div style='font-size:11px;color:{RED};font-weight:700;margin-top:2px'>⏱ {t('ls_kickoff_in')} {_cd_text(kdt)}</div>"
+                    f"<div style='font-size:11px;color:{RED};font-weight:700;margin-top:2px'>{_cd_text(kdt)}</div>"
                     + (f"<div style='font-size:10px;color:{GOLD};margin-top:1px'>{t('ls_pred')}: {_ps}</div>" if _ps else "")
                     + "</div>", unsafe_allow_html=True)
                 _predict_btn(m["home"], m["away"], key, t("ls_predict_fut"))
