@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-06-13T17:19:52.545127+00:00",
+  "lineage": [
+    {
+      "number": "Champion probability (base)",
+      "source_file": "outputs/live/ml_ensemble/stage_probs.csv",
+      "provider": "internal (martj42 Elo)",
+      "transformation": "run_ml_ensemble_comparison.py \u2192 CalibratedEloMatchModel(ML@0.20)",
+      "caveat": "Monte Carlo 100k; ML-ensemble reweighted"
+    },
+    {
+      "number": "Champion probability interval (P5/P50/P95)",
+      "source_file": "data/live/champion_probability_intervals.json",
+      "provider": "internal",
+      "transformation": "run_beta_uncertainty_intervals.py (beta bootstrap)",
+      "caveat": "beta SAMPLING uncertainty only \u2014 a FLOOR"
+    },
+    {
+      "number": "xG live adjustment",
+      "source_file": "data/live/xg_adjustment_log.json",
+      "provider": "Highlightly",
+      "transformation": "run_xg_comparison.py (bounded \u00b18 Elo)",
+      "caveat": "live-conditioning only; not xG-trained"
+    },
+    {
+      "number": "Shotmap xG (per-shot, x/y)",
+      "source_file": "data/live/thestatsapi_shotmap.json",
+      "provider": "TheStatsAPI",
+      "transformation": "direct extraction",
+      "caveat": "same upstream as Highlightly (not independent)"
+    },
+    {
+      "number": "Odds-implied 1X2",
+      "source_file": "data/live/thestatsapi_odds_implied.json",
+      "provider": "TheStatsAPI",
+      "transformation": "de-vig (median of bookmakers)",
+      "caveat": "4 completed matches only"
+    },
+    {
+      "number": "ML validation metrics (Brier/NLL/ECE)",
+      "source_file": "outputs/audit/ml_validation_report.json",
+      "provider": "internal (martj42)",
+      "transformation": "train_ml_match_model.py",
+      "caveat": "leak-free held-out 2019-2022 (3580 matches)"
+    },
+    {
+      "number": "Tournament validation (champ Brier)",
+      "source_file": "outputs/audit/expanded_tournament_validation.json",
+      "provider": "internal (martj42)",
+      "transformation": "run_expanded_validation_and_dynamic_ml.py",
+      "caveat": "4 WCs; beta fixed; per-cutoff ML"
+    },
+    {
+      "number": "beta intervals",
+      "source_file": "outputs/audit/beta_uncertainty_bootstrap.json",
+      "provider": "internal (martj42 1990-2025)",
+      "transformation": "bootstrap 300x, temp-scaled",
+      "caveat": "iid match bootstrap = lower bound"
+    },
+    {
+      "number": "Provider agreement",
+      "source_file": "data/live/provider_status.json, provider_disagreements.json",
+      "provider": "4 live providers",
+      "transformation": "update_live_data.py",
+      "caveat": "4 matches; 0 disagreements"
+    },
+    {
+      "number": "Market disagreement flags",
+      "source_file": "data/live/market_disagreement_flags.json",
+      "provider": "TheStatsAPI odds + internal model",
+      "transformation": "market_disagreement_control",
+      "caveat": "benchmark only, not blended"
+    },
+    {
+      "number": "Maturity score",
+      "source_file": "outputs/audit/final_maturity_score_v5.json",
+      "provider": "internal self-assessment",
+      "transformation": "manual per-dimension",
+      "caveat": "self-assigned, not externally reviewed"
+    }
+  ]
+}

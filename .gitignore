@@ -60,3 +60,6 @@ data/*.bak
 # Streamlit secrets (never commit) — config.toml (theme) is safe to track
 .streamlit/secrets.toml
 !outputs/audit/competition_backtest.json
+!outputs/audit/data_lineage_map.json
+!outputs/audit/reviewer_attack_audit.json
+!outputs/audit/artifact_consistency_audit.json

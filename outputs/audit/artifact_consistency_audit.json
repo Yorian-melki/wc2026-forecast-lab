@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-06-13T17:19:52.545127+00:00",
+  "canonical_truth": {
+    "ml_weight": 0.2,
+    "ml_weight_mode": "fixed (dynamic available)",
+    "maturity": 6.43,
+    "tests": 574,
+    "thestatsapi": "active",
+    "xg_upstream": "Highlightly==TSA (not independent)",
+    "intervals": "beta sampling floor (not total uncertainty)",
+    "market": "benchmark only, not integrated",
+    "champion_top3": "ESP 19.0%, ARG 15.7%, FRA 10.8%"
+  },
+  "artifacts": [
+    {
+      "file": "README.md",
+      "status": "STALE",
+      "issue": "278 tests (now 558), Spain 16.97% (now 19.0%), no ML/TSA/intervals/4-WC validation",
+      "action": "REWRITTEN this batch"
+    },
+    {
+      "file": "MODEL_CARD.md",
+      "status": "SUPERSEDED",
+      "issue": "P4 'frozen', no ML/intervals/providers",
+      "action": "superseded by outputs/audit/model_card_public.md (kept as historical)"
+    },
+    {
+      "file": "MODEL_FREEZE.md",
+      "status": "CONTRADICTORY",
+      "issue": "'do not modify before publication' but model evolved (ML added)",
+      "action": "label historical; model_stack_config.json is current source of truth"
+    },
+    {
+      "file": "outputs/audit/final_maturity_score_v2/v3/v4.*",
+      "status": "HISTORICAL",
+      "issue": "earlier maturity snapshots",
+      "action": "v5 is canonical"
+    },
+    {
+      "file": "outputs/audit/stratospheric_final_report.json / macro_upgrade_final_report.json",
+      "status": "HISTORICAL",
+      "issue": "per-batch checkpoints",
+      "action": "latest = uncertainty_robustness_final_report.json + this batch"
+    },
+    {
+      "file": "outputs/audit/global_maturity_score.json",
+      "status": "HISTORICAL_BASELINE",
+      "issue": "2026-06-10 baseline (5.21)",
+      "action": "used as before-baseline, keep"
+    },
+    {
+      "file": "data/model_stack_config.json",
+      "status": "CURRENT",
+      "issue": "none \u2014 weight 0.20, mode fixed",
+      "action": "source of truth"
+    },
+    {
+      "file": "tests/test_no_overclaim.py",
+      "status": "CURRENT",
+      "issue": "none \u2014 passing",
+      "action": "keep enforcing"
+    }
+  ]
+}

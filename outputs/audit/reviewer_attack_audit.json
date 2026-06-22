@@ -1,0 +1,178 @@
+{
+  "generated_at": "2026-06-13T17:18:53.345233+00:00",
+  "n_objections": 20,
+  "severity_counts": {
+    "HIGH": 6,
+    "MEDIUM": 11,
+    "LOW": 3
+  },
+  "fully_or_now_defended": 8,
+  "partially_defended": 3,
+  "top_unresolved": [
+    "structural uncertainty beyond beta sampling",
+    "only 4 WCs validated",
+    "temperature_mul uncertainty"
+  ],
+  "objections": [
+    {
+      "objection": "Only 4 World Cups validated \u2014 far too few to trust tournament-level claims",
+      "severity": "HIGH",
+      "currently_defended": "partial",
+      "defense_artifact": "outputs/audit/expanded_tournament_validation.json",
+      "remaining_weakness": "4 WCs, all 32-team; no EUROs/Copa",
+      "action_needed": "flexible-bracket harness to add EUROs/Copa"
+    },
+    {
+      "objection": "beta intervals are too narrow because structural uncertainty is excluded",
+      "severity": "HIGH",
+      "currently_defended": "partial (labeled a FLOOR)",
+      "defense_artifact": "outputs/audit/beta_uncertainty_bootstrap.json",
+      "remaining_weakness": "temperature/model-form/tournament-variance uncertainty unquantified",
+      "action_needed": "model-form ensemble + posterior over temperature_mul"
+    },
+    {
+      "objection": "ML overrates favorites and would hurt on upset tournaments",
+      "severity": "MEDIUM",
+      "currently_defended": "yes",
+      "defense_artifact": "outputs/audit/tournament_walkforward_validation.json (weight cut 0.5->0.2)",
+      "remaining_weakness": "still helps favorites/hurts upsets at 0.20",
+      "action_needed": "adopt dynamic ML on larger sample"
+    },
+    {
+      "objection": "Market odds extracted but never used to correct the model",
+      "severity": "LOW",
+      "currently_defended": "yes (benchmark by choice)",
+      "defense_artifact": "outputs/audit/market_disagreement_control.json",
+      "remaining_weakness": "no market calibration; 4 matches",
+      "action_needed": "accumulate odds history, revisit"
+    },
+    {
+      "objection": "xG sources are not independent (Highlightly == TheStatsAPI upstream)",
+      "severity": "MEDIUM",
+      "currently_defended": "yes (documented)",
+      "defense_artifact": "outputs/audit/thestatsapi_final_retest.json (single_upstream_xg_likely)",
+      "remaining_weakness": "no truly independent xG cross-check",
+      "action_needed": "add Understat/FBref via soccerdata"
+    },
+    {
+      "objection": "Live API data can drift or break silently",
+      "severity": "MEDIUM",
+      "currently_defended": "partial",
+      "defense_artifact": "data/live/provider_status.json + saved raw responses",
+      "remaining_weakness": "no automated drift alerting",
+      "action_needed": "scheduled freshness/disagreement alerts"
+    },
+    {
+      "objection": "Team names may silently map to the 1500 default Elo",
+      "severity": "MEDIUM",
+      "currently_defended": "yes",
+      "defense_artifact": "run_expanded_validation_and_dynamic_ml.py (rejects unresolved teams)",
+      "remaining_weakness": "WC2026 name map not auto-asserted",
+      "action_needed": "add WC2026 name-resolution test"
+    },
+    {
+      "objection": "Dashboard implies more certainty than the evidence warrants",
+      "severity": "HIGH",
+      "currently_defended": "partial (intervals+caveats added this batch)",
+      "defense_artifact": "app.py Forecast Uncertainty panel",
+      "remaining_weakness": "needs explicit 'what this is / is not'",
+      "action_needed": "Batch F panel (this batch)"
+    },
+    {
+      "objection": "Deployment could leak the 5 API keys",
+      "severity": "HIGH",
+      "currently_defended": "NOW yes",
+      "defense_artifact": "'.gitignore' now excludes .env; .env.example added",
+      "remaining_weakness": "was a real gap until this batch",
+      "action_needed": "env_var_inventory + never commit .env"
+    },
+    {
+      "objection": "beta_elo was fit with future data relative to WC2018/2022 backtests",
+      "severity": "MEDIUM",
+      "currently_defended": "yes",
+      "defense_artifact": "wc_historical_backtest.json + walk-forward holds beta fixed",
+      "remaining_weakness": "no per-era beta refit",
+      "action_needed": "refit beta per held-out era"
+    },
+    {
+      "objection": "temperature_mul=0.55 is a hand calibration, not bootstrapped",
+      "severity": "HIGH",
+      "currently_defended": "partial (acknowledged)",
+      "defense_artifact": "beta_uncertainty_bootstrap.json caveats",
+      "remaining_weakness": "its uncertainty not propagated",
+      "action_needed": "posterior/sensitivity over temperature_mul"
+    },
+    {
+      "objection": "Champion probabilities are Monte Carlo point estimates with noise",
+      "severity": "LOW",
+      "currently_defended": "yes",
+      "defense_artifact": "100k sims, conservation \u03a3=1.000 verified",
+      "remaining_weakness": "~0.1pp MC noise (immaterial)",
+      "action_needed": "none material"
+    },
+    {
+      "objection": "ML uses only 2 features (elo_diff, neutral) \u2014 underpowered",
+      "severity": "MEDIUM",
+      "currently_defended": "yes (anti-overfit, beats Elo held-out)",
+      "defense_artifact": "ml_validation_report.json",
+      "remaining_weakness": "richer features untested",
+      "action_needed": "gate-test more features"
+    },
+    {
+      "objection": "Penalties / extra-time mechanics are simplistic and high-variance",
+      "severity": "MEDIUM",
+      "currently_defended": "partial",
+      "defense_artifact": "logistic penalty model in calibrated_elo_model.py",
+      "remaining_weakness": "KO mechanics not separately validated",
+      "action_needed": "validate KO sub-model"
+    },
+    {
+      "objection": "No injury, suspension, or squad-depth modeling",
+      "severity": "MEDIUM",
+      "currently_defended": "acknowledged",
+      "defense_artifact": "model_card_public.md limitations",
+      "remaining_weakness": "real gap",
+      "action_needed": "provider injury feed"
+    },
+    {
+      "objection": "Reproducibility was scattered across many scripts",
+      "severity": "LOW",
+      "currently_defended": "NOW yes",
+      "defense_artifact": "scripts/rebuild_publication_forecast.py",
+      "remaining_weakness": "full run is ~25min",
+      "action_needed": "none"
+    },
+    {
+      "objection": "Many contradictory maturity reports (v2..v5) confuse the record",
+      "severity": "MEDIUM",
+      "currently_defended": "NOW yes",
+      "defense_artifact": "artifact_consistency_audit.json (v5 canonical)",
+      "remaining_weakness": "historical files remain (labeled)",
+      "action_needed": "keep v5 as source of truth"
+    },
+    {
+      "objection": "Maturity score is self-assigned, not externally reviewed",
+      "severity": "MEDIUM",
+      "currently_defended": "partial (per-dimension, capped honestly)",
+      "defense_artifact": "final_maturity_score_v5.md",
+      "remaining_weakness": "no external review",
+      "action_needed": "seek external review"
+    },
+    {
+      "objection": "Single-tournament variance dominates \u2014 one WC is high variance",
+      "severity": "HIGH",
+      "currently_defended": "yes (this is WHY intervals+entropy exist)",
+      "defense_artifact": "champion_probability_intervals.json",
+      "remaining_weakness": "inherent to the problem",
+      "action_needed": "communicate clearly, never imply certainty"
+    },
+    {
+      "objection": "'ML beats Elo' is a small 0.508 vs 0.529 Brier edge on one test window",
+      "severity": "MEDIUM",
+      "currently_defended": "yes",
+      "defense_artifact": "ml_validation_report.json (leak-free 3580 matches, Brier+NLL+ECE all better)",
+      "remaining_weakness": "modest edge; single window",
+      "action_needed": "more held-out years"
+    }
+  ]
+}
