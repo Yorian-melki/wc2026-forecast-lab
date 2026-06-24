@@ -89,8 +89,24 @@ config/data/probability change.**
   test** (Negative-Binomial marginals / shared shock), gated by the existing leak-free walk-forward
   backtest. Draws (isotonic) = second. Decision-rule draw hack = rejected (metric-gaming).
 
+## Phase 2B — tail-overdispersion experiment (OFFLINE) · commit `fb739a8` — NEGATIVE but VALUABLE
+NegBin vs Poisson scoreline dist on martj42 2010-2025 (10,555 matches). `NegBin(r=∞)==Poisson==prod
+_build_dc_flat` (15 equivalence tests). **0/27 candidates pass.** Fattening the tail buys only ~4%
+rel improvement on 5+ goals rank while degrading Brier/RPS/NLL/ECE and dropping top-3 coverage — a
+bad trade. **Conclusion: tail overdispersion alone is NOT worth a production change.** Deepest
+insight: scoreline rank and proper calibration are partially in tension. Artifacts:
+`outputs/experiments/2B_tail_dispersion/`, scratch code in `src/wc2026/experimental/nb_scoreline.py`
++ `scripts/exp_tail_dispersion.py` (never imported by app.py). Production files untouched.
+
+## Phase 2C — full weakness & solution research MAP (RESEARCH ONLY) — DONE
+Memo: `docs/PHASE_2C_FULL_MODEL_RESEARCH_MAP.md`. 15 research lenses + full weakness/solution maps.
+Grounded fact: `expected_goals` is **Elo-only** (no market/lineups/style/incentives in μ). Key honest
+findings: draw recall 0/14 ≈ decision-rule artifact; exact top-1 8.3% ≈ near the entropy floor; much
+of the rank weakness is metric-induced (rank ↔ calibration tension); validation rests on n≈4
+tournaments. **Recommended next = NOT a model change.**
+
 ## Next step
-**Phase 2B — OFFLINE EXPERIMENT ONLY: tail overdispersion diagnostic.** Build an offline script that
-re-scores the live-48 + WC backtests under a grid of NegBin dispersion `r` (and μ-cap variants) →
-rank-vs-Brier tradeoff curve. Scratch module only; production model byte-identical & default-off; no
-config/data/probability change shipped. See `NEXT_STEP.md`. (1D-B nav still deferred.)
+**Phase 2D — E1 "Objective & ceiling audit" (OFFLINE, in-repo).** Recompute metrics as proper scores
+with bootstrap CIs on the live-48; estimate the entropy floor by simulating from the model's own λ.
+Goal: separate real weaknesses from metric artifacts and irreducible ceilings BEFORE any model
+experiment. No model/config/data/probability change. See `NEXT_STEP.md`. (1D-B nav still deferred.)

@@ -28,30 +28,38 @@ Read-only analysis off the live 48-match audit. **Diagnosis:** W/D/L signal soli
 recall 0/14 partly a decision-rule artifact**. **Recommendation:** first experiment = offline
 overdispersion / fat-tail scoreline distribution test. No model/config/data/probability change.
 
-## THE NEXT ACTION: Phase 2B — OFFLINE EXPERIMENT ONLY (tail overdispersion diagnostic)
-Build an **offline** diagnostic that re-scores the live-48 + WC backtests under a grid of
-Negative-Binomial dispersion `r` (and μ-cap variants), producing the rank-vs-Brier tradeoff curve.
-**Measure before committing to any production change.**
+## ✅ Phase 2B — tail-overdispersion experiment (OFFLINE) — DONE · commit `fb739a8` — NEGATIVE result
+NegBin vs Poisson on martj42 2010-2025 (10,555 matches). `NegBin(r=∞)==Poisson==prod _build_dc_flat`
+(15 equivalence tests; 607 suite passes). **0/27 candidates pass.** Fattening the tail buys only ~4%
+rel on 5+ goals rank while degrading Brier/RPS/NLL/ECE + dropping top-3 coverage — bad trade.
+**Tail overdispersion alone is NOT worth a production change.** Production files byte-identical.
 
-### Allowed (2B)
-- New offline script (e.g. `scripts/exp_tail_dispersion.py`) + optional `evals/` entry + a results doc.
-- Reuse read-only tooling: `audit_live_scorecard.py`, `run_tournament_walkforward_validation.py`,
-  `run_wc_historical_backtest.py`, `calibrate_mle.py`.
-- Implement the alternative distribution in a **scratch/experimental module**, default OFF.
-- Tests for the new offline code.
+## ✅ Phase 2C — full weakness & solution research MAP (RESEARCH ONLY) — DONE · `docs/PHASE_2C_FULL_MODEL_RESEARCH_MAP.md`
+15 research lenses + full weakness/solution maps. Grounded: `expected_goals` is **Elo-only** (no
+market/lineups/style/incentives in μ). Honest findings: draw recall 0/14 ≈ decision-rule artifact;
+exact top-1 8.3% ≈ entropy floor; much of rank weakness is metric-induced (rank ↔ calibration
+tension); validation rests on n≈4 tournaments. **Best next move = NOT a model change.**
 
-### FORBIDDEN in 2B
-- ❌ No change to the production model path: `src/wc2026/calibrated_elo_model.py` must stay
-  byte-identical (experiment lives in a separate module, default off).
-- ❌ No `data/elo_calibrated_params.json` / `data/model_stack_config.json` / `data/*` change.
-- ❌ No probability / forecast / scorecard-output change shipped to production.
-- ❌ No recalibration written back to production params.
-- ❌ Do not deploy a model change — 2B output is a measured tradeoff curve + report only.
+## THE NEXT ACTION: Phase 2D — E1 "Objective & ceiling audit" (OFFLINE, in-repo)
+Before any model experiment, separate **real** weaknesses from **metric artifacts** and **irreducible
+ceilings**. Recompute all metrics as **proper scores** with **bootstrap CIs** on the live-48; estimate
+the **entropy floor** by simulating exact-score/RPS from the model's OWN λ. Decide which Part-A
+"weaknesses" survive as real before touching the model.
 
-### Deliverable (2B)
-Rank-vs-Brier tradeoff curve over dispersion `r`, scored on live-48 + WC backtests, with the
-pre-registered acceptance gate evaluated. A production change (if justified) is a separate,
-explicitly-approved Phase 2C.
+### Allowed (2D)
+- New offline script (e.g. `scripts/exp_objective_ceiling.py`) + a results doc/report.
+- Reuse read-only tooling (`audit_live_scorecard.py`, backtests) and the scratch `experimental/` pkg.
+- Tests for the new offline code. Bootstrap is read-only resampling of existing results.
+
+### FORBIDDEN in 2D
+- ❌ No production model/scorecard/app change (`calibrated_elo_model.py`, `scorecard.py`, `app.py`
+  byte-identical). ❌ No `data/*` / `configs/*` change. ❌ No probability/forecast change shipped.
+- ❌ No provider fetch / API call / recalibration / deploy. Output = analysis + report only.
+
+### Deliverable (2D)
+A verdict per Part-A weakness: real / metric-induced / at-ceiling, with CIs and the entropy floor.
+Then E2 (market-anchor diagnostic) and E3 (draw calibration) become candidate follow-ups — each its
+own explicitly-approved phase.
 
 ### 1D-B nav — STILL DEFERRED (unchanged)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real
