@@ -22,7 +22,38 @@ Plain-language tooltips for ECE / NLL / ρ / `log_base` / headline Brier + a glo
 (display-only, GREEN LANE). `tests/test_metric_tooltips.py` (6 tests). 592 tests pass. No model /
 config / data change.
 
-## THE NEXT ACTION: NONE APPROVED — awaiting Yorian's decision (1D-B nav still deferred)
+## ✅ Phase 2A — Model improvement planning — DONE · memo `docs/PHASE_2A_MODEL_PLAN.md`
+Read-only analysis off the live 48-match audit. **Diagnosis:** W/D/L signal solid (acc 58.3%, RPS
+0.180 vs 0.229); scoreline **tail too thin** (5+ goals mean rank 18.0 vs ~4) = biggest gap; **draw
+recall 0/14 partly a decision-rule artifact**. **Recommendation:** first experiment = offline
+overdispersion / fat-tail scoreline distribution test. No model/config/data/probability change.
+
+## THE NEXT ACTION: Phase 2B — OFFLINE EXPERIMENT ONLY (tail overdispersion diagnostic)
+Build an **offline** diagnostic that re-scores the live-48 + WC backtests under a grid of
+Negative-Binomial dispersion `r` (and μ-cap variants), producing the rank-vs-Brier tradeoff curve.
+**Measure before committing to any production change.**
+
+### Allowed (2B)
+- New offline script (e.g. `scripts/exp_tail_dispersion.py`) + optional `evals/` entry + a results doc.
+- Reuse read-only tooling: `audit_live_scorecard.py`, `run_tournament_walkforward_validation.py`,
+  `run_wc_historical_backtest.py`, `calibrate_mle.py`.
+- Implement the alternative distribution in a **scratch/experimental module**, default OFF.
+- Tests for the new offline code.
+
+### FORBIDDEN in 2B
+- ❌ No change to the production model path: `src/wc2026/calibrated_elo_model.py` must stay
+  byte-identical (experiment lives in a separate module, default off).
+- ❌ No `data/elo_calibrated_params.json` / `data/model_stack_config.json` / `data/*` change.
+- ❌ No probability / forecast / scorecard-output change shipped to production.
+- ❌ No recalibration written back to production params.
+- ❌ Do not deploy a model change — 2B output is a measured tradeoff curve + report only.
+
+### Deliverable (2B)
+Rank-vs-Brier tradeoff curve over dispersion `r`, scored on live-48 + WC backtests, with the
+pre-registered acceptance gate evaluated. A production change (if justified) is a separate,
+explicitly-approved Phase 2C.
+
+### 1D-B nav — STILL DEFERRED (unchanged)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real
 SR-user/audit report, better Streamlit native nav a11y, or a broader nav redesign) OR an explicit
 Yorian decision to implement Option A/B/C. Until then, do NOT touch the nav. (Background on the

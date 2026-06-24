@@ -78,8 +78,19 @@ tests-only, small display-only UI fixes, accessibility micro-fixes, read-only au
 model/config/data files, secrets/API keys, delete operations, navigation rewrite / `st.radio`
 replacement, broad `app.py` refactor, visible product redesign.
 
+## Phase 2A — Model improvement planning (PLANNING ONLY) — DONE
+Memo at `docs/PHASE_2A_MODEL_PLAN.md`. Read-only analysis off the live 48-match audit. **No model/
+config/data/probability change.**
+- **Diagnosis:** W/D/L signal is **solid** (acc 58.3%, RPS 0.180 vs 0.229 baseline). The scoreline
+  **tail is too thin** (5+ goals mean rank **18.0** vs ~4 for low totals; blowouts mean rank 13.73) —
+  the **biggest model gap**. **Draw recall 0/14 is partly a decision-rule artifact** (`argmax` is
+  structurally never draw under symmetric DC-Poisson; draw *calibration* only mildly low).
+- **Recommendation:** first experiment = **offline overdispersion / fat-tail scoreline distribution
+  test** (Negative-Binomial marginals / shared shock), gated by the existing leak-free walk-forward
+  backtest. Draws (isotonic) = second. Decision-rule draw hack = rejected (metric-gaming).
+
 ## Next step
-**Phase 1D-B planning is DONE** — options memo at `docs/PHASE_1D-B_NAV_PLAN.md` (3 options + risk +
-recommendation). **Recommendation = DEFER** nav implementation (proper fix = RED-LINE rewrite; cheap
-ARIA overlay = unverifiable). No approved implementation action right now; nav stays `st.radio`
-untouched until Yorian picks a trigger/option. See `NEXT_STEP.md`.
+**Phase 2B — OFFLINE EXPERIMENT ONLY: tail overdispersion diagnostic.** Build an offline script that
+re-scores the live-48 + WC backtests under a grid of NegBin dispersion `r` (and μ-cap variants) →
+rank-vs-Brier tradeoff curve. Scratch module only; production model byte-identical & default-off; no
+config/data/probability change shipped. See `NEXT_STEP.md`. (1D-B nav still deferred.)
