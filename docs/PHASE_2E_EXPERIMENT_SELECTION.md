@@ -9,7 +9,8 @@
 - **2D verdicts:** exact-score top-1/3/5 ≈ irreducible (top-1 ceiling ~12.7%); scoreline rank = diagnostic,
   not a target; draw recall 0/14 = decision-rule artifact. **Real, bounded weaknesses:** (a) high-total/
   blowout *conditional* ranking (5+ real 21.78 vs ceiling 7.03; ~17% of matches), (b) mild draw
-  under-calibration (−3.6pp), (c) mild W/D/L under-confidence (model over-dispersed; in-sample).
+  **over-prediction** (−3.6pp gap; predicted > actual — **[corrected by 2F]**; the live-48 hinted the
+  opposite but was noise), (c) mild W/D/L under-confidence (model over-dispersed; in-sample).
 - **2B lesson:** globally fattening the scoreline tail FAILED (degraded Brier/RPS/NLL/ECE for ~4% rel rank).
   **Do not globally fatten.** Any high-total fix must be *conditional* + gated.
 - **Model facts:** `expected_goals` is Elo-only (no market/lineups/style/incentives in μ). Config already
@@ -32,7 +33,8 @@
 - **Now/defer:** **DEFER** until a conditioning signal is proven (its own cheap kill-test, and/or candidate 4).
 
 ### 2. Draw probability calibration
-- **Target:** the −3.6pp draw under-calibration (confirmed real, mild).
+- **Target:** the −3.6pp draw mis-calibration (mild). **[2F UPDATE]** the direction is OVER-prediction,
+  not under; and 2F found A/B do NOT pass the proper-score gate — this candidate is now CLOSED.
 - **Upside:** SMALL but clean and proper-score-relevant (drawn matches ≈ 22%); modest RPS/NLL gain.
 - **Risk to RPS/Brier/NLL/ECE:** **LOW-MED.** A monotone draw-mass recalibration is gentle; main risk is
   over-shifting and the MC champion knock-on (W/D/L feeds the tournament sim) — both checkable.

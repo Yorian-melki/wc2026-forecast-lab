@@ -5,6 +5,10 @@
 > Principle: **our strength is knowing our weaknesses.** Our failure mode is jumping from one dead
 > hypothesis to the next plausible one (Phase 2B was exactly that risk). This map exists to stop that.
 > Brutally honest by design. Optimised for *eliminating* bad paths, not sounding clever.
+>
+> **[Corrected by Phase 2F]** Where this map says draw *probabilities* are "mildly low" (under-predicted,
+> from the noisy live-48 buckets): on robust historical data the model mildly **OVER-predicts** draws,
+> and 2F showed calibration does not pass the proper-score gate. The live-48 draw signal is not reliable.
 
 ---
 

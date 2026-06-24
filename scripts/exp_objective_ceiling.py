@@ -249,7 +249,7 @@ def write_report(mdf, bdf, draw_recall, draw_pred_rate, draw_calib_gap, small, A
         "draw recall under this decision rule is ~0. **Draw recall 0/14 is a decision-rule artifact, not a "
         "probability failure.**",
         f"- Draw calibration gap (actual draw rate − mean predicted P(draw)) = **{draw_calib_gap:+.3f}** "
-        "→ the size of the only genuinely model-side draw issue (mild under-prediction).",
+        "→ a negative gap means the model mildly OVER-predicts draws (predicted > actual). [2F confirmed.]",
         "",
         "## How noisy is an n=48 audit? (resample-48-from-history, 95% spread)",
         f"- exact_top1: [{small['exact_top1'][0]:.3f}, {small['exact_top1'][1]:.3f}]",
@@ -283,8 +283,9 @@ def write_report(mdf, bdf, draw_recall, draw_pred_rate, draw_calib_gap, small, A
         "5+ goals), the naive fix (fatter marginal tail) backfired in 2B, and optimising rank trades against W/D/L "
         "calibration. **Keep scoreline rank as a DIAGNOSTIC, not a target.** Any real attempt must be a *conditional* "
         "lever for high-total matches, gated on not regressing the dominant low-total games or W/D/L scores.",
-        "- **Draws: recall 0/14 is a decision-rule artifact** (ceiling recall ≈ 0 under argmax). The only genuine "
-        "model-side draw issue is mild under-prediction (calibration gap ≈ −3.6pp).",
+        "- **Draws: recall 0/14 is a decision-rule artifact** (ceiling recall ≈ 0 under argmax). The mild "
+        "model-side draw issue is OVER-prediction (negative gap: predicted > actual); 2F showed correcting it "
+        "does not pass the proper-score gate.",
         "- **The live-48 audit is very noisy.** At n=48, exact_top1's 95% spread is ~[0.04, 0.21] and outcome_acc "
         "~[0.44, 0.73]; the live point values all sit inside. Do not over-read single live-48 numbers.",
     ]

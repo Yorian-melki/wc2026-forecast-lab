@@ -47,8 +47,10 @@ Report: `outputs/experiments/2D_objective_ceiling/`. **Key decisions (validated 
   minority high-total bucket; optimizing it trades against W/D/L calibration).
 - Draw recall 0/14 → **decision-rule artifact** (ceiling recall ≈ 0 under argmax).
 - **Real remaining weaknesses:** (a) high-total/blowout **conditional** ranking (5+ real 21.78 vs
-  ceiling 7.03, ~17% of matches), (b) mild **draw under-calibration** (≈ −3.6pp), (c) mild **W/D/L
-  under-confidence** (over-dispersed; sharpening fights champion temperature).
+  ceiling 7.03, ~17% of matches), (b) mild **draw OVER-prediction** on robust historical data
+  (predicted ≈0.255 > actual ≈0.219; −3.6pp gap) — **[corrected by 2F]**; the live-48 hinted
+  under-prediction but was noise, (c) mild **W/D/L under-confidence** (over-dispersed; sharpening
+  fights champion temperature).
 - **Phase 2B fat-tail FAILED → do NOT globally fatten the distribution.** Any high-total fix must be
   a *conditional* lever, gated on not regressing low-total games or W/D/L.
 
@@ -59,23 +61,33 @@ mean (no proven signal; gate behind feature kill-test/market data), market ancho
 gates the conditional-mean path), temperature sharpening (diagnostic-only sweep; shipping reopens the
 champion over-concentration tension). **Reporting-only = parallel, zero-risk, always-worth-doing.**
 
-## THE NEXT ACTION: Phase 2F — Draw calibration experiment (OFFLINE ONLY) — pending approval
-Build `scripts/exp_draw_calibration.py` (scratch `experimental/` pkg, never imported by app). Fit a
-1–2 param **draw-mass / isotonic** calibrator on a **walk-forward / time-blocked train split**;
-evaluate OOS.
+## ✅ Phase 2F — draw calibration experiment (OFFLINE) — DONE · commit `3cc31b6` — INCONCLUSIVE (not shipped)
+Calibrators A (γ) + B (isotonic), walk-forward OOS on martj42 2010-2025 (pooled n=5,713; 7 tests; full
+suite 620). Report: `outputs/experiments/2F_draw_calibration/`.
+- **Sign correction:** fitted **γ ≈ 0.84 (<1)** ⇒ model mildly **OVER-predicts** draws on robust
+  historical data; the earlier "under-calibration" framing (from the noisy live-48) was wrong direction.
+- A/B slightly improve OOS RPS/Brier/ECE but **NLL gain is within noise** → pre-registered gate NOT met;
+  W/D/L mass shift (~4–5%) also exceeds the 3% champion proxy. **INCONCLUSIVE/FAIL for both.**
+- **Decisions:** do NOT ship draw calibration · do NOT treat draw recall as a model target · do NOT
+  pursue draw calibration further unless new evidence appears.
 
-### Allowed (2F)
-- New offline script + tests; outputs under `outputs/experiments/2F_draw_calibration/`.
-- Reuse read-only historical data + production params + the scratch `experimental/` distributions.
+## THE NEXT ACTION: Phase 2G — NEXT EXPERIMENT REASSESSMENT (ANALYSIS ONLY)
+**2B (fat tail) and 2F (draw calibration) both failed to produce a shippable change.** Reassess the
+remaining experiment space WITHOUT jumping to the next plausible idea. **No implementation.** For EACH
+candidate produce: weakness targeted · evidence FOR · evidence AGAINST · data needed · kill-test · risk
+to RPS/Brier/NLL/ECE/champion calibration · test-now-or-defer. Then a ranked recommendation. Output =
+`docs/PHASE_2G_EXPERIMENT_REASSESSMENT.md`.
 
-### FORBIDDEN in 2F
-- ❌ Production `calibrated_elo_model.py` / `scorecard.py` / `app.py` change (byte-identical).
-- ❌ `data/*` / `configs/*` change. ❌ recalibration written back. ❌ provider fetch / API / deploy.
+### Candidates to compare (2G)
+1. **W/D/L sharpening / temperature diagnostic** (targets W/D/L under-confidence; ⚠ champion tradeoff).
+2. **Market-total benchmark / anchor feasibility** (external signal + validation; data-acquisition Q).
+3. **Conditional high-total / blowout mean adjustment** (the one real ranking gap; needs a signal).
+4. **Reporting-only / model honesty improvements** (demote rank/exact to diagnostics; surface proper scores).
+5. **No model change** (accept the model is near its ceiling; stop spending here).
 
-### Acceptance gate (2F, pre-registered)
-Accept the calibrator ONLY if **RPS AND NLL improve OOS** on the walk-forward split, **AND** ECE,
-outcome accuracy, and **champion-level concentration/Brier do NOT regress** beyond noise (W/D/L feeds
-the MC). Otherwise reject cleanly. Shipping (if it passes) = a separate explicitly-approved Phase 2G.
+### FORBIDDEN in 2G
+- ❌ No model code change, ❌ no config/data change, ❌ no recalibration, ❌ no provider fetch,
+  ❌ no implementation. 2G is a written reassessment only.
 
 ### 1D-B nav — STILL DEFERRED (unchanged)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real

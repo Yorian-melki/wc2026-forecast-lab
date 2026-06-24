@@ -116,8 +116,10 @@ Analytic self-sim ceiling (cross-checked vs Monte-Carlo, 6 tests; 613 suite pass
 - **Draw recall 0/14 → decision-rule artifact** (ceiling recall ≈ 0 under argmax). Not a prob failure.
 - **Real remaining weaknesses (bounded, entangled):** (a) high-total/blowout **conditional** ranking
   (5+ goals real rank 21.78 vs ceiling 7.03 = genuine mis-specification, but ~17% of matches),
-  (b) mild **draw under-calibration** (actual − predicted P(draw) ≈ −3.6pp), (c) mild **W/D/L
-  under-confidence** (REAL beats self-sim ⇒ over-dispersed; sharpening fights champion temperature).
+  (b) mild **draw OVER-prediction** on robust historical data (predicted ≈0.255 > actual ≈0.219;
+  gap −3.6pp) — the live-48 hinted the *opposite* (under-prediction) but was noise; **[corrected by 2F]**,
+  (c) mild **W/D/L under-confidence** (REAL beats self-sim ⇒ over-dispersed; sharpening fights champion
+  temperature).
 - **Phase 2B lesson stands: globally fattening the distribution FAILED — do NOT do it.** Any
   high-total fix must be a *conditional* lever, gated on not regressing low-total games or W/D/L.
 - The **live-48 audit is very noisy** (n=48: exact_top1 95% spread ~[0.04,0.21]); don't over-read it.
@@ -133,9 +135,23 @@ feature kill-test and/or market data), market-total anchor (data-blocked + fetch
 — shipping it reopens the champion over-concentration tension). **Reporting-only = parallel, zero-risk,
 always-worth-doing** but it's not a model experiment.
 
+## Phase 2F — draw calibration experiment (OFFLINE) · commit `3cc31b6` — DONE, INCONCLUSIVE (not shipped)
+Calibrators A (single γ) + B (isotonic), walk-forward OOS on martj42 2010-2025 (pooled n=5,713).
+7 calibrator tests; full suite 620 passed. Report: `outputs/experiments/2F_draw_calibration/`.
+- **Sign correction:** fitted **γ ≈ 0.84 (<1)** every fold ⇒ on robust historical data the model mildly
+  **OVER-predicts** draws (predicted ≈0.255 > actual ≈0.219). The earlier "draw under-calibration"
+  framing (from the noisy live-48 buckets) was **wrong direction** — live-48 draw signal is not reliable.
+- **Result:** A and B slightly improve OOS **RPS/Brier/ECE**, but the **NLL gain is WITHIN bootstrap
+  noise** ⇒ the pre-registered "RPS *and* NLL beyond noise" gate is **NOT met**; W/D/L mass shift
+  (~4–5%) also exceeds the 3% champion proxy. **Verdict: INCONCLUSIVE/FAIL for both.**
+- **Decisions:** **do NOT ship draw calibration**; **do NOT treat draw recall as a model target**;
+  **do NOT pursue draw calibration further unless new evidence appears.**
+- Pattern note: **2B (fat tail) and 2F (draw calibration) both failed to produce a shippable change.**
+
 ## Next step
-**Phase 2F — Draw calibration experiment (OFFLINE ONLY)** — when approved. Build
-`scripts/exp_draw_calibration.py` in the scratch `experimental/` pkg; fit a 1–2 param draw-mass /
-isotonic calibrator on a walk-forward train split; accept only on OOS proper-score improvement with
-champion guardrail. Production model byte-identical, default off, no ship. See `NEXT_STEP.md`.
-(1D-B nav still deferred.)
+**Phase 2G — NEXT EXPERIMENT REASSESSMENT (ANALYSIS ONLY).** After two failed experiments, reassess
+the remaining space WITHOUT jumping to the next plausible idea. Compare: (1) W/D/L sharpening /
+temperature diagnostic, (2) market-total benchmark/anchor feasibility, (3) conditional high-total mean,
+(4) reporting-only / honesty, (5) no model change — each on weakness targeted · evidence for · evidence
+against · data needed · kill-test · risk to RPS/Brier/NLL/ECE/champion · test-now-or-defer. No
+implementation. See `NEXT_STEP.md`. (1D-B nav still deferred.)

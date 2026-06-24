@@ -4,6 +4,10 @@
 > the official live 48-match audit `outputs/audit/live_metric_snapshots/2026-06-24_14-54.json`
 > (model `v0.6.93-ml20-dc`). Baseline tag `model-baseline-v0.6.93-ml20-dc`.
 > Status: planning complete · next = **Phase 2B offline experiment** (tail overdispersion diagnostic).
+>
+> **[Corrected by Phase 2F]** Where this doc says draws are "under-weighted/under-predicted" (from the
+> noisy live-48 buckets): on robust historical data the model mildly **OVER-predicts** draws, and 2F
+> showed calibrating them does not pass the proper-score gate. The live-48 draw signal is not reliable.
 
 ## 1. Current model architecture
 - **Elo backbone** — per-team Elos (`data/elo_calibrated_params.json`), fit on martj42 competitive

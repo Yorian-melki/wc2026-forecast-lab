@@ -27,7 +27,7 @@ Set: martj42 competitive 2010-2025, **10,555 matches** (production grid g=8, μ�
 
 ## Draws
 - Draw recall under the argmax rule: REAL **0.000**. The model predicts 'draw' as the modal W/D/L outcome only **0.00%** of the time *at all* → the CEILING for draw recall under this decision rule is ~0. **Draw recall 0/14 is a decision-rule artifact, not a probability failure.**
-- Draw calibration gap (actual draw rate − mean predicted P(draw)) = **-0.036** → the size of the only genuinely model-side draw issue (mild under-prediction).
+- Draw calibration gap (actual draw rate − mean predicted P(draw)) = **-0.036** → the model mildly **OVER-predicts** draws (predicted ≈0.255 > actual ≈0.219). **[Corrected by Phase 2F]**: a negative gap means too many draws predicted; an earlier draft mislabelled this "under-prediction". The live-48 hinted the opposite but was noise.
 
 ## How noisy is an n=48 audit? (resample-48-from-history, 95% spread)
 - exact_top1: [0.042, 0.208]
@@ -46,5 +46,5 @@ Set: martj42 competitive 2010-2025, **10,555 matches** (production grid g=8, μ�
 - **Exact-score top-1: essentially irreducible.** Even a perfectly-specified model of this family tops out at ~12.7% (ceiling), barely above the 10.9% you get by always guessing 1-0. REAL 11.8% sits between. The entire achievable range above climatology is ~1.8pp. **Not worth chasing.**
 - **Exact-score top-3 / top-5: AT CEILING** (REAL ≈ self-sim). No recoverable signal. Diagnostic only.
 - **Scoreline rank: aggregate is ~1 rank above ceiling (8.08 vs 7.05) — but it splits by total goals.** Low-total games rank BETTER than ceiling (0-1: 3.33 vs 7.05); high-total games rank FAR WORSE (5+: 21.78 vs 7.03; blowout 17.21 vs 7.03). So the **high-total weakness is REAL** (genuine mis-specification for those matches, NOT purely a metric artifact) — but it affects a minority (~17% are 5+ goals), the naive fix (fatter marginal tail) backfired in 2B, and optimising rank trades against W/D/L calibration. **Keep scoreline rank as a DIAGNOSTIC, not a target.** Any real attempt must be a *conditional* lever for high-total matches, gated on not regressing the dominant low-total games or W/D/L scores.
-- **Draws: recall 0/14 is a decision-rule artifact** (ceiling recall ≈ 0 under argmax). The only genuine model-side draw issue is mild under-prediction (calibration gap ≈ −3.6pp).
+- **Draws: recall 0/14 is a decision-rule artifact** (ceiling recall ≈ 0 under argmax). The mild model-side draw issue is **OVER-prediction** (gap ≈ −3.6pp: predicted > actual) **[corrected by 2F]** — and Phase 2F showed even correcting it does not pass the proper-score gate.
 - **The live-48 audit is very noisy.** At n=48, exact_top1's 95% spread is ~[0.04, 0.21] and outcome_acc ~[0.44, 0.73]; the live point values all sit inside. Do not over-read single live-48 numbers.
