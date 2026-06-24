@@ -11,8 +11,19 @@ mobile safe-area / `max-height` / `overflow` / `role="region"`; `tests/test_a11y
 HTTP 200 post-deploy. Contrast (already AA) and typography (already consolidated) deliberately left
 untouched. See HANDOFF.md "Completed phases".
 
-## THE NEXT ACTION: Phase 1D-B — PLANNING ONLY (no implementation)
+## ✅ Phase 1D-B PLANNING — DONE · memo `docs/PHASE_1D-B_NAV_PLAN.md`
+Read-only investigation complete. 3 options analysed (A: ARIA overlay / B: `st.navigation` migration /
+C: custom button nav). **Recommendation = DEFER implementation** — proper fix (B) is a RED-LINE nav
+rewrite disproportionate to an "announced-wrong" (not unusable) nit; cheap fix (A) is unverifiable
+a11y theater. No code touched; `st.radio` + `_goto`/`page_nav`/`dna_sel` plumbing untouched.
 
+## THE NEXT ACTION: NONE APPROVED — awaiting Yorian's decision on 1D-B
+No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real
+SR-user/audit report, better Streamlit native nav a11y, or a broader nav redesign) OR an explicit
+Yorian decision to implement Option A/B/C. Until then, do NOT touch the nav. (Background on the
+original investigation request kept below for context.)
+
+### (archived) original 1D-B planning brief
 Investigate the sidebar navigation accessibility issue Talos flagged (HIGH — "navigation exposed as
 radio controls in the a11y tree"). The nav is `st.radio(..., key="page_nav")` in `app.py` (search
 `key="page_nav"`), wired to `_goto` / `page_nav` cross-page plumbing.

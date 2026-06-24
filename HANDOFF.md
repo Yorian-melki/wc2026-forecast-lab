@@ -72,7 +72,7 @@ model/config/data files, secrets/API keys, delete operations, navigation rewrite
 replacement, broad `app.py` refactor, visible product redesign.
 
 ## Next step
-**Phase 1D-B — PLANNING ONLY.** Investigate sidebar navigation (`st.radio`, `key="page_nav"`)
-accessibility options. Read-only investigation, propose 2–3 options, estimate risk, recommend
-whether to defer. **No implementation, no `st.radio` replacement, no `app.py` changes, no
-model/config/data changes.** See `NEXT_STEP.md`.
+**Phase 1D-B planning is DONE** — options memo at `docs/PHASE_1D-B_NAV_PLAN.md` (3 options + risk +
+recommendation). **Recommendation = DEFER** nav implementation (proper fix = RED-LINE rewrite; cheap
+ARIA overlay = unverifiable). No approved implementation action right now; nav stays `st.radio`
+untouched until Yorian picks a trigger/option. See `NEXT_STEP.md`.
