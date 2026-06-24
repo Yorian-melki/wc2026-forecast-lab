@@ -372,6 +372,7 @@ TXT = {
         "empty_no_form": "No form data available.",
         "empty_no_squad": "No squad attribute data.",
         "empty_no_pair": "No pair with 5+ meetings found in this selection.",
+        "mv_title": "Model version & changelog", "mv_readonly": "Read-only — params shown live from config; model math unchanged",
         # Model Lab
         "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
         "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
@@ -473,6 +474,7 @@ TXT = {
         "empty_no_form": "Pas de données de forme disponibles.",
         "empty_no_squad": "Pas de données d'attributs d'effectif.",
         "empty_no_pair": "Aucune paire avec 5+ confrontations dans cette sélection.",
+        "mv_title": "Version du modèle & changelog", "mv_readonly": "Lecture seule — params lus en direct du config ; math du modèle inchangé",
         "ml_eyebrow": "Méthodologie", "ml_title": "Laboratoire du modèle",
         "ml_desc": "Transparence mathématique complète, limites assumées, et un audit de maturité auto-évalué.",
         "ml_hint": "💡 La section \"on montre nos calculs\" — les maths et les limites assumées derrière la prévision. Curieux ? Plonge. Pressé ? Tu peux passer.",
@@ -2376,6 +2378,20 @@ elif page == "🧮 Model Lab":
     page_header("ml_eyebrow", "ml_title", "ml_desc")
     takeaway(t("ml_takeaway"))
     st.caption(t("ml_hint"))
+
+    # ── Read-only model version & changelog (Phase 1A versioning infra; no math/probability change) ──
+    from wc2026.version import get_manifest as _vmani, get_active_config as _vcfg, get_changelog as _vchg
+    _mv, _ac = _vmani(), _vcfg()
+    with st.expander(f"🏷️ {t('mv_title')} — `{_mv.get('model_version', '?')}`", expanded=False):
+        st.markdown(
+            f"**Engine:** {_mv.get('engine', '—')}  \n"
+            f"**Params (live):** β = {_ac.get('beta_elo', '—')} · ρ = {_ac.get('rho', '—')} · "
+            f"log_base = {_ac.get('log_base', '—')} · ML weight = {_ac.get('ml_weight', '—')} · "
+            f"xG-live = {_ac.get('use_xg_live_adjustment', '—')}  \n"
+            f"<span style='color:{MUTED};font-size:12px'>{t('mv_readonly')} · baseline tag "
+            f"<code>{_mv.get('baseline_git_tag', '—')}</code></span>", unsafe_allow_html=True)
+        st.markdown("---")
+        st.markdown(_vchg() or "_changelog unavailable_")
 
     t1, t2, t3, t4, t5 = st.tabs(
         ["📐 Mathematics", "📊 Ablation", "🔬 Calibration", "⚠️ Limitations", "📋 Maturity Score"])

@@ -1,0 +1,12 @@
+{
+  "model_version": "v0.6.93-ml20-dc",
+  "engine": "Calibrated Elo → Dixon-Coles Poisson → ML 1X2 ensemble @0.20 → 100k Monte Carlo",
+  "established": "2026-06-24",
+  "baseline_git_tag": "model-baseline-v0.6.93-ml20-dc",
+  "config_file": "data/model_stack_config.json",
+  "params_file": "data/elo_calibrated_params.json",
+  "archived_config": "configs/archive/v0.6.93-ml20-dc__model_stack_config.json",
+  "archived_params": "configs/archive/v0.6.93-ml20-dc__elo_calibrated_params.json",
+  "changelog": "CHANGELOG_MODEL.md",
+  "note": "Read-only metadata layer (Phase 1A). The model math, parameters, probabilities and forecast generation are UNCHANGED by the versioning infrastructure."
+}

@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-06-14T00:00:00+00:00",
+  "use_xg_live_adjustment": true,
+  "use_ml_match_model": true,
+  "use_isotonic_calibrator": false,
+  "ensemble": {
+    "elo_calibrated_weight": 0.8,
+    "ml_logistic_weight": 0.2
+  },
+  "ml_weight_mode": "fixed",
+  "ml_gap_scale": 300.0,
+  "ml_weight_mode_source": "expanded_tournament_validation (4 WCs 2010/14/18/22): dynamic gap-decaying weight HALVES worst-case upset regret (0.0129->0.0061) but aggregate Brier is within MC noise (0.02516 vs 0.02529). Kept FIXED as default; dynamic available via ml_weight_mode='dynamic'.",
+  "ml_weight_source": "tournament_walkforward_validation (WC2018+WC2022): chosen 0.20 by robustness rule. Raw best aggregate Brier was 0.50 but flagged overconcentrated (hurts WC2018 upset >3%). 0.20 improves aggregate +1.49% vs Elo-only with worst-case regret <=3%.",
+  "rollback_to_score_only": true,
+  "notes": "Match-level gate accepted ML (Brier 0.508<0.529). Tournament walk-forward then set the WEIGHT to 0.20 (down from the match-gate's 0.50) for upset robustness. use_ml_match_model=false fully reverts to Elo-only."
+}

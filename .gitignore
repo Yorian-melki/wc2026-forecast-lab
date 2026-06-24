@@ -63,3 +63,5 @@ data/*.bak
 !outputs/audit/data_lineage_map.json
 !outputs/audit/reviewer_attack_audit.json
 !outputs/audit/artifact_consistency_audit.json
+/handoff/
+/outputs/forecast_log/
