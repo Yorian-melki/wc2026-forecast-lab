@@ -71,23 +71,36 @@ suite 620). Report: `outputs/experiments/2F_draw_calibration/`.
 - **Decisions:** do NOT ship draw calibration · do NOT treat draw recall as a model target · do NOT
   pursue draw calibration further unless new evidence appears.
 
-## THE NEXT ACTION: Phase 2G — NEXT EXPERIMENT REASSESSMENT (ANALYSIS ONLY)
-**2B (fat tail) and 2F (draw calibration) both failed to produce a shippable change.** Reassess the
-remaining experiment space WITHOUT jumping to the next plausible idea. **No implementation.** For EACH
-candidate produce: weakness targeted · evidence FOR · evidence AGAINST · data needed · kill-test · risk
-to RPS/Brier/NLL/ECE/champion calibration · test-now-or-defer. Then a ranked recommendation. Output =
-`docs/PHASE_2G_EXPERIMENT_REASSESSMENT.md`.
+## ✅ Phase 2G — next experiment reassessment (ANALYSIS ONLY) — DONE · `docs/PHASE_2G_EXPERIMENT_REASSESSMENT.md`
+**Verdict: another model-MATH experiment is NOT justified now.** 2D ceiling audit + 2B & 2F failures ⇒
+the model is near its floor; the only real remaining signals are data-blocked (market→conditional
+high-total), champion-entangled (temperature), or aimed at a demoted diagnostic (rank).
+- **Ranked:** (1) **Reporting-only / honesty — DO NEXT** (GREEN-LANE display, zero model risk).
+  (2) **Freeze the model math** ("no change" stance). (3) Optional cheap offline diagnostics to *close*
+  open paths with evidence: 3a high-total feature→total-goals OOS regression, 3b temperature/champion
+  frontier sweep. (4) Defer market data acquisition (unlock for conditional high-total).
+- **Eliminated:** draw calibration (2F), global distribution shape (2B), exact-score/rank as targets (2D).
+- **"No model change" is the strongest posture for the math**, paired with reporting improvements.
 
-### Candidates to compare (2G)
-1. **W/D/L sharpening / temperature diagnostic** (targets W/D/L under-confidence; ⚠ champion tradeoff).
-2. **Market-total benchmark / anchor feasibility** (external signal + validation; data-acquisition Q).
-3. **Conditional high-total / blowout mean adjustment** (the one real ranking gap; needs a signal).
-4. **Reporting-only / model honesty improvements** (demote rank/exact to diagnostics; surface proper scores).
-5. **No model change** (accept the model is near its ceiling; stop spending here).
+## THE NEXT ACTION: Phase 2H — Reporting / model-honesty improvements (DESIGN FIRST)
+Operationalise the 2D/2G conclusions in the UI: surface **proper scores** (RPS/Brier/NLL) + CIs + ceiling
+context; **demote scoreline rank & exact-score to labelled diagnostics** (not targets); honest copy that
+exact-score is near-irreducible and that the model is near its achievable ceiling. **Display-only, GREEN
+LANE (like Phase 1E).** Plan + show exact files/copy BEFORE editing; get approval; then implement → test →
+commit → push.
 
-### FORBIDDEN in 2G
-- ❌ No model code change, ❌ no config/data change, ❌ no recalibration, ❌ no provider fetch,
-  ❌ no implementation. 2G is a written reassessment only.
+### Allowed (2H)
+- Display/markup/copy in `app.py` (and `src/wc2026/web_analytics.py` markup if needed) — like Phase 1E.
+- New `tests/test_*.py` for any added display helpers. Reuse the 2D/2F outputs as reference content.
+
+### FORBIDDEN in 2H
+- ❌ No model math / probability / forecast / scorecard-calculation change.
+- ❌ No `data/*` / `configs/*` change. ❌ No nav rewrite / `st.radio` change. ❌ No layout redesign.
+
+### Optional (separate, only if requested) — evidence-closing diagnostics
+- **3a:** offline OOS regression of actual total goals on in-repo pre-match features → close/open the
+  conditional-high-total path. **3b:** offline temperature/champion frontier sweep (diagnostic-only).
+  Both scratch `experimental/`, no production change.
 
 ### 1D-B nav — STILL DEFERRED (unchanged)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real

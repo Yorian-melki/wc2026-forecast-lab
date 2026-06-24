@@ -148,10 +148,22 @@ Calibrators A (single γ) + B (isotonic), walk-forward OOS on martj42 2010-2025 
   **do NOT pursue draw calibration further unless new evidence appears.**
 - Pattern note: **2B (fat tail) and 2F (draw calibration) both failed to produce a shippable change.**
 
+## Phase 2G — next experiment reassessment (ANALYSIS ONLY) — DONE
+Memo: `docs/PHASE_2G_EXPERIMENT_REASSESSMENT.md`. **Verdict: another model-MATH experiment is NOT
+justified now.** Evidence: 2D ceiling audit (model near its floor) + 2B and 2F both failed; the only
+real remaining signals are data-blocked (market→conditional high-total) or champion-entangled
+(temperature) or aim at a demoted diagnostic (rank).
+- **Eliminated:** draw calibration (2F), global distribution shape (2B), optimising exact-score/rank as
+  targets (2D).
+- **Ranked recommendation:** (1) **Reporting-only / honesty — DO NEXT** (GREEN-LANE display; zero model
+  risk; operationalises 2D). (2) **Freeze the model math** (adopt "no change" as the stance). (3) Optional
+  cheap offline diagnostics to *close* open paths with evidence: 3a high-total feature→total-goals OOS
+  regression (kill-test for conditional high-total), 3b temperature/champion frontier sweep. (4) Defer
+  market data acquisition (separate data decision; unlock for conditional high-total).
+- **"No model change" is now the strongest posture for the math** — paired with reporting improvements.
+
 ## Next step
-**Phase 2G — NEXT EXPERIMENT REASSESSMENT (ANALYSIS ONLY).** After two failed experiments, reassess
-the remaining space WITHOUT jumping to the next plausible idea. Compare: (1) W/D/L sharpening /
-temperature diagnostic, (2) market-total benchmark/anchor feasibility, (3) conditional high-total mean,
-(4) reporting-only / honesty, (5) no model change — each on weakness targeted · evidence for · evidence
-against · data needed · kill-test · risk to RPS/Brier/NLL/ECE/champion · test-now-or-defer. No
-implementation. See `NEXT_STEP.md`. (1D-B nav still deferred.)
+**Phase 2H — Reporting / model-honesty improvements (DESIGN FIRST).** Surface proper scores (RPS/Brier/
+NLL) + CIs + ceiling context in-app; demote scoreline rank & exact-score to *labelled diagnostics*; honest
+copy that exact-score is near-irreducible. Display-only (GREEN LANE, like Phase 1E) — **no model/config/
+data/probability change.** Plan + show files before editing. See `NEXT_STEP.md`. (1D-B nav still deferred.)
