@@ -4,76 +4,55 @@
 > Do not start any later phase. Plan + show files/commands + get approval BEFORE editing; do not
 > push until explicitly approved.
 
-## THE NEXT ACTION: Phase 1D-A only — low-risk accessibility / UI polish
+## ✅ Phase 1D-A — DONE & PUSHED · commit `37a743f`
+Low-risk display-only a11y polish: invisible utility iframes labelled + `aria-hidden`; cookie banner
+mobile safe-area / `max-height` / `overflow` / `role="region"`; `tests/test_a11y_iframe_consent.py`
+(5 tests). 586 tests pass. Model/config/forecast/scorecard/data byte-identical to baseline. Site
+HTTP 200 post-deploy. Contrast (already AA) and typography (already consolidated) deliberately left
+untouched. See HANDOFF.md "Completed phases".
 
-Display/markup-only accessibility fixes from the Talos audit
-(`handoff/wc2026_claude_code_handoff_v3/12_external_audits/TALOS_UI_UX_REPORT.md`) that do NOT
-restructure navigation and do NOT touch the model.
+## THE NEXT ACTION: Phase 1D-B — PLANNING ONLY (no implementation)
 
-### In scope (1D-A) — pick from these only
-1. **Iframe title** — the live spotlight / analytics `components.html` iframe is exposed as
-   "st.iframe". Give it a descriptive `title` (e.g. "WC2026 live dashboard") or hide decorative
-   iframes from the a11y tree.
-2. **Contrast tokens** — lift muted/teal microcopy + badge colors toward WCAG AA (≥4.5:1 for small
-   text) via the existing CSS variables. No layout change.
-3. **Cookie consent banner** — semantic `<button>`s, non-obstructive on mobile (safe-area), respect
-   reduced motion. (Find it first; it's injected by the analytics/consent code.)
-4. **Typography consolidation** — one primary UI font; reserve JetBrains Mono for code/figures only;
-   no accidental monospace in prose. Centralize in CSS tokens.
-5. (Optional, if trivial & display-only) **beginner metric tooltips** via `help=`/expanders for
-   RPS / ECE / NLL / λ / β / entropy / Dixon-Coles.
+Investigate the sidebar navigation accessibility issue Talos flagged (HIGH — "navigation exposed as
+radio controls in the a11y tree"). The nav is `st.radio(..., key="page_nav")` in `app.py` (search
+`key="page_nav"`), wired to `_goto` / `page_nav` cross-page plumbing.
 
-### EXPLICITLY FORBIDDEN in 1D-A (do NOT do these now)
-- ❌ **Navigation rewrite / `st.radio` replacement.** The sidebar nav is `st.radio(..., key="page_nav")`
-  at `app.py` (search `key="page_nav"`). Talos flags its radio semantics, BUT replacing it
-  (st.page_link / st.tabs / custom component) is broad + risky + would touch the `_goto`/`page_nav`
-  cross-page navigation plumbing. **Deferred to a later, separately-approved phase (1D-B).** Leave
-  the nav exactly as is.
-- ❌ Any model math / probabilities / forecast generation / scorecard calculation change.
-- ❌ Any change to config/params/data files.
-- ❌ Visual redesign / layout restructure beyond a11y tokens.
-- ❌ Pushing without explicit approval.
+### Allowed (1D-B planning)
+- **Read-only investigation** of `app.py` nav (`st.radio`, `key="page_nav"`, `_goto`, session-state
+  plumbing) and of the Streamlit a11y options (st.page_link, st.tabs, st.navigation/st.Page, custom
+  HTML nav component, injected ARIA attributes).
+- **Propose 2–3 options** to improve nav screen-reader semantics (announce "navigation" + link/button
+  names + `aria-current`), each with what it touches and its blast radius.
+- **Estimate risk** per option (does it touch the `_goto`/`page_nav` plumbing? deep-link behaviour?
+  query-params? test impact?).
+- **Recommend** whether to implement now or defer — and if defer, why.
+- Write the plan into `HANDOFF.md` / a new doc; do NOT change app behaviour.
 
-### Allowed files
-- `app.py` — only: the global CSS/style block (contrast & typography tokens), the iframe `title`
-  argument, the cookie-banner markup, optional `help=` tooltips. Display-only edits.
-- New `tests/test_*.py` (e.g. an a11y/contrast or iframe-title smoke test).
-- (If the cookie banner lives in `src/wc2026/web_analytics.py`, that file is allowed **for markup
-  only** — semantic buttons / title — never for model/data logic.)
+### FORBIDDEN in 1D-B planning
+- ❌ No navigation rewrite. ❌ No `st.radio` replacement. ❌ No `app.py` implementation changes.
+- ❌ No model math / probabilities / forecast / scorecard changes.
+- ❌ No config/params/data file changes.
+- ❌ Do not break the existing `_goto` / `page_nav` deep-linking.
 
-### Forbidden files (do not modify)
-`data/model_stack_config.json` · `data/elo_calibrated_params.json` · `data/elo_live_params.json` ·
+### Forbidden files (do not modify for 1D-B)
+`app.py` (no behaviour changes — planning only) · `data/model_stack_config.json` ·
+`data/elo_calibrated_params.json` · `data/elo_live_params.json` ·
 `data/wc2026_live.json` (must stay blob `bbcd3ef82b520034bd51f8fce58d41c49e648271`) ·
-`src/wc2026/calibrated_elo_model.py` · `src/wc2026/scorecard.py` · the `st.radio` nav.
+`src/wc2026/calibrated_elo_model.py` · `src/wc2026/scorecard.py`.
 
-### Tests to run (before commit)
-```
-PYTHONPATH=src .venv/bin/python -m py_compile app.py
-WC2026_DISABLE_PERSIST=1 PYTHONPATH=src .venv/bin/python -m pytest tests/test_no_nan_ui.py -q
-PYTHONPATH=src .venv/bin/python -m pytest tests/ -q        # expect 581+ passed
-# then: confirm model/config/forecast/scorecard == baseline tag, and wc2026_live blob unchanged
-git restore data/wc2026_live.json   # AppTest may mutate it; always restore to bbcd3ef…
-```
+### Deliverable (1D-B planning)
+A written options memo (2–3 options + risk + recommendation). No code. Implementation of the chosen
+option becomes a separate, explicitly-approved Phase 1D-B-impl.
 
-### Risks
-- Streamlit limits DOM control: a11y fixes are best-effort via injected CSS/attributes; some Talos
-  items (esp. nav roles) can't be fully fixed without a custom component → that's why nav is deferred.
-- The countdown/analytics use `st.components.v1.html` (deprecation-warned but works on Streamlit 1.56).
-- Render free tier: ~10s page loads under throttled CPU — not a code bug; don't "fix" by changing logic.
-- AppTest with live keys can write `data/wc2026_live.json` → always `git restore` it.
-
-### Rollback strategy
-- Commit is additive/display-only → `git reset --hard HEAD~1` (if unpushed) or `git revert <sha>`.
-- Model rollback (not relevant to 1D-A): `git checkout model-baseline-v0.6.93-ml20-dc -- <files>`
-  or `cp configs/archive/v0.6.93-ml20-dc__*.json data/…`, then `pytest`.
-
-### Done criteria (1D-A)
-- Targeted a11y items shipped; nav untouched; no raw `nan` regression; `pytest` ≥ 581 passed;
-  model/config/forecast/scorecard byte-identical to baseline; site loads (HTTP 200) after deploy;
-  "probabilities, not predictions" + honesty copy intact.
+### Working protocol (now in effect)
+- **GREEN LANE** (no per-step approval): docs-only, tests-only, small display-only UI fixes, a11y
+  micro-fixes, read-only audit tooling → implement → test → commit → push → report.
+- **RED LINE** (ASK FIRST): model math · probabilities · forecast generation · scorecard calc ·
+  model/config/data files · secrets/API keys · delete ops · nav rewrite / `st.radio` replacement ·
+  broad `app.py` refactor · visible product redesign.
 
 ## What must NOT be inferred from memory (verify from the repo)
-- **Current HEAD / phase / commits** → `git log --oneline -8`, `git tag`. (HEAD at writing: `4429f8f`.)
+- **Current HEAD / phase / commits** → `git log --oneline -8`, `git tag`. (HEAD at writing: `37a743f`.)
 - **Model numbers** (β, ρ, log_base, ML weight, metrics) → read `data/elo_calibrated_params.json`,
   `configs/model_version.json`, `CHANGELOG_MODEL.md`, latest `outputs/audit/live_metric_snapshots/*.json`.
   Do not quote remembered values.

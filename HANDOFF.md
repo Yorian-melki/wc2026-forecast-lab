@@ -40,10 +40,20 @@ priors as measured. Keep all honesty/disclaimer copy.
     `fetch_live_state`). Official snapshot `outputs/audit/live_metric_snapshots/2026-06-24_14-54.json`
     = **48 matches** (outcome 58.3%, RPS 0.180 vs 0.229, exact top-1 8.3% / top-3 29.2%, avg rank
     7.98, **draw recall 0.0**). Tests: deterministic, in-bounds, read-only.
-- **Phase 1C — no-raw-`nan` / missing-data display guards** · commit `4429f8f` (pushed, = current HEAD).
+- **Phase 1C — no-raw-`nan` / missing-data display guards** · commit `4429f8f` (pushed).
   - `format_optional_number()` helper; Nation DNA squad-DNA shows "Default prior used" / "No provider
     coverage" instead of `nan`; penalty notes hidden when NaN (Nation DNA + Head-to-Head).
   - `tests/test_no_nan_ui.py`: 0 raw `nan` across all 11 pages + all 48 Nation DNA teams.
+- **Phase 1D-A — low-risk a11y polish (display-only)** · commit `37a743f` (pushed, = current HEAD).
+  - Two invisible (`height=0`) utility iframes (analytics shim in `src/wc2026/web_analytics.py`,
+    countdown in `app.py`) now set `window.frameElement` `title` + `aria-hidden`/`tabindex=-1` so
+    screen readers no longer announce a meaningless "st.iframe".
+  - Cookie consent banner (`src/wc2026/web_analytics.py`): mobile `env(safe-area-inset-bottom)` +
+    `max-height:60vh;overflow:auto` (never blankets the screen), `role="region"` + localized
+    `aria-label`. Buttons were already semantic `<button>`s.
+  - `tests/test_a11y_iframe_consent.py`: 5 static source-text assertions.
+  - NOT touched: nav/`st.radio`, contrast tokens (already AA), typography (already consolidated),
+    any model/config/data file. Site healthy (HTTP 200) post-deploy.
 
 ## Model/config/forecast/scorecard files — UNCHANGED through 1A–1C
 `data/model_stack_config.json`, `data/elo_calibrated_params.json`, `data/elo_live_params.json`,
@@ -52,8 +62,17 @@ baseline tag `model-baseline-v0.6.93-ml20-dc`. `data/wc2026_live.json` stays at 
 `bbcd3ef82b520034bd51f8fce58d41c49e648271`.
 
 ## Latest tests
-**581 passed** (`PYTHONPATH=src .venv/bin/python -m pytest tests/ -q`).
+**586 passed** (`PYTHONPATH=src .venv/bin/python -m pytest tests/ -q`) — 581 baseline + 5 from 1D-A.
+
+## Working protocol (updated)
+**GREEN LANE** (implement → test → commit → push → report, no per-step approval): docs-only,
+tests-only, small display-only UI fixes, accessibility micro-fixes, read-only audit tooling.
+**RED LINE** (ASK FIRST): model math, probabilities, forecast generation, scorecard calculations,
+model/config/data files, secrets/API keys, delete operations, navigation rewrite / `st.radio`
+replacement, broad `app.py` refactor, visible product redesign.
 
 ## Next step
-**Phase 1D-A only** — low-risk accessibility/UI polish. **See `NEXT_STEP.md` for the exact, single
-approved action and its hard constraints.** Do NOT start anything else (no nav rewrite, no model math).
+**Phase 1D-B — PLANNING ONLY.** Investigate sidebar navigation (`st.radio`, `key="page_nav"`)
+accessibility options. Read-only investigation, propose 2–3 options, estimate risk, recommend
+whether to defer. **No implementation, no `st.radio` replacement, no `app.py` changes, no
+model/config/data changes.** See `NEXT_STEP.md`.
