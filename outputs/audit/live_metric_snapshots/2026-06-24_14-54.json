@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "generated_at": "2026-06-24T14:54:08+00:00",
+    "source": "live:fetch_live_state().all_completed",
+    "model_version": "v0.6.93-ml20-dc"
+  },
+  "metrics": {
+    "n_matches": 48,
+    "outcome_accuracy": 0.5833,
+    "rps": 0.1797,
+    "rps_uniform_baseline": 0.2292,
+    "brier_wdl": 0.5815,
+    "nll_wdl": 0.9574,
+    "exact_top1": 0.0833,
+    "exact_top3": 0.2917,
+    "exact_top5": 0.4792,
+    "exact_top10": 0.7292,
+    "avg_rank_real_score": 7.9792,
+    "mean_prob_actual_score": 0.0686,
+    "confusion_matrix_pred_x_actual": {
+      "order": [
+        "home",
+        "draw",
+        "away"
+      ],
+      "counts": [
+        [
+          20,
+          12,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          2,
+          8
+        ]
+      ]
+    },
+    "draw_recall": 0.0,
+    "n_actual_draws": 14,
+    "draw_calibration": [
+      {
+        "bucket": "0.1-0.2",
+        "n": 11,
+        "pred_draw_mean": 0.1514,
+        "actual_draw_rate": 0.3636
+      },
+      {
+        "bucket": "0.2-0.3",
+        "n": 37,
+        "pred_draw_mean": 0.2461,
+        "actual_draw_rate": 0.2703
+      }
+    ],
+    "blowout_report": {
+      "n": 15,
+      "mean_rank": 13.73,
+      "mean_p_actual": 0.0361,
+      "top10_coverage": 0.2667
+    },
+    "rank_by_total_goals": {
+      "0-1": {
+        "n": 12,
+        "mean_rank": 4.58
+      },
+      "2-3": {
+        "n": 17,
+        "mean_rank": 4.12
+      },
+      "4": {
+        "n": 9,
+        "mean_rank": 8.67
+      },
+      "5+": {
+        "n": 10,
+        "mean_rank": 18.0
+      }
+    }
+  }
+}
