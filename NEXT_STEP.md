@@ -52,7 +52,8 @@ option becomes a separate, explicitly-approved Phase 1D-B-impl.
   broad `app.py` refactor · visible product redesign.
 
 ## What must NOT be inferred from memory (verify from the repo)
-- **Current HEAD / phase / commits** → `git log --oneline -8`, `git tag`. (HEAD at writing: `37a743f`.)
+- **Current HEAD / phase / commits** → `git log --oneline -8`, `git tag`. (HEAD at writing: `42e9ee2`;
+  latest implementation commit = `37a743f` = Phase 1D-A.)
 - **Model numbers** (β, ρ, log_base, ML weight, metrics) → read `data/elo_calibrated_params.json`,
   `configs/model_version.json`, `CHANGELOG_MODEL.md`, latest `outputs/audit/live_metric_snapshots/*.json`.
   Do not quote remembered values.

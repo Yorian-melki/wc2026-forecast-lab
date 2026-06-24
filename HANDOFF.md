@@ -44,7 +44,7 @@ priors as measured. Keep all honesty/disclaimer copy.
   - `format_optional_number()` helper; Nation DNA squad-DNA shows "Default prior used" / "No provider
     coverage" instead of `nan`; penalty notes hidden when NaN (Nation DNA + Head-to-Head).
   - `tests/test_no_nan_ui.py`: 0 raw `nan` across all 11 pages + all 48 Nation DNA teams.
-- **Phase 1D-A — low-risk a11y polish (display-only)** · commit `37a743f` (pushed, = current HEAD).
+- **Phase 1D-A — low-risk a11y polish (display-only)** · commit `37a743f` (pushed; latest impl commit. Current repo HEAD is the later docs commit `42e9ee2`).
   - Two invisible (`height=0`) utility iframes (analytics shim in `src/wc2026/web_analytics.py`,
     countdown in `app.py`) now set `window.frameElement` `title` + `aria-hidden`/`tabindex=-1` so
     screen readers no longer announce a meaningless "st.iframe".
