@@ -52,27 +52,30 @@ Report: `outputs/experiments/2D_objective_ceiling/`. **Key decisions (validated 
 - **Phase 2B fat-tail FAILED → do NOT globally fatten the distribution.** Any high-total fix must be
   a *conditional* lever, gated on not regressing low-total games or W/D/L.
 
-## THE NEXT ACTION: Phase 2E — NEXT MODEL EXPERIMENT SELECTION ONLY
-Choose the next offline experiment from the validated weakness map. **Selection/analysis only — no
-implementation.** Compare the 5 candidates below; for EACH produce: target weakness · expected upside
-· risk to RPS/Brier/NLL/ECE · data required · implementation complexity · overfit risk · simplest
-kill-test · test-now-or-defer. Then rank and recommend a single next experiment (with why-not for the
-others). Output = a short decision memo (`docs/PHASE_2E_EXPERIMENT_SELECTION.md`).
+## ✅ Phase 2E — next experiment selection (SELECTION ONLY) — DONE · `docs/PHASE_2E_EXPERIMENT_SELECTION.md`
+Compared 5 candidates. **Recommendation = Candidate 2, Draw probability calibration** (only real +
+cheap + low-risk + champion-safe + no-new-data + fast-kill lever). **Deferred:** conditional high-total
+mean (no proven signal; gate behind feature kill-test/market data), market anchor (data-blocked; it
+gates the conditional-mean path), temperature sharpening (diagnostic-only sweep; shipping reopens the
+champion over-concentration tension). **Reporting-only = parallel, zero-risk, always-worth-doing.**
 
-### Candidates to compare (2E)
-1. **Conditional high-total / blowout mean adjustment** — targets the one real, bounded ranking gap.
-2. **Draw probability calibration** — targets the −3.6pp draw under-calibration.
-3. **W/D/L sharpening / temperature adjustment** — targets W/D/L under-confidence (⚠ champion tradeoff).
-4. **Market-total benchmark / anchor** — diagnostic + potential conditional-mean signal (needs odds data).
-5. **No model change — reporting only** — demote rank to diagnostic, surface proper scores + CIs in-app.
+## THE NEXT ACTION: Phase 2F — Draw calibration experiment (OFFLINE ONLY) — pending approval
+Build `scripts/exp_draw_calibration.py` (scratch `experimental/` pkg, never imported by app). Fit a
+1–2 param **draw-mass / isotonic** calibrator on a **walk-forward / time-blocked train split**;
+evaluate OOS.
 
-### FORBIDDEN in 2E
-- ❌ No model code change, ❌ no config/data change, ❌ no recalibration, ❌ no provider fetch,
-  ❌ no implementation. 2E is a written comparison + recommendation only.
+### Allowed (2F)
+- New offline script + tests; outputs under `outputs/experiments/2F_draw_calibration/`.
+- Reuse read-only historical data + production params + the scratch `experimental/` distributions.
 
-### Deliverable (2E)
-A decision memo with the per-candidate table, a priority ranking, and ONE recommended next experiment
-(each actual experiment remains a separate, explicitly-approved phase).
+### FORBIDDEN in 2F
+- ❌ Production `calibrated_elo_model.py` / `scorecard.py` / `app.py` change (byte-identical).
+- ❌ `data/*` / `configs/*` change. ❌ recalibration written back. ❌ provider fetch / API / deploy.
+
+### Acceptance gate (2F, pre-registered)
+Accept the calibrator ONLY if **RPS AND NLL improve OOS** on the walk-forward split, **AND** ECE,
+outcome accuracy, and **champion-level concentration/Brier do NOT regress** beyond noise (W/D/L feeds
+the MC). Otherwise reject cleanly. Shipping (if it passes) = a separate explicitly-approved Phase 2G.
 
 ### 1D-B nav — STILL DEFERRED (unchanged)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real

@@ -122,8 +122,20 @@ Analytic self-sim ceiling (cross-checked vs Monte-Carlo, 6 tests; 613 suite pass
   high-total fix must be a *conditional* lever, gated on not regressing low-total games or W/D/L.
 - The **live-48 audit is very noisy** (n=48: exact_top1 95% spread ~[0.04,0.21]); don't over-read it.
 
+## Phase 2E — next experiment selection (SELECTION ONLY) — DONE
+Memo: `docs/PHASE_2E_EXPERIMENT_SELECTION.md`. Compared 5 candidates on the validated weakness map.
+**Recommendation = Candidate 2, Draw probability calibration** — the only lever that is real + cheap +
+low-risk + champion-safe + needs no new data + fast to kill. Run offline (fit-on-train → walk-forward),
+strict proper-score gate (accept only if RPS **and** NLL improve OOS without ECE/accuracy/champion
+regression). **Deferred:** conditional high-total mean (no proven pre-match signal → gate behind a
+feature kill-test and/or market data), market-total anchor (data-blocked + fetch-forbidden; it's the
+*gate* for the conditional-mean path), temperature sharpening (run only as a diagnostic frontier sweep
+— shipping it reopens the champion over-concentration tension). **Reporting-only = parallel, zero-risk,
+always-worth-doing** but it's not a model experiment.
+
 ## Next step
-**Phase 2E — NEXT MODEL EXPERIMENT SELECTION ONLY.** Compare 5 candidates (conditional high-total
-mean / draw calibration / W-D-L sharpening / market-total anchor / reporting-only) on the validated
-weakness map and pick the next offline experiment. **No implementation.** See `NEXT_STEP.md`.
+**Phase 2F — Draw calibration experiment (OFFLINE ONLY)** — when approved. Build
+`scripts/exp_draw_calibration.py` in the scratch `experimental/` pkg; fit a 1–2 param draw-mass /
+isotonic calibrator on a walk-forward train split; accept only on OOS proper-score improvement with
+champion guardrail. Production model byte-identical, default off, no ship. See `NEXT_STEP.md`.
 (1D-B nav still deferred.)
