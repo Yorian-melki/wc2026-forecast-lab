@@ -58,7 +58,8 @@ _BOOTSTRAP = (
   var pol=FR?"Politique de confidentialité":"Privacy policy";
   var acc=FR?"Accepter":"Accept", rej=FR?"Refuser":"Decline";
   var b=document.createElement('div'); b.id='wc-consent';
-  b.style.cssText="position:fixed;left:16px;right:16px;bottom:16px;z-index:100000;background:#12121e;border:1px solid #2A9D8F;border-radius:14px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 10px 34px rgba(0,0,0,.55);font-family:system-ui,-apple-system,sans-serif";
+  b.setAttribute('role','region'); b.setAttribute('aria-label', FR?'Consentement aux cookies':'Cookie consent');
+  b.style.cssText="position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:100000;background:#12121e;border:1px solid #2A9D8F;border-radius:14px;padding:14px 18px;max-height:60vh;overflow:auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 10px 34px rgba(0,0,0,.55);font-family:system-ui,-apple-system,sans-serif";
   b.innerHTML='<div style="color:#C9C9E0;font-size:13px;max-width:700px;line-height:1.5">'+txt+' <a href="'+"__PRIVACY__"+'" target="_blank" style="color:#2A9D8F;text-decoration:none">'+pol+'</a></div><div style="display:flex;gap:8px"><button id="wc-reject" style="background:transparent;color:#9a9ab5;border:1px solid #2a2a40;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer">'+rej+'</button><button id="wc-accept" style="background:#2A9D8F;color:#06060a;border:0;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer">'+acc+'</button></div>';
   document.body.appendChild(b);
   document.getElementById('wc-accept').onclick=function(){try{localStorage.setItem('wc_consent','accept');}catch(e){} b.remove(); loadPH(); try{posthog.capture('consent_accepted');}catch(e){}};
@@ -81,7 +82,12 @@ def inject(st) -> bool:
             .replace("__PH_HOST__", host)
             .replace("__PRIVACY__", _PRIVACY_URL))
     shim = (
-        "<script>(function(){var P=window.parent;if(!P||P.__wcAnalytics)return;"
+        "<script>(function(){"
+        # Label + hide this invisible (height=0) functional iframe from the a11y tree
+        # so screen readers don't announce a meaningless "st.iframe".
+        "var fe=window.frameElement;if(fe){fe.title='WC2026 analytics (no visible UI)';"
+        "fe.setAttribute('aria-hidden','true');fe.setAttribute('tabindex','-1');}"
+        "var P=window.parent;if(!P||P.__wcAnalytics)return;"
         "P.__wcAnalytics=1;var d=P.document;var s=d.createElement('script');"
         "s.textContent=" + json.dumps(boot) + ";d.head.appendChild(s);})();</script>"
     )

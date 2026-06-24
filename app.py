@@ -1348,7 +1348,12 @@ elif page == "⚽ Live Standings":
                 if _cd_js:
                     import json as _json
                     _kw, _lw = _json.dumps("⏱ " + t('ls_kickoff_in') + " "), _json.dumps("🔴 " + t('ls_live_short'))
-                    _js = ("<script>function wcCountdown(id,target){function u(){"
+                    _js = ("<script>"
+                           # Label + hide this invisible (height=0) functional iframe from the a11y
+                           # tree so screen readers don't announce a meaningless "st.iframe".
+                           "var _fe=window.frameElement;if(_fe){_fe.title='WC2026 countdown (no visible UI)';"
+                           "_fe.setAttribute('aria-hidden','true');_fe.setAttribute('tabindex','-1');}"
+                           "function wcCountdown(id,target){function u(){"
                            "var el=window.parent.document.getElementById(id);if(!el)return;"
                            "var d=target-Date.now();if(d<=0){el.innerHTML=" + _lw + ";return;}"
                            "var dd=Math.floor(d/86400000),h=Math.floor((d%86400000)/3600000),"
