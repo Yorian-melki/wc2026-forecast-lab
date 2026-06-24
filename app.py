@@ -2437,8 +2437,11 @@ elif page == "🧮 Model Lab":
                       help="Maximum-likelihood fit before the temperature correction.")
             c2.metric("β_elo production (used)", f"{beta_prod:.4f}",
                       help="raw × 0.55 — this is the β the model uses in every match.")
-            c3.metric("log_base (used)", f"{lp['log_base']:.4f}")
-            c4.metric("ρ Dixon-Coles (used)", f"{lp.get('rho', -0.021):.4f}")
+            c3.metric("log_base (used)", f"{lp['log_base']:.4f}",
+                      help="Baseline scoring rate (log-goals) for an even matchup, before the Elo gap tilts it up or down.")
+            c4.metric("ρ Dixon-Coles (used)", f"{lp.get('rho', -0.021):.4f}",
+                      help="Dixon-Coles low-score correction (rho): nudges the 0-0 / 1-0 / 0-1 / 1-1 probabilities "
+                           "that a plain independent-Poisson model gets slightly wrong. A small negative value tweaks low-score draws.")
         except Exception:
             pass
 
@@ -2520,9 +2523,15 @@ Occam's razor: simpler model wins when calibration gap is material.
     with t3:
         st.markdown("### Calibration Report")
         cc1, cc2, cc3 = st.columns(3)
-        cc1.metric("Primary model ECE", "0.0170", "avg 4 temporal splits")
-        cc2.metric("Full Hybrid ECE", "0.0199", "+17% vs primary", delta_color="inverse")
-        cc3.metric("Match-level NLL", "See ablation", delta_color="off")
+        cc1.metric("Primary model ECE", "0.0170", "avg 4 temporal splits",
+                   help="Expected Calibration Error: the gap between predicted probabilities and what actually "
+                        "happens — of all the '70%' calls, ~70% should come true. Lower = better-calibrated.")
+        cc2.metric("Full Hybrid ECE", "0.0199", "+17% vs primary", delta_color="inverse",
+                   help="Expected Calibration Error for the fuller model — higher here means worse calibration "
+                        "than the primary model, despite more parameters. Lower = better.")
+        cc3.metric("Match-level NLL", "See ablation", delta_color="off",
+                   help="Negative Log-Likelihood (log loss): rewards confident correct calls and penalises "
+                        "confident wrong ones heavily. Lower = better.")
 
         st.markdown("""<div class="caveat-box">
         ⚠️ <b>Caveat:</b> ECE = 0.017 measures match-outcome calibration on historical data.
@@ -2921,6 +2930,10 @@ elif page == "📡 Data Quality":
         cmp.columns = ["Model", "Brier ↓", "NLL ↓", "ECE ↓"]
         st.dataframe(cmp, width="stretch", hide_index=True)
         st.caption(
+            "Brier = mean squared probability error · NLL = log loss (punishes confident misses) · "
+            "ECE = calibration gap (predicted % vs observed %). For all three, lower is better (↓)."
+        )
+        st.caption(
             f"Gate: {mr['gate']['reason']} "
             "Honest scope: this panel validates the **single-match 1X2 model** on a leak-free temporal "
             "split (train ≤2018, test 2019–2022). That model **is** wired into the tournament Monte "
@@ -3057,7 +3070,9 @@ elif page == "📡 Data Quality":
 
         cols = st.columns(3)
         with cols[0]:
-            st.metric("Avg Champion Brier", f"{combined.get('avg_champion_brier', 0):.4f}")
+            st.metric("Avg Champion Brier", f"{combined.get('avg_champion_brier', 0):.4f}",
+                      help="Squared error of the title probabilities vs who actually won, averaged over 48 teams. "
+                           "Compare it to the uniform 1/48 null next to it — lower than the null = real signal.")
         with cols[1]:
             st.metric("Uniform 1/48 null", f"{combined.get('uniform_null_champion_brier', 0.0204):.4f}",
                       help="Mean-Brier of predicting 1/48 for every team — the honest no-information baseline.")
