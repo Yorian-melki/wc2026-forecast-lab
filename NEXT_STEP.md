@@ -40,26 +40,39 @@ market/lineups/style/incentives in μ). Honest findings: draw recall 0/14 ≈ de
 exact top-1 8.3% ≈ entropy floor; much of rank weakness is metric-induced (rank ↔ calibration
 tension); validation rests on n≈4 tournaments. **Best next move = NOT a model change.**
 
-## THE NEXT ACTION: Phase 2D — E1 "Objective & ceiling audit" (OFFLINE, in-repo)
-Before any model experiment, separate **real** weaknesses from **metric artifacts** and **irreducible
-ceilings**. Recompute all metrics as **proper scores** with **bootstrap CIs** on the live-48; estimate
-the **entropy floor** by simulating exact-score/RPS from the model's OWN λ. Decide which Part-A
-"weaknesses" survive as real before touching the model.
+## ✅ Phase 2D — Objective & ceiling audit (OFFLINE) — DONE · commit `6d04da3`
+Report: `outputs/experiments/2D_objective_ceiling/`. **Key decisions (validated weakness map):**
+- Exact-score top-1/top-3 → **do NOT optimize directly** (top-1 ceiling ~12.7%; top-3/5 at ceiling).
+- Scoreline rank → **demote to DIAGNOSTIC, not a target** (aggregate ~1 above ceiling; signal only in
+  minority high-total bucket; optimizing it trades against W/D/L calibration).
+- Draw recall 0/14 → **decision-rule artifact** (ceiling recall ≈ 0 under argmax).
+- **Real remaining weaknesses:** (a) high-total/blowout **conditional** ranking (5+ real 21.78 vs
+  ceiling 7.03, ~17% of matches), (b) mild **draw under-calibration** (≈ −3.6pp), (c) mild **W/D/L
+  under-confidence** (over-dispersed; sharpening fights champion temperature).
+- **Phase 2B fat-tail FAILED → do NOT globally fatten the distribution.** Any high-total fix must be
+  a *conditional* lever, gated on not regressing low-total games or W/D/L.
 
-### Allowed (2D)
-- New offline script (e.g. `scripts/exp_objective_ceiling.py`) + a results doc/report.
-- Reuse read-only tooling (`audit_live_scorecard.py`, backtests) and the scratch `experimental/` pkg.
-- Tests for the new offline code. Bootstrap is read-only resampling of existing results.
+## THE NEXT ACTION: Phase 2E — NEXT MODEL EXPERIMENT SELECTION ONLY
+Choose the next offline experiment from the validated weakness map. **Selection/analysis only — no
+implementation.** Compare the 5 candidates below; for EACH produce: target weakness · expected upside
+· risk to RPS/Brier/NLL/ECE · data required · implementation complexity · overfit risk · simplest
+kill-test · test-now-or-defer. Then rank and recommend a single next experiment (with why-not for the
+others). Output = a short decision memo (`docs/PHASE_2E_EXPERIMENT_SELECTION.md`).
 
-### FORBIDDEN in 2D
-- ❌ No production model/scorecard/app change (`calibrated_elo_model.py`, `scorecard.py`, `app.py`
-  byte-identical). ❌ No `data/*` / `configs/*` change. ❌ No probability/forecast change shipped.
-- ❌ No provider fetch / API call / recalibration / deploy. Output = analysis + report only.
+### Candidates to compare (2E)
+1. **Conditional high-total / blowout mean adjustment** — targets the one real, bounded ranking gap.
+2. **Draw probability calibration** — targets the −3.6pp draw under-calibration.
+3. **W/D/L sharpening / temperature adjustment** — targets W/D/L under-confidence (⚠ champion tradeoff).
+4. **Market-total benchmark / anchor** — diagnostic + potential conditional-mean signal (needs odds data).
+5. **No model change — reporting only** — demote rank to diagnostic, surface proper scores + CIs in-app.
 
-### Deliverable (2D)
-A verdict per Part-A weakness: real / metric-induced / at-ceiling, with CIs and the entropy floor.
-Then E2 (market-anchor diagnostic) and E3 (draw calibration) become candidate follow-ups — each its
-own explicitly-approved phase.
+### FORBIDDEN in 2E
+- ❌ No model code change, ❌ no config/data change, ❌ no recalibration, ❌ no provider fetch,
+  ❌ no implementation. 2E is a written comparison + recommendation only.
+
+### Deliverable (2E)
+A decision memo with the per-candidate table, a priority ranking, and ONE recommended next experiment
+(each actual experiment remains a separate, explicitly-approved phase).
 
 ### 1D-B nav — STILL DEFERRED (unchanged)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real

@@ -105,8 +105,25 @@ findings: draw recall 0/14 ≈ decision-rule artifact; exact top-1 8.3% ≈ near
 of the rank weakness is metric-induced (rank ↔ calibration tension); validation rests on n≈4
 tournaments. **Recommended next = NOT a model change.**
 
+## Phase 2D — Objective & ceiling audit (OFFLINE) · commit `6d04da3` — DONE
+Analytic self-sim ceiling (cross-checked vs Monte-Carlo, 6 tests; 613 suite passes) on martj42
+2010-2025. Report: `outputs/experiments/2D_objective_ceiling/`. **Validated weakness map:**
+- **Exact-score top-1/top-3 → DO NOT optimize directly.** Top-1 ceiling is only ~12.7% (vs 10.9%
+  always-guess-1-0); top-3/top-5 are AT ceiling. Irreducible noise, not model failure.
+- **Scoreline rank → DEMOTE to diagnostic, not a target.** Aggregate is ~1 above ceiling (8.08 vs
+  7.05); recoverable signal lives only in the minority high-total bucket; optimizing it trades
+  against W/D/L calibration.
+- **Draw recall 0/14 → decision-rule artifact** (ceiling recall ≈ 0 under argmax). Not a prob failure.
+- **Real remaining weaknesses (bounded, entangled):** (a) high-total/blowout **conditional** ranking
+  (5+ goals real rank 21.78 vs ceiling 7.03 = genuine mis-specification, but ~17% of matches),
+  (b) mild **draw under-calibration** (actual − predicted P(draw) ≈ −3.6pp), (c) mild **W/D/L
+  under-confidence** (REAL beats self-sim ⇒ over-dispersed; sharpening fights champion temperature).
+- **Phase 2B lesson stands: globally fattening the distribution FAILED — do NOT do it.** Any
+  high-total fix must be a *conditional* lever, gated on not regressing low-total games or W/D/L.
+- The **live-48 audit is very noisy** (n=48: exact_top1 95% spread ~[0.04,0.21]); don't over-read it.
+
 ## Next step
-**Phase 2D — E1 "Objective & ceiling audit" (OFFLINE, in-repo).** Recompute metrics as proper scores
-with bootstrap CIs on the live-48; estimate the entropy floor by simulating from the model's own λ.
-Goal: separate real weaknesses from metric artifacts and irreducible ceilings BEFORE any model
-experiment. No model/config/data/probability change. See `NEXT_STEP.md`. (1D-B nav still deferred.)
+**Phase 2E — NEXT MODEL EXPERIMENT SELECTION ONLY.** Compare 5 candidates (conditional high-total
+mean / draw calibration / W-D-L sharpening / market-total anchor / reporting-only) on the validated
+weakness map and pick the next offline experiment. **No implementation.** See `NEXT_STEP.md`.
+(1D-B nav still deferred.)
