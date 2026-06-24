@@ -62,7 +62,14 @@ baseline tag `model-baseline-v0.6.93-ml20-dc`. `data/wc2026_live.json` stays at 
 `bbcd3ef82b520034bd51f8fce58d41c49e648271`.
 
 ## Latest tests
-**586 passed** (`PYTHONPATH=src .venv/bin/python -m pytest tests/ -q`) — 581 baseline + 5 from 1D-A.
+**592 passed** (`PYTHONPATH=src .venv/bin/python -m pytest tests/ -q`) — 581 baseline + 5 (1D-A) + 6 (1E).
+
+## Phase 1E — metric/tooltip clarity (display-only) · commit `8b09044` (pushed)
+Plain-language `help=` tooltips + a one-line glossary so non-experts can read the jargon metrics
+that previously had no nearby definition: ECE, NLL, ρ (Dixon-Coles), `log_base`, and headline Brier
+(Model Lab Math/Calibration tabs + Data Quality). RPS, λ, β, entropy, Dixon-Coles, Monte Carlo were
+already explained. `tests/test_metric_tooltips.py` (6 static assertions). No calculation / model /
+config / data change.
 
 ## Working protocol (updated)
 **GREEN LANE** (implement → test → commit → push → report, no per-step approval): docs-only,

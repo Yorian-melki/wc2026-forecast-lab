@@ -17,7 +17,12 @@ C: custom button nav). **Recommendation = DEFER implementation** — proper fix 
 rewrite disproportionate to an "announced-wrong" (not unusable) nit; cheap fix (A) is unverifiable
 a11y theater. No code touched; `st.radio` + `_goto`/`page_nav`/`dna_sel` plumbing untouched.
 
-## THE NEXT ACTION: NONE APPROVED — awaiting Yorian's decision on 1D-B
+## ✅ Phase 1E — metric/tooltip clarity — DONE · commit `8b09044`
+Plain-language tooltips for ECE / NLL / ρ / `log_base` / headline Brier + a glossary caption
+(display-only, GREEN LANE). `tests/test_metric_tooltips.py` (6 tests). 592 tests pass. No model /
+config / data change.
+
+## THE NEXT ACTION: NONE APPROVED — awaiting Yorian's decision (1D-B nav still deferred)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real
 SR-user/audit report, better Streamlit native nav a11y, or a broader nav redesign) OR an explicit
 Yorian decision to implement Option A/B/C. Until then, do NOT touch the nav. (Background on the
