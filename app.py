@@ -373,6 +373,7 @@ TXT = {
         "empty_no_squad": "No squad attribute data.",
         "empty_no_pair": "No pair with 5+ meetings found in this selection.",
         "mv_title": "Model version & changelog", "mv_readonly": "Read-only — params shown live from config; model math unchanged",
+        "ndna_no_coverage": "No provider coverage", "data_unavailable": "Data unavailable",
         # Model Lab
         "ml_eyebrow": "Methodology", "ml_title": "Model Laboratory",
         "ml_desc": "Full mathematical transparency, honest limitations, and a self-assessed maturity audit.",
@@ -668,6 +669,17 @@ def full_name(code: str, disp_df: pd.DataFrame) -> str:
         return code
     row = disp_df[disp_df["code"] == code]
     return row["full_name"].iloc[0] if len(row) else code
+
+def format_optional_number(value, fmt: str = "{:.2f}", fallback: str = "Data unavailable") -> str:
+    """Display a number safely, or return `fallback` when it's missing/None/NaN/inf — so a raw
+    'nan' never reaches the user. Pure UI display guard (no model/data change)."""
+    try:
+        v = float(value)
+    except (TypeError, ValueError):
+        return fallback
+    if math.isnan(v) or math.isinf(v):
+        return fallback
+    return fmt.format(v)
 
 def confederation(code: str, disp_df: pd.DataFrame) -> str:
     if disp_df.empty:
@@ -1611,7 +1623,7 @@ elif page == "🎯 Match Predictor":
                         st.markdown(f"{fh} **{team_a}** WC penalty record: "
                                     f"<span style='color:{col}'>{record}</span>",
                                     unsafe_allow_html=True)
-                        if note:
+                        if isinstance(note, str) and note.strip():   # NaN cell → hide (no "⚠️ nan")
                             st.caption(f"⚠️ {note}")
                     else:
                         st.caption(f"{fh} {team_a}: no WC penalty shootout history")
@@ -1624,7 +1636,7 @@ elif page == "🎯 Match Predictor":
                         st.markdown(f"{fa_i} **{team_b}** WC penalty record: "
                                     f"<span style='color:{col}'>{record}</span>",
                                     unsafe_allow_html=True)
-                        if note:
+                        if isinstance(note, str) and note.strip():   # NaN cell → hide (no "⚠️ nan")
                             st.caption(f"⚠️ {note}")
                     else:
                         st.caption(f"{fa_i} {team_b}: no WC penalty shootout history")
@@ -1864,7 +1876,7 @@ elif page == "🧬 Nation DNA":
                     f"<span style='color:{pr_col}'>{pr_record}</span>",
                     unsafe_allow_html=True,
                 )
-                if pr_note:
+                if isinstance(pr_note, str) and pr_note.strip():   # NaN cell → hide (no "⚠️ nan")
                     st.caption(f"⚠️ {pr_note}")
             else:
                 st.caption(t("empty_no_pen"))
@@ -1952,17 +1964,21 @@ elif page == "🧬 Nation DNA":
             badge = '<span class="badge badge-teal">StatsBomb coverage</span>' if sb else '<span class="badge badge-muted">Default values (no StatsBomb)</span>'
             st.markdown(f"Data source: {badge}", unsafe_allow_html=True)
 
-            ppda = float(tm_row.get("ppda", 6.0))
-            sq   = float(tm_row.get("shot_quality", 0.1))
-            pi   = float(tm_row.get("press_intensity", 0.35))
-            cr   = float(tm_row.get("comeback_rate", 0.3))
-            ck   = float(tm_row.get("choke_rate", 0.1))
+            # Missing/NaN guard: a team without StatsBomb coverage shows "Default prior used"
+            # (its values are analyst priors, not measured); a present-but-NaN cell shows "No
+            # provider coverage". Never a raw "nan". (Display-only — no model/data change.)
+            _dna_fb = "Default prior used" if not sb else "No provider coverage"
+            ppda = format_optional_number(tm_row.get("ppda"), "{:.2f}", _dna_fb)
+            sq   = format_optional_number(tm_row.get("shot_quality"), "{:.3f}", _dna_fb)
+            pi   = format_optional_number(tm_row.get("press_intensity"), "{:.3f}", _dna_fb)
+            cr   = format_optional_number(tm_row.get("comeback_rate"), "{:.0%}", _dna_fb)
+            ck   = format_optional_number(tm_row.get("choke_rate"), "{:.0%}", _dna_fb)
             st.markdown(
-                f"**Pressing (PPDA):** {ppda:.2f}  ·  "
-                f"**Shot quality:** {sq:.3f}  ·  "
-                f"**Press intensity:** {pi:.3f}  ·  "
-                f"**Comeback rate:** {cr:.0%}  ·  "
-                f"**Choke rate:** {ck:.0%}"
+                f"**Pressing (PPDA):** {ppda}  ·  "
+                f"**Shot quality:** {sq}  ·  "
+                f"**Press intensity:** {pi}  ·  "
+                f"**Comeback rate:** {cr}  ·  "
+                f"**Choke rate:** {ck}"
             )
 
     with t5:
