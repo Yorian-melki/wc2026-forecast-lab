@@ -186,8 +186,20 @@ match_features.py`, `scripts/exp_feature_search.py`, `outputs/experiments/3A_evi
 - **Critical caveat:** baseline was pure-Elo logistic; **production already blends an ML 1X2 layer
   @0.20**, so this may overstate the gain vs the deployed model. **RESEARCH, not READY — do not integrate.**
 
+## Phase 3B — External data access recon (OFFLINE, real keys from .env.yorian) — DONE
+Doc: `docs/PHASE_3B_EXTERNAL_DATA_ACCESS_RECON.md`; research files `scripts/research/`,
+`outputs/research/phase_3b_external_data/`. Secret-safe (keys never printed/committed; leak scan clean;
+`.env.yorian` gitignored). **Auth results:**
+- **The Odds API ✅** — 500 req/mo free, 15 soccer markets incl. World Cup (live odds). Historical odds = paid.
+- **Sportmonks ✅** — **Pro trial until 2026-07-09**, ~53k req/hr; rich football data (xG/lineups plan-dep, not yet probed). Strongest breadth.
+- **API-Football ❌** — rejected on direct + RapidAPI hosts (verify key/product).
+- **TheOdds.io ⚠️** — domain ambiguous/times out; **key withheld** (not sent anywhere); confirm provider.
+- **Key gap unchanged:** *historical* odds/totals for OOS backtesting still blocked (free tiers = current
+  only). Live odds usable **prospectively**, not for backtesting past matches.
+
 ## Next step
-**Phase 3B — decisive head-to-head: recent-form features vs the ACTUAL production W/D/L (Elo→DC→ML@0.20),
-OFFLINE.** Does the §9 signal survive *on top of* the production ML layer? YES→READY_FOR_MODEL_LAB (then a
-separate approved integration with champion guardrails); NO→WATCHLIST/KILL (confirms freeze). Still
-offline/in-repo, no new data, no production change. Model math FROZEN until then. (1D-B nav deferred.)
+**Phase 3C (TIME-BOXED, before 2026-07-09) — minimal Sportmonks endpoint probe** (≤6 req): fixtures
+historical depth, lineups, injuries, statistics/xG, odds entitlement — fill the UNKNOWN rows while the
+Pro trial is live. In parallel ask Yorian to verify the API-Football key product and confirm what
+"TheOdds.io" is. **No integration, no production change.** The deferred 3A→production W/D/L head-to-head
+(recent-form features vs Elo→DC→ML@0.20) also remains open. Model math FROZEN. (1D-B nav deferred.)

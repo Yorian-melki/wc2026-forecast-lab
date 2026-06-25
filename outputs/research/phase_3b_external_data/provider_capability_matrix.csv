@@ -1,0 +1,5 @@
+provider,auth_status,http,endpoint,fields_confirmed,quota_plan,useful_data
+The Odds API (the-odds-api.com),ok,200,GET /v4/sports,active|description|group|has_outrights|key|title,"{""x-requests-remaining"": ""500"", ""x-requests-used"": ""0"", ""x-requests-last"": ""0""}",15 soccer markets listed incl. World Cup
+API-Football (api-sports.io / RapidAPI),FAIL 403,403,GET /status [rapidapi (x-rapidapi-key)],,"{""errors"": ""None""}",key rejected on both direct + RapidAPI hosts
+Sportmonks (api.sportmonks.com/v3/football),ok,200,GET /v3/football/leagues,active|category|country_id|has_jerseys|id|image_path|last_played_at|name|short_code|sport_id|sub_type|type,"{""plan"": ""Pro - Trialing until 2026-07-09 13:20:20"", ""rate_limit"": {""resets_in_seconds"": 3438, ""remaining"": 52998, ""requested_entity"": ""League""}}",leagues readable
+TheOdds.io (UNVERIFIED domain),NOT TESTED (key withheld),unreachable,keyless probe of literal domain,,{},key present but provider identity ambiguous — needs confirmation

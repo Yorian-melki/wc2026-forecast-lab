@@ -97,16 +97,25 @@ but real, history-derivable (no train/serve skew). **High-total/total-goals leve
 signal). **Caveat:** baseline was pure-Elo logistic; production already has an ML 1X2 layer @0.20, so
 the gain may not survive vs the deployed model ⇒ **RESEARCH, not READY; do not integrate.**
 
-## THE NEXT ACTION: Phase 3B — decisive head-to-head vs PRODUCTION W/D/L (OFFLINE)
+## ✅ Phase 3B — External data access recon (OFFLINE, real keys) — DONE · `docs/PHASE_3B_EXTERNAL_DATA_ACCESS_RECON.md`
+Secret-safe smoke tests (keys from `.env.yorian`, never printed/committed; leak scan clean). **The Odds
+API ✅** (500/mo free, World Cup odds; historical=paid) · **Sportmonks ✅** (Pro trial → 2026-07-09, ~53k/hr,
+rich data) · **API-Football ❌** (rejected both hosts; verify key) · **TheOdds.io ⚠️** (ambiguous domain;
+key withheld). Key gap unchanged: *historical* odds/totals for OOS backtesting still blocked on free tiers.
+
+## THE NEXT ACTION: Phase 3C — minimal Sportmonks endpoint probe (TIME-BOXED before 2026-07-09)
+While the Sportmonks Pro trial is live, run a **≤6-request** recon probing the high-value endpoints —
+fixtures (historical depth), lineups, injuries, statistics/**xG**, odds entitlement — to fill the
+UNKNOWN capability rows. Secret-safe (keys from `.env.yorian` only). In parallel, ask Yorian to verify
+the API-Football key product/host and confirm the real "TheOdds.io" provider.
+- **Allowed:** extend `scripts/research/`, outputs under `outputs/research/phase_3c_*`, docs.
+- **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration, ❌ key printed/committed,
+  ❌ betting execution, ❌ scraping behind login, ❌ quota-rotation. Recon only.
+
+## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head
 Test whether the recent-form signal survives **on top of the actual production W/D/L** (Elo→DC→ML@0.20),
-not just vs pure-Elo. Same walk-forward folds, same in-repo data, offline.
-- **Allowed:** extend the scratch `experimental/` harness + script; outputs under
-  `outputs/experiments/3B_*`; tests. Reuse the production model READ-ONLY to get its W/D/L per match.
-- **FORBIDDEN:** ❌ production model/scorecard/app/data/config change, ❌ recalibration written back,
-  ❌ provider fetch, ❌ deploy. No integration.
-- **Decision:** if features beat production W/D/L OOS beyond noise → **READY_FOR_MODEL_LAB** (then a
-  separate, explicitly-approved integration phase with a champion-calibration guardrail, since W/D/L
-  feeds the MC). If not → **WATCHLIST/KILL** (production ensemble already captures it; confirms freeze).
+offline. If it beats production OOS beyond noise → **READY_FOR_MODEL_LAB** (separate approved integration
+with a champion guardrail). If not → **WATCHLIST/KILL**. No production change.
 
 ### Optional (parked) — evidence-closing diagnostics
 - **High-total lever:** closed by 3A unless external data (market totals / xG / lineups) is acquired.
