@@ -1,0 +1,95 @@
+{
+  "data": [
+    {
+      "id": 60,
+      "fixture_id": 11984409,
+      "league_id": 1326,
+      "title": "Preview: Turkey vs Italy",
+      "type": "prematch"
+    }
+  ],
+  "pagination": {
+    "count": 1,
+    "per_page": 1,
+    "has_more": true,
+    "current_page": 1,
+    "next_page": "https://api.sportmonks.com/v3/football/news/pre-match?per_page=1&page=2",
+    "next_cursor": "https://api.sportmonks.com/v3/football/news/pre-match?cursor=WzEsMSxbNjBdLFtbInNwb3J0cy5uZXdzaXRlbXMuaWQiLDBdXV0"
+  },
+  "subscription": [
+    {
+      "meta": {
+        "current_timestamp": 1782409710,
+        "next_billing_cycle": "2026-07-09T13:20:20 UTC"
+      },
+      "plans": [
+        {
+          "plan": "Pro - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Advanced"
+        },
+        {
+          "plan": "Euro Club Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        },
+        {
+          "plan": "International Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        }
+      ],
+      "add_ons": [
+        {
+          "add_on": "50000 API Calls - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Calls"
+        },
+        {
+          "add_on": "130 Extra Leagues - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Extra leagues"
+        },
+        {
+          "add_on": "Transfer Rumours - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Transfer rumours"
+        },
+        {
+          "add_on": "Expected Lineups - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Lineups"
+        },
+        {
+          "add_on": "News - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "News"
+        },
+        {
+          "add_on": "Match Facts - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Match facts"
+        }
+      ],
+      "widgets": [],
+      "bundles": [
+        {
+          "bundle": "Odds & Predictions - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Odds - Predictions"
+        },
+        {
+          "bundle": "Pressure Index & xG - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Pressure - Expected"
+        }
+      ]
+    }
+  ],
+  "rate_limit": {
+    "resets_in_seconds": 3482,
+    "remaining": 52998,
+    "requested_entity": "NewsItem"
+  },
+  "timezone": "UTC"
+}

@@ -197,9 +197,24 @@ Doc: `docs/PHASE_3B_EXTERNAL_DATA_ACCESS_RECON.md`; research files `scripts/rese
 - **Key gap unchanged:** *historical* odds/totals for OOS backtesting still blocked (free tiers = current
   only). Live odds usable **prospectively**, not for backtesting past matches.
 
+## Phase 3C — Sportmonks deep capability probe (OFFLINE) — DONE
+Doc: `docs/PHASE_3C_SPORTMONKS_CAPABILITY_PROBE.md`; research `scripts/research/probe_sportmonks_
+capabilities.py`, `outputs/research/phase_3c_sportmonks_probe/`. Secret-safe (token never printed/
+committed; leak scan clean). Plan: **Pro trial → 2026-07-09, ~53k/hr.** All probes HTTP 200.
+- **HEADLINE: historical ODDS confirmed** — 3,748 odds rows on a 2022 fixture; markets incl. 1X2
+  (Fulltime Result), Over/Under totals, Asian Handicap; fields incl. `probability` + `winning`
+  (settlement). **Unblocks OOS backtesting of market-implied features** (the 2G/3A market anchor).
+- **FIFA World Cup = league 732 (6 historical seasons)** + qualifiers (711). Fixtures carry
+  **confirmed lineups, events, statistics, referees** historically; squads/players + news confirmed.
+- **xG/pressure:** entitled (200, no error) but **EMPTY for the sampled international fixture** →
+  coverage for international/WC UNCONFIRMED (RESEARCH, needs coverage kill-test). Expected-lineups
+  (type_id mapping) + injuries/sidelined (empty) unclear.
+- **READY_FOR_FEATURE_LAB:** historical odds (strongest), lineups, fixtures/leagues, squads.
+
 ## Next step
-**Phase 3C (TIME-BOXED, before 2026-07-09) — minimal Sportmonks endpoint probe** (≤6 req): fixtures
-historical depth, lineups, injuries, statistics/xG, odds entitlement — fill the UNKNOWN rows while the
-Pro trial is live. In parallel ask Yorian to verify the API-Football key product and confirm what
-"TheOdds.io" is. **No integration, no production change.** The deferred 3A→production W/D/L head-to-head
-(recent-form features vs Elo→DC→ML@0.20) also remains open. Model math FROZEN. (1D-B nav deferred.)
+**Phase 3D (≤6 req, before 2026-07-09) — xG-coverage + historical-odds-depth kill-test:** confirm xG
+returns data on a recent club fixture AND estimate coverage on WC-732 fixtures; confirm odds exist
+across the 6 WC-732 seasons; resolve expected-lineup `type_id` + injuries entitlement. THEN the
+high-value experiment (separate approval): build an **offline market-implied feature** from Sportmonks
+historical odds for international/WC and test vs the frozen baseline OOS. **No integration, no production
+change.** Deferred 3A→production W/D/L head-to-head also still open. Model math FROZEN. (1D-B nav deferred.)

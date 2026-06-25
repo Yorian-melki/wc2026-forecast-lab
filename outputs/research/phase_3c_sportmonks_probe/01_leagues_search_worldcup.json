@@ -1,0 +1,462 @@
+{
+  "data": [
+    {
+      "id": 711,
+      "sport_id": 1,
+      "country_id": 147,
+      "name": "CAF World Cup Qualifiers",
+      "active": true,
+      "short_code": null,
+      "image_path": "https://cdn.sportmonks.com/images/soccer/leagues/7/711.png",
+      "type": "league",
+      "sub_type": "international",
+      "last_played_at": "2025-10-09 16:00:00",
+      "category": 1,
+      "has_jerseys": false,
+      "seasons": [
+        {
+          "id": 887,
+          "sport_id": 1,
+          "league_id": 711,
+          "tie_breaker_rule_id": 169,
+          "name": "2018",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2015-10-07",
+          "ending_at": "2017-11-14",
+          "standings_recalculated_at": "2022-09-27 08:13:05.900028",
+          "games_in_current_week": false
+        },
+        {
+          "id": 26946,
+          "sport_id": 1,
+          "league_id": 711,
+          "tie_breaker_rule_id": 171,
+          "name": "2030",
+          "finished": false,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2027-11-15",
+          "ending_at": "2029-11-16",
+          "standings_recalculated_at": null,
+          "games_in_current_week": false
+        },
+        {
+          "id": 5773,
+          "sport_id": 1,
+          "league_id": 711,
+          "tie_breaker_rule_id": 169,
+          "name": "2006",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2003-10-10",
+          "ending_at": "2005-10-08",
+          "standings_recalculated_at": "2023-11-30 14:34:22",
+          "games_in_current_week": false
+        },
+        {
+          "id": 5774,
+          "sport_id": 1,
+          "league_id": 711,
+          "tie_breaker_rule_id": 169,
+          "name": "2010",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2007-10-14",
+          "ending_at": "2009-11-18",
+          "standings_recalculated_at": "2023-05-24 09:04:56",
+          "games_in_current_week": false
+        },
+        {
+          "id": 5775,
+          "sport_id": 1,
+          "league_id": 711,
+          "tie_breaker_rule_id": 169,
+          "name": "2014",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2011-11-11",
+          "ending_at": "2013-11-19",
+          "standings_recalculated_at": "2022-09-27 08:13:05.900028",
+          "games_in_current_week": false
+        },
+        {
+          "id": 16497,
+          "sport_id": 1,
+          "league_id": 711,
+          "tie_breaker_rule_id": 169,
+          "name": "2022",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2019-09-04",
+          "ending_at": "2022-03-29",
+          "standings_recalculated_at": "2023-11-30 15:17:08",
+          "games_in_current_week": false
+        },
+        {
+          "id": 22005,
+          "sport_id": 1,
+          "league_id": 711,
+          "tie_breaker_rule_id": 171,
+          "name": "2026",
+          "finished": false,
+          "pending": false,
+          "is_current": true,
+          "starting_at": "2023-11-15",
+          "ending_at": "2025-11-16",
+          "standings_recalculated_at": "2026-06-24 21:46:58",
+          "games_in_current_week": false
+        }
+      ]
+    },
+    {
+      "id": 732,
+      "sport_id": 1,
+      "country_id": 99474,
+      "name": "World Cup",
+      "active": true,
+      "short_code": "FIFA WC",
+      "image_path": "https://cdn.sportmonks.com/images/soccer/leagues/28/732.png",
+      "type": "league",
+      "sub_type": "cup_international",
+      "last_played_at": "2026-06-25 01:00:00",
+      "category": 1,
+      "has_jerseys": true,
+      "seasons": [
+        {
+          "id": 5796,
+          "sport_id": 1,
+          "league_id": 732,
+          "tie_breaker_rule_id": 169,
+          "name": "2014",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2014-06-12",
+          "ending_at": "2014-07-13",
+          "standings_recalculated_at": "2023-11-30 14:34:29",
+          "games_in_current_week": false
+        },
+        {
+          "id": 892,
+          "sport_id": 1,
+          "league_id": 732,
+          "tie_breaker_rule_id": 169,
+          "name": "2018",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2018-06-14",
+          "ending_at": "2018-07-15",
+          "standings_recalculated_at": "2023-11-30 14:42:51",
+          "games_in_current_week": false
+        },
+        {
+          "id": 5795,
+          "sport_id": 1,
+          "league_id": 732,
+          "tie_breaker_rule_id": 169,
+          "name": "2010",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2010-06-11",
+          "ending_at": "2010-07-11",
+          "standings_recalculated_at": "2026-03-19 19:39:09",
+          "games_in_current_week": false
+        },
+        {
+          "id": 18017,
+          "sport_id": 1,
+          "league_id": 732,
+          "tie_breaker_rule_id": 170,
+          "name": "2022",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2022-11-20",
+          "ending_at": "2022-12-18",
+          "standings_recalculated_at": "2025-12-25 09:09:05",
+          "games_in_current_week": false
+        },
+        {
+          "id": 5794,
+          "sport_id": 1,
+          "league_id": 732,
+          "tie_breaker_rule_id": 169,
+          "name": "2006",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2006-06-09",
+          "ending_at": "2006-07-09",
+          "standings_recalculated_at": "2023-11-30 14:34:28",
+          "games_in_current_week": false
+        },
+        {
+          "id": 26618,
+          "sport_id": 1,
+          "league_id": 732,
+          "tie_breaker_rule_id": 138867,
+          "name": "2026",
+          "finished": false,
+          "pending": false,
+          "is_current": true,
+          "starting_at": "2026-06-11",
+          "ending_at": "2026-07-19",
+          "standings_recalculated_at": "2026-06-25 07:37:27",
+          "games_in_current_week": true
+        }
+      ]
+    },
+    {
+      "id": 3412,
+      "sport_id": 1,
+      "country_id": 99474,
+      "name": "FIFA Club World Cup",
+      "active": true,
+      "short_code": null,
+      "image_path": "https://cdn.sportmonks.com/images/soccer/leagues/20/3412.png",
+      "type": "league",
+      "sub_type": "international",
+      "last_played_at": "2025-07-13 19:00:00",
+      "category": 1,
+      "has_jerseys": false,
+      "seasons": [
+        {
+          "id": 24680,
+          "sport_id": 1,
+          "league_id": 3412,
+          "tie_breaker_rule_id": 170,
+          "name": "2025",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2025-06-15",
+          "ending_at": "2025-07-13",
+          "standings_recalculated_at": "2026-02-10 20:18:08",
+          "games_in_current_week": false
+        },
+        {
+          "id": 27736,
+          "sport_id": 1,
+          "league_id": 3412,
+          "tie_breaker_rule_id": 170,
+          "name": "2029",
+          "finished": false,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2029-06-15",
+          "ending_at": "2029-07-13",
+          "standings_recalculated_at": null,
+          "games_in_current_week": false
+        }
+      ]
+    },
+    {
+      "id": 1364,
+      "sport_id": 1,
+      "country_id": 99474,
+      "name": "World Cup U20",
+      "active": true,
+      "short_code": null,
+      "image_path": "https://cdn.sportmonks.com/images/soccer/leagues/20/1364.png",
+      "type": "league",
+      "sub_type": "cup_international",
+      "last_played_at": "2025-10-19 23:00:00",
+      "category": 2,
+      "has_jerseys": false,
+      "seasons": [
+        {
+          "id": 21460,
+          "sport_id": 1,
+          "league_id": 1364,
+          "tie_breaker_rule_id": 171,
+          "name": "2023",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2023-05-20",
+          "ending_at": "2023-06-11",
+          "standings_recalculated_at": "2023-11-30 15:41:00",
+          "games_in_current_week": false
+        },
+        {
+          "id": 27745,
+          "sport_id": 1,
+          "league_id": 1364,
+          "tie_breaker_rule_id": 171,
+          "name": "2027",
+          "finished": false,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2027-09-27",
+          "ending_at": "2027-10-20",
+          "standings_recalculated_at": null,
+          "games_in_current_week": false
+        },
+        {
+          "id": 25524,
+          "sport_id": 1,
+          "league_id": 1364,
+          "tie_breaker_rule_id": 171,
+          "name": "2025",
+          "finished": false,
+          "pending": false,
+          "is_current": true,
+          "starting_at": "2025-09-27",
+          "ending_at": "2025-10-20",
+          "standings_recalculated_at": "2026-06-24 21:46:31",
+          "games_in_current_week": true
+        }
+      ]
+    },
+    {
+      "id": 1369,
+      "sport_id": 1,
+      "country_id": 99474,
+      "name": "World Cup Women",
+      "active": true,
+      "short_code": null,
+      "image_path": "https://cdn.sportmonks.com/images/soccer/leagues/25/1369.png",
+      "type": "league",
+      "sub_type": "cup_international",
+      "last_played_at": "2023-08-20 10:00:00",
+      "category": 2,
+      "has_jerseys": false,
+      "seasons": [
+        {
+          "id": 11563,
+          "sport_id": 1,
+          "league_id": 1369,
+          "tie_breaker_rule_id": 169,
+          "name": "2019",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2019-06-07",
+          "ending_at": "2019-07-07",
+          "standings_recalculated_at": "2023-11-30 14:53:55",
+          "games_in_current_week": false
+        },
+        {
+          "id": 19161,
+          "sport_id": 1,
+          "league_id": 1369,
+          "tie_breaker_rule_id": 171,
+          "name": "2023",
+          "finished": true,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2023-07-20",
+          "ending_at": "2023-08-20",
+          "standings_recalculated_at": "2023-11-30 15:36:21",
+          "games_in_current_week": false
+        },
+        {
+          "id": 27742,
+          "sport_id": 1,
+          "league_id": 1369,
+          "tie_breaker_rule_id": 171,
+          "name": "2027",
+          "finished": false,
+          "pending": false,
+          "is_current": false,
+          "starting_at": "2027-07-20",
+          "ending_at": "2027-08-20",
+          "standings_recalculated_at": null,
+          "games_in_current_week": false
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "count": 5,
+    "per_page": 25,
+    "has_more": false,
+    "current_page": 1,
+    "next_page": null,
+    "next_cursor": null
+  },
+  "subscription": [
+    {
+      "meta": {
+        "current_timestamp": 1782409707,
+        "next_billing_cycle": "2026-07-09T13:20:20 UTC"
+      },
+      "plans": [
+        {
+          "plan": "Pro - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Advanced"
+        },
+        {
+          "plan": "Euro Club Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        },
+        {
+          "plan": "International Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        }
+      ],
+      "add_ons": [
+        {
+          "add_on": "50000 API Calls - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Calls"
+        },
+        {
+          "add_on": "130 Extra Leagues - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Extra leagues"
+        },
+        {
+          "add_on": "Transfer Rumours - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Transfer rumours"
+        },
+        {
+          "add_on": "Expected Lineups - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Lineups"
+        },
+        {
+          "add_on": "News - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "News"
+        },
+        {
+          "add_on": "Match Facts - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Match facts"
+        }
+      ],
+      "widgets": [],
+      "bundles": [
+        {
+          "bundle": "Odds & Predictions - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Odds - Predictions"
+        },
+        {
+          "bundle": "Pressure Index & xG - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Pressure - Expected"
+        }
+      ]
+    }
+  ],
+  "rate_limit": {
+    "resets_in_seconds": 3482,
+    "remaining": 52998,
+    "requested_entity": "League"
+  },
+  "timezone": "UTC"
+}

@@ -1,0 +1,380 @@
+{
+  "data": [
+    {
+      "id": 1321592,
+      "transfer_id": null,
+      "player_id": 37603157,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 151,
+      "start": null,
+      "end": "2024-11-14",
+      "captain": false,
+      "jersey_number": 9
+    },
+    {
+      "id": 1543469,
+      "transfer_id": null,
+      "player_id": 17176205,
+      "team_id": 18554,
+      "position_id": 24,
+      "detailed_position_id": 24,
+      "start": null,
+      "end": "2026-04-01",
+      "captain": false,
+      "jersey_number": 1
+    },
+    {
+      "id": 1543482,
+      "transfer_id": null,
+      "player_id": 37758643,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 151,
+      "start": null,
+      "end": "2026-03-29",
+      "captain": false,
+      "jersey_number": 18
+    },
+    {
+      "id": 1530322,
+      "transfer_id": null,
+      "player_id": 37644692,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 154,
+      "start": null,
+      "end": "2025-10-13",
+      "captain": false,
+      "jersey_number": 23
+    },
+    {
+      "id": 1330605,
+      "transfer_id": null,
+      "player_id": 37566137,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 152,
+      "start": null,
+      "end": "2025-09-04",
+      "captain": false,
+      "jersey_number": 11
+    },
+    {
+      "id": 1323235,
+      "transfer_id": null,
+      "player_id": 581043,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 154,
+      "start": null,
+      "end": "2022-09-27",
+      "captain": false,
+      "jersey_number": 20
+    },
+    {
+      "id": 1527675,
+      "transfer_id": null,
+      "player_id": 37744066,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 156,
+      "start": null,
+      "end": "2026-03-29",
+      "captain": false,
+      "jersey_number": 14
+    },
+    {
+      "id": 1323227,
+      "transfer_id": null,
+      "player_id": 430779,
+      "team_id": 18554,
+      "position_id": 24,
+      "detailed_position_id": 24,
+      "start": null,
+      "end": "2026-03-29",
+      "captain": false,
+      "jersey_number": 22
+    },
+    {
+      "id": 1544195,
+      "transfer_id": null,
+      "player_id": 430355,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 148,
+      "start": null,
+      "end": "2021-03-28",
+      "captain": false,
+      "jersey_number": 3
+    },
+    {
+      "id": 1544196,
+      "transfer_id": null,
+      "player_id": 99064,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 148,
+      "start": null,
+      "end": "2017-03-28",
+      "captain": false,
+      "jersey_number": 6
+    },
+    {
+      "id": 29471,
+      "transfer_id": null,
+      "player_id": 600694,
+      "team_id": 18554,
+      "position_id": 24,
+      "detailed_position_id": 24,
+      "start": null,
+      "end": "2021-03-28",
+      "captain": false,
+      "jersey_number": 16
+    },
+    {
+      "id": 1323233,
+      "transfer_id": null,
+      "player_id": 305358,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 155,
+      "start": null,
+      "end": "2021-03-25",
+      "captain": false,
+      "jersey_number": 2
+    },
+    {
+      "id": 1527673,
+      "transfer_id": null,
+      "player_id": 37357411,
+      "team_id": 18554,
+      "position_id": 26,
+      "detailed_position_id": 150,
+      "start": null,
+      "end": "2020-10-09",
+      "captain": false,
+      "jersey_number": 25
+    },
+    {
+      "id": 1321559,
+      "transfer_id": null,
+      "player_id": 35709049,
+      "team_id": 18554,
+      "position_id": 26,
+      "detailed_position_id": 153,
+      "start": null,
+      "end": "2025-09-04",
+      "captain": false,
+      "jersey_number": 15
+    },
+    {
+      "id": 1323240,
+      "transfer_id": null,
+      "player_id": 96364,
+      "team_id": 18554,
+      "position_id": 26,
+      "detailed_position_id": 149,
+      "start": null,
+      "end": "2018-03-23",
+      "captain": true,
+      "jersey_number": 17
+    },
+    {
+      "id": 1330607,
+      "transfer_id": null,
+      "player_id": 467005,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 151,
+      "start": null,
+      "end": "2018-10-16",
+      "captain": false,
+      "jersey_number": 19
+    },
+    {
+      "id": 1543473,
+      "transfer_id": null,
+      "player_id": 37669542,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 148,
+      "start": null,
+      "end": "2026-04-01",
+      "captain": false,
+      "jersey_number": 24
+    },
+    {
+      "id": 1527669,
+      "transfer_id": null,
+      "player_id": 466999,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 155,
+      "start": null,
+      "end": "2021-11-30",
+      "captain": false,
+      "jersey_number": 21
+    },
+    {
+      "id": 1543477,
+      "transfer_id": null,
+      "player_id": 31907,
+      "team_id": 18554,
+      "position_id": 26,
+      "detailed_position_id": 149,
+      "start": null,
+      "end": "2026-03-29",
+      "captain": false,
+      "jersey_number": 13
+    },
+    {
+      "id": 1544197,
+      "transfer_id": null,
+      "player_id": 37316858,
+      "team_id": 18554,
+      "position_id": 26,
+      "detailed_position_id": 150,
+      "start": null,
+      "end": "2021-06-05",
+      "captain": false,
+      "jersey_number": 10
+    },
+    {
+      "id": 1330606,
+      "transfer_id": null,
+      "player_id": 15169863,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 152,
+      "start": null,
+      "end": "2021-10-07",
+      "captain": false,
+      "jersey_number": 26
+    },
+    {
+      "id": 1544199,
+      "transfer_id": null,
+      "player_id": 21413511,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 152,
+      "start": null,
+      "end": "2022-06-02",
+      "captain": false,
+      "jersey_number": 7
+    },
+    {
+      "id": 1323255,
+      "transfer_id": null,
+      "player_id": 37579757,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 152,
+      "start": null,
+      "end": "2024-03-26",
+      "captain": false,
+      "jersey_number": 8
+    },
+    {
+      "id": 1323256,
+      "transfer_id": null,
+      "player_id": 305950,
+      "team_id": 18554,
+      "position_id": 27,
+      "detailed_position_id": 152,
+      "start": null,
+      "end": "2019-09-21",
+      "captain": false,
+      "jersey_number": 12
+    },
+    {
+      "id": 1409531,
+      "transfer_id": null,
+      "player_id": 37667492,
+      "team_id": 18554,
+      "position_id": 25,
+      "detailed_position_id": 148,
+      "start": null,
+      "end": "2026-03-29",
+      "captain": false,
+      "jersey_number": 5
+    }
+  ],
+  "subscription": [
+    {
+      "meta": {
+        "current_timestamp": 1782409709,
+        "next_billing_cycle": "2026-07-09T13:20:20 UTC"
+      },
+      "plans": [
+        {
+          "plan": "Pro - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Advanced"
+        },
+        {
+          "plan": "Euro Club Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        },
+        {
+          "plan": "International Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        }
+      ],
+      "add_ons": [
+        {
+          "add_on": "50000 API Calls - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Calls"
+        },
+        {
+          "add_on": "130 Extra Leagues - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Extra leagues"
+        },
+        {
+          "add_on": "Transfer Rumours - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Transfer rumours"
+        },
+        {
+          "add_on": "Expected Lineups - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Lineups"
+        },
+        {
+          "add_on": "News - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "News"
+        },
+        {
+          "add_on": "Match Facts - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Match facts"
+        }
+      ],
+      "widgets": [],
+      "bundles": [
+        {
+          "bundle": "Odds & Predictions - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Odds - Predictions"
+        },
+        {
+          "bundle": "Pressure Index & xG - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Pressure - Expected"
+        }
+      ]
+    }
+  ],
+  "rate_limit": {
+    "resets_in_seconds": 3483,
+    "remaining": 52998,
+    "requested_entity": "PlayerTeam"
+  },
+  "timezone": "UTC"
+}

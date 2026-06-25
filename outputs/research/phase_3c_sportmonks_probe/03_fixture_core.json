@@ -1,0 +1,1119 @@
+{
+  "data": {
+    "id": 18475817,
+    "sport_id": 1,
+    "league_id": 711,
+    "season_id": 16497,
+    "stage_id": 77445494,
+    "group_id": null,
+    "aggregate_id": 28590,
+    "round_id": null,
+    "state_id": 5,
+    "venue_id": 2562,
+    "name": "Tunisia vs Mali",
+    "starting_at": "2022-03-29 19:30:00",
+    "result_info": "Game ended in draw.",
+    "leg": "2/2",
+    "details": null,
+    "length": 90,
+    "placeholder": false,
+    "has_odds": true,
+    "has_premium_odds": false,
+    "starting_at_timestamp": 1648582200,
+    "participants": [
+      {
+        "id": 18554,
+        "sport_id": 1,
+        "country_id": 1439,
+        "venue_id": 343603,
+        "gender": "male",
+        "name": "Tunisia",
+        "short_code": "TUN",
+        "image_path": "https://cdn.sportmonks.com/images/soccer/teams/26/18554.png",
+        "founded": 1957,
+        "type": "national",
+        "placeholder": false,
+        "last_played_at": "2026-06-21 04:00:00",
+        "meta": {
+          "location": "home",
+          "winner": false,
+          "position": 2
+        }
+      },
+      {
+        "id": 18731,
+        "sport_id": 1,
+        "country_id": 26,
+        "venue_id": 343707,
+        "gender": "male",
+        "name": "Mali",
+        "short_code": "MLI",
+        "image_path": "https://cdn.sportmonks.com/images/soccer/teams/11/18731.png",
+        "founded": 1960,
+        "type": "national",
+        "placeholder": false,
+        "last_played_at": "2026-03-31 17:00:00",
+        "meta": {
+          "location": "away",
+          "winner": false,
+          "position": 1
+        }
+      }
+    ],
+    "scores": [
+      {
+        "id": 11030264,
+        "fixture_id": 18475817,
+        "type_id": 2,
+        "participant_id": 18554,
+        "score": {
+          "goals": 0,
+          "participant": "home"
+        },
+        "description": "2ND_HALF"
+      },
+      {
+        "id": 11030265,
+        "fixture_id": 18475817,
+        "type_id": 2,
+        "participant_id": 18731,
+        "score": {
+          "goals": 0,
+          "participant": "away"
+        },
+        "description": "2ND_HALF"
+      },
+      {
+        "id": 11030266,
+        "fixture_id": 18475817,
+        "type_id": 1,
+        "participant_id": 18554,
+        "score": {
+          "goals": 0,
+          "participant": "home"
+        },
+        "description": "1ST_HALF"
+      },
+      {
+        "id": 11030267,
+        "fixture_id": 18475817,
+        "type_id": 1,
+        "participant_id": 18731,
+        "score": {
+          "goals": 0,
+          "participant": "away"
+        },
+        "description": "1ST_HALF"
+      },
+      {
+        "id": 11030268,
+        "fixture_id": 18475817,
+        "type_id": 1525,
+        "participant_id": 18554,
+        "score": {
+          "goals": 0,
+          "participant": "home"
+        },
+        "description": "CURRENT"
+      },
+      {
+        "id": 11030269,
+        "fixture_id": 18475817,
+        "type_id": 1525,
+        "participant_id": 18731,
+        "score": {
+          "goals": 0,
+          "participant": "away"
+        },
+        "description": "CURRENT"
+      }
+    ],
+    "lineups": [
+      {
+        "id": 892825440,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 305961,
+        "team_id": 18554,
+        "position_id": 24,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "A. Jemal",
+        "jersey_number": 1
+      },
+      {
+        "id": 892825425,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 304553,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Bilel Ifa",
+        "jersey_number": 2
+      },
+      {
+        "id": 1511063,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 430355,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 4,
+        "player_name": "Montassar Talbi",
+        "jersey_number": 3
+      },
+      {
+        "id": 1511066,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 98519,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 3,
+        "player_name": "Nader Ghandri",
+        "jersey_number": 4
+      },
+      {
+        "id": 892825438,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 97716,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Oussama Haddadi",
+        "jersey_number": 5
+      },
+      {
+        "id": 892825444,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 37357411,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "A. Ben Slimane",
+        "jersey_number": 6
+      },
+      {
+        "id": 1511077,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 301704,
+        "team_id": 18554,
+        "position_id": 27,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 11,
+        "player_name": "Youssef Msakni",
+        "jersey_number": 7
+      },
+      {
+        "id": 1511079,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 306050,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 7,
+        "player_name": "Ghaylen Chaaleli",
+        "jersey_number": 8
+      },
+      {
+        "id": 892825423,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 305950,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Mortadha Ben Ouanes",
+        "jersey_number": 9
+      },
+      {
+        "id": 892825465,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 37316858,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Hannibal Mejbri",
+        "jersey_number": 10
+      },
+      {
+        "id": 892825463,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 305021,
+        "team_id": 18554,
+        "position_id": 27,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Taha Yassine Khenissi",
+        "jersey_number": 11
+      },
+      {
+        "id": 1511091,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 293923,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 5,
+        "player_name": "Ali Ma\u00e2loul",
+        "jersey_number": 12
+      },
+      {
+        "id": 892825426,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 97544,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Ferjani Sassi",
+        "jersey_number": 13
+      },
+      {
+        "id": 1511096,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 98020,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 6,
+        "player_name": "A\u00efssa La\u00efdouni",
+        "jersey_number": 14
+      },
+      {
+        "id": 1511097,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 15074708,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 8,
+        "player_name": "Mohamed Ali Ben Romdhane",
+        "jersey_number": 15
+      },
+      {
+        "id": 892825442,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 600694,
+        "team_id": 18554,
+        "position_id": 24,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Aymen Dahmen",
+        "jersey_number": 16
+      },
+      {
+        "id": 892825464,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 96364,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Ellyes Skhiri",
+        "jersey_number": 17
+      },
+      {
+        "id": 892825427,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 305341,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Saad Bguir",
+        "jersey_number": 18
+      },
+      {
+        "id": 1511104,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 305190,
+        "team_id": 18554,
+        "position_id": 27,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 10,
+        "player_name": "Seifeddine Jaziri",
+        "jersey_number": 19
+      },
+      {
+        "id": 1511105,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 47280,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 2,
+        "player_name": "Mohamed Dr\u00e4ger",
+        "jersey_number": 20
+      },
+      {
+        "id": 892825424,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 305128,
+        "team_id": 18554,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 12,
+        "formation_position": null,
+        "player_name": "Hamza Mathlouthi",
+        "jersey_number": 21
+      },
+      {
+        "id": 1511107,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 306155,
+        "team_id": 18554,
+        "position_id": 24,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 1,
+        "player_name": "Bechir Ben Said",
+        "jersey_number": 22
+      },
+      {
+        "id": 1511108,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 96940,
+        "team_id": 18554,
+        "position_id": 26,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 9,
+        "player_name": "Na\u00efm Sliti",
+        "jersey_number": 23
+      },
+      {
+        "id": 1511109,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 788683,
+        "team_id": 18731,
+        "position_id": 24,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 1,
+        "player_name": "Ibrahim Mounkoro",
+        "jersey_number": 1
+      },
+      {
+        "id": 1511110,
+        "sport_id": 1,
+        "fixture_id": 18475817,
+        "player_id": 62181,
+        "team_id": 18731,
+        "position_id": 25,
+        "formation_field": null,
+        "type_id": 11,
+        "formation_position": 2,
+        "player_name": "Hamari Traor\u00e9",
+        "jersey_number": 2
+      }
+    ],
+    "events": [
+      {
+        "id": 30180002,
+        "fixture_id": 18475817,
+        "period_id": 267807,
+        "participant_id": 18731,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 5640928,
+        "related_player_id": 53625,
+        "player_name": "Mohamed Camara",
+        "related_player_name": "Amadou Haidara",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 34,
+        "extra_minute": null,
+        "injured": true,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 1
+      },
+      {
+        "id": 30180361,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18731,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 170056,
+        "related_player_id": 978883,
+        "player_name": "Moussa Doumbia",
+        "related_player_name": "M. Djenepo",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 64,
+        "extra_minute": null,
+        "injured": false,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 2
+      },
+      {
+        "id": 30180367,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18554,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 305021,
+        "related_player_id": 305190,
+        "player_name": "Taha Yassine Khenissi",
+        "related_player_name": "Seifeddine Jaziri",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 66,
+        "extra_minute": null,
+        "injured": false,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 3
+      },
+      {
+        "id": 30180368,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18554,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 96364,
+        "related_player_id": 301704,
+        "player_name": "Ellyes Skhiri",
+        "related_player_name": "Youssef Msakni",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 67,
+        "extra_minute": null,
+        "injured": false,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 4
+      },
+      {
+        "id": 30180373,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18731,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 751434,
+        "related_player_id": 52803,
+        "player_name": "A. Dieng",
+        "related_player_name": "Diadi\u00e9 Samass\u00e9kou",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 73,
+        "extra_minute": null,
+        "injured": false,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 5
+      },
+      {
+        "id": 30180374,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18731,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 2144,
+        "related_player_id": 96870,
+        "player_name": "Abdoulaye Doucour\u00e9",
+        "related_player_name": "Yves Bissouma",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 73,
+        "extra_minute": null,
+        "injured": null,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 6
+      },
+      {
+        "id": 30180375,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18731,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 12066684,
+        "related_player_id": 62819,
+        "player_name": "I. Kon\u00e9",
+        "related_player_name": "A. Diaby",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 73,
+        "extra_minute": null,
+        "injured": null,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 7
+      },
+      {
+        "id": 30180390,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18554,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 304553,
+        "related_player_id": 15074708,
+        "player_name": "Bilel Ifa",
+        "related_player_name": "Mohamed Ali Ben Romdhane",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 90,
+        "extra_minute": 1,
+        "injured": null,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 8
+      },
+      {
+        "id": 30180396,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18554,
+        "type_id": 18,
+        "section": "event",
+        "player_id": 37316858,
+        "related_player_id": 96940,
+        "player_name": "Hannibal Mejbri",
+        "related_player_name": "Na\u00efm Sliti",
+        "result": null,
+        "info": null,
+        "addition": null,
+        "minute": 90,
+        "extra_minute": 1,
+        "injured": null,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": null,
+        "sort_order": 9
+      },
+      {
+        "id": 30180344,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18731,
+        "type_id": 19,
+        "section": "event",
+        "player_id": 163019,
+        "related_player_id": null,
+        "player_name": "Kiki Kouyat\u00e9",
+        "related_player_name": null,
+        "result": null,
+        "info": "Roughing",
+        "addition": "1st Yellow Card",
+        "minute": 55,
+        "extra_minute": null,
+        "injured": null,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": false,
+        "sort_order": 1
+      },
+      {
+        "id": 30180369,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18731,
+        "type_id": 19,
+        "section": "event",
+        "player_id": 96870,
+        "related_player_id": null,
+        "player_name": "Yves Bissouma",
+        "related_player_name": null,
+        "result": null,
+        "info": "Roughing",
+        "addition": "2nd Yellow Card",
+        "minute": 69,
+        "extra_minute": null,
+        "injured": null,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": false,
+        "sort_order": 2
+      },
+      {
+        "id": 30180370,
+        "fixture_id": 18475817,
+        "period_id": 267846,
+        "participant_id": 18554,
+        "type_id": 19,
+        "section": "event",
+        "player_id": 306155,
+        "related_player_id": null,
+        "player_name": "Bechir Ben Said",
+        "related_player_name": null,
+        "result": null,
+        "info": "Delay of game",
+        "addition": "3rd Yellow Card",
+        "minute": 90,
+        "extra_minute": 3,
+        "injured": null,
+        "on_bench": false,
+        "coach_id": null,
+        "sub_type_id": null,
+        "detailed_period_id": null,
+        "rescinded": false,
+        "sort_order": 3
+      }
+    ],
+    "statistics": [
+      {
+        "id": 3234505,
+        "fixture_id": 18475817,
+        "type_id": 34,
+        "participant_id": 18731,
+        "data": {
+          "value": 1
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234504,
+        "fixture_id": 18475817,
+        "type_id": 34,
+        "participant_id": 18554,
+        "data": {
+          "value": 2
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234567,
+        "fixture_id": 18475817,
+        "type_id": 41,
+        "participant_id": 18731,
+        "data": {
+          "value": 5
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234566,
+        "fixture_id": 18475817,
+        "type_id": 41,
+        "participant_id": 18554,
+        "data": {
+          "value": 6
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234551,
+        "fixture_id": 18475817,
+        "type_id": 42,
+        "participant_id": 18731,
+        "data": {
+          "value": 6
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234550,
+        "fixture_id": 18475817,
+        "type_id": 42,
+        "participant_id": 18554,
+        "data": {
+          "value": 6
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234539,
+        "fixture_id": 18475817,
+        "type_id": 43,
+        "participant_id": 18731,
+        "data": {
+          "value": 125
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234538,
+        "fixture_id": 18475817,
+        "type_id": 43,
+        "participant_id": 18554,
+        "data": {
+          "value": 106
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234545,
+        "fixture_id": 18475817,
+        "type_id": 44,
+        "participant_id": 18731,
+        "data": {
+          "value": 50
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234544,
+        "fixture_id": 18475817,
+        "type_id": 44,
+        "participant_id": 18554,
+        "data": {
+          "value": 22
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234541,
+        "fixture_id": 18475817,
+        "type_id": 45,
+        "participant_id": 18731,
+        "data": {
+          "value": 64
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234540,
+        "fixture_id": 18475817,
+        "type_id": 45,
+        "participant_id": 18554,
+        "data": {
+          "value": 36
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234929,
+        "fixture_id": 18475817,
+        "type_id": 46,
+        "participant_id": 18731,
+        "data": {
+          "value": 87
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234928,
+        "fixture_id": 18475817,
+        "type_id": 46,
+        "participant_id": 18554,
+        "data": {
+          "value": 93
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234569,
+        "fixture_id": 18475817,
+        "type_id": 47,
+        "participant_id": 18731,
+        "data": {
+          "value": 0
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234568,
+        "fixture_id": 18475817,
+        "type_id": 47,
+        "participant_id": 18554,
+        "data": {
+          "value": 0
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234829,
+        "fixture_id": 18475817,
+        "type_id": 49,
+        "participant_id": 18731,
+        "data": {
+          "value": 3
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234828,
+        "fixture_id": 18475817,
+        "type_id": 49,
+        "participant_id": 18554,
+        "data": {
+          "value": 3
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234831,
+        "fixture_id": 18475817,
+        "type_id": 50,
+        "participant_id": 18731,
+        "data": {
+          "value": 3
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234830,
+        "fixture_id": 18475817,
+        "type_id": 50,
+        "participant_id": 18554,
+        "data": {
+          "value": 3
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234823,
+        "fixture_id": 18475817,
+        "type_id": 51,
+        "participant_id": 18731,
+        "data": {
+          "value": 1
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234822,
+        "fixture_id": 18475817,
+        "type_id": 51,
+        "participant_id": 18554,
+        "data": {
+          "value": 1
+        },
+        "location": "home"
+      },
+      {
+        "id": 3234507,
+        "fixture_id": 18475817,
+        "type_id": 52,
+        "participant_id": 18731,
+        "data": {
+          "value": 0
+        },
+        "location": "away"
+      },
+      {
+        "id": 3234506,
+        "fixture_id": 18475817,
+        "type_id": 52,
+        "participant_id": 18554,
+        "data": {
+          "value": 0
+        },
+        "location": "home"
+      },
+      {
+        "id": 22245216,
+        "fixture_id": 18475817,
+        "type_id": 54,
+        "participant_id": 18731,
+        "data": {
+          "value": 4
+        },
+        "location": "away"
+      }
+    ],
+    "referees": [
+      {
+        "id": 2422219,
+        "fixture_id": 18475817,
+        "referee_id": 17713,
+        "type_id": 6
+      },
+      {
+        "id": 2422210,
+        "fixture_id": 18475817,
+        "referee_id": 14014,
+        "type_id": 7
+      },
+      {
+        "id": 2422214,
+        "fixture_id": 18475817,
+        "referee_id": 14015,
+        "type_id": 8
+      },
+      {
+        "id": 1181580,
+        "fixture_id": 18475817,
+        "referee_id": 29683,
+        "type_id": 9
+      }
+    ],
+    "formations": [
+      {
+        "id": 327824,
+        "fixture_id": 18475817,
+        "participant_id": 18731,
+        "formation": "4-1-4-1",
+        "location": "away"
+      },
+      {
+        "id": 327823,
+        "fixture_id": 18475817,
+        "participant_id": 18554,
+        "formation": "4-3-3",
+        "location": "home"
+      }
+    ]
+  },
+  "subscription": [
+    {
+      "meta": {
+        "current_timestamp": 1782409708,
+        "next_billing_cycle": "2026-07-09T13:20:20 UTC"
+      },
+      "plans": [
+        {
+          "plan": "Pro - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Advanced"
+        },
+        {
+          "plan": "Euro Club Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        },
+        {
+          "plan": "International Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        }
+      ],
+      "add_ons": [
+        {
+          "add_on": "50000 API Calls - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Calls"
+        },
+        {
+          "add_on": "130 Extra Leagues - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Extra leagues"
+        },
+        {
+          "add_on": "Transfer Rumours - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Transfer rumours"
+        },
+        {
+          "add_on": "Expected Lineups - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Lineups"
+        },
+        {
+          "add_on": "News - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "News"
+        },
+        {
+          "add_on": "Match Facts - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Match facts"
+        }
+      ],
+      "widgets": [],
+      "bundles": [
+        {
+          "bundle": "Odds & Predictions - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Odds - Predictions"
+        },
+        {
+          "bundle": "Pressure Index & xG - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Pressure - Expected"
+        }
+      ]
+    }
+  ],
+  "rate_limit": {
+    "resets_in_seconds": 3482,
+    "remaining": 52995,
+    "requested_entity": "Fixture"
+  },
+  "timezone": "UTC"
+}

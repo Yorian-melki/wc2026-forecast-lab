@@ -1,0 +1,398 @@
+{
+  "data": [
+    {
+      "id": 168925,
+      "sport_id": 1,
+      "league_id": 2,
+      "season_id": 5315,
+      "stage_id": 9925,
+      "group_id": null,
+      "aggregate_id": 21521,
+      "round_id": null,
+      "state_id": 5,
+      "venue_id": 321614,
+      "name": "Chelsea vs Paris Saint Germain",
+      "starting_at": "2014-04-08 18:45:00",
+      "result_info": "Chelsea won after full-time.",
+      "leg": "2/2",
+      "details": null,
+      "length": 90,
+      "placeholder": false,
+      "has_odds": false,
+      "has_premium_odds": false,
+      "starting_at_timestamp": 1396982700,
+      "lineups": [
+        {
+          "id": 2189619,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 84,
+          "team_id": 18,
+          "position_id": 24,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Petr \u010cech",
+          "jersey_number": 1
+        },
+        {
+          "id": 2189630,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 690,
+          "team_id": 18,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Branislav Ivanovi\u0107",
+          "jersey_number": 2
+        },
+        {
+          "id": 2189639,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 1333,
+          "team_id": 18,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "David Luiz",
+          "jersey_number": 4
+        },
+        {
+          "id": 2189646,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95,
+          "team_id": 18,
+          "position_id": 26,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Frank Lampard",
+          "jersey_number": 8
+        },
+        {
+          "id": 2189655,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 1307,
+          "team_id": 18,
+          "position_id": 27,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Oscar",
+          "jersey_number": 11
+        },
+        {
+          "id": 2189665,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 1331,
+          "team_id": 18,
+          "position_id": 27,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Eden Hazard",
+          "jersey_number": 17
+        },
+        {
+          "id": 2189670,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 1317,
+          "team_id": 18,
+          "position_id": 26,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Willian",
+          "jersey_number": 22
+        },
+        {
+          "id": 2189677,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 334,
+          "team_id": 18,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Gary Cahill",
+          "jersey_number": 24
+        },
+        {
+          "id": 2189683,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 88,
+          "team_id": 18,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "John Terry",
+          "jersey_number": 26
+        },
+        {
+          "id": 2189693,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 1330,
+          "team_id": 18,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "C\u00e9sar Azpilicueta",
+          "jersey_number": 28
+        },
+        {
+          "id": 2189704,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 4119,
+          "team_id": 18,
+          "position_id": 27,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Samuel Eto'o",
+          "jersey_number": 29
+        },
+        {
+          "id": 2189721,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95792,
+          "team_id": 591,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Thiago Silva",
+          "jersey_number": 2
+        },
+        {
+          "id": 2189726,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95726,
+          "team_id": 591,
+          "position_id": 26,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Thiago Motta",
+          "jersey_number": 8
+        },
+        {
+          "id": 2189737,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 96088,
+          "team_id": 591,
+          "position_id": 27,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Edinson Cavani",
+          "jersey_number": 9
+        },
+        {
+          "id": 2189743,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 699,
+          "team_id": 591,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Alex",
+          "jersey_number": 13
+        },
+        {
+          "id": 2189751,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 94396,
+          "team_id": 591,
+          "position_id": 26,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Blaise Matuidi",
+          "jersey_number": 14
+        },
+        {
+          "id": 2189757,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95591,
+          "team_id": 591,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Maxwell",
+          "jersey_number": 17
+        },
+        {
+          "id": 2189766,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95594,
+          "team_id": 591,
+          "position_id": 27,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Ezequiel Lavezzi",
+          "jersey_number": 22
+        },
+        {
+          "id": 2189775,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95593,
+          "team_id": 591,
+          "position_id": 26,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Marco Verratti",
+          "jersey_number": 24
+        },
+        {
+          "id": 2189781,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 94043,
+          "team_id": 591,
+          "position_id": 25,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Christophe Jallet",
+          "jersey_number": 26
+        },
+        {
+          "id": 2189787,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95998,
+          "team_id": 591,
+          "position_id": 27,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Lucas Moura",
+          "jersey_number": 29
+        },
+        {
+          "id": 2189795,
+          "sport_id": 1,
+          "fixture_id": 168925,
+          "player_id": 95384,
+          "team_id": 591,
+          "position_id": 24,
+          "formation_field": null,
+          "type_id": 11,
+          "formation_position": null,
+          "player_name": "Salvatore Sirigu",
+          "jersey_number": 30
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "count": 1,
+    "per_page": 1,
+    "has_more": true,
+    "current_page": 1,
+    "next_page": "https://api.sportmonks.com/v3/football/fixtures?filters=lineupTypes%3A11&include=lineups&per_page=1&page=2",
+    "next_cursor": "https://api.sportmonks.com/v3/football/fixtures?filters=lineupTypes%3A11&include=lineups&cursor=WzEsMSxbMTY4OTI1XSxbWyJzcG9ydHMuZml4dHVyZXMuaWQiLDBdXV0"
+  },
+  "subscription": [
+    {
+      "meta": {
+        "current_timestamp": 1782409709,
+        "next_billing_cycle": "2026-07-09T13:20:20 UTC"
+      },
+      "plans": [
+        {
+          "plan": "Pro - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Advanced"
+        },
+        {
+          "plan": "Euro Club Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        },
+        {
+          "plan": "International Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        }
+      ],
+      "add_ons": [
+        {
+          "add_on": "50000 API Calls - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Calls"
+        },
+        {
+          "add_on": "130 Extra Leagues - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Extra leagues"
+        },
+        {
+          "add_on": "Transfer Rumours - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Transfer rumours"
+        },
+        {
+          "add_on": "Expected Lineups - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Lineups"
+        },
+        {
+          "add_on": "News - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "News"
+        },
+        {
+          "add_on": "Match Facts - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Match facts"
+        }
+      ],
+      "widgets": [],
+      "bundles": [
+        {
+          "bundle": "Odds & Predictions - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Odds - Predictions"
+        },
+        {
+          "bundle": "Pressure Index & xG - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Pressure - Expected"
+        }
+      ]
+    }
+  ],
+  "rate_limit": {
+    "resets_in_seconds": 3481,
+    "remaining": 52992,
+    "requested_entity": "Fixture"
+  },
+  "timezone": "UTC"
+}

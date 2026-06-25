@@ -103,14 +103,26 @@ API ✅** (500/mo free, World Cup odds; historical=paid) · **Sportmonks ✅** (
 rich data) · **API-Football ❌** (rejected both hosts; verify key) · **TheOdds.io ⚠️** (ambiguous domain;
 key withheld). Key gap unchanged: *historical* odds/totals for OOS backtesting still blocked on free tiers.
 
-## THE NEXT ACTION: Phase 3C — minimal Sportmonks endpoint probe (TIME-BOXED before 2026-07-09)
-While the Sportmonks Pro trial is live, run a **≤6-request** recon probing the high-value endpoints —
-fixtures (historical depth), lineups, injuries, statistics/**xG**, odds entitlement — to fill the
-UNKNOWN capability rows. Secret-safe (keys from `.env.yorian` only). In parallel, ask Yorian to verify
-the API-Football key product/host and confirm the real "TheOdds.io" provider.
-- **Allowed:** extend `scripts/research/`, outputs under `outputs/research/phase_3c_*`, docs.
+## ✅ Phase 3C — Sportmonks deep capability probe (OFFLINE) — DONE · `docs/PHASE_3C_SPORTMONKS_CAPABILITY_PROBE.md`
+All probes HTTP 200 (Pro trial → 2026-07-09). **Historical ODDS confirmed** (3,748 rows/fixture; 1X2 +
+O/U totals + Asian Handicap; `probability` + `winning` settlement) — unblocks OOS market-feature
+backtesting. **FIFA WC = league 732 (6 seasons)**; historical lineups/events/statistics/referees/squads
+confirmed. **xG/pressure entitled but EMPTY for the sampled international fixture** (coverage unconfirmed);
+expected-lineups + injuries unclear. READY_FOR_FEATURE_LAB: odds, lineups, fixtures, squads.
+
+## THE NEXT ACTION: Phase 3D — xG-coverage + historical-odds-depth kill-test (≤6 req, before 2026-07-09)
+Settle the open Sportmonks unknowns while the trial is live:
+1. **xG coverage** — request xG on (a) a recent top-club fixture (prove the include/endpoint returns
+   data) and (b) 2–3 WC league-732 fixtures (estimate *international* xG coverage). Resolves
+   entitled-but-sparse vs wrong-access.
+2. **Historical-odds depth** — confirm odds exist across the 6 WC-732 seasons (not just one fixture).
+3. **Expected-lineup `type_id`** + **injuries entitlement** on a current fixture/team.
+- **Allowed:** extend `scripts/research/`, outputs under `outputs/research/phase_3d_*`, docs.
 - **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration, ❌ key printed/committed,
   ❌ betting execution, ❌ scraping behind login, ❌ quota-rotation. Recon only.
+- **THEN (separate approval):** build an OFFLINE market-implied feature from Sportmonks historical odds
+  for international/WC and test vs the frozen baseline OOS → READY_FOR_MODEL_LAB only if it clears.
+- **Parallel asks for Yorian:** verify the API-Football key product/host; confirm the real "TheOdds.io".
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head
 Test whether the recent-form signal survives **on top of the actual production W/D/L** (Elo→DC→ML@0.20),
