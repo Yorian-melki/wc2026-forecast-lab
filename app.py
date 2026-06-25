@@ -365,6 +365,12 @@ TXT = {
         "sc_cols": "match · real score · model's top scores · % on real score · rank · result",
         "sc_comp_title": "Across competitions — same model, scored the same way",
         "sc_comp_note": "The Elo→Dixon-Coles core scored on every competition since 2010 (rolling pre-match Elos). 'WC2026 (live)' is this tournament so far. Lower RPS = better; every competition beats the coin-flip baseline.",
+        "sc_diag_note": "'Exact score' and 'average rank of the real score' are **diagnostics**, not targets. The model optimises calibrated probabilities — measured by RPS above (which beats the coin-flip line). We show exact-score numbers for transparency, not as a report card.",
+        "sc_ceiling_note": "Calling the exact final score is mostly chance: even a flawless model of this kind lands the top score only about 1 time in 8. Read exact-score hit-rates as a sanity check, not a grade.",
+        "sc_smalln_note": "Early in the tournament these figures rest on only a handful of matches, so they swing a lot — treat them with wide error bars until the sample grows.",
+        "sc_t1_help": "Diagnostic, not a target: how often the real score was the model's single most-likely scoreline. Exact scores are near-irreducible in football.",
+        "sc_t3_help": "Diagnostic: how often the real score landed in the model's top-3 scorelines.",
+        "sc_rank_help": "Diagnostic: average position of the real score among the model's ranked scorelines (1 = top pick). Tracked to spot patterns (e.g. high-scoring games), not optimised directly.",
         "empty_same_team": "Please select two different teams.",
         "empty_no_prob": "No probability data.",
         "empty_no_wc_hist": "No WC history data.",
@@ -468,6 +474,12 @@ TXT = {
         "sc_cols": "match · score réel · meilleurs scores du modèle · % sur le score réel · rang · résultat",
         "sc_comp_title": "Sur les compétitions — même modèle, même mesure",
         "sc_comp_note": "Le cœur Elo→Dixon-Coles mesuré sur chaque compétition depuis 2010 (Elos roulants d'avant-match). « CDM2026 (live) » = ce tournoi jusqu'ici. RPS plus bas = mieux ; chaque compétition bat le pile-ou-face.",
+        "sc_diag_note": "« Score exact » et « rang moyen du vrai score » sont des **diagnostics**, pas des objectifs. Le modèle optimise des probabilités calibrées — mesurées par le RPS ci-dessus (qui bat la ligne pile-ou-face). On affiche les scores exacts par transparence, pas comme un bulletin de notes.",
+        "sc_ceiling_note": "Deviner le score exact relève surtout du hasard : même un modèle parfait de ce type ne trouve le bon score qu'environ 1 fois sur 8. À lire comme un contrôle de cohérence, pas une note.",
+        "sc_smalln_note": "En début de tournoi, ces chiffres reposent sur une poignée de matchs et bougent beaucoup — à prendre avec de larges marges d'erreur tant que l'échantillon reste petit.",
+        "sc_t1_help": "Diagnostic, pas un objectif : à quelle fréquence le vrai score était le scoreline le plus probable du modèle. Les scores exacts sont quasi irréductibles au foot.",
+        "sc_t3_help": "Diagnostic : à quelle fréquence le vrai score était dans le top-3 du modèle.",
+        "sc_rank_help": "Diagnostic : position moyenne du vrai score dans le classement du modèle (1 = meilleur choix). Suivi pour repérer des tendances (matchs à buts), pas optimisé directement.",
         "empty_same_team": "Choisis deux équipes différentes.",
         "empty_no_prob": "Pas de données de probabilité.",
         "empty_no_wc_hist": "Pas de données d'historique Coupe du monde.",
@@ -1099,15 +1111,20 @@ elif page == "📊 Scorecard":
     a1, a2, a3, a4 = st.columns(4)
     a1.metric(t("sc_acc"), f"{s['outcome_accuracy']*100:.0f}%")
     a2.metric(t("sc_p"), f"{s['mean_prob_actual_score']*100:.1f}%")
-    a3.metric(t("sc_t1"), f"{s['exact_hit_top1']*100:.0f}%")
-    a4.metric(t("sc_t3"), f"{s['exact_hit_top3']*100:.0f}%")
+    a3.metric(t("sc_t1"), f"{s['exact_hit_top1']*100:.0f}%", help=t("sc_t1_help"))
+    a4.metric(t("sc_t3"), f"{s['exact_hit_top3']*100:.0f}%", help=t("sc_t3_help"))
     b1, b2, b3 = st.columns(3)
     rps_better = s["mean_rps"] <= s["rps_baseline_uniform"]
     b1.metric(t("sc_rps"), f"{s['mean_rps']:.3f}",
               delta=("✓ beats coin-flip" if rps_better else "✗ below coin-flip"),
               delta_color="normal" if rps_better else "inverse")
     b2.metric(t("sc_rps_base"), f"{s['rps_baseline_uniform']:.3f}", delta_color="off")
-    b3.metric(t("sc_rank"), f"{s['mean_score_rank']:.1f}", delta_color="off")
+    b3.metric(t("sc_rank"), f"{s['mean_score_rank']:.1f}", delta_color="off", help=t("sc_rank_help"))
+    # Honesty framing (display-only): proper scores are the target; exact-score/rank are diagnostics.
+    st.caption(t("sc_diag_note"))
+    st.caption(t("sc_ceiling_note"))
+    if s["n_matches"] < 64:
+        st.caption(t("sc_smalln_note"))
 
     bst, wst = sc["best"], sc["worst"]
     if bst and wst:
@@ -2591,6 +2608,25 @@ Occam's razor: simpler model wins when calibration gap is material.
             <b style='color:{color}'>{icon} {title}</b><br>
             <span style='color:{MUTED};font-size:13px'>{desc}</span>
             </div>""", unsafe_allow_html=True)
+
+        st.markdown("### What we tested — and won't chase")
+        st.markdown(
+            "Offline experiments with the production model frozen (full write-ups: repo "
+            "`docs/PHASE_2B…2G`). We report negative results as plainly as positive ones:\n\n"
+            "- **Fatter-tailed scoreline distribution** (to rank high-scoring games better) — tested "
+            "offline; it degraded probability calibration (RPS / Brier / ECE) for only a ~4% gain in "
+            "high-total rank, and even hurt top-3 coverage. **Rejected (Phase 2B).**\n"
+            "- **Draw re-calibration** (single-factor + isotonic, walk-forward out-of-sample) — the "
+            "proper-score (RPS / NLL) gain was within bootstrap noise. The live-sample 'draw weakness' "
+            "was sampling noise; on robust historical data the model mildly *over*-predicts draws. "
+            "**Not shipped (Phase 2F).**\n"
+            "- **Objective & ceiling audit** — a self-simulation shows the model sits near the natural "
+            "ceiling for this class of model on most metrics (e.g. exact-score top-1 ceiling ≈ 12.7%, "
+            "in-sample). **Model math frozen (Phase 2D / 2G).**\n\n"
+            "Effort now goes to data quality and honest reporting, not model tinkering. **Scoreline "
+            "rank and exact-score are tracked as diagnostics, not optimisation targets** — the model "
+            "optimises calibrated outcome probabilities (RPS / Brier / NLL)."
+        )
 
     with t5:
         st.markdown("### Global Maturity Audit — Quant Lab Standard")
