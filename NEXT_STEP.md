@@ -82,20 +82,24 @@ high-total), champion-entangled (temperature), or aimed at a demoted diagnostic 
 - **Eliminated:** draw calibration (2F), global distribution shape (2B), exact-score/rank as targets (2D).
 - **"No model change" is the strongest posture for the math**, paired with reporting improvements.
 
-## THE NEXT ACTION: Phase 2H — Reporting / model-honesty improvements (DESIGN FIRST)
-Operationalise the 2D/2G conclusions in the UI: surface **proper scores** (RPS/Brier/NLL) + CIs + ceiling
-context; **demote scoreline rank & exact-score to labelled diagnostics** (not targets); honest copy that
-exact-score is near-irreducible and that the model is near its achievable ceiling. **Display-only, GREEN
-LANE (like Phase 1E).** Plan + show exact files/copy BEFORE editing; get approval; then implement → test →
-commit → push.
+## ✅ Phase 2H — reporting / model-honesty improvements (DISPLAY-ONLY) — DONE & PUSHED · commit `6043b88`
+Scorecard honesty notes + tooltips (EN+FR): exact-score & scoreline-rank = **diagnostics, not targets**;
+near-ceiling note; small-sample (<64) caveat. Model Lab Limitations "What we tested — and won't chase"
+block (2B rejected · 2F not shipped · 2D/2G math frozen). **626 passed; production math/data/config/nav
+untouched; site HTTP 200.** Model math remains FROZEN per 2G.
 
-### Allowed (2H)
-- Display/markup/copy in `app.py` (and `src/wc2026/web_analytics.py` markup if needed) — like Phase 1E.
-- New `tests/test_*.py` for any added display helpers. Reuse the 2D/2F outputs as reference content.
+## THE NEXT ACTION: Phase 2I — FINAL STATE / NEXT OPTIONS SUMMARY (ANALYSIS ONLY)
+Concise project-state summary after Phases 1A–2H. **No code/model/config/data change.** Output =
+`docs/PHASE_2I_FINAL_STATE.md`. Must cover:
+1. what was improved (1A–2H),
+2. what was deliberately NOT changed (model math frozen; nav deferred; etc.),
+3. which model weaknesses are real vs fake/irreducible (per 2D ceiling audit),
+4. which experiments failed and why (2B fat-tail, 2F draw calibration),
+5. current production risk status,
+6. best next options ranked (reporting/honesty done; diagnostics 3a/3b optional; market data; freeze).
 
-### FORBIDDEN in 2H
-- ❌ No model math / probability / forecast / scorecard-calculation change.
-- ❌ No `data/*` / `configs/*` change. ❌ No nav rewrite / `st.radio` change. ❌ No layout redesign.
+### FORBIDDEN in 2I
+- ❌ No code/model/config/data change, ❌ no implementation. Written summary only.
 
 ### Optional (separate, only if requested) — evidence-closing diagnostics
 - **3a:** offline OOS regression of actual total goals on in-repo pre-match features → close/open the

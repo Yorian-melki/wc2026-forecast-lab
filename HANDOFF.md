@@ -162,8 +162,18 @@ real remaining signals are data-blocked (market→conditional high-total) or cha
   market data acquisition (separate data decision; unlock for conditional high-total).
 - **"No model change" is now the strongest posture for the math** — paired with reporting improvements.
 
+## Phase 2H — reporting / model-honesty improvements (DISPLAY-ONLY) · commit `6043b88` — DONE & PUSHED
+Shipped: **Scorecard** honesty notes + tooltips (EN+FR) — exact-score & scoreline-rank labelled
+**diagnostics, not targets**; exact-score near-ceiling note; small-sample (<64 matches) caveat. **Model
+Lab → Limitations** "What we tested — and won't chase" block recording the 2B fat-tail rejection, the 2F
+draw-calibration non-result, and the 2D/2G model-math freeze.
+- **Verification:** full suite **626 passed**; `tests/test_honesty_copy.py` (6); **production math/data/
+  config/nav untouched** (`src/wc2026/`, `data/`, `configs/` byte-identical; live blob `bbcd3ef…648271`);
+  site **HTTP 200**. Display/copy only — GREEN LANE.
+- **Model math remains FROZEN per Phase 2G.** 1D-B nav still deferred.
+
 ## Next step
-**Phase 2H — Reporting / model-honesty improvements (DESIGN FIRST).** Surface proper scores (RPS/Brier/
-NLL) + CIs + ceiling context in-app; demote scoreline rank & exact-score to *labelled diagnostics*; honest
-copy that exact-score is near-irreducible. Display-only (GREEN LANE, like Phase 1E) — **no model/config/
-data/probability change.** Plan + show files before editing. See `NEXT_STEP.md`. (1D-B nav still deferred.)
+**Phase 2I — FINAL STATE / NEXT OPTIONS SUMMARY (ANALYSIS ONLY).** Concise project-state summary after
+Phases 1A–2H: what improved · what was deliberately not changed · real vs fake/irreducible weaknesses ·
+failed experiments & why · production risk status · ranked next options. **No code/model/config/data
+change.** See `NEXT_STEP.md`. (1D-B nav still deferred.)
