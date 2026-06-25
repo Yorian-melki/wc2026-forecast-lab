@@ -172,8 +172,22 @@ draw-calibration non-result, and the 2D/2G model-math freeze.
   site **HTTP 200**. Display/copy only — GREEN LANE.
 - **Model math remains FROZEN per Phase 2G.** 1D-B nav still deferred.
 
+## Phase 3A — Evidence Lab / model-improvement search (OFFLINE RESEARCH) — DONE · verdict RESEARCH
+Doc: `docs/PHASE_3A_EVIDENCE_LAB.md`. Isolated research files only (`src/wc2026/experimental/
+match_features.py`, `scripts/exp_feature_search.py`, `outputs/experiments/3A_evidence_lab/`,
+`tests/test_match_features.py`). 631 suite passes; **production model/data/config/nav untouched**.
+- **First POSITIVE evidence after 2B & 2F:** recent-form features (recent goals-against `ga_diff` +
+  points momentum `form_diff`) add **genuine OOS signal beyond Elo-alone** on W/D/L — log-loss −0.0083
+  [−0.0126,−0.0041], RPS −0.0025 [−0.0037,−0.0014], Brier −0.0059 (all CIs entirely < 0). Small (~1%)
+  but real; features are history-derivable ⇒ no train/serve skew.
+- **High-total lever stays DEAD:** derivable features do NOT predict total goals OOS (CIs straddle 0).
+  No usable conditioning signal without external data (market totals / xG / lineups — none in-repo as
+  time-series).
+- **Critical caveat:** baseline was pure-Elo logistic; **production already blends an ML 1X2 layer
+  @0.20**, so this may overstate the gain vs the deployed model. **RESEARCH, not READY — do not integrate.**
+
 ## Next step
-**Phase 2I — FINAL STATE / NEXT OPTIONS SUMMARY (ANALYSIS ONLY).** Concise project-state summary after
-Phases 1A–2H: what improved · what was deliberately not changed · real vs fake/irreducible weaknesses ·
-failed experiments & why · production risk status · ranked next options. **No code/model/config/data
-change.** See `NEXT_STEP.md`. (1D-B nav still deferred.)
+**Phase 3B — decisive head-to-head: recent-form features vs the ACTUAL production W/D/L (Elo→DC→ML@0.20),
+OFFLINE.** Does the §9 signal survive *on top of* the production ML layer? YES→READY_FOR_MODEL_LAB (then a
+separate approved integration with champion guardrails); NO→WATCHLIST/KILL (confirms freeze). Still
+offline/in-repo, no new data, no production change. Model math FROZEN until then. (1D-B nav deferred.)

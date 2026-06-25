@@ -88,23 +88,29 @@ near-ceiling note; small-sample (<64) caveat. Model Lab Limitations "What we tes
 block (2B rejected · 2F not shipped · 2D/2G math frozen). **626 passed; production math/data/config/nav
 untouched; site HTTP 200.** Model math remains FROZEN per 2G.
 
-## THE NEXT ACTION: Phase 2I — FINAL STATE / NEXT OPTIONS SUMMARY (ANALYSIS ONLY)
-Concise project-state summary after Phases 1A–2H. **No code/model/config/data change.** Output =
-`docs/PHASE_2I_FINAL_STATE.md`. Must cover:
-1. what was improved (1A–2H),
-2. what was deliberately NOT changed (model math frozen; nav deferred; etc.),
-3. which model weaknesses are real vs fake/irreducible (per 2D ceiling audit),
-4. which experiments failed and why (2B fat-tail, 2F draw calibration),
-5. current production risk status,
-6. best next options ranked (reporting/honesty done; diagnostics 3a/3b optional; market data; freeze).
+## ✅ Phase 3A — Evidence Lab / model-improvement search (OFFLINE RESEARCH) — DONE · verdict **RESEARCH**
+Doc: `docs/PHASE_3A_EVIDENCE_LAB.md`; isolated research files only; 631 suite passes; production
+model/data/config/nav untouched. **First positive evidence after 2B & 2F:** recent-form features
+(`ga_diff` defensive form + `form_diff` momentum) add **genuine OOS W/D/L signal beyond Elo-alone**
+(log-loss −0.0083, RPS −0.0025, Brier −0.0059, all CIs entirely < 0; pooled OOS n=6,961). Small (~1%)
+but real, history-derivable (no train/serve skew). **High-total/total-goals lever stays DEAD** (no OOS
+signal). **Caveat:** baseline was pure-Elo logistic; production already has an ML 1X2 layer @0.20, so
+the gain may not survive vs the deployed model ⇒ **RESEARCH, not READY; do not integrate.**
 
-### FORBIDDEN in 2I
-- ❌ No code/model/config/data change, ❌ no implementation. Written summary only.
+## THE NEXT ACTION: Phase 3B — decisive head-to-head vs PRODUCTION W/D/L (OFFLINE)
+Test whether the recent-form signal survives **on top of the actual production W/D/L** (Elo→DC→ML@0.20),
+not just vs pure-Elo. Same walk-forward folds, same in-repo data, offline.
+- **Allowed:** extend the scratch `experimental/` harness + script; outputs under
+  `outputs/experiments/3B_*`; tests. Reuse the production model READ-ONLY to get its W/D/L per match.
+- **FORBIDDEN:** ❌ production model/scorecard/app/data/config change, ❌ recalibration written back,
+  ❌ provider fetch, ❌ deploy. No integration.
+- **Decision:** if features beat production W/D/L OOS beyond noise → **READY_FOR_MODEL_LAB** (then a
+  separate, explicitly-approved integration phase with a champion-calibration guardrail, since W/D/L
+  feeds the MC). If not → **WATCHLIST/KILL** (production ensemble already captures it; confirms freeze).
 
-### Optional (separate, only if requested) — evidence-closing diagnostics
-- **3a:** offline OOS regression of actual total goals on in-repo pre-match features → close/open the
-  conditional-high-total path. **3b:** offline temperature/champion frontier sweep (diagnostic-only).
-  Both scratch `experimental/`, no production change.
+### Optional (parked) — evidence-closing diagnostics
+- **High-total lever:** closed by 3A unless external data (market totals / xG / lineups) is acquired.
+- **3b temperature/champion frontier sweep** (diagnostic-only) remains available if requested.
 
 ### 1D-B nav — STILL DEFERRED (unchanged)
 No approved implementation action. Phase 1D-B implementation is **DEFERRED** pending a trigger (real
