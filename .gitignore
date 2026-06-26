@@ -65,3 +65,4 @@ data/*.bak
 !outputs/audit/artifact_consistency_audit.json
 /handoff/
 /outputs/forecast_log/
+.env.yorian

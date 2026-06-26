@@ -225,10 +225,24 @@ Secret-safe (leak scan clean). **All 3C unknowns closed:**
 - **Unblocked for OFFLINE OOS:** market-implied features (intl/WC 2018+; small n at tournament level, large
   at match level), xG (club + WC2018+), injuries/availability.
 
+## Phase 3E — market-odds feature lab (OFFLINE) — DONE · verdict **READY_FOR_MODEL_LAB** (with conditions)
+Doc: `docs/PHASE_3E_MARKET_ODDS_FEATURE_LAB.md`; data `outputs/research/phase_3e_market_odds_feature_lab/`.
+Secret-safe (leak scan clean); production untouched; settlement used only as a leakage diagnostic.
+**Frozen offline dataset captured: 188 WC-732 fixtures** (2018: 64 + 2022: 64 with usable 1X2; 2026: 60
+O/U-only). Median-bookmaker no-vig 1X2.
+- **HEADLINE — market beats the frozen model OOS, beyond bootstrap noise (pooled n=128):** RPS 0.202 vs
+  0.234 (Δ−0.032 CI[−0.056,−0.007]), NLL 0.970 vs 1.063 (Δ−0.093 CI[−0.169,−0.012]), Brier 0.570 vs 0.641,
+  acc 54.7% vs 47.7%. 2018 significant on both; 2022 directional but within noise. **Best blend α=1.0
+  (pure market)** — frozen model adds ~nothing on top. **First clear proper-score-backed candidate** after
+  2B/2F/3A failures.
+- **Caveats:** n=128 = only 2 WCs; baseline = Elo→DC **not** full Elo→DC→ML@0.20; "use market" = anchoring to
+  bookmakers (identity decision). Not leaky (pre-match closing lines; no settlement feature).
+
 ## Next step
-**Phase 3E (separate approval) — offline market-implied feature experiment.** From Sportmonks historical
-odds (intl/WC 2018+): build de-vigged market-implied W/D/L (+ totals) feature, test **OOS vs the frozen
-baseline** AND whether it adds over production Elo→DC→ML (mirror the 3A harness + champion guardrail).
-READY_FOR_MODEL_LAB only if it clears. **No integration/production change.** Prudent before trial expiry
-(2026-07-09): capture a frozen historical-odds research fixture (offline file, no production data mutation).
-Deferred 3A→production W/D/L head-to-head still open. Model math FROZEN. (1D-B nav deferred.)
+**Phase 3F (separate approval) — Model-Lab evaluation of the market signal.** Must: (1) compare market/blend
+vs the **FULL production W/D/L (Elo→DC→ML@0.20)**; (2) use a **larger international sample** (all intl 2018+
+with odds, not just 2 WCs); (3) **champion-calibration guardrail**; (4) integrate as a **market-informed
+anchor/blend** preserving the independent-forecast identity; (5) confirm **live pre-match odds** for WC2026.
+**No integration/production change until it clears.** Deferred 3A→production W/D/L head-to-head still open.
+Model math FROZEN. (1D-B nav deferred.) Parallel asks for Yorian: verify the API-Football key; confirm
+"TheOdds.io".

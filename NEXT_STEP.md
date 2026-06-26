@@ -116,16 +116,24 @@ fixture); **pressure index empty on WC → WATCHLIST**. **Odds: WC 2018/2022/202
 1X2 + O/U + Asian Handicap + probability + settlement back to 2018 ⇒ **3 WCs**. **Injuries/sidelined
 CONFIRMED** (dates + games_missed, historically reconstructable). Expected-XI forward-only (low priority).
 
-## THE NEXT ACTION: Phase 3E — offline market-implied feature experiment (SEPARATE APPROVAL; not started)
-From Sportmonks historical odds (intl/WC **2018+**): build a **de-vigged market-implied W/D/L (+ totals)**
-feature, test **OOS vs the frozen baseline** AND whether it **adds over production Elo→DC→ML** (mirror the
-Phase 3A walk-forward harness + a champion-calibration guardrail). READY_FOR_MODEL_LAB only if it clears.
-- **Caveat:** tournament/champion level = only ~3 WCs (small n); match level (W/D/L, totals) = large intl
-  sample since 2018 — run the experiment at MATCH level.
-- **Allowed:** scratch `experimental/` + `scripts/research/`, outputs under `outputs/research/phase_3e_*`,
-  a frozen historical-odds research fixture (offline file). **FORBIDDEN:** ❌ production model/app/data/
-  config change, ❌ integration, ❌ key printed/committed, ❌ betting exec, ❌ scraping, ❌ quota-rotation.
-- **Prudent before 2026-07-09 (trial expiry):** capture the historical-odds research fixture offline.
+## ✅ Phase 3E — market-odds feature lab (OFFLINE) — DONE · verdict **READY_FOR_MODEL_LAB (conditional)**
+Doc: `docs/PHASE_3E_MARKET_ODDS_FEATURE_LAB.md`. Frozen 188-fixture WC dataset captured (2018/2022 = 128
+usable 1X2; 2026 O/U-only). **Market beats the frozen model OOS beyond bootstrap noise (pooled n=128):**
+RPS 0.202 vs 0.234 (CI[−0.056,−0.007]), NLL 0.970 vs 1.063 (CI[−0.169,−0.012]), acc 54.7% vs 47.7%; best
+blend α=1.0 (pure market). 2018 significant, 2022 within noise. Not leaky (pre-match lines; settlement
+diagnostic only). **First proper-score-backed win after 2B/2F/3A.** Caveats: 2 WCs only; baseline = Elo→DC
+not full Elo→DC→ML@0.20; "use market" = a product-identity decision.
+
+## THE NEXT ACTION: Phase 3F — Model-Lab evaluation of the market signal (SEPARATE APPROVAL; not started)
+Promote the market signal to a rigorous Model-Lab test. It MUST:
+1. compare market/blend vs the **FULL production W/D/L (Elo→DC→ML@0.20)**, not just Elo→DC;
+2. use a **larger international sample** (all intl matches 2018+ with Sportmonks odds, not just 2 WCs);
+3. enforce a **champion-calibration guardrail** (W/D/L feeds the Monte-Carlo);
+4. integrate (if it clears) as a **market-informed anchor/blend** preserving the independent-forecast identity;
+5. confirm **live pre-match odds availability** for WC2026 going forward.
+- **Allowed:** scratch `experimental/` + `scripts/research/`, outputs under `outputs/research/phase_3f_*`,
+  reuse the frozen 3E dataset. **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration,
+  ❌ key printed/committed, ❌ betting exec, ❌ scraping, ❌ quota-rotation. No production change until it clears.
 - **Parallel asks for Yorian:** verify the API-Football key product/host; confirm the real "TheOdds.io".
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head
