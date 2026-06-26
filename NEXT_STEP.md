@@ -124,16 +124,23 @@ blend α=1.0 (pure market). 2018 significant, 2022 within noise. Not leaky (pre-
 diagnostic only). **First proper-score-backed win after 2B/2F/3A.** Caveats: 2 WCs only; baseline = Elo→DC
 not full Elo→DC→ML@0.20; "use market" = a product-identity decision.
 
-## THE NEXT ACTION: Phase 3F — Model-Lab evaluation of the market signal (SEPARATE APPROVAL; not started)
-Promote the market signal to a rigorous Model-Lab test. It MUST:
-1. compare market/blend vs the **FULL production W/D/L (Elo→DC→ML@0.20)**, not just Elo→DC;
-2. use a **larger international sample** (all intl matches 2018+ with Sportmonks odds, not just 2 WCs);
-3. enforce a **champion-calibration guardrail** (W/D/L feeds the Monte-Carlo);
-4. integrate (if it clears) as a **market-informed anchor/blend** preserving the independent-forecast identity;
-5. confirm **live pre-match odds availability** for WC2026 going forward.
-- **Allowed:** scratch `experimental/` + `scripts/research/`, outputs under `outputs/research/phase_3f_*`,
-  reuse the frozen 3E dataset. **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration,
-  ❌ key printed/committed, ❌ betting exec, ❌ scraping, ❌ quota-rotation. No production change until it clears.
+## ✅ Phase 3F — market vs FULL production baseline (OFFLINE) — DONE · verdict **READY_FOR_MODEL_LAB (confirmed)**
+Doc: `docs/PHASE_3F_MARKET_VS_PRODUCTION_BASELINE.md`. Full production W/D/L reproduced (`0.8·DC + 0.2·ML`;
+128/128 matched). **ML@0.20 does NOT close the gap** (full-prod 0.2338 ≈ dc 0.2341). **Market beats FULL
+production beyond noise (pooled n=128):** RPS 0.202 vs 0.234 (CI[−0.055,−0.007]), NLL 0.970 vs 1.062, acc
+54.7% vs 47.7%, ECE 0.047 vs 0.109 (market better calibrated). Best blend α=1.0 (pure market). 2018
+significant; 2022 within noise. Anchoring *improves* calibration; real constraint = **identity risk**.
+
+## THE NEXT ACTION: Phase 3G — bounded international generalization (SEPARATE APPROVAL; not started)
+Gating evidence: does the market edge hold **beyond 2 World Cups**? Bounded Sportmonks extract of
+international odds 2018+ (Euro / Copa / Nations League / WC qualifiers — find league ids, document, cap
+requests), compare **market vs FULL production** OOS with bootstrap CIs at MATCH level.
+- **Allowed:** `scripts/research/`, outputs under `outputs/research/phase_3g_*`, reuse 3E/3F harness.
+  **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration, ❌ key printed/committed,
+  ❌ betting exec, ❌ scraping behind login, ❌ quota-rotation, ❌ uncontrolled crawl.
+- **Only after 3G clears** does Model-Lab integration get considered — and it must add: champion-calibration
+  guardrail (W/D/L → MC), an **identity-preserving blend weight** (not α=1.0), live-odds availability +
+  fallback for WC2026. Prudent before 2026-07-09 trial expiry: capture any new odds extract offline.
 - **Parallel asks for Yorian:** verify the API-Football key product/host; confirm the real "TheOdds.io".
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head

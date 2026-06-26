@@ -238,11 +238,23 @@ O/U-only). Median-bookmaker no-vig 1X2.
 - **Caveats:** n=128 = only 2 WCs; baseline = Elo→DC **not** full Elo→DC→ML@0.20; "use market" = anchoring to
   bookmakers (identity decision). Not leaky (pre-match closing lines; no settlement feature).
 
+## Phase 3F — market vs FULL production baseline (OFFLINE) — DONE · verdict **READY_FOR_MODEL_LAB (confirmed)**
+Doc: `docs/PHASE_3F_MARKET_VS_PRODUCTION_BASELINE.md`. No new API calls (reused 3E dataset + ML pickle +
+rolling Elo, read-only). **Full production W/D/L reproduced** = `0.8·DC + 0.2·ML` (ML features
+`[elo_diff,neutral]`; 128/128 matched). **3E caveat RESOLVED: the ML@0.20 layer does NOT close the gap**
+(pooled full-prod RPS 0.2338 ≈ dc-only 0.2341).
+- **Market beats FULL production beyond noise (pooled n=128):** RPS 0.202 vs 0.234 (Δ−0.032 CI[−0.055,−0.007]),
+  NLL 0.970 vs 1.062 (beyond noise), acc 54.7% vs 47.7%, and **market is BETTER calibrated** (ECE 0.047 vs
+  0.109). 2018 significant; 2022 within noise. **Best blend α=1.0 (pure market)** — production adds no
+  incremental W/D/L signal here.
+- **Guardrail:** market anchoring *improves* calibration (no damage); the real constraint is **identity risk**
+  (α=1.0 = "become the bookmaker" — integrate as a principled anchor/blend, not full deferral).
+- **Broader international sample = DEFERRED** (no new calls this phase; main remaining evidence gap).
+
 ## Next step
-**Phase 3F (separate approval) — Model-Lab evaluation of the market signal.** Must: (1) compare market/blend
-vs the **FULL production W/D/L (Elo→DC→ML@0.20)**; (2) use a **larger international sample** (all intl 2018+
-with odds, not just 2 WCs); (3) **champion-calibration guardrail**; (4) integrate as a **market-informed
-anchor/blend** preserving the independent-forecast identity; (5) confirm **live pre-match odds** for WC2026.
-**No integration/production change until it clears.** Deferred 3A→production W/D/L head-to-head still open.
-Model math FROZEN. (1D-B nav deferred.) Parallel asks for Yorian: verify the API-Football key; confirm
-"TheOdds.io".
+**Phase 3G (separate approval) — bounded international generalization.** Does the market edge hold beyond
+2 WCs? Bounded Sportmonks extract of international odds 2018+ (Euro/Copa/Nations League/WC qualifiers),
+compare market vs full production OOS with bootstrap CIs. This is the **gating evidence** before any
+Model-Lab integration (which would also need a champion guardrail + live-odds availability + an
+identity-preserving blend weight). **No integration/production change.** Model math FROZEN. (1D-B nav
+deferred.) Parallel asks for Yorian: verify the API-Football key; confirm "TheOdds.io".
