@@ -130,6 +130,10 @@ Doc: `docs/PHASE_3F_MARKET_VS_PRODUCTION_BASELINE.md`. Full production W/D/L rep
 production beyond noise (pooled n=128):** RPS 0.202 vs 0.234 (CI[−0.055,−0.007]), NLL 0.970 vs 1.062, acc
 54.7% vs 47.7%, ECE 0.047 vs 0.109 (market better calibrated). Best blend α=1.0 (pure market). 2018
 significant; 2022 within noise. Anchoring *improves* calibration; real constraint = **identity risk**.
+**Phase 3F-B reconciliation (DONE):** RPS formula + class order identical across 1B/2D/3E/3F; 3F
+reconstruction validated (native recompute = 0.2338 exactly; full set reproduces 0.193). **0.2338 = WC
+final-tournament difficulty, not a bug** — prior 0.18/0.19 were easier samples. Market edge survives;
+recommendation PRESERVED. Doc: `docs/PHASE_3F_B_RPS_BASELINE_RECONCILIATION.md`.
 
 ## THE NEXT ACTION: Phase 3G — bounded international generalization (SEPARATE APPROVAL; not started)
 Gating evidence: does the market edge hold **beyond 2 World Cups**? Bounded Sportmonks extract of

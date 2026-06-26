@@ -251,6 +251,15 @@ rolling Elo, read-only). **Full production W/D/L reproduced** = `0.8·DC + 0.2·
   (α=1.0 = "become the bookmaker" — integrate as a principled anchor/blend, not full deferral).
 - **Broader international sample = DEFERRED** (no new calls this phase; main remaining evidence gap).
 
+## Phase 3F-B — RPS baseline reconciliation (OFFLINE, no API) — DONE · 3F recommendation PRESERVED
+Doc: `docs/PHASE_3F_B_RPS_BASELINE_RECONCILIATION.md`. Explained the 0.2338-vs-0.18/0.19 discrepancy:
+**RPS formula + class order identical across 1B/2D/3E/3F**; **3F reconstruction validated** (native
+martj42 orientation on the same 128 = 0.2338 exactly; full competitive set reproduces 0.193 = matches 2D).
+**0.2338 = WC-final-tournament difficulty, NOT a bug.** Segments: full set 0.191, WC incl. qualifiers 0.179
+(≈ live-48 0.180), WC-final 2018+22 0.214 (n=228) / 0.234 (128 odds-subset). Model barely beats uniform
+(0.2413) on the 128 → very low skill on hard balanced WC games; market's edge survives apples-to-apples.
+**READY_FOR_MODEL_LAB stands** (still gated on 3G generalization).
+
 ## Next step
 **Phase 3G (separate approval) — bounded international generalization.** Does the market edge hold beyond
 2 WCs? Bounded Sportmonks extract of international odds 2018+ (Euro/Copa/Nations League/WC qualifiers),

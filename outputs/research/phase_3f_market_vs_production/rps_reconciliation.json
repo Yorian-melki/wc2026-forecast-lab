@@ -1,0 +1,58 @@
+[
+  {
+    "segment": "ALL competitive 2010-2025",
+    "n": 10555,
+    "dc_rps": 0.1929,
+    "full_prod_rps": 0.1905,
+    "uniform_rps": 0.2413,
+    "model_acc": 0.585,
+    "home_rate": 0.475,
+    "draw_rate": 0.219,
+    "away_rate": 0.306
+  },
+  {
+    "segment": "non-WC competitive",
+    "n": 6863,
+    "dc_rps": 0.1988,
+    "full_prod_rps": 0.1967,
+    "uniform_rps": 0.2409,
+    "model_acc": 0.571,
+    "home_rate": 0.472,
+    "draw_rate": 0.221,
+    "away_rate": 0.307
+  },
+  {
+    "segment": "all World Cup matches (incl. qualifiers)",
+    "n": 3692,
+    "dc_rps": 0.1819,
+    "full_prod_rps": 0.1789,
+    "uniform_rps": 0.242,
+    "model_acc": 0.613,
+    "home_rate": 0.48,
+    "draw_rate": 0.215,
+    "away_rate": 0.306
+  },
+  {
+    "segment": "WC final tournament 2018+2022 (all, n=228)",
+    "n": 228,
+    "dc_rps": 0.2152,
+    "full_prod_rps": 0.2138,
+    "uniform_rps": 0.2449,
+    "model_acc": 0.557,
+    "home_rate": 0.465,
+    "draw_rate": 0.197,
+    "away_rate": 0.338
+  },
+  {
+    "segment": "WC2018+2022 odds-subset, NATIVE orientation (= 3F's 128)",
+    "n": 128,
+    "dc_rps": "",
+    "full_prod_rps": 0.2338,
+    "uniform_rps": 0.2413,
+    "model_acc": 0.492,
+    "market_rps_same_subset": 0.2079,
+    "home_rate": 0.414,
+    "draw_rate": 0.219,
+    "away_rate": 0.367
+  }
+]

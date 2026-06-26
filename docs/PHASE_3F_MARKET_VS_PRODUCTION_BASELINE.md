@@ -5,6 +5,12 @@
 > read-only). Settlement used only as a validation diagnostic, never a feature. Files: `scripts/research/
 > market_vs_full_production_baseline.py`, `outputs/research/phase_3f_market_vs_production/`.
 
+> **[Phase 3F-B reconciliation]** The production RPS 0.2338 here is **not** comparable to the ~0.180
+> (live-48) / ~0.193 (full-historical) figures — it is the *WC final-tournament* difficulty (the hardest,
+> most balanced sample). Verified no formula/class-order/orientation bug: native-orientation recompute on
+> the same 128 = 0.2338 exactly; full competitive set reproduces 0.193. Market improvement survives; this
+> recommendation stands. See `docs/PHASE_3F_B_RPS_BASELINE_RECONCILIATION.md`.
+
 ## 1. Was the full production baseline reproducible? — YES
 Production W/D/L = Elo→Dixon-Coles → ML 1X2 ensemble @0.20. The ML layer's features are just
 `[elo_diff, neutral=1]` (verified in `calibrated_elo_model._ml_wdl`), and the ensemble reweight makes the
