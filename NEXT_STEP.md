@@ -110,18 +110,22 @@ backtesting. **FIFA WC = league 732 (6 seasons)**; historical lineups/events/sta
 confirmed. **xG/pressure entitled but EMPTY for the sampled international fixture** (coverage unconfirmed);
 expected-lineups + injuries unclear. READY_FOR_FEATURE_LAB: odds, lineups, fixtures, squads.
 
-## THE NEXT ACTION: Phase 3D — xG-coverage + historical-odds-depth kill-test (≤6 req, before 2026-07-09)
-Settle the open Sportmonks unknowns while the trial is live:
-1. **xG coverage** — request xG on (a) a recent top-club fixture (prove the include/endpoint returns
-   data) and (b) 2–3 WC league-732 fixtures (estimate *international* xG coverage). Resolves
-   entitled-but-sparse vs wrong-access.
-2. **Historical-odds depth** — confirm odds exist across the 6 WC-732 seasons (not just one fixture).
-3. **Expected-lineup `type_id`** + **injuries entitlement** on a current fixture/team.
-- **Allowed:** extend `scripts/research/`, outputs under `outputs/research/phase_3d_*`, docs.
-- **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration, ❌ key printed/committed,
-  ❌ betting execution, ❌ scraping behind login, ❌ quota-rotation. Recon only.
-- **THEN (separate approval):** build an OFFLINE market-implied feature from Sportmonks historical odds
-  for international/WC and test vs the frozen baseline OOS → READY_FOR_MODEL_LAB only if it clears.
+## ✅ Phase 3D — Sportmonks coverage closure (OFFLINE, 6 req) — DONE · `docs/PHASE_3D_SPORTMONKS_COVERAGE_CLOSURE.md`
+All 3C unknowns closed. **xG CONFIRMED** (club 5/5, WC-732 2018 = 20 rows; 3C's empty was a qualifier/old
+fixture); **pressure index empty on WC → WATCHLIST**. **Odds: WC 2018/2022/2026 full** (2006/2010/2014 none);
+1X2 + O/U + Asian Handicap + probability + settlement back to 2018 ⇒ **3 WCs**. **Injuries/sidelined
+CONFIRMED** (dates + games_missed, historically reconstructable). Expected-XI forward-only (low priority).
+
+## THE NEXT ACTION: Phase 3E — offline market-implied feature experiment (SEPARATE APPROVAL; not started)
+From Sportmonks historical odds (intl/WC **2018+**): build a **de-vigged market-implied W/D/L (+ totals)**
+feature, test **OOS vs the frozen baseline** AND whether it **adds over production Elo→DC→ML** (mirror the
+Phase 3A walk-forward harness + a champion-calibration guardrail). READY_FOR_MODEL_LAB only if it clears.
+- **Caveat:** tournament/champion level = only ~3 WCs (small n); match level (W/D/L, totals) = large intl
+  sample since 2018 — run the experiment at MATCH level.
+- **Allowed:** scratch `experimental/` + `scripts/research/`, outputs under `outputs/research/phase_3e_*`,
+  a frozen historical-odds research fixture (offline file). **FORBIDDEN:** ❌ production model/app/data/
+  config change, ❌ integration, ❌ key printed/committed, ❌ betting exec, ❌ scraping, ❌ quota-rotation.
+- **Prudent before 2026-07-09 (trial expiry):** capture the historical-odds research fixture offline.
 - **Parallel asks for Yorian:** verify the API-Football key product/host; confirm the real "TheOdds.io".
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head

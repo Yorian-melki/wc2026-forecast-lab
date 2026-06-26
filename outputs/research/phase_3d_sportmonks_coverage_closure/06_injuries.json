@@ -1,0 +1,286 @@
+{
+  "data": {
+    "id": 3319,
+    "sport_id": 1,
+    "country_id": 11,
+    "venue_id": 1945,
+    "gender": "male",
+    "name": "VfB Stuttgart",
+    "short_code": "VFB",
+    "image_path": "https://cdn.sportmonks.com/images/soccer/teams/23/3319.png",
+    "founded": 1893,
+    "type": "domestic",
+    "placeholder": false,
+    "last_played_at": "2026-05-23 18:00:00",
+    "sidelined": [
+      {
+        "id": 714699,
+        "player_id": 3861542,
+        "type_id": 598,
+        "category": "injury",
+        "team_id": 3319,
+        "season_id": null,
+        "start_date": "2025-03-29",
+        "end_date": null,
+        "games_missed": 64,
+        "completed": false,
+        "player": {
+          "id": 3861542,
+          "sport_id": 1,
+          "country_id": 11,
+          "nationality_id": 11,
+          "city_id": 35451,
+          "position_id": 25,
+          "detailed_position_id": 154,
+          "type_id": 25,
+          "common_name": "J. Karaboue Vagnomann",
+          "firstname": "Josha Mamadou",
+          "lastname": "Karaboue Vagnomann",
+          "name": "Josha Mamadou Karaboue Vagnomann",
+          "display_name": "Josha Vagnoman",
+          "image_path": "https://cdn.sportmonks.com/images/soccer/players/6/3861542.png",
+          "height": 190,
+          "weight": 90,
+          "date_of_birth": "2000-12-11",
+          "gender": "male"
+        }
+      },
+      {
+        "id": 723133,
+        "player_id": 3862360,
+        "type_id": 535,
+        "category": "injury",
+        "team_id": 3319,
+        "season_id": null,
+        "start_date": "2025-05-11",
+        "end_date": null,
+        "games_missed": 57,
+        "completed": false,
+        "player": {
+          "id": 3862360,
+          "sport_id": 1,
+          "country_id": 11,
+          "nationality_id": 11,
+          "city_id": null,
+          "position_id": 26,
+          "detailed_position_id": 149,
+          "type_id": 26,
+          "common_name": "Y. Keitel",
+          "firstname": "Yannik",
+          "lastname": "Keitel",
+          "name": "Yannik Keitel",
+          "display_name": "Yannik Keitel",
+          "image_path": "https://cdn.sportmonks.com/images/soccer/players/24/3862360.png",
+          "height": 186,
+          "weight": 84,
+          "date_of_birth": "2000-02-15",
+          "gender": "male"
+        }
+      },
+      {
+        "id": 695651,
+        "player_id": 30446920,
+        "type_id": 587,
+        "category": "injury",
+        "team_id": 3319,
+        "season_id": null,
+        "start_date": "2025-01-25",
+        "end_date": null,
+        "games_missed": 74,
+        "completed": false,
+        "player": {
+          "id": 30446920,
+          "sport_id": 1,
+          "country_id": 26,
+          "nationality_id": 26,
+          "city_id": null,
+          "position_id": 27,
+          "detailed_position_id": 152,
+          "type_id": 27,
+          "common_name": "E. Toure",
+          "firstname": "El Bilal",
+          "lastname": "Toure",
+          "name": "El Bilal Toure",
+          "display_name": "El Bilal Tour\u00e9",
+          "image_path": "https://cdn.sportmonks.com/images/soccer/players/8/30446920.png",
+          "height": 185,
+          "weight": 77,
+          "date_of_birth": "2001-10-03",
+          "gender": "male"
+        }
+      },
+      {
+        "id": 702791,
+        "player_id": 45593,
+        "type_id": 336,
+        "category": "injury",
+        "team_id": 3319,
+        "season_id": null,
+        "start_date": "2025-03-06",
+        "end_date": null,
+        "games_missed": 66,
+        "completed": false,
+        "player": {
+          "id": 45593,
+          "sport_id": 1,
+          "country_id": 11,
+          "nationality_id": 11,
+          "city_id": null,
+          "position_id": 25,
+          "detailed_position_id": null,
+          "type_id": 25,
+          "common_name": "J. Chabot",
+          "firstname": "Julian",
+          "lastname": "Chabot",
+          "name": "Julian Chabot",
+          "display_name": "Jeff Chabot",
+          "image_path": "https://cdn.sportmonks.com/images/soccer/players/25/45593.png",
+          "height": 195,
+          "weight": 95,
+          "date_of_birth": "1998-02-12",
+          "gender": "male"
+        }
+      },
+      {
+        "id": 695652,
+        "player_id": 432767,
+        "type_id": 587,
+        "category": "injury",
+        "team_id": 3319,
+        "season_id": null,
+        "start_date": "2025-01-25",
+        "end_date": null,
+        "games_missed": 74,
+        "completed": false,
+        "player": {
+          "id": 432767,
+          "sport_id": 1,
+          "country_id": 17,
+          "nationality_id": 17,
+          "city_id": null,
+          "position_id": 25,
+          "detailed_position_id": 148,
+          "type_id": 25,
+          "common_name": "D. Zagadou",
+          "firstname": "Dan-Axel",
+          "lastname": "Zagadou",
+          "name": "Dan-Axel Zagadou",
+          "display_name": "Dan-Axel Zagadou",
+          "image_path": "https://cdn.sportmonks.com/images/soccer/players/31/432767.png",
+          "height": 196,
+          "weight": 90,
+          "date_of_birth": "1999-06-03",
+          "gender": "male"
+        }
+      },
+      {
+        "id": 794643,
+        "player_id": 35281182,
+        "type_id": 545,
+        "category": "injury",
+        "team_id": 3319,
+        "season_id": null,
+        "start_date": "2026-06-03",
+        "end_date": null,
+        "games_missed": null,
+        "completed": false,
+        "player": {
+          "id": 35281182,
+          "sport_id": 1,
+          "country_id": 17,
+          "nationality_id": 17,
+          "city_id": 33515,
+          "position_id": 25,
+          "detailed_position_id": 154,
+          "type_id": 27,
+          "common_name": "L. Assignon",
+          "firstname": "Lorenz",
+          "lastname": "Assignon",
+          "name": "Lorenz Assignon",
+          "display_name": "Lorenz Assignon",
+          "image_path": "https://cdn.sportmonks.com/images/soccer/players/30/35281182.png",
+          "height": 181,
+          "weight": 77,
+          "date_of_birth": "2000-06-22",
+          "gender": "male"
+        }
+      }
+    ]
+  },
+  "subscription": [
+    {
+      "meta": {
+        "current_timestamp": 1782483401,
+        "next_billing_cycle": "2026-07-09T13:20:20 UTC"
+      },
+      "plans": [
+        {
+          "plan": "Pro - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Advanced"
+        },
+        {
+          "plan": "Euro Club Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        },
+        {
+          "plan": "International Tournaments",
+          "sport": "Football",
+          "category": "All-in"
+        }
+      ],
+      "add_ons": [
+        {
+          "add_on": "50000 API Calls - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Calls"
+        },
+        {
+          "add_on": "130 Extra Leagues - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Extra leagues"
+        },
+        {
+          "add_on": "Transfer Rumours - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Transfer rumours"
+        },
+        {
+          "add_on": "Expected Lineups - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Lineups"
+        },
+        {
+          "add_on": "News - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "News"
+        },
+        {
+          "add_on": "Match Facts - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Match facts"
+        }
+      ],
+      "widgets": [],
+      "bundles": [
+        {
+          "bundle": "Odds & Predictions - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Odds - Predictions"
+        },
+        {
+          "bundle": "Pressure Index & xG - Trialing until 2026-07-09 13:20:20",
+          "sport": "Football",
+          "category": "Pressure - Expected"
+        }
+      ]
+    }
+  ],
+  "rate_limit": {
+    "resets_in_seconds": 3600,
+    "remaining": 52999,
+    "requested_entity": "Team"
+  },
+  "timezone": "UTC"
+}

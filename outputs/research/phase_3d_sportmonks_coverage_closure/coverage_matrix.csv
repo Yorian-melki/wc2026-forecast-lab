@@ -1,0 +1,7 @@
+data_family,endpoint,http,nonempty,wc_historical,club_historical,prematch_live,oos_backtest,feature_lab_priority,next_action
+expected-lineup type map,/core/types,200,True,n/a,n/a,forward only,no,RESEARCH,lineup type_ids: [11]
+WC odds presence (has_odds),/leagues/732?include=seasons.fixtures,200,True,yes,n/a,yes,yes,READY,"seasons w/ odds: [('2006', 0), ('2010', 0), ('2014', 0), ('2018', 64), ('2022', 64), ('2026', 76)]"
+WC odds markets (historical),/fixtures/8636021?include=odds,200,True,yes,n/a,yes,yes,READY,"markets=['1st Half Asian Handicap', 'Asian Handicap', 'Fulltime Result', 'Goals Over/Under'] prob=True settle=True season=2018"
+xG / pressure (club),/fixtures/between(club)?include=xGFixture;statistics,200,True,n/a,yes,yes,yes,RESEARCH,club xGFixture returns data
+xG / pressure (WC),/fixtures/8636021?include=xGFixture;pressure;statistics,200,True,yes,n/a,maybe,yes,RESEARCH,WC xG=True pressure=False stats_present=True
+injuries / sidelined,/teams/3319?include=sidelined,200,True,unknown,yes,yes,maybe,RESEARCH,sidelined rows=6 (empty=>no current injuries or entitlement)

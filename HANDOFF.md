@@ -211,10 +211,24 @@ committed; leak scan clean). Plan: **Pro trial → 2026-07-09, ~53k/hr.** All pr
   (type_id mapping) + injuries/sidelined (empty) unclear.
 - **READY_FOR_FEATURE_LAB:** historical odds (strongest), lineups, fixtures/leagues, squads.
 
+## Phase 3D — Sportmonks coverage closure (OFFLINE, 6 req) — DONE
+Doc: `docs/PHASE_3D_SPORTMONKS_COVERAGE_CLOSURE.md`; research under `outputs/research/phase_3d_*`.
+Secret-safe (leak scan clean). **All 3C unknowns closed:**
+- **xG CONFIRMED** (corrects 3C): `xGFixture` non-empty for **club 5/5** and **WC-732 2018** (20 metric
+  rows); 3C's empty was a CAF-qualifier/older fixture. **Pressure index empty on WC** → WATCHLIST.
+- **Odds across WC seasons:** **2018/2022/2026 = full**, 2006/2010/2014 = none. Markets 1X2 + O/U totals +
+  Asian Handicap + implied `probability` + `winning` settlement confirmed back to **2018** (819 rows on a
+  2018 fixture). ⇒ **3 WCs of odds.**
+- **Injuries/sidelined CONFIRMED:** 6 rows with start/end dates + games_missed → historically
+  reconstructable.
+- **Expected lineups:** Lineup type_id=11; expected-XI is forward-only, not isolated → low priority.
+- **Unblocked for OFFLINE OOS:** market-implied features (intl/WC 2018+; small n at tournament level, large
+  at match level), xG (club + WC2018+), injuries/availability.
+
 ## Next step
-**Phase 3D (≤6 req, before 2026-07-09) — xG-coverage + historical-odds-depth kill-test:** confirm xG
-returns data on a recent club fixture AND estimate coverage on WC-732 fixtures; confirm odds exist
-across the 6 WC-732 seasons; resolve expected-lineup `type_id` + injuries entitlement. THEN the
-high-value experiment (separate approval): build an **offline market-implied feature** from Sportmonks
-historical odds for international/WC and test vs the frozen baseline OOS. **No integration, no production
-change.** Deferred 3A→production W/D/L head-to-head also still open. Model math FROZEN. (1D-B nav deferred.)
+**Phase 3E (separate approval) — offline market-implied feature experiment.** From Sportmonks historical
+odds (intl/WC 2018+): build de-vigged market-implied W/D/L (+ totals) feature, test **OOS vs the frozen
+baseline** AND whether it adds over production Elo→DC→ML (mirror the 3A harness + champion guardrail).
+READY_FOR_MODEL_LAB only if it clears. **No integration/production change.** Prudent before trial expiry
+(2026-07-09): capture a frozen historical-odds research fixture (offline file, no production data mutation).
+Deferred 3A→production W/D/L head-to-head still open. Model math FROZEN. (1D-B nav deferred.)
