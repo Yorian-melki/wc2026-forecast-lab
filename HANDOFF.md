@@ -260,10 +260,21 @@ martj42 orientation on the same 128 = 0.2338 exactly; full competitive set repro
 (0.2413) on the 128 → very low skill on hard balanced WC games; market's edge survives apples-to-apples.
 **READY_FOR_MODEL_LAB stands** (still gated on 3G generalization).
 
+## Phase 3G — international market generalization (OFFLINE) — DONE · verdict **READY_FOR_INTEGRATION_DESIGN**
+Doc: `docs/PHASE_3G_MARKET_GENERALIZATION.md`. Bounded Sportmonks extract (Euro/Copa/AFCON/Asian Cup finals,
+2019-2021 editions usable) + reuse WC 3E. Rate-limit-safe; **completed: 39 requests, 0 rate-limited**;
+secret-safe; production untouched. Unified eval **n=356** (228 non-WC + 128 WC).
+- **Edge GENERALIZES beyond WC:** pooled-ALL RPS 0.186 vs prod 0.212 (Δ−0.025 CI[−0.036,−0.015]); **pooled
+  non-WC** 0.177 vs 0.199 (Δ−0.022 CI[−0.032,−0.011]) — both BEYOND noise; market better calibrated
+  (ECE 0.050 vs 0.070). Best blend α=1.0.
+- **Heterogeneous (informative):** edge largest where the model is weakest — Asian Cup Δ−0.055, WC −0.032,
+  AFCON −0.013; **≈ zero on Euro** (Δ−0.004 within noise, blend α=0.8) where the Elo model holds its own.
+- **Caveats:** 2023-2025 finals + WC2026 had **no usable 1X2** in-extract (recent intl 1X2 sparse) → era is
+  mostly 2018-2022; post-2022 within noise. **LIVE WC2026 1X2 availability UNCONFIRMED = the binding gate.**
+
 ## Next step
-**Phase 3G (separate approval) — bounded international generalization.** Does the market edge hold beyond
-2 WCs? Bounded Sportmonks extract of international odds 2018+ (Euro/Copa/Nations League/WC qualifiers),
-compare market vs full production OOS with bootstrap CIs. This is the **gating evidence** before any
-Model-Lab integration (which would also need a champion guardrail + live-odds availability + an
-identity-preserving blend weight). **No integration/production change.** Model math FROZEN. (1D-B nav
-deferred.) Parallel asks for Yorian: verify the API-Football key; confirm "TheOdds.io".
+**Phase 3H (separate approval) — INTEGRATION DESIGN ONLY (no code/integration).** Design a market-informed,
+identity-preserving, regime-aware anchor/blend for W/D/L with a champion-calibration guardrail. MUST first
+resolve **live WC2026 pre-match 1X2 odds availability + fallback** (the binding practical gate; WC2026 1X2
+was empty in 3E/3G). No production change. Model math FROZEN. (1D-B nav deferred.) Parallel asks for Yorian:
+verify the API-Football key; confirm "TheOdds.io".

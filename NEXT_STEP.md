@@ -135,16 +135,24 @@ reconstruction validated (native recompute = 0.2338 exactly; full set reproduces
 final-tournament difficulty, not a bug** — prior 0.18/0.19 were easier samples. Market edge survives;
 recommendation PRESERVED. Doc: `docs/PHASE_3F_B_RPS_BASELINE_RECONCILIATION.md`.
 
-## THE NEXT ACTION: Phase 3G — bounded international generalization (SEPARATE APPROVAL; not started)
-Gating evidence: does the market edge hold **beyond 2 World Cups**? Bounded Sportmonks extract of
-international odds 2018+ (Euro / Copa / Nations League / WC qualifiers — find league ids, document, cap
-requests), compare **market vs FULL production** OOS with bootstrap CIs at MATCH level.
-- **Allowed:** `scripts/research/`, outputs under `outputs/research/phase_3g_*`, reuse 3E/3F harness.
-  **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration, ❌ key printed/committed,
-  ❌ betting exec, ❌ scraping behind login, ❌ quota-rotation, ❌ uncontrolled crawl.
-- **Only after 3G clears** does Model-Lab integration get considered — and it must add: champion-calibration
-  guardrail (W/D/L → MC), an **identity-preserving blend weight** (not α=1.0), live-odds availability +
-  fallback for WC2026. Prudent before 2026-07-09 trial expiry: capture any new odds extract offline.
+## ✅ Phase 3G — international market generalization (OFFLINE) — DONE · verdict **READY_FOR_INTEGRATION_DESIGN**
+Doc: `docs/PHASE_3G_MARKET_GENERALIZATION.md`. Completed cleanly (39 req, 0 rate-limited). Unified n=356
+(228 non-WC + 128 WC). **Edge generalizes beyond WC:** pooled non-WC ΔRPS −0.022 CI[−0.032,−0.011] (beyond
+noise), pooled-ALL −0.025 CI[−0.036,−0.015]; market better calibrated. **Heterogeneous:** big on Asian
+Cup/WC/AFCON, **≈ tie on Euro** (model holds its own). Best blend α=1.0 (Euro/post-2022 α=0.8). **Caveat:
+2023-2025 finals + WC2026 had no usable 1X2 → era mostly 2018-2022; LIVE WC2026 1X2 availability is the
+binding gate.**
+
+## THE NEXT ACTION: Phase 3H — INTEGRATION DESIGN ONLY (SEPARATE APPROVAL; no code/integration)
+Design (not build) a market-informed W/D/L integration. MUST cover: (1) **resolve live WC2026 pre-match 1X2
+availability + fallback** — the binding practical gate (WC2026 1X2 was empty in 3E/3G); (2) **regime-aware
+blend** (market helps most where the model is weak; ≈ nothing on Euro — don't flat-α=1.0 dissolve the model
+where it's competitive); (3) **identity-preserving anchor/blend** (not "become the bookmaker"); (4)
+**champion-calibration guardrail** (W/D/L → 100k MC; re-validate concentration/Brier); (5) **close the
+recent-era odds gap** (2023-2025 + WC2026 1X2).
+- **Allowed:** docs/design only (+ bounded read-only probes if needed). **FORBIDDEN:** ❌ production
+  model/app/data/config change, ❌ integration/code, ❌ key printed/committed, ❌ betting, ❌ scraping,
+  ❌ quota-rotation. No production change.
 - **Parallel asks for Yorian:** verify the API-Football key product/host; confirm the real "TheOdds.io".
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head
