@@ -158,16 +158,23 @@ reuse `_reweight_flat_to_wdl`; **champion-MC guardrail** (re-concentration risk 
 present as **market-informed** not bookmaker-wrapper. Not production-ready (champion-MC unvalidated, α
 untuned, shadow not run, 48-team map incomplete, identity = product call).
 
-## THE NEXT ACTION: Phase 3I — lab prototype + shadow logger (OFFLINE, flagged; SEPARATE APPROVAL)
-Build (in the experimental package, behind a flag, **no production path**): `MarketOddsProvider` interface
-(The Odds API + Sportmonks) + the frozen de-vig + α policies (fixed → regime-aware) fit/validated OFFLINE on
-the 3E–3G datasets + a **shadow logger** (logs model/market/blend/actual; serves nothing). Then champion-MC
-validation, then a live WC2026 shadow run.
-- **Allowed:** `src/wc2026/experimental/`, `scripts/research/`, outputs under `outputs/research/phase_3i_*`,
-  tests. **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration into live scoring, ❌ UI,
-  ❌ key printed/committed, ❌ betting, ❌ scraping, ❌ quota-rotation. No production change.
-- **Yorian decisions needed:** Sportmonks-paid-vs-OddsAPI; the market-informed-vs-independent identity call;
-  verify the API-Football key; confirm the real "TheOdds.io".
+## ✅ Phase 3I — market-informed Model-Lab prototype (OFFLINE) — DONE · verdict **READY_FOR_SHADOW_MODE (gated)**
+Doc: `docs/PHASE_3I_MARKET_MODEL_LAB_PROTOTYPE.md`. `experimental/market_blend.py` (8 tests incl. reweight
+parity); n=356. **Every capped blend beats production beyond noise** (α=0.25/0.40/0.60 + regime); α=0.60 RPS
+0.1912 (Δ−0.020 CI[−0.027,−0.014]), ECE 0.058 < prod 0.070, keeps 40% model voice. Regime≈fixed-0.6 here
+(unproven). Market-only (α=1.0) = oracle ref, rejected. **Champion guardrail = PROXY only** (blend sharpens
+conf 0.474→0.517 = re-concentration RISK); **full 100k-MC-over-bracket harness MISSING = the gate.**
+
+## THE NEXT ACTION: Phase 3J — champion-MC guardrail harness (OFFLINE; SEPARATE APPROVAL)
+Build the offline harness that runs the **100k tournament Monte-Carlo with blended per-match W/D/L** on a
+reconstructed WC bracket and checks **champion top-3 concentration / entropy / champion-Brier vs the frozen
+baseline**; cap α / apply temperature post-blend if it over-concentrates. **Required gate before any live
+shadow mode.**
+- **Allowed:** `src/wc2026/experimental/`, `scripts/research/`, outputs under `outputs/research/phase_3j_*`,
+  tests; reuse the frozen blend datasets + the production tournament MC read-only. **FORBIDDEN:** ❌ production
+  model/app/data/config change, ❌ integration, ❌ UI, ❌ key printed/committed, ❌ betting. No production change.
+- **Yorian decisions needed:** market-informed-vs-independent identity; Sportmonks-paid-vs-OddsAPI; verify the
+  API-Football key; confirm the real "TheOdds.io".
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head
 Test whether the recent-form signal survives **on top of the actual production W/D/L** (Elo→DC→ML@0.20),

@@ -1,0 +1,203 @@
+{
+  "n": 356,
+  "methods": {
+    "production(alpha=0)": {
+      "rps": 0.21155718652709413,
+      "nll": 1.0074638198694836,
+      "brier": 0.6031919657608731,
+      "acc": 0.5308988764044944,
+      "ece": 0.06988612059000804,
+      "mean_conf": 0.4737734971730642,
+      "mean_entropy": 1.0410671374370222,
+      "vs_prod_rps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "vs_prod_nll": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "beats_prod_beyond_noise": false
+    },
+    "blend_alpha=0.25": {
+      "rps": 0.20122641672513317,
+      "nll": 0.9770981281598621,
+      "brier": 0.5813637710469102,
+      "acc": 0.5617977528089888,
+      "ece": 0.09388683104572658,
+      "mean_conf": 0.4875931702261295,
+      "mean_entropy": 1.0297304478140696,
+      "vs_prod_rps": [
+        -0.010330769801960998,
+        -0.013324484172195155,
+        -0.0074723891390138944
+      ],
+      "vs_prod_nll": [
+        -0.03036569170962172,
+        -0.039235476633316946,
+        -0.021798002105891355
+      ],
+      "beats_prod_beyond_noise": true
+    },
+    "blend_alpha=0.4": {
+      "rps": 0.19630047956809504,
+      "nll": 0.9626368538814208,
+      "brier": 0.570984159814853,
+      "acc": 0.5674157303370787,
+      "ece": 0.06877600938553761,
+      "mean_conf": 0.49957310308086805,
+      "mean_entropy": 1.019050736096351,
+      "vs_prod_rps": [
+        -0.015256706958999125,
+        -0.019924636002573666,
+        -0.010751503958444136
+      ],
+      "vs_prod_nll": [
+        -0.04482696598806291,
+        -0.05870107852922416,
+        -0.03131396937385222
+      ],
+      "beats_prod_beyond_noise": true
+    },
+    "blend_alpha=0.6": {
+      "rps": 0.19121717553687242,
+      "nll": 0.9473872033568612,
+      "brier": 0.5603148680344837,
+      "acc": 0.5702247191011236,
+      "ece": 0.05767200093132861,
+      "mean_conf": 0.517364201244274,
+      "mean_entropy": 1.000144682608956,
+      "vs_prod_rps": [
+        -0.02034001099022174,
+        -0.027053722409555638,
+        -0.013746089430349601
+      ],
+      "vs_prod_nll": [
+        -0.0600766165126225,
+        -0.08050724677488802,
+        -0.03996632716573707
+      ],
+      "beats_prod_beyond_noise": true
+    },
+    "blend_regime(cap0.6)": {
+      "rps": 0.19166976391746704,
+      "nll": 0.9489203168552365,
+      "brier": 0.5613695004297251,
+      "acc": 0.5702247191011236,
+      "ece": 0.06495907022820031,
+      "mean_conf": 0.5150239990981694,
+      "mean_entropy": 1.003915804879718,
+      "vs_prod_rps": [
+        -0.01988742260962715,
+        -0.026371605582741375,
+        -0.013477783444390153
+      ],
+      "vs_prod_nll": [
+        -0.058543503014247295,
+        -0.07793824618403843,
+        -0.039432919830283464
+      ],
+      "beats_prod_beyond_noise": true
+    },
+    "market_only(alpha=1.0 ORACLE-ref)": {
+      "rps": 0.1861406663709811,
+      "nll": 0.9319162633347732,
+      "brier": 0.549845506859027,
+      "acc": 0.5730337078651685,
+      "ece": 0.04957948534144486,
+      "mean_conf": 0.5582297677103167,
+      "mean_entropy": 0.9443948181020739,
+      "vs_prod_rps": [
+        -0.025416520156113082,
+        -0.03622018021562667,
+        -0.014819947758647983
+      ],
+      "vs_prod_nll": [
+        -0.0755475565347104,
+        -0.10962339246041541,
+        -0.04003105907280758
+      ],
+      "beats_prod_beyond_noise": true
+    }
+  },
+  "alpha_grid": [
+    0.0,
+    0.25,
+    0.4,
+    0.6
+  ],
+  "identity_note": "alpha=1.0 is an ORACLE REFERENCE only \u2014 rejected for production (bookmaker wrapper).",
+  "segments": {
+    "WC": {
+      "blend_alpha=0.6": {
+        "n": 128,
+        "rps_vs_prod": [
+          -0.026658384025594176,
+          -0.041291473174244274,
+          -0.011615912238779953
+        ]
+      },
+      "blend_regime(cap0.6)": {
+        "n": 128,
+        "rps_vs_prod": [
+          -0.026233386754639522,
+          -0.040507745690756075,
+          -0.01157966503502458
+        ]
+      }
+    },
+    "nonWC": {
+      "blend_alpha=0.6": {
+        "n": 228,
+        "rps_vs_prod": [
+          -0.0167928541984337,
+          -0.02348275064539679,
+          -0.00995056945940727
+        ]
+      },
+      "blend_regime(cap0.6)": {
+        "n": 228,
+        "rps_vs_prod": [
+          -0.01632477607207634,
+          -0.022738318018009674,
+          -0.009726087791813857
+        ]
+      }
+    }
+  },
+  "champion_proxy": {
+    "production(alpha=0)": {
+      "mean_conf": 0.4737734971730642,
+      "mean_entropy": 1.0410671374370222,
+      "ece": 0.06988612059000804
+    },
+    "blend_alpha=0.25": {
+      "mean_conf": 0.4875931702261295,
+      "mean_entropy": 1.0297304478140696,
+      "ece": 0.09388683104572658
+    },
+    "blend_alpha=0.4": {
+      "mean_conf": 0.49957310308086805,
+      "mean_entropy": 1.019050736096351,
+      "ece": 0.06877600938553761
+    },
+    "blend_alpha=0.6": {
+      "mean_conf": 0.517364201244274,
+      "mean_entropy": 1.000144682608956,
+      "ece": 0.05767200093132861
+    },
+    "blend_regime(cap0.6)": {
+      "mean_conf": 0.5150239990981694,
+      "mean_entropy": 1.003915804879718,
+      "ece": 0.06495907022820031
+    },
+    "market_only(alpha=1.0 ORACLE-ref)": {
+      "mean_conf": 0.5582297677103167,
+      "mean_entropy": 0.9443948181020739,
+      "ece": 0.04957948534144486
+    }
+  },
+  "champion_proxy_note": "PROXY ONLY: mean match-level confidence/entropy. Higher confidence than production => champion RE-CONCENTRATION risk (the thing the x0.55 temperature fixed). The FULL champion guardrail requires running the 100k tournament Monte Carlo with blended W/D/L on a reconstructed WC bracket \u2014 NOT testable from these match-level datasets alone. MISSING: bracket/group wiring + MC harness with blended per-match W/D/L + champion-Brier/top-3-concentration vs frozen baseline."
+}

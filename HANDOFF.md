@@ -301,10 +301,24 @@ Doc: `docs/PHASE_3H_B_MARKET_INTEGRATION_DESIGN.md`. No code/provider calls/secr
 - **Verdict:** build an OFFLINE lab prototype + shadow logger (flagged, experimental pkg); NOT production-ready
   (champion-MC unvalidated, α untuned, shadow not run, 48-team map incomplete, identity = Yorian's call).
 
+## Phase 3I — market-informed Model-Lab prototype (OFFLINE) — DONE · verdict **READY_FOR_SHADOW_MODE** (gated)
+Doc: `docs/PHASE_3I_MARKET_MODEL_LAB_PROTOTYPE.md`. Isolated: `src/wc2026/experimental/market_blend.py`,
+`scripts/research/market_model_lab_prototype.py`, `tests/test_market_blend.py` (8 tests, incl. reweight
+parity vs production `_reweight_flat_to_wdl`); 639 suite passes; production untouched; no API/secrets.
+- **Every capped blend beats production beyond noise (n=356):** α=0.25 RPS 0.2012 (Δ−0.010), α=0.40 0.1963
+  (Δ−0.015), **α=0.60 0.1912 (Δ−0.020 CI[−0.027,−0.014])** — all RPS+NLL beyond bootstrap noise; both WC and
+  non-WC segments beyond noise. α=0.60 captures ~80% of the market gain with 40% model voice and **better
+  calibration** (ECE 0.058 vs 0.070). Tiny α (0.25) slightly *worsens* ECE → prefer moderate α 0.4–0.6.
+- **Regime-aware ≈ fixed α=0.6 here** (balanced tournaments saturate entropy) → not yet proven valuable.
+- **Market-only (α=1.0) = oracle reference only, rejected** (bookmaker wrapper).
+- **Champion guardrail = PROXY only:** blend sharpens W/D/L (mean conf 0.474→0.517 at α=0.6) → modest
+  re-concentration RISK. **FULL guardrail UNTESTABLE from match-level data — the 100k-MC-over-bracket harness
+  (champion top-3/Brier vs baseline) is the MISSING gating deliverable.**
+
 ## Next step
-**Phase 3I (separate approval) — lab prototype + shadow logger (OFFLINE, flagged).** Build the
-`MarketOddsProvider` interface + frozen de-vig + α policies fit/validated offline + a shadow logger, all in
-the experimental package behind a flag — **no production path touched**. Then champion-MC validation, then a
-live WC2026 shadow run. **No production change, no integration, no UI.** Model math FROZEN. (1D-B nav
-deferred.) Parallel asks for Yorian: verify the API-Football key; confirm "TheOdds.io"; decide
-Sportmonks-paid-vs-OddsAPI + the market-informed-identity product call.
+**Phase 3J (separate approval) — champion-MC guardrail harness (OFFLINE).** Build the offline harness that
+runs the 100k tournament Monte-Carlo with **blended per-match W/D/L** on a reconstructed WC bracket and
+checks champion top-3 concentration / entropy / champion-Brier vs the frozen baseline; cap α / apply
+temperature post-blend if it over-concentrates. **This is the required gate before any live shadow mode.**
+No production change, no integration, no UI. Model math FROZEN. (1D-B nav deferred.) Yorian decisions:
+market-informed-vs-independent identity; Sportmonks-paid-vs-OddsAPI; verify API-Football key; confirm "TheOdds.io".

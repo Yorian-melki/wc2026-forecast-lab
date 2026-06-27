@@ -1,0 +1,18 @@
+{
+  "_doc": "Phase 3H-B shadow logger \u2014 proposed schema; OFFLINE design only, no active scheduler.",
+  "fields": {
+    "fixture_id": "str/int",
+    "kickoff_utc": "ISO8601",
+    "provider": "the_odds_api|sportmonks",
+    "snapshot_ts_utc": "ISO8601 (<= kickoff-15min)",
+    "n_books": "int (>=3 else low_coverage)",
+    "market_wdl": "[p_home,p_draw,p_away] no-vig",
+    "production_wdl": "[p_home,p_draw,p_away]",
+    "alpha": "float (0..0.6 capped)",
+    "alpha_policy": "fixed|regime",
+    "blended_wdl": "[p_home,p_draw,p_away]",
+    "freshness_min": "minutes before kickoff",
+    "fallback_reason": "none|stale|missing|low_coverage|provider_down|name_unmapped",
+    "served": "false (shadow mode \u2014 never served)"
+  }
+}
