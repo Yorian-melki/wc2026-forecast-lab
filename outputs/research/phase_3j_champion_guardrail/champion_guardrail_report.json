@@ -1,0 +1,113 @@
+{
+  "method": "controlled synthetic 32-team WC-style bracket; market = power-sharpen proxy (T-fit to real market mean-confidence 0.558); +retemper = champion mitigation (de-sharpen blend back to baseline conf)",
+  "n_sims": 20000,
+  "fit_T": 1.672,
+  "retemper_S": {
+    "0.4": 0.794,
+    "0.6": 0.718
+  },
+  "prod_conf": 0.469,
+  "market_conf": 0.558,
+  "proxy_blend_conf_by_alpha": {
+    "0.25": 0.492,
+    "0.4": 0.505,
+    "0.6": 0.523
+  },
+  "real_blend_conf_by_alpha": {
+    "0.25": 0.484,
+    "0.4": 0.497,
+    "0.6": 0.515
+  },
+  "match_level_rps_356": {
+    "production": 0.213,
+    "blend_0.4": 0.1968,
+    "blend_0.4+retemper": 0.2016,
+    "blend_0.6": 0.1915,
+    "blend_0.6+retemper": 0.1985
+  },
+  "limitations": [
+    "market is a sharpening PROXY, not real per-matchup odds (unavailable for hypothetical matchups)",
+    "synthetic 32-team bracket, not the exact 48-team WC2026 format",
+    "champion-Brier vs actual NOT computable",
+    "tests the concentration MECHANISM only; full guardrail needs live per-matchup odds"
+  ],
+  "by_alpha": {
+    "0.0": {
+      "top1": 0.242,
+      "top3_share": 0.519,
+      "entropy_bits": 3.641,
+      "gini": 0.706,
+      "n_teams_ge_1pct": 14,
+      "d_top3_share": 0.0,
+      "d_entropy_bits": 0.0,
+      "d_top1": 0.0
+    },
+    "0.25": {
+      "top1": 0.2757,
+      "top3_share": 0.5695,
+      "entropy_bits": 3.415,
+      "gini": 0.74,
+      "n_teams_ge_1pct": 14,
+      "d_top3_share": 0.0505,
+      "d_entropy_bits": 0.226,
+      "d_top1": 0.0337
+    },
+    "0.4": {
+      "top1": 0.2885,
+      "top3_share": 0.5952,
+      "entropy_bits": 3.289,
+      "gini": 0.77,
+      "n_teams_ge_1pct": 12,
+      "d_top3_share": 0.0762,
+      "d_entropy_bits": 0.352,
+      "d_top1": 0.0465
+    },
+    "0.6": {
+      "top1": 0.3191,
+      "top3_share": 0.6381,
+      "entropy_bits": 3.112,
+      "gini": 0.775,
+      "n_teams_ge_1pct": 12,
+      "d_top3_share": 0.1191,
+      "d_entropy_bits": 0.529,
+      "d_top1": 0.0771
+    },
+    "1.0": {
+      "top1": 0.3678,
+      "top3_share": 0.7058,
+      "entropy_bits": 2.815,
+      "gini": 0.795,
+      "n_teams_ge_1pct": 10,
+      "d_top3_share": 0.1868,
+      "d_entropy_bits": 0.826,
+      "d_top1": 0.1258
+    },
+    "0.4+retemper": {
+      "top1": 0.2377,
+      "top3_share": 0.5146,
+      "entropy_bits": 3.665,
+      "gini": 0.702,
+      "n_teams_ge_1pct": 14,
+      "d_top3_share": -0.0044,
+      "d_entropy_bits": -0.024,
+      "d_top1": -0.0043
+    },
+    "0.6+retemper": {
+      "top1": 0.2387,
+      "top3_share": 0.5161,
+      "entropy_bits": 3.67,
+      "gini": 0.7,
+      "n_teams_ge_1pct": 14,
+      "d_top3_share": -0.0029,
+      "d_entropy_bits": -0.029,
+      "d_top1": -0.0033
+    }
+  },
+  "acceptance": {
+    "0.25": "FAIL (over-concentrates)",
+    "0.4": "FAIL (over-concentrates)",
+    "0.6": "FAIL (over-concentrates)",
+    "0.4+retemper": "PASS",
+    "0.6+retemper": "PASS"
+  }
+}

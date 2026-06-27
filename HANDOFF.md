@@ -315,10 +315,25 @@ parity vs production `_reweight_flat_to_wdl`); 639 suite passes; production unto
   re-concentration RISK. **FULL guardrail UNTESTABLE from match-level data — the 100k-MC-over-bracket harness
   (champion top-3/Brier vs baseline) is the MISSING gating deliverable.**
 
+## Phase 3J — champion-MC guardrail (OFFLINE, controlled synthetic) — DONE · verdict **READY_FOR_MODEL_LAB_ONLY** (downgrade)
+Doc: `docs/PHASE_3J_CHAMPION_MONTE_CARLO_GUARDRAIL.md`. Full replay infeasible (no market for hypothetical
+matchups; champion-Brier not computable) → synthetic 32-team bracket + sharpening proxy (T=1.672 fit to real
+market conf 0.558; proxy-blend conf ≈ real-blend, validated). N=20k.
+- **NAIVE capped blends ALL FAIL the champion guardrail** — concentration compounds: α=0.25 top-3 +5.1pp,
+  0.40 +7.6pp, 0.60 +11.9pp (entropy drops 0.23–0.53 bits). 3I's match-level proxy understated this. This is
+  exactly the risk ×0.55 temperature controls.
+- **Champion-safe path EXISTS — re-temper mitigation:** de-sharpen the blend back to baseline conf before the
+  champion MC (S=0.794@0.4, 0.718@0.6) → **PASS** (top-3 ≈ baseline). And it **keeps ~73% of the match RPS
+  gain** (0.6+retemper RPS 0.1985 vs prod 0.213; naive 0.1915). Market value = directional re-ranking (keep)
+  + extra sharpness (drop for champions).
+- **Verdict downgraded from 3I's gated-shadow to READY_FOR_MODEL_LAB_ONLY:** naive blend unsafe for champions;
+  re-temper is the lab direction but tuned on a PROXY, unvalidated vs real per-matchup odds. Do NOT advance to
+  shadow serving of any blended tournament/champion number yet.
+
 ## Next step
-**Phase 3J (separate approval) — champion-MC guardrail harness (OFFLINE).** Build the offline harness that
-runs the 100k tournament Monte-Carlo with **blended per-match W/D/L** on a reconstructed WC bracket and
-checks champion top-3 concentration / entropy / champion-Brier vs the frozen baseline; cap α / apply
-temperature post-blend if it over-concentrates. **This is the required gate before any live shadow mode.**
-No production change, no integration, no UI. Model math FROZEN. (1D-B nav deferred.) Yorian decisions:
-market-informed-vs-independent identity; Sportmonks-paid-vs-OddsAPI; verify API-Football key; confirm "TheOdds.io".
+**Phase 3K (separate approval) — re-temper / champion-safe blend policy (OFFLINE lab).** Add a
+"blend-then-champion-temperature" policy to the experimental prototype so the match-level gain is captured
+while champion concentration stays in band; re-run match-level proper scores + the synthetic champion
+guardrail; document the accuracy↔concentration frontier. **No production change, no integration, no UI, no
+shadow serving.** Model math FROZEN. (1D-B nav deferred.) Yorian decisions: market-informed-vs-independent
+identity; Sportmonks-paid-vs-OddsAPI; verify API-Football key; confirm "TheOdds.io".

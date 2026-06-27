@@ -165,14 +165,21 @@ parity); n=356. **Every capped blend beats production beyond noise** (α=0.25/0.
 (unproven). Market-only (α=1.0) = oracle ref, rejected. **Champion guardrail = PROXY only** (blend sharpens
 conf 0.474→0.517 = re-concentration RISK); **full 100k-MC-over-bracket harness MISSING = the gate.**
 
-## THE NEXT ACTION: Phase 3J — champion-MC guardrail harness (OFFLINE; SEPARATE APPROVAL)
-Build the offline harness that runs the **100k tournament Monte-Carlo with blended per-match W/D/L** on a
-reconstructed WC bracket and checks **champion top-3 concentration / entropy / champion-Brier vs the frozen
-baseline**; cap α / apply temperature post-blend if it over-concentrates. **Required gate before any live
-shadow mode.**
-- **Allowed:** `src/wc2026/experimental/`, `scripts/research/`, outputs under `outputs/research/phase_3j_*`,
-  tests; reuse the frozen blend datasets + the production tournament MC read-only. **FORBIDDEN:** ❌ production
-  model/app/data/config change, ❌ integration, ❌ UI, ❌ key printed/committed, ❌ betting. No production change.
+## ✅ Phase 3J — champion-MC guardrail (OFFLINE synthetic) — DONE · verdict **READY_FOR_MODEL_LAB_ONLY** (downgrade)
+Doc: `docs/PHASE_3J_CHAMPION_MONTE_CARLO_GUARDRAIL.md`. Full replay infeasible → synthetic 32-team bracket +
+sharpening proxy (T=1.672, validated). **NAIVE capped blends ALL FAIL** (champion concentration compounds:
+top-3 +5.1/+7.6/+11.9pp at α=0.25/0.40/0.60). **Re-temper mitigation PASSES** (de-sharpen blend to baseline
+conf before champion MC) AND keeps ~73% of the match RPS gain (0.6+retemper 0.1985 vs prod 0.213). Champion-
+Brier not computable (needs live data). **Naive blend unsafe for champions; re-temper unvalidated vs real
+odds → stays in the lab.**
+
+## THE NEXT ACTION: Phase 3K — champion-safe (re-temper) blend policy (OFFLINE lab; SEPARATE APPROVAL)
+Add a **"blend-then-champion-temperature"** policy to the experimental prototype: capture the match-level
+gain while holding champion concentration in band. Re-run match-level proper scores + the synthetic champion
+guardrail across an (α, S) grid; document the accuracy↔concentration frontier and the recommended config.
+- **Allowed:** `src/wc2026/experimental/`, `scripts/research/`, outputs under `outputs/research/phase_3k_*`,
+  tests. **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration, ❌ UI, ❌ shadow serving,
+  ❌ key printed/committed, ❌ betting. No production change.
 - **Yorian decisions needed:** market-informed-vs-independent identity; Sportmonks-paid-vs-OddsAPI; verify the
   API-Football key; confirm the real "TheOdds.io".
 
