@@ -330,10 +330,22 @@ market conf 0.558; proxy-blend conf ≈ real-blend, validated). N=20k.
   re-temper is the lab direction but tuned on a PROXY, unvalidated vs real per-matchup odds. Do NOT advance to
   shadow serving of any blended tournament/champion number yet.
 
+## Phase 3K — champion-safe blend policy (OFFLINE lab) — DONE · verdict **READY_FOR_MODEL_LAB_ONLY** (policy defined)
+Doc: `docs/PHASE_3K_CHAMPION_SAFE_BLEND_POLICY.md`. `experimental/market_temperature.py` (6 tests; 645 suite).
+Policy = blend (α≤0.6) then temper W/D/L to baseline sharpness (`S` via match-confidence-restore), then
+reweight grid via `_reweight_flat_to_wdl`. α×S grid (match-level on 356 + champion on the 3J synthetic bracket).
+- **Naive (S=1) FAILS at every α; `match_conf_restore` PASSES at every α** (champion top-3 within ~1pp of
+  baseline 0.517; all 14 teams ≥1%) while retaining **71–83%** of the match RPS gain (all beat prod beyond noise).
+- **Candidates:** conservative α=0.25,S=0.903 (RPS 0.2039, 83%); **balanced α=0.40,S≈0.83 (0.2005, 77%)**;
+  aggressive α=0.60,S=0.746 (0.1976, 71%).
+- **Proxy-only validation → stays MODEL-LAB-ONLY** (not shadow/prod). A champion-safe policy now EXISTS &
+  characterised (upgrade over 3J). Shadow needs: real per-matchup odds for a resolving bracket, real
+  champion-Brier, S re-tuned on real data + the 48-team format.
+
 ## Next step
-**Phase 3K (separate approval) — re-temper / champion-safe blend policy (OFFLINE lab).** Add a
-"blend-then-champion-temperature" policy to the experimental prototype so the match-level gain is captured
-while champion concentration stays in band; re-run match-level proper scores + the synthetic champion
-guardrail; document the accuracy↔concentration frontier. **No production change, no integration, no UI, no
-shadow serving.** Model math FROZEN. (1D-B nav deferred.) Yorian decisions: market-informed-vs-independent
-identity; Sportmonks-paid-vs-OddsAPI; verify API-Football key; confirm "TheOdds.io".
+**No further offline lab step is required to characterise the signal — the evidence chain (3E→3K) is
+complete.** Remaining work is GATED on Yorian product/cost decisions and live data, not on more research:
+(a) **identity decision** (market-informed vs independent); (b) **provider/cost** (Sportmonks-paid vs Odds
+API); (c) if both go ahead → a separate, explicitly-approved **shadow-mode design** (serves nothing; collects
+real per-matchup odds to validate the champion side with policy α≈0.40, S≈0.83). Until then: model math
+FROZEN, nothing integrated. Standing asks: verify API-Football key; confirm "TheOdds.io". (1D-B nav deferred.)

@@ -173,15 +173,24 @@ conf before champion MC) AND keeps ~73% of the match RPS gain (0.6+retemper 0.19
 Brier not computable (needs live data). **Naive blend unsafe for champions; re-temper unvalidated vs real
 odds → stays in the lab.**
 
-## THE NEXT ACTION: Phase 3K — champion-safe (re-temper) blend policy (OFFLINE lab; SEPARATE APPROVAL)
-Add a **"blend-then-champion-temperature"** policy to the experimental prototype: capture the match-level
-gain while holding champion concentration in band. Re-run match-level proper scores + the synthetic champion
-guardrail across an (α, S) grid; document the accuracy↔concentration frontier and the recommended config.
-- **Allowed:** `src/wc2026/experimental/`, `scripts/research/`, outputs under `outputs/research/phase_3k_*`,
-  tests. **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration, ❌ UI, ❌ shadow serving,
-  ❌ key printed/committed, ❌ betting. No production change.
-- **Yorian decisions needed:** market-informed-vs-independent identity; Sportmonks-paid-vs-OddsAPI; verify the
-  API-Football key; confirm the real "TheOdds.io".
+## ✅ Phase 3K — champion-safe blend policy (OFFLINE lab) — DONE · verdict **READY_FOR_MODEL_LAB_ONLY** (policy defined)
+Doc: `docs/PHASE_3K_CHAMPION_SAFE_BLEND_POLICY.md`. `experimental/market_temperature.py` (6 tests). Naive
+blend FAILS at every α; **`match_conf_restore` PASSES at every α** — champion top-3 within ~1pp of baseline,
+14 teams ≥1%, retaining **71–83%** of the match RPS gain (all beat prod beyond noise). Candidates: cons.
+α0.25/S0.903 (RPS 0.2039, 83%), **bal. α0.40/S≈0.83 (0.2005, 77%)**, aggr. α0.60/S0.746 (0.1976, 71%).
+Proxy-only → stays MODEL-LAB-ONLY.
+
+## THE NEXT ACTION: NONE — research chain 3E→3K COMPLETE; gated on Yorian decisions, not more lab work
+The market-signal investigation is fully characterised: real (3E) → beats full production (3F) → reconciled
+(3F-B) → generalizes (3G) → live-feedable (3H-A) → designed (3H-B) → prototyped (3I) → champion risk found
+(3J) → **champion-safe policy defined & proxy-validated (3K: α≈0.40, S≈0.83)**. No further offline lab step
+adds signal. **Next moves require Yorian, not research:**
+1. **Identity decision** — market-informed blend vs keep the model fully independent.
+2. **Provider/cost** — Sportmonks-paid vs The Odds API for the live feed.
+3. If both ⇒ a separate, explicitly-approved **shadow-mode design** (serves nothing; collects real
+   per-matchup odds + real champion-Brier to validate the champion side beyond the synthetic proxy).
+- **Standing asks:** verify the API-Football key product/host; confirm the real "TheOdds.io".
+- Model math FROZEN; nothing integrated; α=1.0 rejected. (1D-B nav still deferred.)
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head
 Test whether the recent-form signal survives **on top of the actual production W/D/L** (Elo→DC→ML@0.20),
