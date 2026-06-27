@@ -283,10 +283,28 @@ secret-safe; production untouched. **Two providers can supply live pre-match WC2
 - **Old-key note:** `.env` (repo root) holds a DIFFERENT/old `THESTATSAPI_KEY` — treated invalid, **not
   used**; only `.env.yorian` used. No committed key value in tracked files.
 
+## Phase 3H-B — market-odds integration DESIGN (DESIGN ONLY) — DONE · verdict **READY_FOR_MODEL_LAB_PROTOTYPE**
+Doc: `docs/PHASE_3H_B_MARKET_INTEGRATION_DESIGN.md`. No code/provider calls/secrets.
+- **Provider:** primary **The Odds API** (clean h2h, full upcoming coverage, quota-efficient bulk endpoint,
+  no trial dependency); fallback/cross-check **Sportmonks** (same as historical pipeline, needs paid plan
+  post-2026-07-09). Disagreement → consensus if close, else more-books/fresher; neither → frozen model.
+- **De-vig:** FROZEN 3E–3G method (median-bookmaker no-vig, ≥3 books, lock = kickoff−15min, stale-skip).
+- **Blend:** reject α=1.0 (bookmaker wrapper). Prototype = conservative fixed α; target = **regime-aware α**
+  (mirror existing `ml_weight_mode:"dynamic"`); **cap α≤0.6** (identity); α fit/validated OOS, never hand-set.
+- **Grid:** reuse existing `_reweight_flat_to_wdl(flat, target=blended W/D/L)` — same path as the ML layer; no
+  scoreline redesign.
+- **Champion guardrail (critical):** sharper W/D/L can re-concentrate champions (the thing ×0.55 fixed) →
+  re-run 4-WC walk-forward; top-3 concentration in band, champion-Brier non-regression, conservation; cap α /
+  keep temperature post-blend.
+- **Identity:** present as **market-informed** (capped blend, show both numbers) — never a bookmaker wrapper.
+- **Validation before prod:** offline replay → champion-MC → **live shadow mode** → calibration → fallback.
+- **Verdict:** build an OFFLINE lab prototype + shadow logger (flagged, experimental pkg); NOT production-ready
+  (champion-MC unvalidated, α untuned, shadow not run, 48-team map incomplete, identity = Yorian's call).
+
 ## Next step
-**Phase 3H-B (separate approval) — INTEGRATION DESIGN ONLY (no code/integration).** Now that a live 1X2
-feed exists, design the market-informed, **identity-preserving, regime-aware** W/D/L anchor/blend with a
-champion-calibration guardrail. Specify: primary feed (The Odds API or Sportmonks) + fallback, last-pre-match
-snapshot timing, de-vig/aggregation rule, blend policy (down-weight where the model is already strong, e.g.
-Euro/European sides), champion-MC re-validation. **No production change.** Model math FROZEN. (1D-B nav
-deferred.) Parallel asks for Yorian: verify the API-Football key; confirm "TheOdds.io".
+**Phase 3I (separate approval) — lab prototype + shadow logger (OFFLINE, flagged).** Build the
+`MarketOddsProvider` interface + frozen de-vig + α policies fit/validated offline + a shadow logger, all in
+the experimental package behind a flag — **no production path touched**. Then champion-MC validation, then a
+live WC2026 shadow run. **No production change, no integration, no UI.** Model math FROZEN. (1D-B nav
+deferred.) Parallel asks for Yorian: verify the API-Football key; confirm "TheOdds.io"; decide
+Sportmonks-paid-vs-OddsAPI + the market-informed-identity product call.

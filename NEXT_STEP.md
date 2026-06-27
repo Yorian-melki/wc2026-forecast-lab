@@ -150,17 +150,24 @@ market-1 odds — resolves the 3E/3G "empty", which was completed/settled fixtur
 (auth ok via `.env.yorian`; odds 404 on scheduled → finished-match odds only). Old/different `THESTATSAPI_KEY`
 in repo `.env` treated invalid, not used. Secret-safe; production untouched.
 
-## THE NEXT ACTION: Phase 3H-B — INTEGRATION DESIGN ONLY (SEPARATE APPROVAL; no code/integration)
-Design (not build) the market-informed W/D/L integration, now that a live 1X2 feed exists. MUST cover:
-(1) **primary feed + fallback** (The Odds API ↔ Sportmonks), last-pre-match snapshot timing, de-vig +
-bookmaker-aggregation rule; (2) **regime-aware blend** (market helps most where the model is weak; ≈ nothing
-on Euro — don't flat-α=1.0 dissolve the model where it's competitive); (3) **identity-preserving anchor/blend**
-(not "become the bookmaker"); (4) **champion-calibration guardrail** (W/D/L → 100k MC; re-validate
-concentration/Brier); (5) close the recent-era historical odds gap (2023-2025 finals).
-- **Allowed:** docs/design only (+ bounded read-only probes if needed). **FORBIDDEN:** ❌ production
-  model/app/data/config change, ❌ integration/code, ❌ key printed/committed, ❌ betting, ❌ scraping,
-  ❌ quota-rotation. No production change.
-- **Parallel asks for Yorian:** verify the API-Football key product/host; confirm the real "TheOdds.io".
+## ✅ Phase 3H-B — market-odds integration DESIGN (DESIGN ONLY) — DONE · verdict **READY_FOR_MODEL_LAB_PROTOTYPE**
+Doc: `docs/PHASE_3H_B_MARKET_INTEGRATION_DESIGN.md`. Primary feed **The Odds API** (quota-efficient bulk
+h2h) + fallback **Sportmonks**; FROZEN de-vig (median no-vig, ≥3 books, lock kickoff−15min); **reject
+α=1.0**, prototype fixed-α → target **regime-aware α** (mirror `ml_weight_mode:"dynamic"`), **cap α≤0.6**;
+reuse `_reweight_flat_to_wdl`; **champion-MC guardrail** (re-concentration risk vs ×0.55 temperature);
+present as **market-informed** not bookmaker-wrapper. Not production-ready (champion-MC unvalidated, α
+untuned, shadow not run, 48-team map incomplete, identity = product call).
+
+## THE NEXT ACTION: Phase 3I — lab prototype + shadow logger (OFFLINE, flagged; SEPARATE APPROVAL)
+Build (in the experimental package, behind a flag, **no production path**): `MarketOddsProvider` interface
+(The Odds API + Sportmonks) + the frozen de-vig + α policies (fixed → regime-aware) fit/validated OFFLINE on
+the 3E–3G datasets + a **shadow logger** (logs model/market/blend/actual; serves nothing). Then champion-MC
+validation, then a live WC2026 shadow run.
+- **Allowed:** `src/wc2026/experimental/`, `scripts/research/`, outputs under `outputs/research/phase_3i_*`,
+  tests. **FORBIDDEN:** ❌ production model/app/data/config change, ❌ integration into live scoring, ❌ UI,
+  ❌ key printed/committed, ❌ betting, ❌ scraping, ❌ quota-rotation. No production change.
+- **Yorian decisions needed:** Sportmonks-paid-vs-OddsAPI; the market-informed-vs-independent identity call;
+  verify the API-Football key; confirm the real "TheOdds.io".
 
 ## ALSO OPEN (deferred) — Phase 3A → production W/D/L head-to-head
 Test whether the recent-form signal survives **on top of the actual production W/D/L** (Elo→DC→ML@0.20),
