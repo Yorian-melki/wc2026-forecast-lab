@@ -143,13 +143,20 @@ Cup/WC/AFCON, **≈ tie on Euro** (model holds its own). Best blend α=1.0 (Euro
 2023-2025 finals + WC2026 had no usable 1X2 → era mostly 2018-2022; LIVE WC2026 1X2 availability is the
 binding gate.**
 
-## THE NEXT ACTION: Phase 3H — INTEGRATION DESIGN ONLY (SEPARATE APPROVAL; no code/integration)
-Design (not build) a market-informed W/D/L integration. MUST cover: (1) **resolve live WC2026 pre-match 1X2
-availability + fallback** — the binding practical gate (WC2026 1X2 was empty in 3E/3G); (2) **regime-aware
-blend** (market helps most where the model is weak; ≈ nothing on Euro — don't flat-α=1.0 dissolve the model
-where it's competitive); (3) **identity-preserving anchor/blend** (not "become the bookmaker"); (4)
-**champion-calibration guardrail** (W/D/L → 100k MC; re-validate concentration/Brier); (5) **close the
-recent-era odds gap** (2023-2025 + WC2026 1X2).
+## ✅ Phase 3H-A — live WC2026 1X2 odds availability (OFFLINE smoke) — DONE · **binding gate CLEARED**
+Doc: `docs/PHASE_3H_A_LIVE_ODDS_AVAILABILITY.md`. Two providers supply live pre-match WC2026 1X2: **The Odds
+API** (15/15 upcoming events h2h; quota 499/500) and **Sportmonks** (19/41 upcoming league-732 fixtures have
+market-1 odds — resolves the 3E/3G "empty", which was completed/settled fixtures). **TheStatsAPI = WATCHLIST**
+(auth ok via `.env.yorian`; odds 404 on scheduled → finished-match odds only). Old/different `THESTATSAPI_KEY`
+in repo `.env` treated invalid, not used. Secret-safe; production untouched.
+
+## THE NEXT ACTION: Phase 3H-B — INTEGRATION DESIGN ONLY (SEPARATE APPROVAL; no code/integration)
+Design (not build) the market-informed W/D/L integration, now that a live 1X2 feed exists. MUST cover:
+(1) **primary feed + fallback** (The Odds API ↔ Sportmonks), last-pre-match snapshot timing, de-vig +
+bookmaker-aggregation rule; (2) **regime-aware blend** (market helps most where the model is weak; ≈ nothing
+on Euro — don't flat-α=1.0 dissolve the model where it's competitive); (3) **identity-preserving anchor/blend**
+(not "become the bookmaker"); (4) **champion-calibration guardrail** (W/D/L → 100k MC; re-validate
+concentration/Brier); (5) close the recent-era historical odds gap (2023-2025 finals).
 - **Allowed:** docs/design only (+ bounded read-only probes if needed). **FORBIDDEN:** ❌ production
   model/app/data/config change, ❌ integration/code, ❌ key printed/committed, ❌ betting, ❌ scraping,
   ❌ quota-rotation. No production change.

@@ -272,9 +272,21 @@ secret-safe; production untouched. Unified eval **n=356** (228 non-WC + 128 WC).
 - **Caveats:** 2023-2025 finals + WC2026 had **no usable 1X2** in-extract (recent intl 1X2 sparse) → era is
   mostly 2018-2022; post-2022 within noise. **LIVE WC2026 1X2 availability UNCONFIRMED = the binding gate.**
 
+## Phase 3H-A — live WC2026 1X2 odds availability (OFFLINE smoke) — DONE · **binding gate CLEARED**
+Doc: `docs/PHASE_3H_A_LIVE_ODDS_AVAILABILITY.md`. Keys parsed directly from `.env.yorian` (never os.getenv);
+secret-safe; production untouched. **Two providers can supply live pre-match WC2026 1X2:**
+- **The Odds API ✅ READY** — `soccer_fifa_world_cup`, **15/15 upcoming events have h2h (1X2)**; quota 499/500.
+- **Sportmonks ✅ READY** — league 732 upcoming: **19/41 fixtures have Fulltime Result (market 1)** odds.
+  Resolves the 3E/3G "empty" — that was *completed/settled* fixtures; pre-match odds DO exist for upcoming.
+- **TheStatsAPI ⚠️ WATCHLIST** — auth ok (`.env.yorian` key), but `matches/{id}/odds` = 404 for scheduled
+  matches (finished-match odds only; no pre-match 1X2).
+- **Old-key note:** `.env` (repo root) holds a DIFFERENT/old `THESTATSAPI_KEY` — treated invalid, **not
+  used**; only `.env.yorian` used. No committed key value in tracked files.
+
 ## Next step
-**Phase 3H (separate approval) — INTEGRATION DESIGN ONLY (no code/integration).** Design a market-informed,
-identity-preserving, regime-aware anchor/blend for W/D/L with a champion-calibration guardrail. MUST first
-resolve **live WC2026 pre-match 1X2 odds availability + fallback** (the binding practical gate; WC2026 1X2
-was empty in 3E/3G). No production change. Model math FROZEN. (1D-B nav deferred.) Parallel asks for Yorian:
-verify the API-Football key; confirm "TheOdds.io".
+**Phase 3H-B (separate approval) — INTEGRATION DESIGN ONLY (no code/integration).** Now that a live 1X2
+feed exists, design the market-informed, **identity-preserving, regime-aware** W/D/L anchor/blend with a
+champion-calibration guardrail. Specify: primary feed (The Odds API or Sportmonks) + fallback, last-pre-match
+snapshot timing, de-vig/aggregation rule, blend policy (down-weight where the model is already strong, e.g.
+Euro/European sides), champion-MC re-validation. **No production change.** Model math FROZEN. (1D-B nav
+deferred.) Parallel asks for Yorian: verify the API-Football key; confirm "TheOdds.io".

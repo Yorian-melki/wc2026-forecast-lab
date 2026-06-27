@@ -1,0 +1,4 @@
+provider,auth,endpoint,http,upcoming_wc_fixtures,fixtures_with_1x2,fields,requests,verdict
+Sportmonks,ok,"GET /fixtures/between (league 732, markets:1)",200,41,19,aggregate_id|details|group_id|has_odds|has_premium_odds|id|league_id|leg|length|name,1,READY_FOR_LIVE_ODDS_FEED
+The Odds API,ok,GET /v4/sports + /sports/soccer_fifa_world_cup/odds?markets=h2h,200,15,15,"wc_key=soccer_fifa_world_cup quota={'x-requests-remaining': '499', 'x-requests-used': '1'}",2,READY_FOR_LIVE_ODDS_FEED
+TheStatsAPI,ok,GET football/competitions/comp_6107 + /matches + /matches/{id}/odds,200,20,0,match_statuses=['scheduled'] odds_fields=['error'],3,WATCHLIST (auth ok; pre-match 1X2 not confirmed)

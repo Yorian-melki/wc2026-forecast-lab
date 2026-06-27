@@ -1,0 +1,18 @@
+{
+  "data": {
+    "id": "comp_6107",
+    "name": "FIFA World Cup",
+    "country": null,
+    "country_code": null,
+    "subdivision_code": null,
+    "confederation": "FIFA",
+    "type": "tournament",
+    "has_team_stats": true,
+    "has_player_stats": true,
+    "odds_available": true,
+    "live_odds_available": false,
+    "xg_available": true,
+    "current_season_id": "sn_118868",
+    "total_teams": 48
+  }
+}
